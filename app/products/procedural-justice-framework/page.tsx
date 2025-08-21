@@ -16,8 +16,7 @@ export default function PJFPage() {
       <h1 style={{ marginTop: 0 }}>Procedural Justice Framework™</h1>
       <p>
         The Procedural Justice Framework™ establishes fair, transparent and defensible complaint handling and
-        investigation processes that prevent escalation and contain liability. After the first mention, Procedural Justice
-        Framework is used without the mark for readability.
+        investigation processes that prevent escalation and contain liability.
       </p>
 
       {/* Image lives at: AdMeliorem/public/Images/justice.jpg */}
@@ -54,7 +53,7 @@ export default function PJFPage() {
           </li>
         </ul>
 
-        <p style={{ marginTop: 16 }}>By design, the Procedural Justice Framework enables organisations to:</p>
+        <p style={{ marginTop: 16 }}>By design, the Procedural Justice Framework™ enables organisations to:</p>
         <ul>
           <li>Prevent costly escalation by eliminating gaps in process that regulators target.</li>
           <li>Contain liability by demonstrating that systems — not just policies — are live and defensible.</li>
@@ -71,7 +70,6 @@ export default function PJFPage() {
         <h2 style={{ marginTop: 0 }}>What you get</h2>
         <ul>
           <li>Workflow and roles for intake, triage, assessment, and investigation</li>
-          <li>Templates and guidance for notices, interviews, findings, and outcomes</li>
           <li>Quality checks aligned to fairness, transparency and defensibility</li>
         </ul>
         <p style={{ marginTop: 12 }}>
