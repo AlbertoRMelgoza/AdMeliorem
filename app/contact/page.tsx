@@ -1,5 +1,6 @@
 import Image from "next/image";
 import type { CSSProperties } from "react";
+import styles from "./Contact.module.css"; // <-- add this
 
 export const metadata = {
   title: "Contact — Ad Meliorem",
@@ -15,14 +16,16 @@ export default function ContactPage() {
       <h1 style={{ marginTop: 0 }}>Contact</h1>
       <p>
         Please send an email to{" "}
-        <a href="mailto:am@albertormelgoza.com">am@albertormelgoza.com</a>{" "}
+        <a className={styles.mailto} href="mailto:am@albertormelgoza.com">
+          am@albertormelgoza.com
+        </a>{" "}
         outlining your needs or request. I’ll get back to you promptly to discuss next steps.
       </p>
 
       {/* AdMeliorem\public\Images\contact.jpg */}
       <div style={{ display: "flex", justifyContent: "center", margin: "24px 0" }}>
         <Image
-          src="/Images/contact.jpg" // 👈 make sure file is in public/images/contact.jpg
+          src="/Images/contact.jpg" // make sure this is at public/images/contact.jpg
           alt="Contact Ad Meliorem"
           width={800}
           height={400}
@@ -39,7 +42,9 @@ export default function ContactPage() {
           <li><strong>ABN:</strong> 93 710 507 818</li>
           <li>
             <strong>Email:</strong>{" "}
-            <a href="mailto:am@albertormelgoza.com">am@albertormelgoza.com</a>
+            <a className={styles.mailto} href="mailto:am@albertormelgoza.com">
+              am@albertormelgoza.com
+            </a>
           </li>
         </ul>
       </section>
@@ -58,18 +63,6 @@ export default function ContactPage() {
           your organisation.
         </p>
       </section>
-
-      {/* Scoped style — ONLY affects mailto links on this page */}
-      <style jsx>{`
-        a[href^="mailto:"] {
-          color: #f1c40f !important;
-          font-weight: 600 !important;
-          text-decoration: none !important;
-        }
-        a[href^="mailto:"]:hover {
-          text-decoration: underline !important;
-        }
-      `}</style>
     </main>
   );
 }
