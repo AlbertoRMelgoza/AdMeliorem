@@ -1,10 +1,5 @@
-import { Analytics } from "@vercel/analytics/react";
-import { SpeedInsights } from "@vercel/speed-insights/next";
-
 export const metadata = {
-  // Helps Next.js build absolute OG URLs (WhatsApp prefers absolute)
   metadataBase: new URL("https://albertormelgoza.com"),
-
   title: "Ad Meliorem — Culture and Psychosocial Risk Prevention & Control",
   description:
     "Specialist in preventing sexual harassment, aggression, bullying, and procedural justice failures. WHS-compliant frameworks, diagnostics, and support.",
@@ -15,7 +10,7 @@ export const metadata = {
     type: "website",
     images: [
       {
-        url: "/Images/og-default.jpg", // becomes absolute via metadataBase
+        url: "/Images/og-default.jpg", // becomes absolute
         width: 1200,
         height: 630,
         alt: "Ad Meliorem — Practical help when it matters",
