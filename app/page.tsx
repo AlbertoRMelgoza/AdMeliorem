@@ -60,7 +60,7 @@ export default function Page() {
           </p>
         </div>
         <div>
-          {/* File must exist at admeliorem/public/images/hero-here-to-help.jpg */}
+          {/* File must exist at admeliorem/admeliorem/public/images/hero-here-to-help.jpg */}
           <img
             src="/images/hero-here-to-help.jpg"
             alt="Professional support to prevent psychosocial harm"
@@ -98,7 +98,7 @@ export default function Page() {
             <div style={card}>
               <h4 style={{ margin: "0 0 6px" }}>SHSARC™ — Sexual harassment &amp; sexual assault risk control</h4>
               <p style={{ margin: 0 }}>
-                3-day, 11-module program focused on prevention, indicators, and defensible controls.
+                3-day, 11-module talent management program focused on prevention, indicators, and defensible controls.
               </p>
             </div>
           </a>
@@ -107,7 +107,7 @@ export default function Page() {
             <div style={card}>
               <h4 style={{ margin: "0 0 6px" }}>RCABH™ — Risk control aggression, bullying &amp; harassment</h4>
               <p style={{ margin: 0 }}>
-                4-day, 13-module program delivering practical, regulator-ready prevention measures.
+                4-day, 13-module talent management program delivering practical, regulator-ready prevention measures.
               </p>
             </div>
           </a>
