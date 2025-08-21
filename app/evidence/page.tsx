@@ -35,7 +35,7 @@ export default function EvidencePage() {
     <main style={wrap}>
       <h1 style={{ marginTop: 0 }}>Evidence of Impact</h1>
       <p>
-        Selected outcomes from complex matters and organisational change work—showing prevention, fairness, and measurable
+        Selected outcomes from complex matters and organisational change work, showing prevention, fairness, and measurable
         culture improvement.
       </p>
 
@@ -120,7 +120,7 @@ export default function EvidencePage() {
       <section style={section}>
         <h2 style={{ marginTop: 0 }}>Discuss your situation</h2>
         <p>
-          Whether you’re facing a live dispute, regulator scrutiny, or a culture turning point, we’ll design a defensible,
+          Whether you’re facing a live dispute, regulator scrutiny, or a culture turning point, I will design a defensible,
           fair pathway that prevents harm and protects value.
         </p>
         <p style={{ marginTop: 12 }}>
