@@ -1,4 +1,5 @@
 import type { CSSProperties } from "react";
+import TrackLink from "../components/TrackLink"; // <-- add this
 
 export const metadata = {
   title: "Whitepapers — Ad Meliorem",
@@ -35,8 +36,7 @@ const PAPERS: Paper[] = [
     slug: "sh-and-sa-what-they-are-and-are-not",
   },
   {
-    title:
-      "Power imbalances at work, the role of gender domination",
+    title: "Power imbalances at work, the role of gender domination",
     blurb:
       "Examines structural and situational power dynamics and how to design fair, defensible processes.",
     slug: "power-imbalances-gender-domination",
@@ -71,68 +71,4 @@ export default function WhitepapersPage() {
   const blurb: CSSProperties = { margin: 0, color: subtext, fontSize: 14 };
 
   // CTA styles
-  const cta: CSSProperties = {
-    marginTop: 40,
-    padding: 24,
-    background: "#111",
-    border: "1px solid #333",
-    borderRadius: 12,
-    textAlign: "center",
-  };
-  const button: CSSProperties = {
-    marginTop: 12,
-    padding: "10px 18px",
-    borderRadius: 8,
-    border: "1px solid #f1c40f",
-    background: accent,
-    color: "#000",
-    fontWeight: 600,
-    cursor: "pointer",
-    textDecoration: "none",
-    display: "inline-block",
-  };
-
-  return (
-    <main style={wrap}>
-      {/* Hero */}
-      <section style={hero}>
-        <div>
-          <h1 style={{ marginTop: 0 }}>Whitepapers</h1>
-          <p style={{ color: subtext }}>
-            Practical, regulator-ready papers you can use to prevent harm and protect value.
-          </p>
-        </div>
-
-        {/* AdMeliorem/public/Images/Whitepapers.jpg */}
-        <img
-          src="/Images/Whitepapers.jpg"
-          alt="Ad Meliorem whitepapers"
-          style={heroImg}
-          width={800}
-          height={500}
-        />
-      </section>
-
-      {/* Cards */}
-      <section style={grid}>
-        {PAPERS.map((p) => (
-          <article key={p.slug} style={card}>
-            <h3 style={title}>{p.title}</h3>
-            <p style={blurb}>{p.blurb}</p>
-          </article>
-        ))}
-      </section>
-
-      {/* Call to action */}
-      <section style={cta}>
-        <h2 style={{ marginTop: 0 }}>Want a copy?</h2>
-        <p style={{ color: subtext }}>
-          Get in touch and I’ll send you the full whitepaper tailored to your needs.
-        </p>
-        <a href="mailto:am@albertormelgoza.com" style={button}>
-          Request Whitepaper
-        </a>
-      </section>
-    </main>
-  );
-}
+  cons
