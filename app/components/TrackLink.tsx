@@ -1,34 +1,51 @@
 'use client';
 
-import type { CSSProperties, PropsWithChildren } from 'react';
+import type {
+  PropsWithChildren,
+  AnchorHTMLAttributes,
+  KeyboardEvent,
+  MouseEvent,
+} from 'react';
 import { track } from '@vercel/analytics';
 
-type Props = {
+type Props = PropsWithChildren<
+  AnchorHTMLAttributes<HTMLAnchorElement>
+> & {
   href: string;
-  event: string;            // event name to send to Vercel Analytics
-  style?: CSSProperties;
-  className?: string;
-  title?: string;
+  event: string; // event name to send to Vercel Analytics
 };
 
 export default function TrackLink({
   href,
   event,
-  style,
-  className,
-  title,
   children,
-}: PropsWithChildren<Props>) {
-  const handleClick = () => {
-    // fire the analytics event
+  onClick,
+  onKeyDown,
+  ...rest
+}: Props) {
+  const handleClick = (e: MouseEvent<HTMLAnchorElement>) => {
+    // fire the analytics event (don’t block navigation)
     track(event);
-    // no preventDefault so the link still works (mailto opens immediately)
+    // if parent passed its own onClick, call it too
+    if (onClick) onClick(e);
+  };
+
+  const handleKeyDown = (e: KeyboardEvent<HTMLAnchorElement>) => {
+    // also track keyboard activation for accessibility
+    if (e.key === 'Enter' || e.key === ' ') {
+      track(event);
+    }
+    if (onKeyDown) onKeyDown(e);
   };
 
   return (
-    <a href={href} onClick={handleClick} style={style} className={className} title={title}>
+    <a
+      href={href}
+      onClick={handleClick}
+      onKeyDown={handleKeyDown}
+      {...rest}
+    >
       {children}
     </a>
   );
 }
-
