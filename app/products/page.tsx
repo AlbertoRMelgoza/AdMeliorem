@@ -1,3 +1,5 @@
+import type { CSSProperties } from "react";
+
 export const metadata = {
   title: "Products & Services — Ad Meliorem",
   description:
@@ -5,11 +7,10 @@ export const metadata = {
 };
 
 export default function ProductsIndex() {
-  const wrap: React.CSSProperties = { maxWidth: 1000, margin: "28px auto", padding: "0 16px", lineHeight: 1.65 };
-  const grid: React.CSSProperties = { display: "grid", gridTemplateColumns: "repeat(auto-fit, minmax(280px, 1fr))", gap: 16 };
-  const card: React.CSSProperties = { background: "#111", border: "1px solid #222", borderRadius: 12, padding: 16 };
-
-  const linkStyle: React.CSSProperties = { color: "inherit", textDecoration: "none" };
+  const wrap: CSSProperties = { maxWidth: 1000, margin: "28px auto", padding: "0 16px", lineHeight: 1.65 };
+  const grid: CSSProperties = { display: "grid", gridTemplateColumns: "repeat(auto-fit, minmax(280px, 1fr))", gap: 16 };
+  const card: CSSProperties = { background: "#111", border: "1px solid #222", borderRadius: 12, padding: 16 };
+  const linkStyle: CSSProperties = { color: "inherit", textDecoration: "none" };
 
   return (
     <main style={wrap}>
@@ -23,23 +24,26 @@ export default function ProductsIndex() {
           <div style={card}>
             <h3 style={{ marginTop: 0 }}>SHSARC™ &amp; RCABH™ — Risk Control Programs</h3>
             <p style={{ margin: 0 }}>
-              Two flagship risk control programs through talent management that produce
-              regulator-ready Prevention Plans.
+              Two flagship risk control programs through talent management that produce regulator-ready Prevention Plans.
             </p>
           </div>
         </a>
 
-        <a href="/products/procedural-justice-framework™" style={linkStyle}>
+        <a href="/products/procedural-justice-framework" style={linkStyle}>
           <div style={card}>
             <h3 style={{ marginTop: 0 }}>Procedural Justice Framework™</h3>
-            <p style={{ margin: 0 }}>Fair, transparent, defensible processes that prevent escalation and contain liability.</p>
+            <p style={{ margin: 0 }}>
+              Fair, transparent, defensible processes that prevent escalation and contain liability.
+            </p>
           </div>
         </a>
 
-        <a href="/products/culture-risk-diagnostic™" style={linkStyle}>
+        <a href="/products/culture-risk-diagnostic" style={linkStyle}>
           <div style={card}>
             <h3 style={{ marginTop: 0 }}>Culture Risk Diagnostic™</h3>
-            <p style={{ margin: 0 }}>Precise culture risk assessments with qualitative and quantitative methods, culture risk indicators, and due-diligence evidence.</p>
+            <p style={{ margin: 0 }}>
+              Precise culture risk assessments with qualitative and quantitative methods, culture risk indicators, and due-diligence evidence.
+            </p>
           </div>
         </a>
 
@@ -60,4 +64,3 @@ export default function ProductsIndex() {
     </main>
   );
 }
-
