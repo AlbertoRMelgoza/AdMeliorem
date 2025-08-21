@@ -16,14 +16,13 @@ export default function PJFPage() {
       <h1 style={{ marginTop: 0 }}>Procedural Justice Framework™</h1>
       <p>
         The Procedural Justice Framework™ establishes fair, transparent and defensible complaint handling and
-        investigation processes that prevent escalation and contain liability. After the first mention, Procedural Justice
-        Framework is used without the mark for readability.
+        investigation processes that prevent escalation and contain liability.
       </p>
 
-      {/* AdMeliorem\public\Images\justice.jpg */}
+      {/* Image lives at: AdMeliorem/public/Images/justice.jpg */}
       <div style={{ display: "flex", justifyContent: "center", margin: "24px 0" }}>
         <Image
-          src="/Images/justice.jpg" // 👈 make sure this file is inside public/images/
+          src="/Images/justice.jpg"
           alt="Procedural Justice Framework illustration"
           width={800}
           height={400}
@@ -31,7 +30,7 @@ export default function PJFPage() {
         />
       </div>
 
-      {/* New section with your content */}
+      {/* How it functions as a critical control */}
       <section style={card}>
         <h2 style={{ marginTop: 0 }}>How it functions as a critical control</h2>
         <p>This framework functions as a critical control by embedding:</p>
@@ -54,7 +53,7 @@ export default function PJFPage() {
           </li>
         </ul>
 
-        <p style={{ marginTop: 16 }}>By design, the Procedural Justice Framework enables organisations to:</p>
+        <p style={{ marginTop: 16 }}>By design, the Procedural Justice Framework™ enables organisations to:</p>
         <ul>
           <li>Prevent costly escalation by eliminating gaps in process that regulators target.</li>
           <li>Contain liability by demonstrating that systems — not just policies — are live and defensible.</li>
@@ -66,12 +65,11 @@ export default function PJFPage() {
         </ul>
       </section>
 
-      {/* Existing section moved to the end */}
+      {/* What you get (at the end) */}
       <section style={card}>
         <h2 style={{ marginTop: 0 }}>What you get</h2>
         <ul>
           <li>Workflow and roles for intake, triage, assessment, and investigation</li>
-          <li>Templates and guidance for notices, interviews, findings, and outcomes</li>
           <li>Quality checks aligned to fairness, transparency and defensibility</li>
         </ul>
         <p style={{ marginTop: 12 }}>
@@ -84,3 +82,13 @@ export default function PJFPage() {
               borderRadius: 6,
               fontWeight: 600,
               textDecoration: "none",
+              display: "inline-block",
+            }}
+          >
+            Ask about PJF →
+          </a>
+        </p>
+      </section>
+    </main>
+  );
+}
