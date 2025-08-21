@@ -21,15 +21,16 @@ export default function TrainingPrograms() {
       </p>
 
       {/* AdMeliorem\public\Images\courses.jpg */}
-      <div style={{ margin: "24px 0" }}>
-        <Image
-          src="/Images/courses.jpg"
-          alt="Training programs illustration"
-          width={800}
-          height={400}
-          style={{ borderRadius: 12 }}
-        />
-      </div>
+     <div style={{ display: "flex", justifyContent: "center", margin: "24px 0" }}>
+  <Image
+    src="/Images/courses.jpg"
+    alt="Training programs illustration"
+    width={800}
+    height={400}
+    style={{ borderRadius: 12 }}
+  />
+</div>
+
 
       <section style={block} id="shsarc">
         <h2 style={{ marginTop: 0 }}>SHSARC</h2>
