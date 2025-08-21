@@ -20,10 +20,10 @@ export default function PJFPage() {
         Framework is used without the mark for readability.
       </p>
 
-      {/* AdMeliorem\public\Images\justice.jpg */}
+      {/* Image lives at: AdMeliorem/public/Images/justice.jpg */}
       <div style={{ display: "flex", justifyContent: "center", margin: "24px 0" }}>
         <Image
-          src="/Images/justice.jpg" // 👈 make sure this file is inside public/images/
+          src="/Images/justice.jpg"
           alt="Procedural Justice Framework illustration"
           width={800}
           height={400}
@@ -31,7 +31,7 @@ export default function PJFPage() {
         />
       </div>
 
-      {/* New section with your content */}
+      {/* How it functions as a critical control */}
       <section style={card}>
         <h2 style={{ marginTop: 0 }}>How it functions as a critical control</h2>
         <p>This framework functions as a critical control by embedding:</p>
@@ -66,7 +66,7 @@ export default function PJFPage() {
         </ul>
       </section>
 
-      {/* Existing section moved to the end */}
+      {/* What you get (at the end) */}
       <section style={card}>
         <h2 style={{ marginTop: 0 }}>What you get</h2>
         <ul>
@@ -84,3 +84,13 @@ export default function PJFPage() {
               borderRadius: 6,
               fontWeight: 600,
               textDecoration: "none",
+              display: "inline-block",
+            }}
+          >
+            Ask about PJF →
+          </a>
+        </p>
+      </section>
+    </main>
+  );
+}
