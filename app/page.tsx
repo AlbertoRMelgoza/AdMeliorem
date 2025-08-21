@@ -73,7 +73,7 @@ export default function Page() {
       <section>
         <h2 style={h2}>My Products &amp; Services</h2>
 
-        <h3 style={{ marginTop: 16 }}>Flagship Programs (™)</h3>
+        <h3 style={{ marginTop: 16 }}>Flagship Products (™)</h3>
         <div style={{ display: "grid", gridTemplateColumns: "repeat(2, 1fr)", gap: 16 }}>
           <a href="/products/procedural-justice-framework" style={{ color: "inherit", textDecoration: "none" }}>
             <div style={card}>
