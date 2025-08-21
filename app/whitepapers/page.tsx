@@ -83,7 +83,7 @@ export default function WhitepapersPage() {
 
         {/* AdMeliorem\public\Images\Whitepapers.jpg */}
         <img
-          src="/Images/whitepapers-hero.jpg"
+          src="/Images/whitepapers.jpg"
           alt="Ad Meliorem whitepapers"
           style={heroImg}
           width={800}
