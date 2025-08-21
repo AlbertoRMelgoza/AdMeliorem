@@ -70,6 +70,28 @@ export default function WhitepapersPage() {
   const title: CSSProperties = { margin: "0 0 6px", fontSize: 18, color: accent };
   const blurb: CSSProperties = { margin: 0, color: subtext, fontSize: 14 };
 
+  // CTA styles
+  const cta: CSSProperties = {
+    marginTop: 40,
+    padding: 24,
+    background: "#111",
+    border: "1px solid #333",
+    borderRadius: 12,
+    textAlign: "center",
+  };
+  const button: CSSProperties = {
+    marginTop: 12,
+    padding: "10px 18px",
+    borderRadius: 8,
+    border: "1px solid #f1c40f",
+    background: accent,
+    color: "#000",
+    fontWeight: 600,
+    cursor: "pointer",
+    textDecoration: "none",
+    display: "inline-block",
+  };
+
   return (
     <main style={wrap}>
       {/* Hero */}
@@ -81,9 +103,9 @@ export default function WhitepapersPage() {
           </p>
         </div>
 
-        {/* AdMeliorem\public\Images\Whitepapers.jpg */}
+        {/* AdMeliorem/public/Images/Whitepapers.jpg */}
         <img
-          src="/Images/whitepapers.jpg"
+          src="/Images/Whitepapers.jpg"
           alt="Ad Meliorem whitepapers"
           style={heroImg}
           width={800}
@@ -97,12 +119,20 @@ export default function WhitepapersPage() {
           <article key={p.slug} style={card}>
             <h3 style={title}>{p.title}</h3>
             <p style={blurb}>{p.blurb}</p>
-            {/* If you later create detail pages at /whitepapers/[slug],
-                turn the title into a Link and add a “Read” button. */}
           </article>
         ))}
+      </section>
+
+      {/* Call to action */}
+      <section style={cta}>
+        <h2 style={{ marginTop: 0 }}>Want a copy?</h2>
+        <p style={{ color: subtext }}>
+          Get in touch and I’ll send you the full whitepaper tailored to your needs.
+        </p>
+        <a href="mailto:am@albertormelgoza.com" style={button}>
+          Request Whitepaper
+        </a>
       </section>
     </main>
   );
 }
-
