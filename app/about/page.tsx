@@ -59,12 +59,12 @@ export default function AboutPage() {
         {/* Text */}
         <div>
           <h1 style={h1}>
-            Experience, integrity, and leverage — applied to prevent harm and protect value
+            Experience, integrity, and leverage, applied to prevent harm and protect value
           </h1>
 
           <div style={card}>
             <p>
-              I help organisations proactively control psychosocial risks — with a focus on sexual
+              I help organisations proactively control psychosocial risks with a focus on sexual
               harassment, aggression, bullying, and procedural justice. My approach combines
               evidence-based tools, regulator-ready documentation, and pragmatic delivery tailored to
               the realities of each business.
@@ -81,7 +81,7 @@ export default function AboutPage() {
               control), and RCABH™ (risk control for aggression, bullying & harassment).
             </p>
             <p>
-              My commitment is simple: prevent harm, improve culture, and reduce liability — with a
+              My commitment is simple: prevent harm, improve culture, and reduce liability with a
               clear path from strategy to practice.
             </p>
 
