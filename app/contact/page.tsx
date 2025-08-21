@@ -36,11 +36,16 @@ export default function ContactPage() {
           <li>
   <strong>Email:</strong>{" "}
   <a
-    href="mailto:am@albertormelgoza.com"
-    style={{ color: "#f1c40f", textDecoration: "none", fontWeight: 600 }}
-  >
-    am@albertormelgoza.com
-  </a>
+  href="mailto:am@albertormelgoza.com"
+  style={{
+    color: "#f1c40f",
+    fontWeight: 600,
+    textDecoration: "none",
+  }}
+>
+  am@albertormelgoza.com
+</a>
+
 </li>
       </section>
 
@@ -66,10 +71,15 @@ export default function ContactPage() {
         Please send an email to{" "}
 <a
   href="mailto:am@albertormelgoza.com"
-  style={{ color: "#f1c40f", textDecoration: "none", fontWeight: 600 }}
+  style={{
+    color: "#f1c40f",
+    fontWeight: 600,
+    textDecoration: "none",
+  }}
 >
   am@albertormelgoza.com
-</a>{" "}
+</a>
+
 outlining your needs or request. I’ll get back to you promptly to discuss next steps.
       </section>
     </main>
