@@ -16,8 +16,7 @@ export default function CRDPage() {
       <h1 style={{ marginTop: 0 }}>Culture Risk Diagnostic™</h1>
       <p>
         The Culture Risk Diagnostic™ is a forensic assessment that maps hotspots and provides leading indicators, risk
-        scores and due-diligence evidence. After the first mention, Culture Risk Diagnostic is used without the mark for
-        readability.
+        scores and due-diligence evidence. 
       </p>
 
       {/* AdMeliorem\public\Images\culture.jpg */}
@@ -33,7 +32,7 @@ export default function CRDPage() {
 
       {/* Purposes + tools */}
       <section style={card}>
-        <h2 style={{ marginTop: 0 }}>The Culture Risk Diagnostic serves two purposes</h2>
+        <h2 style={{ marginTop: 0 }}>The Culture Risk Diagnostic™ serves two purposes</h2>
         <p>
           Depending on organisational needs, five reliable and validated tools can be applied to provide a 360° view of
           hidden culture risks or to evaluate the broader business environment:
@@ -106,7 +105,7 @@ export default function CRDPage() {
         <ul>
           <li>Validated survey instruments (e.g., COPSOQ, SEQ) and targeted interviews</li>
           <li>Key Culture Risk Indicators with thresholds and trend views</li>
-          <li>Actionable Prevention Plan items for leadership</li>
+          <li>Precise Prevention Plans for the corporation</li>
         </ul>
         <p style={{ marginTop: 12 }}>
           <a
