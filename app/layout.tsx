@@ -2,6 +2,7 @@ import { Analytics } from "@vercel/analytics/react";
 import { SpeedInsights } from "@vercel/speed-insights/next";
 
 export const metadata = {
+  // helps build absolute OG urls
   metadataBase: new URL("https://albertormelgoza.com"),
   title: "Ad Meliorem — Culture and Psychosocial Risk Prevention & Control",
   description:
@@ -13,7 +14,7 @@ export const metadata = {
     type: "website",
     images: [
       {
-        url: "/Images/og-default.jpg", // becomes absolute
+        url: "/Images/og-default.jpg",
         width: 1200,
         height: 630,
         alt: "Ad Meliorem — Practical help when it matters",
@@ -25,7 +26,7 @@ export const metadata = {
 const brand = {
   max: 1000,
   pad: "0 16px",
-  accent: "#f1c40f", // yellow accent
+  accent: "#f1c40f",
   text: "#eaeaea",
   subtext: "#bdbdbd",
   bg: "#000000",
@@ -66,7 +67,7 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
             }}
             aria-label="Ad Meliorem Home"
           >
-            {/* Logo file: admeliorem/public/Images/logo-ad-meliorem.jpg */}
+            {/* Logo file: public/Images/logo-ad-meliorem.jpg */}
             <span
               style={{
                 display: "inline-flex",
