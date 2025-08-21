@@ -5,7 +5,7 @@ export const metadata = {
   openGraph: {
     title: "Ad Meliorem",
     description:
-      "Specialist in psychosocial risk prevention. Procedural Justice Framework™, Culture Risk Diagnostic™, SHSARC™, RCABH™, mediation & negotiation.",
+      "Specialist in sexual harassment, aggression and bullying prevention. Procedural Justice Framework™, Culture Risk Diagnostic™, SHSARC™, RCABH™, mediation & negotiation.",
     type: "website",
   },
 };
