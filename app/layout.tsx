@@ -67,7 +67,7 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
               }}
             >
               <img
-                src="/Images/logo.ad.meliorem.jpg"
+                src="/Images/logo-ad-meliorem.jpg"
                 alt="Ad Meliorem logo"
                 style={{ height: 28, display: "block" }}
               />
