@@ -19,10 +19,17 @@ export default function NegotiationPage() {
         agreements aligned to your objectives.
       </p>
 
+      {/* Added experience statement */}
+      <p>
+        My negotiation experience involves key corporate finance transactions, industrial relations, procurement, and deeds
+        ranging from billions to thousands. I bring global experience to coach you and help you understand your leverage,
+        always aiming to achieve win–win scenarios.
+      </p>
+
       {/* AdMeliorem\public\Images\negotiation.jpg */}
       <div style={{ display: "flex", justifyContent: "center", margin: "24px 0" }}>
         <Image
-          src="/Images/negotiation.jpg" // 👈 place your image here: public/images/negotiation.jpg
+          src="/Images/negotiation.jpg" // 👈 place your image in public/images/negotiation.jpg
           alt="Negotiation services illustration"
           width={800}
           height={400}
@@ -57,4 +64,3 @@ export default function NegotiationPage() {
     </main>
   );
 }
-
