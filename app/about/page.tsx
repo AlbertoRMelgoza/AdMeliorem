@@ -47,9 +47,9 @@ export default function AboutPage() {
         {/* Photo */}
         <div style={leftCol}>
           <div style={photoBox}>
-            {/* File must exist at admeliorem/public/Images/Bradkay-Alberto-013-EditOR.jpg */}
+            {/* File must exist at AdMeliorem/public/Images/alberto.jpg */}
             <img
-              src="/Images/Bradkay-Alberto-013-EditOR.jpg"
+              src="/Images/alberto.jpg"
               alt="Portrait of Alberto R. Melgoza, founder of Ad Meliorem"
               style={{ width: "100%", height: "100%", objectFit: "cover", display: "block" }}
             />
