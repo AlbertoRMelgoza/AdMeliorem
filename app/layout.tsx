@@ -1,3 +1,6 @@
+import { Analytics } from "@vercel/analytics/react";
+import { SpeedInsights } from "@vercel/speed-insights/next";
+
 export const metadata = {
   title: "Ad Meliorem — Culture and Psychosocial Risk Prevention & Control",
   description:
@@ -131,6 +134,10 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
             © {new Date().getFullYear()} Ad Meliorem · Practical help when it matters.
           </p>
         </footer>
+
+        {/* Vercel Analytics & Speed Insights */}
+        <Analytics />
+        <SpeedInsights />
       </body>
     </html>
   );
