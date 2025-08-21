@@ -39,10 +39,10 @@ export default function EvidencePage() {
         culture improvement.
       </p>
 
-      {/* Centered hero image */}
+      {/* AdMeliorem\public\Images\feedback.jpg */}
       <div style={{ display: "flex", justifyContent: "center", margin: "24px 0" }}>
         <Image
-          src="/images/evidence.jpg"  // ← place your image at public/images/evidence.jpg
+          src="/Images/feedback.jpg"  // ← place your image at public/images/evidence.jpg
           alt="Preventing harm and embedding fairness"
           width={900}
           height={500}
