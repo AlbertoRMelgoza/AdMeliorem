@@ -1,7 +1,6 @@
 export default function Page() {
   const wrap: React.CSSProperties = { maxWidth: 1000, margin: "28px auto", padding: "0 16px", lineHeight: 1.65 };
-  const card: React.CSSProperties = { border: "1px solid #eee", borderRadius: 12, padding: 16 };
-  const img: React.CSSProperties = { width: "100%", borderRadius: 8, display: "block" };
+  const card: React.CSSProperties = { background: "#111", border: "1px solid #222", borderRadius: 12, padding: 16 };
   const h2: React.CSSProperties = { marginTop: 32 };
 
   return (
@@ -18,117 +17,74 @@ export default function Page() {
         </p>
       </section>
 
-      {/* Hero */}
-      <section style={{ display: "grid", gridTemplateColumns: "1.1fr 0.9fr", gap: 24, alignItems: "center" }}>
-        <div style={{ padding: 24, border: "1px solid #eee", borderRadius: 12 }}>
-          <h2 style={{ marginTop: 0 }}>Compliance isn’t enough — proactive control is essential.</h2>
-          <p style={{ marginTop: 0 }}>
-            I help organisations prevent sexual harassment, aggression, bullying, and procedural justice failures before
-            they cause harm.
-          </p>
-          <p style={{ marginTop: 12 }}>
-            <a href="/contact" style={{ textDecoration: "none" }}>Contact me →</a>
-          </p>
-        </div>
-        <div>
-          <img
-            src="/images/hero-here-to-help.jpg"
-            alt="Professional support to prevent psychosocial harm"
-            style={{ width: "100%", borderRadius: 12 }}
-          />
-        </div>
+      {/* Hero COPY ONLY (no image) */}
+      <section style={{ padding: 24, background: "#111", border: "1px solid #222", borderRadius: 12 }}>
+        <h2 style={{ marginTop: 0 }}>Compliance isn’t enough — proactive control is essential.</h2>
+        <p style={{ marginTop: 0 }}>
+          I help organisations prevent sexual harassment, aggression, bullying, and procedural justice failures before
+          they cause harm.
+        </p>
+        <p style={{ marginTop: 12 }}>
+          <a href="/contact" style={{ textDecoration: "none", color: "#61dafb" }}>Contact me →</a>
+        </p>
       </section>
 
-      {/* Programs & Services */}
+      {/* Niche Products & Services */}
       <section>
-        <h2 style={h2}>My Programs &amp; Services</h2>
+        <h2 style={h2}>My Products &amp; Services</h2>
 
         <h3 style={{ marginTop: 16 }}>Flagship Programs (™)</h3>
-        <div style={{ display: "grid", gridTemplateColumns: "repeat(3, 1fr)", gap: 16 }}>
-          <a href="/products/procedural-justice-framework" style={{ color: "inherit", textDecoration: "none" }}>
+        <div style={{ display: "grid", gridTemplateColumns: "repeat(2, 1fr)", gap: 16 }}>
+          <a href="/products/procedural-justice-framework™" style={{ color: "inherit", textDecoration: "none" }}>
             <div style={card}>
-              <img
-                src="/images/procedural-justice-book.jpg"
-                alt="Procedural Justice Framework—complaint handling & investigations"
-                style={img}
-              />
-              <h4 style={{ margin: "12px 0 6px" }}>Procedural Justice Framework™</h4>
-              <p style={{ margin: 0 }}>Toolkit + training for complaint handling & investigations. Fairness, transparency, defensibility.</p>
+              <h4 style={{ margin: "0 0 6px" }}>Procedural Justice Framework™</h4>
+              <p style={{ margin: 0 }}>
+                Toolkit + guidance for fair processes, remediation &amp; investigations. Ensures fairness, transparency, and defensibility.
+              </p>
             </div>
           </a>
 
-          <a href="/products/culture-risk-diagnostic" style={{ color: "inherit", textDecoration: "none" }}>
+          <a href="/products/culture-risk-diagnostic™" style={{ color: "inherit", textDecoration: "none" }}>
             <div style={card}>
-              <img
-                src="/images/culture-weave.jpg"
-                alt="Culture Risk Diagnostic—organisation culture mapping"
-                style={img}
-              />
-              <h4 style={{ margin: "12px 0 6px" }}>Culture Risk Diagnostic™</h4>
-              <p style={{ margin: 0 }}>Validated tools (COPSOQ, SEQ, etc.). Maps hotspots, delivers Key Culture Risk Indicators.</p>
+              <h4 style={{ margin: "0 0 6px" }}>Culture Risk Diagnostic™</h4>
+              <p style={{ margin: 0 }}>
+                Validated tools (COPSOQ, SEQ, OCAS, IAT, WFBS) to identify hotspots and deliver Key Culture Risk Indicators.
+              </p>
             </div>
           </a>
 
-          <a href="/products/shsarc" style={{ color: "inherit", textDecoration: "none" }}>
+          <a href="/products/SHSARC™" style={{ color: "inherit", textDecoration: "none" }}>
             <div style={card}>
-              <img
-                src="/images/product-1-help-scene.jpg"
-                alt="SHSARC training—sexual harassment & sexual assault risk control"
-                style={img}
-              />
-              <h4 style={{ margin: "12px 0 6px" }}>SHSARC™</h4>
-              <p style={{ margin: 0 }}>3-day, 11-module training on sexual harassment & sexual assault risk control.</p>
+              <h4 style={{ margin: "0 0 6px" }}>SHSARC™ — Sexual harassment &amp; sexual assault risk control</h4>
+              <p style={{ margin: 0 }}>
+                3-day, 11-module talent management program focused on prevention, indicators, and defensible controls.
+              </p>
             </div>
           </a>
 
-          <a href="/products/rcabh" style={{ color: "inherit", textDecoration: "none" }}>
+          <a href="/products/RCABH™" style={{ color: "inherit", textDecoration: "none" }}>
             <div style={card}>
-              <img
-                src="/images/product-1-help-scene.jpg"
-                alt="RCABH training—aggression, bullying & harassment prevention"
-                style={img}
-              />
-              <h4 style={{ margin: "12px 0 6px" }}>RCABH™</h4>
-              <p style={{ margin: 0 }}>4-day, 13-module training on aggression, bullying & harassment prevention.</p>
-            </div>
-          </a>
-
-          <a href="/products/talent-management-risk-controls" style={{ color: "inherit", textDecoration: "none" }}>
-            <div style={card}>
-              <img
-                src="/images/product-1-help-scene.jpg"
-                alt="Talent management risk controls—staff as live hazard controls"
-                style={img}
-              />
-              <h4 style={{ margin: "12px 0 6px" }}>Talent Management Risk Controls</h4>
-              <p style={{ margin: 0 }}>Embed staff as live hazard controls. Regulator-ready Prevention Plans.</p>
+              <h4 style={{ margin: "0 0 6px" }}>RCABH™ — Risk control aggression, bullying &amp; harassment</h4>
+              <p style={{ margin: 0 }}>
+                4-day, 13-module talent management program delivering practical, regulator-ready prevention measures.
+              </p>
             </div>
           </a>
         </div>
 
-        <h3 style={{ marginTop: 24 }}>Supporting Services</h3>
+        <h3 style={{ marginTop: 24 }}>Services</h3>
         <div style={{ display: "grid", gridTemplateColumns: "repeat(2, 1fr)", gap: 16 }}>
-          <a href="/mediation" style={{ color: "inherit", textDecoration: "none" }}>
+          <a href="/products/mediation" style={{ color: "inherit", textDecoration: "none" }}>
             <div style={card}>
-              <img
-                src="/images/mediation-chairs.jpg"
-                alt="Mediation—neutral, confidential facilitation"
-                style={img}
-              />
-              <h4 style={{ margin: "12px 0 6px" }}>Mediation</h4>
+              <h4 style={{ margin: "0 0 6px" }}>Mediation</h4>
               <p style={{ margin: 0 }}>Neutral, confidential facilitation to resolve disputes.</p>
             </div>
           </a>
 
-          <a href="/negotiation" style={{ color: "inherit", textDecoration: "none" }}>
+          <a href="/products/negotiation" style={{ color: "inherit", textDecoration: "none" }}>
             <div style={card}>
-              <img
-                src="/images/negotiation-handshake.jpg"
-                alt="Negotiation—structured preparation and leverage clarification"
-                style={img}
-              />
-              <h4 style={{ margin: "12px 0 6px" }}>Negotiation</h4>
-              <p style={{ margin: 0 }}>Structured preparation and leverage clarification for better outcomes.</p>
+              <h4 style={{ margin: "0 0 6px" }}>Negotiation</h4>
+              <p style={{ margin: 0 }}>Helping you understand your leverage.</p>
             </div>
           </a>
         </div>
@@ -140,7 +96,7 @@ export default function Page() {
         <ul>
           <li>Regulator-ready documentation and defensibility</li>
           <li>Evidence-based tools and validated surveys</li>
-          <li>Targeted training with proven outcomes</li>
+          <li>Targeted programs with proven outcomes</li>
           <li>Confidential, pragmatic, and tailored support</li>
           <li>Backed by over 20 years of personal expertise</li>
         </ul>
@@ -150,7 +106,7 @@ export default function Page() {
       <section style={{ marginTop: 24 }}>
         <h2>Book a consultation</h2>
         <p>Let’s discuss how I can support your organisation.</p>
-        <p><a href="/contact" style={{ textDecoration: "none" }}>Contact me →</a></p>
+        <p><a href="/contact" style={{ textDecoration: "none", color: "#f1c40f" }}>Contact me →</a></p>
       </section>
     </main>
   );
