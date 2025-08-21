@@ -13,12 +13,16 @@ export default function ContactPage() {
   return (
     <main style={wrap}>
       <h1 style={{ marginTop: 0 }}>Contact</h1>
-      <p>If you’d like to discuss working together, please reach out using the details below.</p>
+      <p>
+        Please send an email to{" "}
+        <a href="mailto:am@albertormelgoza.com">am@albertormelgoza.com</a>{" "}
+        outlining your needs or request. I’ll get back to you promptly to discuss next steps.
+      </p>
 
-      {/* AdMeliorem/public/Images/contact.jpg */}
+      {/* AdMeliorem\public\Images\contact.jpg */}
       <div style={{ display: "flex", justifyContent: "center", margin: "24px 0" }}>
         <Image
-          src="/Images/contact.jpg" // 👈 place your file at public/images/contact.jpg
+          src="/Images/contact.jpg" // 👈 make sure file is in public/images/contact.jpg
           alt="Contact Ad Meliorem"
           width={800}
           height={400}
@@ -27,26 +31,17 @@ export default function ContactPage() {
         />
       </div>
 
-      {/* Contact details */}
+      {/* Business info */}
       <section style={card}>
         <h2 style={{ marginTop: 0 }}>Business Information</h2>
         <ul>
           <li><strong>Business Name:</strong> Ad Meliorem</li>
           <li><strong>ABN:</strong> 93 710 507 818</li>
           <li>
-  <strong>Email:</strong>{" "}
-  <a
-  href="mailto:am@albertormelgoza.com"
-  style={{
-    color: "#f1c40f",
-    fontWeight: 600,
-    textDecoration: "none",
-  }}
->
-  am@albertormelgoza.com
-</a>
-
-</li>
+            <strong>Email:</strong>{" "}
+            <a href="mailto:am@albertormelgoza.com">am@albertormelgoza.com</a>
+          </li>
+        </ul>
       </section>
 
       {/* Disclaimer */}
@@ -55,33 +50,26 @@ export default function ContactPage() {
         <p>
           The information provided by Ad Meliorem is for general educational and advisory purposes only. It does not
           constitute legal, financial, or medical advice and should not be relied upon as a substitute for independent
-          professional consultation. While all care is taken to ensure accuracy, Ad Meliorem makes no warranties as to the
-          completeness or suitability of this information for your specific circumstances.
+          professional consultation.
         </p>
         <p>
-          By engaging with Ad Meliorem, you acknowledge that ultimate responsibility for decisions remains with you and your
-          organisation. Confidentiality, fairness, and integrity are upheld in all interactions.
+          While all care is taken to ensure accuracy, Ad Meliorem makes no warranties as to the completeness or suitability
+          of this information for your specific circumstances. Ultimate responsibility for decisions remains with you and
+          your organisation.
         </p>
       </section>
 
-      {/* Optional CTA */}
-      <section style={card}>
-        <h2 style={{ marginTop: 0 }}>Get in touch</h2>
-        <p>
-        Please send an email to{" "}
-<a
-  href="mailto:am@albertormelgoza.com"
-  style={{
-    color: "#f1c40f",
-    fontWeight: 600,
-    textDecoration: "none",
-  }}
->
-  am@albertormelgoza.com
-</a>
-
-outlining your needs or request. I’ll get back to you promptly to discuss next steps.
-      </section>
+      {/* Scoped style — ONLY affects mailto links on this page */}
+      <style jsx>{`
+        a[href^="mailto:"] {
+          color: #f1c40f !important;
+          font-weight: 600 !important;
+          text-decoration: none !important;
+        }
+        a[href^="mailto:"]:hover {
+          text-decoration: underline !important;
+        }
+      `}</style>
     </main>
   );
 }
