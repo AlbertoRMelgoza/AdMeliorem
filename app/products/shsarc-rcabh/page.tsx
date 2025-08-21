@@ -1,7 +1,7 @@
 export const metadata = {
-  title: "SHSARC™ & RCABH™ Training — Ad Meliorem",
+  title: "SHSARC™ & RCABH™ Talent Management— Ad Meliorem",
   description:
-    "Two flagship training programs that embed leaders and staff as live hazard controls and produce regulator-ready Prevention Plans.",
+    "Two flagship workshops that serve as hazard controls and produce regulator-ready Prevention Plans.",
 };
 
 export default function TrainingPrograms() {
@@ -12,29 +12,28 @@ export default function TrainingPrograms() {
     <main style={wrap}>
       <h1 style={{ marginTop: 0 }}>SHSARC™ &amp; RCABH™ — Training Programs</h1>
       <p>
-        The SHSARC™ — Sexual Harassment &amp; Sexual Assault Risk Control training program and the RCABH™ — Risk Control
-        Aggression, Bullying &amp; Harassment training program embed leaders and staff as live hazard controls and produce
-        regulator-ready Prevention Plans. After the first mention, SHSARC and RCABH are used without the mark for readability.
+        The SHSARC™ — Sexual Harassment &amp; Sexual Assault Risk Control workshop and the RCABH™ — Risk Control
+        Aggression, Bullying &amp; Harassment workshop produce regulator-ready Prevention Plans. SHSARC™ and RCABH™ will allow to isolate wrongful behavoiur to the individual.
       </p>
 
       <div style={{ display: "grid", gap: 16 }}>
         <section style={block} id="shsarc">
           <h2 style={{ marginTop: 0 }}>SHSARC — Sexual harassment &amp; sexual assault risk control</h2>
           <p style={{ marginTop: 0 }}>
-            A 3-day, 11-module program focused on prevention, indicators, defensible controls, and clear escalation
+            A 3-day, 11-module workshop focused on prevention, indicators, defensible controls, and clear escalation
             pathways. Output includes a regulator-ready Prevention Plan tailored to your context.
           </p>
           <ul>
             <li>Hazard identification and live control design</li>
             <li>Early indicators, reporting channels, by-stander activation</li>
-            <li>Investigation interfaces and defensible documentation</li>
+            <li>Understanding key concepts</li>
           </ul>
         </section>
 
         <section style={block} id="rcabh">
           <h2 style={{ marginTop: 0 }}>RCABH — Risk control for aggression, bullying &amp; harassment</h2>
           <p style={{ marginTop: 0 }}>
-            A 4-day, 13-module program that equips leaders and teams to prevent aggression, bullying and harassment before
+            A 4-day, 13-module program that equips stakeholders to prevent aggression, bullying and harassment before
             claims arise, and to respond with procedural fairness when events occur.
           </p>
           <ul>
