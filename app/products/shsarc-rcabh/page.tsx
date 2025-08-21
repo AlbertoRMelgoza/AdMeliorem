@@ -1,4 +1,5 @@
 import Image from "next/image";
+import type { CSSProperties } from "react";
 
 export const metadata = {
   title: "SHSARC™ & RCABH™ Training — Ad Meliorem",
@@ -7,8 +8,8 @@ export const metadata = {
 };
 
 export default function TrainingPrograms() {
-  const wrap: React.CSSProperties = { maxWidth: 1000, margin: "28px auto", padding: "0 16px", lineHeight: 1.65 };
-  const block: React.CSSProperties = { background: "#111", border: "1px solid #222", borderRadius: 12, padding: 16 };
+  const wrap: CSSProperties = { maxWidth: 1000, margin: "28px auto", padding: "0 16px", lineHeight: 1.65 };
+  const block: CSSProperties = { background: "#111", border: "1px solid #222", borderRadius: 12, padding: 16 };
 
   return (
     <main style={wrap}>
@@ -19,15 +20,19 @@ export default function TrainingPrograms() {
         regulator-ready Prevention Plans.
       </p>
 
-      <section style={block} id="shsarc">
-        <h2 style={{ marginTop: 0 }}>SHSARC</h2>
+      {/* Insert your uploaded image here */}
+      <div style={{ margin: "24px 0" }}>
         <Image
-          src="/images/products/shsarc.jpg"
-          alt="SHSARC training illustration"
+          src="/images/courses.jpg"
+          alt="Training programs illustration"
           width={800}
           height={400}
-          style={{ borderRadius: 8, marginBottom: 16 }}
+          style={{ borderRadius: 12 }}
         />
+      </div>
+
+      <section style={block} id="shsarc">
+        <h2 style={{ marginTop: 0 }}>SHSARC</h2>
         <p>
           A 3-day, 11-module program focused on prevention, indicators, defensible controls, and clear escalation
           pathways. Output includes a regulator-ready Prevention Plan tailored to your context.
@@ -36,13 +41,6 @@ export default function TrainingPrograms() {
 
       <section style={{ ...block, marginTop: 24 }} id="rcabh">
         <h2 style={{ marginTop: 0 }}>RCABH</h2>
-        <Image
-          src="/images/products/rcabh.jpg"
-          alt="RCABH training illustration"
-          width={800}
-          height={400}
-          style={{ borderRadius: 8, marginBottom: 16 }}
-        />
         <p>
           A 4-day, 13-module program that equips leaders and teams to prevent aggression, bullying and harassment before
           claims arise, and to respond with procedural fairness when events occur.
