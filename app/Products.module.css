@@ -1,1 +1,38 @@
+.grid {
+  display: grid;
+  gap: 24px;
+  margin-top: 24px;
+}
+
+.card {
+  background: #111;
+  border: 1px solid #333;
+  border-radius: 8px;
+  padding: 16px;
+  transition: transform 0.2s ease;
+}
+
+.card:hover {
+  transform: translateY(-4px);
+}
+
+.title {
+  margin: 0 0 8px;
+  font-size: 18px;
+  color: #f1c40f; /* accent */
+}
+
+.blurb {
+  font-size: 14px;
+  color: #bdbdbd;
+}
+
+.link {
+  text-decoration: none;
+  color: inherit;
+}
+
+.item {
+  display: block;
+}
 
