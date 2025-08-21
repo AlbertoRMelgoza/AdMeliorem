@@ -33,8 +33,15 @@ export default function ContactPage() {
         <ul>
           <li><strong>Business Name:</strong> Ad Meliorem</li>
           <li><strong>ABN:</strong> 93 710 507 818</li>
-          <li><strong>Email:</strong> <a href="mailto:am@albertormelgoza.com">am@albertormelgoza.com</a></li>
-        </ul>
+          <li>
+  <strong>Email:</strong>{" "}
+  <a
+    href="mailto:am@albertormelgoza.com"
+    style={{ color: "#f1c40f", textDecoration: "none", fontWeight: 600 }}
+  >
+    am@albertormelgoza.com
+  </a>
+</li>
       </section>
 
       {/* Disclaimer */}
@@ -56,9 +63,14 @@ export default function ContactPage() {
       <section style={card}>
         <h2 style={{ marginTop: 0 }}>Get in touch</h2>
         <p>
-          Please send an email to <a href="mailto:am@albertormelgoza.com">am@albertormelgoza.com</a> outlining your needs or
-          request. I’ll get back to you promptly to discuss next steps.
-        </p>
+        Please send an email to{" "}
+<a
+  href="mailto:am@albertormelgoza.com"
+  style={{ color: "#f1c40f", textDecoration: "none", fontWeight: 600 }}
+>
+  am@albertormelgoza.com
+</a>{" "}
+outlining your needs or request. I’ll get back to you promptly to discuss next steps.
       </section>
     </main>
   );
