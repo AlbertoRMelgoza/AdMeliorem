@@ -15,31 +15,31 @@ export default function ProductsIndex() {
     <main style={wrap}>
       <h1 style={{ marginTop: 0 }}>Products &amp; Services</h1>
       <p style={{ marginTop: 8 }}>
-        Select a program or service to see the full outline, deliverables, and outcomes.
+        Select a product or service to see the full outline, deliverables, and outcomes.
       </p>
 
       <div style={grid}>
         <a href="/products/shsarc-rcabh" style={linkStyle}>
           <div style={card}>
-            <h3 style={{ marginTop: 0 }}>SHSARC™ &amp; RCABH™ — Training Programs</h3>
+            <h3 style={{ marginTop: 0 }}>SHSARC™ &amp; RCABH™ — Risk Control Programs</h3>
             <p style={{ margin: 0 }}>
-              Two flagship training programs that embed leaders and staff as live hazard controls and produce
+              Two flagship risk control programs through talent management that produce
               regulator-ready Prevention Plans.
             </p>
           </div>
         </a>
 
-        <a href="/products/procedural-justice-framework" style={linkStyle}>
+        <a href="/products/procedural-justice-framework™" style={linkStyle}>
           <div style={card}>
             <h3 style={{ marginTop: 0 }}>Procedural Justice Framework™</h3>
             <p style={{ margin: 0 }}>Fair, transparent, defensible processes that prevent escalation and contain liability.</p>
           </div>
         </a>
 
-        <a href="/products/culture-risk-diagnostic" style={linkStyle}>
+        <a href="/products/culture-risk-diagnostic™" style={linkStyle}>
           <div style={card}>
             <h3 style={{ marginTop: 0 }}>Culture Risk Diagnostic™</h3>
-            <p style={{ margin: 0 }}>Forensic cultural assessment with leading indicators, risk scores, and due-diligence evidence.</p>
+            <p style={{ margin: 0 }}>Precise culture risk assessments with qualitative and quantitative methods, culture risk indicators, and due-diligence evidence.</p>
           </div>
         </a>
 
