@@ -60,9 +60,9 @@ export default function Page() {
           </p>
         </div>
         <div>
-          {/* File must exist at admeliorem/admeliorem/public/images/hero-here-to-help.jpg */}
+          {/* File must exist at admeliorem/public/Images/hero-here-to-help.jpg */}
           <img
-            src="/images/hero-here-to-help.jpg"
+            src="/Images/hero-here-to-help.jpg"
             alt="Professional support to prevent psychosocial harm"
             style={{ width: "100%", borderRadius: 12, display: "block" }}
           />
