@@ -20,10 +20,10 @@ export default function TrainingPrograms() {
         regulator-ready Prevention Plans.
       </p>
 
-      {/* Insert your uploaded image here */}
+      {/* AdMeliorem\public\Images\courses.jpg */}
       <div style={{ margin: "24px 0" }}>
         <Image
-          src="/images/courses.jpg"
+          src="/Images/courses.jpg"
           alt="Training programs illustration"
           width={800}
           height={400}
