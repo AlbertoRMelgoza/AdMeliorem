@@ -13,10 +13,10 @@ export default function TrainingPrograms() {
 
   return (
     <main style={wrap}>
-      <h1 style={{ marginTop: 0 }}>SHSARC™ &amp; RCABH™ — Training Programs</h1>
+      <h1 style={{ marginTop: 0 }}>SHSARC™ &amp; RCABH™ — Workshops that serve as critical controls</h1>
       <p>
         The SHSARC™ — Sexual Harassment &amp; Sexual Assault Risk Control workshop and the RCABH™ — Risk Control
-        Aggression, Bullying &amp; Harassment workshoop provide in-depth awareness and understanding of the consequences of wrongful behaviour and produce
+        Aggression, Bullying &amp; Harassment workshop provide in-depth awareness and understanding of the consequences of wrongful behaviour and produce
         regulator-ready Prevention Plans.
       </p>
 
@@ -33,7 +33,7 @@ export default function TrainingPrograms() {
 
 
       <section style={block} id="shsarc">
-        <h2 style={{ marginTop: 0 }}>SHSARC</h2>
+        <h2 style={{ marginTop: 0 }}>SHSARC™</h2>
         <p>
           A 3-day, 11-module workshop focused on prevention, awareness, and isolating wrongful
           behaviour to the individual. Output includes a regulator-ready Prevention Plan tailored to your context.
@@ -41,7 +41,7 @@ export default function TrainingPrograms() {
       </section>
 
       <section style={{ ...block, marginTop: 24 }} id="rcabh">
-        <h2 style={{ marginTop: 0 }}>RCABH</h2>
+        <h2 style={{ marginTop: 0 }}>RCABH™</h2>
         <p>
           A 4-day, 13-module workshop that equips leaders and teams to prevent aggression, bullying and harassment before
           claims arise, and to respond immediately when an incident happens.
