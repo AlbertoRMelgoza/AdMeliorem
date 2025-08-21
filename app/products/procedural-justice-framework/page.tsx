@@ -20,10 +20,10 @@ export default function PJFPage() {
         Framework is used without the mark for readability.
       </p>
 
-      {/* Centered image */}
+      {/* AdMeliorem\public\Images\justice.jpg */}
       <div style={{ display: "flex", justifyContent: "center", margin: "24px 0" }}>
         <Image
-          src="/images/pjf.jpg" // 👈 make sure this file is inside public/images/
+          src="/Images/justice.jpg" // 👈 make sure this file is inside public/images/
           alt="Procedural Justice Framework illustration"
           width={800}
           height={400}
