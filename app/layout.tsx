@@ -11,9 +11,14 @@ export const metadata = {
 };
 
 const brand = {
-  max: 960,
+  max: 1000,
   pad: "0 16px",
-  color: "#0a3d62", // brand accent
+  accent: "#61dafb",
+  text: "#eaeaea",
+  subtext: "#bdbdbd",
+  bg: "#000000",
+  card: "#111111",
+  line: "#222222",
 };
 
 export default function RootLayout({ children }: { children: React.ReactNode }) {
@@ -24,7 +29,8 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
           margin: 0,
           fontFamily:
             "system-ui, -apple-system, Segoe UI, Roboto, Arial, sans-serif",
-          color: "#1b1b1b",
+          background: brand.bg,
+          color: brand.text,
         }}
       >
         <header
@@ -34,7 +40,7 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
             padding: brand.pad,
             display: "flex",
             alignItems: "center",
-            gap: 12,
+            gap: 16,
           }}
         >
           <a
@@ -42,18 +48,40 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
             style={{
               display: "inline-flex",
               alignItems: "center",
-              gap: 8,
+              gap: 12,
               textDecoration: "none",
               color: "inherit",
             }}
+            aria-label="Ad Meliorem Home"
           >
-            <img
-              src="/images/logo-ad-meliorem.png"
-              alt="Ad Meliorem"
-              style={{ height: 32 }}
-            />
-            <strong>Ad Meliorem</strong>
+            {/* Logo on a white badge so it shows on dark background */}
+            <span
+              style={{
+                display: "inline-flex",
+                alignItems: "center",
+                justifyContent: "center",
+                background: "#fff",
+                borderRadius: 8,
+                padding: 4,
+                lineHeight: 0,
+              }}
+            >
+              <img
+                src="/images/logo-ad-meliorem.png"
+                alt="Ad Meliorem logo"
+                style={{ height: 28, display: "block" }}
+              />
+            </span>
+
+            {/* Brand + owner name */}
+            <span style={{ display: "inline-flex", flexDirection: "column" }}>
+              <strong style={{ fontSize: 18, lineHeight: 1 }}>Ad Meliorem</strong>
+              <span style={{ fontSize: 13, color: brand.subtext, lineHeight: 1.2 }}>
+                Alberto R Melgoza, PhD
+              </span>
+            </span>
           </a>
+
           <nav
             style={{
               marginLeft: "auto",
@@ -62,14 +90,12 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
               flexWrap: "wrap",
             }}
           >
-            <a href="/" style={{ color: brand.color }}>
-              Home
-            </a>
-            <a href="/about">About</a>
-            <a href="/products">Products</a>
-            <a href="/evidence">Evidence</a>
-            <a href="/principles">Principles</a>
-            <a href="/contact">Contact</a>
+            <a href="/" style={{ color: brand.accent, textDecoration: "none" }}>Home</a>
+            <a href="/about" style={{ color: brand.text, textDecoration: "none" }}>About</a>
+            <a href="/products" style={{ color: brand.text, textDecoration: "none" }}>Products</a>
+            <a href="/evidence" style={{ color: brand.text, textDecoration: "none" }}>Evidence</a>
+            <a href="/principles" style={{ color: brand.text, textDecoration: "none" }}>Principles</a>
+            <a href="/contact" style={{ color: brand.text, textDecoration: "none" }}>Contact</a>
           </nav>
         </header>
 
@@ -80,12 +106,12 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
             maxWidth: brand.max,
             margin: "40px auto 24px",
             padding: brand.pad,
-            borderTop: "1px solid #eee",
+            borderTop: `1px solid ${brand.line}`,
+            color: brand.subtext,
           }}
         >
           <p style={{ fontSize: 14 }}>
-            © {new Date().getFullYear()} Ad Meliorem · Practical help when it
-            matters.
+            © {new Date().getFullYear()} Ad Meliorem · Practical help when it matters.
           </p>
         </footer>
       </body>
