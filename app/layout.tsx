@@ -1,5 +1,5 @@
 export const metadata = {
-  title: "Ad Meliorem — Psychosocial Risk Prevention & Control",
+  title: "Ad Meliorem — Culture and Psychosocial Risk Prevention & Control",
   description:
     "Specialist in preventing sexual harassment, aggression, bullying, and procedural justice failures. WHS-compliant frameworks, diagnostics, and support.",
   openGraph: {

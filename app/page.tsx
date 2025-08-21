@@ -89,7 +89,7 @@ export default function Page() {
             <div style={card}>
               <h4 style={{ margin: "0 0 6px" }}>Culture Risk Diagnostic™</h4>
               <p style={{ margin: 0 }}>
-                Validated tools (COPSOQ, SEQ, etc.) to map hotspots and deliver Key Culture Risk Indicators.
+                Validated tools (COPSOQ, SEQ, OCAS, IAT, WFBS) to map hotspots and deliver Key Culture Risk Indicators.
               </p>
             </div>
           </a>
