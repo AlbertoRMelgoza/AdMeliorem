@@ -23,38 +23,13 @@ export default function PJFPage() {
       {/* Centered image */}
       <div style={{ display: "flex", justifyContent: "center", margin: "24px 0" }}>
         <Image
-          src="/images/pjf.jpg" // 👈 put your picture in public/images/pjf.jpg
+          src="/images/pjf.jpg" // 👈 make sure this file is inside public/images/
           alt="Procedural Justice Framework illustration"
           width={800}
           height={400}
           style={{ borderRadius: 12 }}
         />
       </div>
-
-      {/* Existing section */}
-      <section style={card}>
-        <h2 style={{ marginTop: 0 }}>What you get</h2>
-        <ul>
-          <li>Workflow and roles for intake, triage, assessment, and investigation</li>
-          <li>Templates and guidance for notices, interviews, findings, and outcomes</li>
-          <li>Quality checks aligned to fairness, transparency and defensibility</li>
-        </ul>
-        <p style={{ marginTop: 12 }}>
-          <a
-            href="/contact"
-            style={{
-              background: "#f1c40f",
-              color: "#000",
-              padding: "10px 18px",
-              borderRadius: 6,
-              fontWeight: 600,
-              textDecoration: "none",
-            }}
-          >
-            Ask about PJF →
-          </a>
-        </p>
-      </section>
 
       {/* New section with your content */}
       <section style={card}>
@@ -84,9 +59,28 @@ export default function PJFPage() {
           <li>Prevent costly escalation by eliminating gaps in process that regulators target.</li>
           <li>Contain liability by demonstrating that systems — not just policies — are live and defensible.</li>
           <li>Protect trust with employees and regulators by embedding fairness and transparency.</li>
-          <li>Provide evidence of due diligence when psychosocial claims arise, shifting liability away from systemic failure.</li>
+          <li>
+            Provide evidence of due diligence when psychosocial claims arise, shifting liability away from systemic
+            failure.
+          </li>
         </ul>
       </section>
-    </main>
-  );
-}
+
+      {/* Existing section moved to the end */}
+      <section style={card}>
+        <h2 style={{ marginTop: 0 }}>What you get</h2>
+        <ul>
+          <li>Workflow and roles for intake, triage, assessment, and investigation</li>
+          <li>Templates and guidance for notices, interviews, findings, and outcomes</li>
+          <li>Quality checks aligned to fairness, transparency and defensibility</li>
+        </ul>
+        <p style={{ marginTop: 12 }}>
+          <a
+            href="/contact"
+            style={{
+              background: "#f1c40f",
+              color: "#000",
+              padding: "10px 18px",
+              borderRadius: 6,
+              fontWeight: 600,
+              textDecoration: "none",
