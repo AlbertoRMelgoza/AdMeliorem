@@ -2,7 +2,6 @@ import { Analytics } from "@vercel/analytics/react";
 import { SpeedInsights } from "@vercel/speed-insights/next";
 
 export const metadata = {
-  // helps build absolute OG urls
   metadataBase: new URL("https://albertormelgoza.com"),
   title: "Ad Meliorem — Culture and Psychosocial Risk Prevention & Control",
   description:
@@ -20,6 +19,9 @@ export const metadata = {
         alt: "Ad Meliorem — Practical help when it matters",
       },
     ],
+  },
+  icons: {
+    icon: "/favicon.ico", // 👈 Add this line
   },
 };
 
