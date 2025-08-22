@@ -18,7 +18,7 @@ export const SUBPRODUCTS: Subproduct[] = [
     short: "Psychosocial hazard mapping across workload, justice, relationships.",
     description:
       "Measures the psychosocial risk environment and flags existing/emerging hazards. Outputs include heatmaps, scores, and defensible indicators aligned to WHS/psychosocial duties.",
-    image: "/Images/COPSPQ.jpg",
+    image: "/Images/COPSOQ.jpg",
     includedInPackages: ["Standard", "Enterprise"],
   },
   {
