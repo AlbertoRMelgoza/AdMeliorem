@@ -1,7 +1,7 @@
 import Image from "next/image";
 import Link from "next/link";
 import type { CSSProperties } from "react";
-import { SUBPRODUCTS } from "../subproducts"; // <-- plural
+import { SUBPRODUCTS } from "../subproducts"; // plural
 
 type Props = { params: { slug: string } };
 
@@ -35,7 +35,7 @@ export default function SubproductPage({ params }: Props) {
   }
 
   const wrap: CSSProperties = { maxWidth: 900, margin: "28px auto", padding: "0 16px", lineHeight: 1.65 };
-  const card: CSSProperties = { background: "#111", border: "1px solid #222", borderRadius: 12, padding: 16, marginTop: 24 };
+  const card: CSSProperties = { background: "#111", border: "1px solid "#222", borderRadius: 12, padding: 16, marginTop: 24 };
 
   const heroSrc = encodeURI(sp.image ?? sp.thumb ?? "/Images/placeholder.jpg");
 
@@ -50,13 +50,14 @@ export default function SubproductPage({ params }: Props) {
       <h1 style={{ marginTop: 0 }}>{sp.title}</h1>
       <p style={{ opacity: 0.9 }}>{sp.short}</p>
 
-      <div style={{ display: "flex", justifyContent: "center", margin: "18px 0" }}>
+      {/* Fixed-size hero frame */}
+      <div style={{ position: "relative", width: "100%", aspectRatio: "16 / 9", borderRadius: 12, overflow: "hidden", margin: "18px 0" }}>
         <Image
           src={heroSrc}
           alt={sp.title}
-          width={900}
-          height={420}
-          style={{ borderRadius: 12, width: "100%", height: "auto", objectFit: "cover" }}
+          fill
+          sizes="(max-width: 900px) 100vw, 900px"
+          style={{ objectFit: "cover" }}
         />
       </div>
 
