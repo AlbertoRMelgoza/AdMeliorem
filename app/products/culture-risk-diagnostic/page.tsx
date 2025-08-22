@@ -51,39 +51,6 @@ export default function CRDPage() {
         />
       </div>
 
-      {/* Purposes + tools */}
-      <section style={card}>
-        <h2 style={{ marginTop: 0 }}>The Culture Risk Diagnostic™ serves two purposes</h2>
-        <p>
-          Depending on organisational needs, five reliable and validated tools can be applied to provide a 360° view of
-          hidden culture risks or to evaluate the broader business environment:
-        </p>
-        <ol>
-          <li>
-            <strong>COPSOQ (Copenhagen Psychosocial Questionnaire)</strong> → Measures the psychosocial risk environment,
-            flagging existing risks and emerging hazards.
-          </li>
-          <li>
-            <strong>SEQ (Sexual Experience Questionnaire)</strong> → Captures data on sexist remarks, inappropriate sexual
-            advances, unwanted sexual attention, and sexual coercion. Results identify risk concentrations by unit or
-            department and allow hazards to be isolated.
-          </li>
-          <li>
-            <strong>OCAS (Overt–Covert Aggression Scale)</strong> → Assesses both overt and covert wrongful behaviours,
-            including aggression, bullying, and harassment.
-          </li>
-          <li>
-            <strong>WFBS (Workplace Feelings &amp; Behaviour Survey)</strong> → Evaluates in-group favouritism and covert
-            harmful behaviours by capturing perceptions and feelings; developed and validated in Australia.
-          </li>
-          <li>
-            <strong>IAT (Implicit Association Test)</strong> → Surfaces hidden biases and unconscious attitudes toward
-            outgroups, exposing cultural drivers of exclusion and unsafe dynamics; delivered in collaboration with Harvard
-            University.
-          </li>
-        </ol>
-      </section>
-
       {/* NEW: Subproducts grid */}
       <section style={card}>
         <h2 style={{ marginTop: 0 }}>Subproducts & Tools</h2>
