@@ -1,5 +1,7 @@
 import Image from "next/image";
+import Link from "next/link";
 import type { CSSProperties } from "react";
+import { SUBPRODUCTS } from "./subproducts";
 
 export const metadata = {
   title: "Culture Risk Diagnostic™ — Ad Meliorem",
@@ -11,18 +13,37 @@ export default function CRDPage() {
   const wrap: CSSProperties = { maxWidth: 1000, margin: "28px auto", padding: "0 16px", lineHeight: 1.65 };
   const card: CSSProperties = { background: "#111", border: "1px solid #222", borderRadius: 12, padding: 16, marginTop: 24 };
 
+  const grid: CSSProperties = {
+    display: "grid",
+    gridTemplateColumns: "repeat(auto-fill, minmax(260px, 1fr))",
+    gap: 16,
+    marginTop: 16,
+  };
+
+  const tile: CSSProperties = {
+    background: "#0c0c0c",
+    border: "1px solid #1f1f1f",
+    borderRadius: 12,
+    padding: 14,
+    textDecoration: "none",
+    color: "inherit",
+    display: "block",
+  };
+
+  const titleStyle: CSSProperties = { fontWeight: 700, margin: "8px 0 4px" };
+  const shortStyle: CSSProperties = { opacity: 0.85, fontSize: 14, margin: 0 };
+
   return (
     <main style={wrap}>
       <h1 style={{ marginTop: 0 }}>Culture Risk Diagnostic™</h1>
       <p>
         The Culture Risk Diagnostic™ is a forensic assessment that maps hotspots and provides leading indicators, risk
-        scores and due-diligence evidence. 
+        scores and due-diligence evidence.
       </p>
 
-      {/* AdMeliorem\public\Images\culture.jpg */}
       <div style={{ display: "flex", justifyContent: "center", margin: "24px 0" }}>
         <Image
-          src="/Images/culture.jpg" // 
+          src="/Images/culture.jpg"
           alt="Culture Risk Diagnostic illustration"
           width={800}
           height={400}
@@ -63,6 +84,28 @@ export default function CRDPage() {
         </ol>
       </section>
 
+      {/* NEW: Subproducts grid */}
+      <section style={card}>
+        <h2 style={{ marginTop: 0 }}>Subproducts & Tools</h2>
+        <div style={grid}>
+          {SUBPRODUCTS.map((sp) => (
+            <Link key={sp.slug} href={`/products/culture-risk-diagnostic/${sp.slug}`} style={tile}>
+              {sp.image && (
+                <Image
+                  src={sp.image}
+                  alt={sp.title}
+                  width={560}
+                  height={280}
+                  style={{ width: "100%", height: "auto", borderRadius: 10, objectFit: "cover" }}
+                />
+              )}
+              <div style={titleStyle}>{sp.title}</div>
+              <p style={shortStyle}>{sp.short}</p>
+            </Link>
+          ))}
+        </div>
+      </section>
+
       {/* Deliverable */}
       <section style={card}>
         <h2 style={{ marginTop: 0 }}>Deliverable</h2>
@@ -99,7 +142,7 @@ export default function CRDPage() {
         </ul>
       </section>
 
-      {/* Existing Deliverables block with CTA */}
+      {/* Deliverables block with CTA */}
       <section style={card}>
         <h2 style={{ marginTop: 0 }}>Deliverables (summary)</h2>
         <ul>
