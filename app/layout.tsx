@@ -21,7 +21,7 @@ export const metadata = {
     ],
   },
   icons: {
-    icon: "/favicon.ico", // 👈 Add this line
+    icon: "/favicon.ico?v=2", // 👈 Add this line
   },
 };
 
