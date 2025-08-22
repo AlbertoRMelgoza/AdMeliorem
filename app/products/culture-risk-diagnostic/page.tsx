@@ -41,21 +41,6 @@ export default function CRDPage() {
         scores and due-diligence evidence.
       </p>
 
-      <section style={card}>
-        <h2 style={{ marginTop: 0 }}>The Culture Risk Diagnostic™ serves two purposes</h2>
-        <p>
-          Depending on organisational needs, five reliable and validated tools can be applied to provide a 360° view of
-          hidden culture risks or to evaluate the broader business environment:
-        </p>
-        <ol>
-          <li><strong>COPSOQ</strong> → Measures the psychosocial risk environment.</li>
-          <li><strong>SEQ</strong> → Captures data on sexist remarks, harassment and coercion.</li>
-          <li><strong>OCAS</strong> → Assesses aggression, bullying and harassment.</li>
-          <li><strong>WFBS</strong> → Evaluates in-group favouritism and covert harmful behaviours.</li>
-          <li><strong>IAT</strong> → Surfaces hidden biases and exclusion dynamics.</li>
-        </ol>
-      </section>
-
       {/* Subproducts grid (NO IMAGES) */}
       <section style={card}>
         <h2 style={{ marginTop: 0 }}>Subproducts & Tools</h2>
