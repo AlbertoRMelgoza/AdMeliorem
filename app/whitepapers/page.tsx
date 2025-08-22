@@ -1,5 +1,4 @@
 import type { CSSProperties } from "react";
-import TrackLink from "../components/TrackLink";
 
 export const metadata = {
   title: "Whitepapers — Ad Meliorem",
@@ -109,12 +108,11 @@ export default function WhitepapersPage() {
     display: "inline-block",
   };
 
-  // Build the mailto with a subject/body (nice UX)
-  const subject = encodeURIComponent("Whitepaper request from website");
-  const body = encodeURIComponent(
+  const mailto = `mailto:am@albertormelgoza.com?subject=${encodeURIComponent(
+    "Whitepaper request from website"
+  )}&body=${encodeURIComponent(
     "Hi Alberto,\n\nI'd like a copy of your whitepaper.\n\nThanks!"
-  );
-  const mailto = `mailto:am@albertormelgoza.com?subject=${subject}&body=${body}`;
+  )}`;
 
   return (
     <main style={wrap}>
@@ -122,10 +120,6 @@ export default function WhitepapersPage() {
       <section style={hero}>
         <div>
           <h1 style={{ marginTop: 0 }}>Whitepapers</h1>
-          <p style={{ color: subtext }}>
-            Practical, regulator-ready papers you can use to prevent harm and
-            protect value.
-          </p>
         </div>
 
         {/* AdMeliorem/public/Images/Whitepapers.jpg */}
@@ -152,19 +146,25 @@ export default function WhitepapersPage() {
       <section style={cta}>
         <h2 style={{ marginTop: 0 }}>Want a copy?</h2>
         <p style={{ color: subtext }}>
-          Get in touch and I’ll send you the full whitepaper tailored to your
-          needs.
+          Get in touch and I’ll send you the full whitepaper tailored to your needs.
         </p>
 
-        {/* Track the click in Vercel Analytics */}
-        <TrackLink
-          href={mailto}
-          event="request_whitepaper_cta_click"
+        {/* Primary CTA → thank-you page (for Google Ads Page-load conversion) */}
+        <a
+          href="/whitepapers/thank-you"
           style={button}
-          title="Email Alberto to request a whitepaper"
+          title="Request a whitepaper"
         >
           Request Whitepaper
-        </TrackLink>
+        </a>
+
+        {/* Optional secondary mailto link */}
+        <p style={{ color: subtext, marginTop: 12 }}>
+          Prefer email?{" "}
+          <a href={mailto} style={{ color: accent }}>
+            am@albertormelgoza.com
+          </a>
+        </p>
       </section>
     </main>
   );

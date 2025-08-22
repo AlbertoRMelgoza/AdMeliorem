@@ -1,3 +1,4 @@
+import Script from "next/script";
 import { Analytics } from "@vercel/analytics/react";
 import { SpeedInsights } from "@vercel/speed-insights/next";
 
@@ -21,7 +22,7 @@ export const metadata = {
     ],
   },
   icons: {
-    icon: "/favicon.ico", // 👈 Add this line
+    icon: "/favicon.ico?v=2", // 👈 Add this line
   },
 };
 
@@ -151,6 +152,24 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
         {/* Vercel Analytics & Speed Insights */}
         <Analytics />
         <SpeedInsights />
+
+        {/* Vercel Analytics & Speed Insights */}
+<Analytics />
+<SpeedInsights />
+
+{/* Google tag (gtag.js) */}
+<Script
+  src="https://www.googletagmanager.com/gtag/js?id=G-XC0JMD1CHD"
+  strategy="afterInteractive"
+/>
+<Script id="google-analytics" strategy="afterInteractive">
+  {`
+    window.dataLayer = window.dataLayer || [];
+    function gtag(){dataLayer.push(arguments);}
+    gtag('js', new Date());
+    gtag('config', 'G-XC0JMD1CHD');
+  `}
+</Script>
       </body>
     </html>
   );
