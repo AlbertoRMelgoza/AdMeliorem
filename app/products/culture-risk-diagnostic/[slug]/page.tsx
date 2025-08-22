@@ -26,7 +26,16 @@ export default function SubproductPage({ params }: Props) {
         <h1>Not found</h1>
         <p>This subproduct does not exist.</p>
         <p>
-          <Link href="/products/culture-risk-diagnostic">← Back to Culture Risk Diagnostic</Link>
+          <Link
+            href="/products/culture-risk-diagnostic"
+            style={{
+              color: "#f1c40f",
+              textDecoration: "none",
+              fontWeight: 600,
+            }}
+          >
+            ← Back to Culture Risk Diagnostic
+          </Link>
         </p>
       </main>
     );
@@ -37,8 +46,17 @@ export default function SubproductPage({ params }: Props) {
 
   return (
     <main style={wrap}>
-      <p style={{ margin: "0 0 8px 0", opacity: 0.75 }}>
-        <Link href="/products/culture-risk-diagnostic">← Culture Risk Diagnostic™</Link>
+      <p style={{ margin: "0 0 8px 0" }}>
+        <Link
+          href="/products/culture-risk-diagnostic"
+          style={{
+            color: "#f1c40f", // brand yellow
+            textDecoration: "none",
+            fontWeight: 600,
+          }}
+        >
+          ← Culture Risk Diagnostic™
+        </Link>
       </p>
 
       <h1 style={{ marginTop: 0 }}>{sp.title}</h1>
@@ -92,7 +110,14 @@ export default function SubproductPage({ params }: Props) {
         <div style={{ display: "flex", gap: 12, flexWrap: "wrap" }}>
           <Link
             href="/contact"
-            style={{ background: "#f1c40f", color: "#000", padding: "10px 18px", borderRadius: 6, fontWeight: 700, textDecoration: "none" }}
+            style={{
+              background: "#f1c40f",
+              color: "#000",
+              padding: "10px 18px",
+              borderRadius: 6,
+              fontWeight: 700,
+              textDecoration: "none",
+            }}
           >
             Enquire / Add to Package →
           </Link>
@@ -100,7 +125,14 @@ export default function SubproductPage({ params }: Props) {
           {/* Example purchase link — replace with Stripe Checkout when ready */}
           <a
             href={sp.cta?.href ?? "/contact"}
-            style={{ border: "1px solid #444", padding: "10px 18px", borderRadius: 6, fontWeight: 600, textDecoration: "none" }}
+            style={{
+              border: "1px solid #444",
+              padding: "10px 18px",
+              borderRadius: 6,
+              fontWeight: 600,
+              textDecoration: "none",
+              color: "#fff",
+            }}
           >
             {sp.cta?.label ?? "Purchase (Coming Soon)"}
           </a>
@@ -109,4 +141,3 @@ export default function SubproductPage({ params }: Props) {
     </main>
   );
 }
-
