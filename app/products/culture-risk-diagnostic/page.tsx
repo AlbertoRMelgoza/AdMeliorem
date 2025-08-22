@@ -1,4 +1,3 @@
-import Image from "next/image";
 import Link from "next/link";
 import type { CSSProperties } from "react";
 import { SUBPRODUCTS } from "./subproducts";
@@ -21,17 +20,18 @@ export default function CRDPage() {
   };
 
   const tile: CSSProperties = {
-    background: "#0c0c0c",
-    border: "1px solid #1f1f1f",
+    background: "#f1c40f", // yellow
+    color: "#000",
+    border: "1px solid #f1c40f",
     borderRadius: 12,
-    padding: 14,
+    padding: 16,
     textDecoration: "none",
-    color: "inherit",
     display: "block",
+    fontWeight: 700,
   };
 
-  const titleStyle: CSSProperties = { fontWeight: 700, margin: "8px 0 4px" };
-  const shortStyle: CSSProperties = { opacity: 0.85, fontSize: 14, margin: 0 };
+  const titleStyle: CSSProperties = { margin: 0, fontSize: 16, lineHeight: 1.35 };
+  const shortStyle: CSSProperties = { margin: "6px 0 0 0", fontSize: 13, opacity: 0.9, fontWeight: 500 };
 
   return (
     <main style={wrap}>
@@ -40,16 +40,6 @@ export default function CRDPage() {
         The Culture Risk Diagnostic™ is a forensic assessment that maps hotspots and provides leading indicators, risk
         scores and due-diligence evidence.
       </p>
-
-      <div style={{ display: "flex", justifyContent: "center", margin: "24px 0" }}>
-        <Image
-          src="/Images/culture.jpg"
-          alt="Culture Risk Diagnostic illustration"
-          width={800}
-          height={400}
-          style={{ borderRadius: 12 }}
-        />
-      </div>
 
       <section style={card}>
         <h2 style={{ marginTop: 0 }}>The Culture Risk Diagnostic™ serves two purposes</h2>
@@ -66,26 +56,13 @@ export default function CRDPage() {
         </ol>
       </section>
 
-      {/* Subproducts grid with small images */}
+      {/* Subproducts grid (NO IMAGES) */}
       <section style={card}>
         <h2 style={{ marginTop: 0 }}>Subproducts & Tools</h2>
         <div style={grid}>
           {SUBPRODUCTS.map((sp) => (
             <Link key={sp.slug} href={`/products/culture-risk-diagnostic/${sp.slug}`} style={tile}>
-              <Image
-                src={sp.thumb || sp.image || "/Images/placeholder.jpg"}
-                alt={sp.title}
-                width={400}
-                height={200}
-                style={{
-                  width: "100%",
-                  height: "140px",   // <<< smaller card image
-                  objectFit: "cover",
-                  borderRadius: 10,
-                  display: "block",
-                }}
-              />
-              <div style={titleStyle}>{sp.title}</div>
+              <p style={titleStyle}>{sp.title}</p>
               <p style={shortStyle}>{sp.short}</p>
             </Link>
           ))}
@@ -95,8 +72,8 @@ export default function CRDPage() {
       <section style={card}>
         <h2 style={{ marginTop: 0 }}>Deliverable</h2>
         <p>
-          A regulator-ready report for key stakeholders with cultural risk scores and hazard mapping. The report is designed
-          to withstand regulator scrutiny and provide precise leading indicators of harm.
+          A regulator-ready report for key stakeholders with cultural risk scores and hazard mapping. The report is
+          designed to withstand regulator scrutiny and provide precise leading indicators of harm.
         </p>
       </section>
 
