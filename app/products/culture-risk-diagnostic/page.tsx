@@ -1,7 +1,8 @@
 import Image from "next/image";
 import Link from "next/link";
 import type { CSSProperties } from "react";
-import { SUBPRODUCTS } from "./subproducts";
+// NOTE: singular import to match your file name:
+import { SUBPRODUCTS } from "./subproduct";
 
 export const metadata = {
   title: "Culture Risk Diagnostic™ — Ad Meliorem",
@@ -52,12 +53,46 @@ export default function CRDPage() {
         />
       </div>
 
-     {/* Subproducts grid (uses thumb -> image -> placeholder, and fixes image size) */}
+      {/* Purposes + tools (unchanged) */}
+      <section style={card}>
+        <h2 style={{ marginTop: 0 }}>The Culture Risk Diagnostic™ serves two purposes</h2>
+        <p>
+          Depending on organisational needs, five reliable and validated tools can be applied to provide a 360° view of
+          hidden culture risks or to evaluate the broader business environment:
+        </p>
+        <ol>
+          <li>
+            <strong>COPSOQ (Copenhagen Psychosocial Questionnaire)</strong> → Measures the psychosocial risk environment,
+            flagging existing risks and emerging hazards.
+          </li>
+          <li>
+            <strong>SEQ (Sexual Experience Questionnaire)</strong> → Captures data on sexist remarks, inappropriate sexual
+            advances, unwanted sexual attention, and sexual coercion. Results identify risk concentrations by unit or
+            department and allow hazards to be isolated.
+          </li>
+          <li>
+            <strong>OCAS (Overt–Covert Aggression Scale)</strong> → Assesses both overt and covert wrongful behaviours,
+            including aggression, bullying, and harassment.
+          </li>
+          <li>
+            <strong>WFBS (Workplace Feelings &amp; Behaviour Survey)</strong> → Evaluates in-group favouritism and covert
+            harmful behaviours by capturing perceptions and feelings; developed and validated in Australia.
+          </li>
+          <li>
+            <strong>IAT (Implicit Association Test)</strong> → Surfaces hidden biases and unconscious attitudes toward
+            outgroups, exposing cultural drivers of exclusion and unsafe dynamics; delivered in collaboration with Harvard
+            University.
+          </li>
+        </ol>
+      </section>
+
+      {/* Subproducts grid with safe image handling */}
       <section style={card}>
         <h2 style={{ marginTop: 0 }}>Subproducts & Tools</h2>
         <div style={grid}>
           {SUBPRODUCTS.map((sp) => {
-            const imgSrc = sp.thumb ?? sp.image ?? "/Images/placeholder.jpg";
+            const raw = sp.thumb ?? sp.image ?? "/Images/placeholder.jpg";
+            const imgSrc = encodeURI(raw); // handles spaces in filenames
             return (
               <Link key={sp.slug} href={`/products/culture-risk-diagnostic/${sp.slug}`} style={tile}>
                 <Image
@@ -67,9 +102,13 @@ export default function CRDPage() {
                   height={200}
                   style={{
                     width: "100%",
-                    height: "160px", // << consistent, smaller card image
+                    height: "160px",
                     objectFit: "cover",
                     borderRadius: 10,
+                  }}
+                  onError={(e) => {
+                    // runtime fallback if file missing
+                    (e.currentTarget as HTMLImageElement).src = "/Images/placeholder.jpg";
                   }}
                 />
                 <div style={titleStyle}>{sp.title}</div>
@@ -80,7 +119,7 @@ export default function CRDPage() {
         </div>
       </section>
 
-      {/* Deliverable */}
+      {/* The rest of the page… (unchanged) */}
       <section style={card}>
         <h2 style={{ marginTop: 0 }}>Deliverable</h2>
         <p>
@@ -91,7 +130,6 @@ export default function CRDPage() {
         </p>
       </section>
 
-      {/* Why Organisations Purchase It */}
       <section style={card}>
         <h2 style={{ marginTop: 0 }}>Why organisations purchase it</h2>
         <ul>
@@ -116,7 +154,6 @@ export default function CRDPage() {
         </ul>
       </section>
 
-      {/* Deliverables block with CTA */}
       <section style={card}>
         <h2 style={{ marginTop: 0 }}>Deliverables (summary)</h2>
         <ul>
