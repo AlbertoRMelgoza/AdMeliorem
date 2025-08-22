@@ -1,7 +1,7 @@
 import Image from "next/image";
 import Link from "next/link";
 import type { CSSProperties } from "react";
-import { SUBPRODUCTS } from "./subproducts"; // <-- plural
+import { SUBPRODUCTS } from "./subproducts"; // plural
 
 export const metadata = {
   title: "Culture Risk Diagnostic™ — Ad Meliorem",
@@ -41,10 +41,20 @@ export default function CRDPage() {
         scores and due-diligence evidence.
       </p>
 
+      {/* Hero image */}
       <div style={{ display: "flex", justifyContent: "center", margin: "24px 0" }}>
-        <Image src="/Images/culture.jpg" alt="Culture Risk Diagnostic illustration" width={800} height={400} style={{ borderRadius: 12 }} />
+        <div style={{ position: "relative", width: "100%", maxWidth: 800, aspectRatio: "16 / 9", borderRadius: 12, overflow: "hidden" }}>
+          <Image
+            src="/Images/culture.jpg"
+            alt="Culture Risk Diagnostic illustration"
+            fill
+            sizes="(max-width: 900px) 100vw, 800px"
+            style={{ objectFit: "cover" }}
+          />
+        </div>
       </div>
 
+      {/* Purposes + tools */}
       <section style={card}>
         <h2 style={{ marginTop: 0 }}>The Culture Risk Diagnostic™ serves two purposes</h2>
         <p>
@@ -60,22 +70,24 @@ export default function CRDPage() {
         </ol>
       </section>
 
-      {/* Subproducts grid (thumb -> image -> placeholder) */}
+      {/* Subproducts grid (fixed size & fallback) */}
       <section style={card}>
         <h2 style={{ marginTop: 0 }}>Subproducts & Tools</h2>
         <div style={grid}>
           {SUBPRODUCTS.map((sp) => {
             const raw = sp.thumb ?? sp.image ?? "/Images/placeholder.jpg";
-            const imgSrc = encodeURI(raw); // handles spaces in filenames
+            const imgSrc = encodeURI(raw);
             return (
               <Link key={sp.slug} href={`/products/culture-risk-diagnostic/${sp.slug}`} style={tile}>
-                <Image
-                  src={imgSrc}
-                  alt={sp.title}
-                  width={400}
-                  height={200}
-                  style={{ width: "100%", height: "160px", objectFit: "cover", borderRadius: 10 }}
-                />
+                <div style={{ position: "relative", width: "100%", aspectRatio: "16 / 9", borderRadius: 10, overflow: "hidden" }}>
+                  <Image
+                    src={imgSrc}
+                    alt={sp.title}
+                    fill
+                    sizes="(max-width: 640px) 100vw, 320px"
+                    style={{ objectFit: "cover" }}
+                  />
+                </div>
                 <div style={titleStyle}>{sp.title}</div>
                 <p style={shortStyle}>{sp.short}</p>
               </Link>
@@ -84,14 +96,16 @@ export default function CRDPage() {
         </div>
       </section>
 
+      {/* Deliverable */}
       <section style={card}>
         <h2 style={{ marginTop: 0 }}>Deliverable</h2>
         <p>
-          A regulator-ready report for key stakeholders with cultural risk scores and hazard mapping. The report is designed to
-          withstand regulator scrutiny and provide precise leading indicators on possible harm.
+          A regulator-ready report for key stakeholders with cultural risk scores and hazard mapping. The report is designed
+          to withstand regulator scrutiny and provide precise leading indicators on possible harm.
         </p>
       </section>
 
+      {/* Why */}
       <section style={card}>
         <h2 style={{ marginTop: 0 }}>Why organisations purchase it</h2>
         <ul>
@@ -102,15 +116,19 @@ export default function CRDPage() {
         </ul>
       </section>
 
+      {/* Summary CTA */}
       <section style={card}>
         <h2 style={{ marginTop: 0 }}>Deliverables (summary)</h2>
         <ul>
           <li>Validated survey instruments and targeted interviews</li>
-          <li>Key Culture Risk Indicators with thresholds and trends</li>
+          <li>Key Culture Risk Indicators with thresholds and trend views</li>
           <li>Precise Prevention Plans</li>
         </ul>
         <p style={{ marginTop: 12 }}>
-          <a href="/contact" style={{ background: "#f1c40f", color: "#000", padding: "10px 18px", borderRadius: 6, fontWeight: 600, textDecoration: "none", display: "inline-block" }}>
+          <a
+            href="/contact"
+            style={{ background: "#f1c40f", color: "#000", padding: "10px 18px", borderRadius: 6, fontWeight: 600, textDecoration: "none", display: "inline-block" }}
+          >
             Discuss CRD →
           </a>
         </p>
