@@ -69,26 +69,25 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
             }}
             aria-label="Ad Meliorem Home"
           >
-            {/* Logo file: public/Images/logo-ad-meliorem-Copy.jpg */}
-            <span
-              style={{
-                display: "inline-flex",
-                alignItems: "center",
-                justifyContent: "center",
-                background: "#fff",
-                borderRadius: 8,
-                padding: 4,
-                lineHeight: 0,
-              }}
-            >
-             <img
-               src="/Images/logo-ad-meliorem-Copy.jpg"   // 👈 match your actual file name
-               alt="Ad Meliorem logo"
-               style={{ height: 28, display: "block" }}
-               />
+          {/* Logo file: public/Images/logo-ad-meliorem-Copy.jpg */}
+<span
+  style={{
+    display: "inline-flex",
+    alignItems: "center",
+    justifyContent: "center",
+    background: "#fff",
+    borderRadius: 8,
+    padding: 4,
+    lineHeight: 0,
+  }}
+>
+  <img
+    src="/Images/logo-ad-meliorem-Copy.jpg"
+    alt="Ad Meliorem logo"
+    style={{ height: 28, display: "block" }}
+  />
+</span>
 
-              />
-            </span>
 
             <span style={{ display: "inline-flex", flexDirection: "column" }}>
               <strong style={{ fontSize: 18, lineHeight: 1 }}>Ad Meliorem</strong>
