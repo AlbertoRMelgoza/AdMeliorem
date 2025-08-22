@@ -41,6 +41,7 @@ export default function CRDPage() {
         scores and due-diligence evidence.
       </p>
 
+      {/* Hero image */}
       <div style={{ display: "flex", justifyContent: "center", margin: "24px 0" }}>
         <Image
           src="/Images/culture.jpg"
@@ -51,25 +52,64 @@ export default function CRDPage() {
         />
       </div>
 
-      {/* NEW: Subproducts grid */}
+      {/* Purposes + tools */}
+      <section style={card}>
+        <h2 style={{ marginTop: 0 }}>The Culture Risk Diagnostic™ serves two purposes</h2>
+        <p>
+          Depending on organisational needs, five reliable and validated tools can be applied to provide a 360° view of
+          hidden culture risks or to evaluate the broader business environment:
+        </p>
+        <ol>
+          <li>
+            <strong>COPSOQ (Copenhagen Psychosocial Questionnaire)</strong> → Measures the psychosocial risk environment,
+            flagging existing risks and emerging hazards.
+          </li>
+          <li>
+            <strong>SEQ (Sexual Experience Questionnaire)</strong> → Captures data on sexist remarks, inappropriate sexual
+            advances, unwanted sexual attention, and sexual coercion. Results identify risk concentrations by unit or
+            department and allow hazards to be isolated.
+          </li>
+          <li>
+            <strong>OCAS (Overt–Covert Aggression Scale)</strong> → Assesses both overt and covert wrongful behaviours,
+            including aggression, bullying, and harassment.
+          </li>
+          <li>
+            <strong>WFBS (Workplace Feelings &amp; Behaviour Survey)</strong> → Evaluates in-group favouritism and covert
+            harmful behaviours by capturing perceptions and feelings; developed and validated in Australia.
+          </li>
+          <li>
+            <strong>IAT (Implicit Association Test)</strong> → Surfaces hidden biases and unconscious attitudes toward
+            outgroups, exposing cultural drivers of exclusion and unsafe dynamics; delivered in collaboration with Harvard
+            University.
+          </li>
+        </ol>
+      </section>
+
+      {/* Subproducts grid (uses thumb -> image -> placeholder, and fixes image size) */}
       <section style={card}>
         <h2 style={{ marginTop: 0 }}>Subproducts & Tools</h2>
         <div style={grid}>
-          {SUBPRODUCTS.map((sp) => (
-            <Link key={sp.slug} href={`/products/culture-risk-diagnostic/${sp.slug}`} style={tile}>
-              {sp.image && (
+          {SUBPRODUCTS.map((sp) => {
+            const imgSrc = sp.thumb ?? sp.image ?? "/Images/placeholder.jpg";
+            return (
+              <Link key={sp.slug} href={`/products/culture-risk-diagnostic/${sp.slug}`} style={tile}>
                 <Image
-                  src={sp.image}
+                  src={imgSrc}
                   alt={sp.title}
-                  width={560}
-                  height={280}
-                  style={{ width: "100%", height: "auto", borderRadius: 10, objectFit: "cover" }}
+                  width={400}
+                  height={200}
+                  style={{
+                    width: "100%",
+                    height: "160px", // << consistent, smaller card image
+                    objectFit: "cover",
+                    borderRadius: 10,
+                  }}
                 />
-              )}
-              <div style={titleStyle}>{sp.title}</div>
-              <p style={shortStyle}>{sp.short}</p>
-            </Link>
-          ))}
+                <div style={titleStyle}>{sp.title}</div>
+                <p style={shortStyle}>{sp.short}</p>
+              </Link>
+            );
+          })}
         </div>
       </section>
 
@@ -137,4 +177,3 @@ export default function CRDPage() {
     </main>
   );
 }
-
