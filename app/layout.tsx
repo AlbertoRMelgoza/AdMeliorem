@@ -69,7 +69,7 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
             }}
             aria-label="Ad Meliorem Home"
           >
-            {/* Logo file: public/Images/logo-ad-meliorem.jpg */}
+            {/* Logo file: public/Images/logo-ad-meliorem-Copy.jpg */}
             <span
               style={{
                 display: "inline-flex",
@@ -82,7 +82,7 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
               }}
             >
               <img
-                src="/Images/logo-ad-meliorem.jpg"
+                src="/Images/logo-ad-meliorem-Copy.jpg"
                 alt="Ad Meliorem logo"
                 style={{ height: 28, display: "block" }}
               />
