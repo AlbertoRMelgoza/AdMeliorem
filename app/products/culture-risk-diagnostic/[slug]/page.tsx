@@ -1,7 +1,7 @@
 import Image from "next/image";
 import Link from "next/link";
 import type { CSSProperties } from "react";
-import { SUBPRODUCTS } from "../subproduct"; // singular
+import { SUBPRODUCTS } from "../subproducts"; // <-- plural
 
 type Props = { params: { slug: string } };
 
@@ -26,10 +26,7 @@ export default function SubproductPage({ params }: Props) {
         <h1>Not found</h1>
         <p>This subproduct does not exist.</p>
         <p>
-          <Link
-            href="/products/culture-risk-diagnostic"
-            style={{ color: "#f1c40f", textDecoration: "none", fontWeight: 600 }}
-          >
+          <Link href="/products/culture-risk-diagnostic" style={{ color: "#f1c40f", textDecoration: "none", fontWeight: 600 }}>
             ← Back to Culture Risk Diagnostic
           </Link>
         </p>
@@ -53,20 +50,15 @@ export default function SubproductPage({ params }: Props) {
       <h1 style={{ marginTop: 0 }}>{sp.title}</h1>
       <p style={{ opacity: 0.9 }}>{sp.short}</p>
 
-      {heroSrc && (
-        <div style={{ display: "flex", justifyContent: "center", margin: "18px 0" }}>
-          <Image
-            src={heroSrc}
-            alt={sp.title}
-            width={900}
-            height={420}
-            style={{ borderRadius: 12, width: "100%", height: "auto", objectFit: "cover" }}
-            onError={(e) => {
-              (e.currentTarget as HTMLImageElement).src = "/Images/placeholder.jpg";
-            }}
-          />
-        </div>
-      )}
+      <div style={{ display: "flex", justifyContent: "center", margin: "18px 0" }}>
+        <Image
+          src={heroSrc}
+          alt={sp.title}
+          width={900}
+          height={420}
+          style={{ borderRadius: 12, width: "100%", height: "auto", objectFit: "cover" }}
+        />
+      </div>
 
       <section style={card}>
         <h2 style={{ marginTop: 0 }}>Why it matters</h2>
@@ -81,9 +73,9 @@ export default function SubproductPage({ params }: Props) {
       <section style={card}>
         <h2 style={{ marginTop: 0 }}>How it works</h2>
         <ul>
-          <li>Deployed with strict anonymity (minimum subgroup sizes enforced).</li>
+          <li>Strict anonymity (minimum subgroup sizes enforced).</li>
           <li>Configured for your organisation (unique link, open/close dates, optional domain gating).</li>
-          <li>Results aggregated; no personal identifiers stored or reported.</li>
+          <li>Aggregated reporting only; no personal identifiers.</li>
         </ul>
       </section>
 
@@ -100,16 +92,10 @@ export default function SubproductPage({ params }: Props) {
         <h2 style={{ marginTop: 0 }}>Next step</h2>
         <p>You can add this subproduct to a Culture Risk Diagnostic package, or run it as a standalone engagement.</p>
         <div style={{ display: "flex", gap: 12, flexWrap: "wrap" }}>
-          <Link
-            href="/contact"
-            style={{ background: "#f1c40f", color: "#000", padding: "10px 18px", borderRadius: 6, fontWeight: 700, textDecoration: "none" }}
-          >
+          <Link href="/contact" style={{ background: "#f1c40f", color: "#000", padding: "10px 18px", borderRadius: 6, fontWeight: 700, textDecoration: "none" }}>
             Enquire / Add to Package →
           </Link>
-          <a
-            href={sp.cta?.href ?? "/contact"}
-            style={{ border: "1px solid #444", padding: "10px 18px", borderRadius: 6, fontWeight: 600, textDecoration: "none", color: "#fff" }}
-          >
+          <a href={sp.cta?.href ?? "/contact"} style={{ border: "1px solid #444", padding: "10px 18px", borderRadius: 6, fontWeight: 600, textDecoration: "none", color: "#fff" }}>
             {sp.cta?.label ?? "Purchase (Coming Soon)"}
           </a>
         </div>
