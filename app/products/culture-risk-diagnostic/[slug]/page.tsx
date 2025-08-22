@@ -1,7 +1,7 @@
 import Image from "next/image";
 import Link from "next/link";
 import type { CSSProperties } from "react";
-import { SUBPRODUCTS } from "../subproducts";
+import { SUBPRODUCTS } from "../subproduct"; // singular
 
 type Props = { params: { slug: string } };
 
@@ -28,11 +28,7 @@ export default function SubproductPage({ params }: Props) {
         <p>
           <Link
             href="/products/culture-risk-diagnostic"
-            style={{
-              color: "#f1c40f",
-              textDecoration: "none",
-              fontWeight: 600,
-            }}
+            style={{ color: "#f1c40f", textDecoration: "none", fontWeight: 600 }}
           >
             ← Back to Culture Risk Diagnostic
           </Link>
@@ -44,17 +40,12 @@ export default function SubproductPage({ params }: Props) {
   const wrap: CSSProperties = { maxWidth: 900, margin: "28px auto", padding: "0 16px", lineHeight: 1.65 };
   const card: CSSProperties = { background: "#111", border: "1px solid #222", borderRadius: 12, padding: 16, marginTop: 24 };
 
+  const heroSrc = encodeURI(sp.image ?? sp.thumb ?? "/Images/placeholder.jpg");
+
   return (
     <main style={wrap}>
       <p style={{ margin: "0 0 8px 0" }}>
-        <Link
-          href="/products/culture-risk-diagnostic"
-          style={{
-            color: "#f1c40f", // brand yellow
-            textDecoration: "none",
-            fontWeight: 600,
-          }}
-        >
+        <Link href="/products/culture-risk-diagnostic" style={{ color: "#f1c40f", textDecoration: "none", fontWeight: 600 }}>
           ← Culture Risk Diagnostic™
         </Link>
       </p>
@@ -62,14 +53,17 @@ export default function SubproductPage({ params }: Props) {
       <h1 style={{ marginTop: 0 }}>{sp.title}</h1>
       <p style={{ opacity: 0.9 }}>{sp.short}</p>
 
-      {sp.image && (
+      {heroSrc && (
         <div style={{ display: "flex", justifyContent: "center", margin: "18px 0" }}>
           <Image
-            src={sp.image}
+            src={heroSrc}
             alt={sp.title}
             width={900}
             height={420}
             style={{ borderRadius: 12, width: "100%", height: "auto", objectFit: "cover" }}
+            onError={(e) => {
+              (e.currentTarget as HTMLImageElement).src = "/Images/placeholder.jpg";
+            }}
           />
         </div>
       )}
@@ -104,35 +98,17 @@ export default function SubproductPage({ params }: Props) {
 
       <section style={card}>
         <h2 style={{ marginTop: 0 }}>Next step</h2>
-        <p>
-          You can add this subproduct to a Culture Risk Diagnostic package, or run it as a standalone engagement.
-        </p>
+        <p>You can add this subproduct to a Culture Risk Diagnostic package, or run it as a standalone engagement.</p>
         <div style={{ display: "flex", gap: 12, flexWrap: "wrap" }}>
           <Link
             href="/contact"
-            style={{
-              background: "#f1c40f",
-              color: "#000",
-              padding: "10px 18px",
-              borderRadius: 6,
-              fontWeight: 700,
-              textDecoration: "none",
-            }}
+            style={{ background: "#f1c40f", color: "#000", padding: "10px 18px", borderRadius: 6, fontWeight: 700, textDecoration: "none" }}
           >
             Enquire / Add to Package →
           </Link>
-
-          {/* Example purchase link — replace with Stripe Checkout when ready */}
           <a
             href={sp.cta?.href ?? "/contact"}
-            style={{
-              border: "1px solid #444",
-              padding: "10px 18px",
-              borderRadius: 6,
-              fontWeight: 600,
-              textDecoration: "none",
-              color: "#fff",
-            }}
+            style={{ border: "1px solid #444", padding: "10px 18px", borderRadius: 6, fontWeight: 600, textDecoration: "none", color: "#fff" }}
           >
             {sp.cta?.label ?? "Purchase (Coming Soon)"}
           </a>
