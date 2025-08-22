@@ -13,7 +13,7 @@ export const metadata = {
     type: "website",
     images: [
       {
-        url: "/Images/logo-ad-meliorem- Copy.jpg",
+        url: "/Images/logo-ad-meliorem - Copy.jpg",
         width: 1200,
         height: 630,
         alt: "Ad Meliorem — Practical help when it matters",
@@ -69,7 +69,7 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
             }}
             aria-label="Ad Meliorem Home"
           >
-          {/* Logo file: public/Images/logo-ad-meliorem- Copy.jpg */}
+          {/* Logo file: public/Images/logo-ad-meliorem - Copy.jpg */}
 <span
   style={{
     display: "inline-flex",
@@ -82,7 +82,7 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
   }}
 >
   <img
-    src="/Images/logo-ad-meliorem- Copy.jpg"
+    src="/Images/logo-ad-meliorem - Copy.jpg"
     alt="Ad Meliorem logo"
     style={{ height: 28, display: "block" }}
   />
