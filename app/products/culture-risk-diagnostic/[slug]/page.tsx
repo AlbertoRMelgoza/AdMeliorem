@@ -1,4 +1,3 @@
-import Image from "next/image";
 import Link from "next/link";
 import type { CSSProperties } from "react";
 import { SUBPRODUCTS } from "../subproducts";
@@ -48,17 +47,7 @@ export default function SubproductPage({ params }: Props) {
       <h1 style={{ marginTop: 0 }}>{sp.title}</h1>
       <p style={{ opacity: 0.9 }}>{sp.short}</p>
 
-      {sp.image && (
-        <div style={{ display: "flex", justifyContent: "center", margin: "18px 0" }}>
-          <Image
-            src={sp.image}
-            alt={sp.title}
-            width={900}
-            height={420}
-            style={{ width: "100%", maxHeight: "360px", objectFit: "cover", borderRadius: 12 }}
-          />
-        </div>
-      )}
+      {/* No hero image */}
 
       <section style={card}>
         <h2 style={{ marginTop: 0 }}>Why it matters</h2>
