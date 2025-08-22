@@ -6,8 +6,9 @@ export type Subproduct = {
   title: string;
   short: string;
   description: string;
-  image?: string; // optional: /Images/xyz.jpg
-  cta?: { label: string; href: string }; // e.g., Stripe Checkout or Enquire
+  image?: string; // full hero image (e.g., /Images/xyz.jpg)
+  thumb?: string; // smaller grid thumbnail (e.g., /Images/subproducts/xyz-thumb.jpg)
+  cta?: { label: string; href: string }; // Stripe Checkout or Enquire
   includedInPackages?: ("Starter" | "Standard" | "Enterprise")[];
 };
 
@@ -19,6 +20,7 @@ export const SUBPRODUCTS: Subproduct[] = [
     description:
       "Measures the psychosocial risk environment and flags existing/emerging hazards. Outputs include heatmaps, scores, and defensible indicators aligned to WHS/psychosocial duties.",
     image: "/Images/COPSOQ.jpg",
+    thumb: "/Images/subproducts/copsoq-thumb.jpg",
     includedInPackages: ["Standard", "Enterprise"],
   },
   {
@@ -28,6 +30,7 @@ export const SUBPRODUCTS: Subproduct[] = [
     description:
       "Captures data on sexist remarks and sexual harassment to identify risk concentrations by unit or role, enabling targeted control measures.",
     image: "/Images/SEQ.jpg",
+    thumb: "/Images/subproducts/seq-thumb.jpg",
     includedInPackages: ["Standard", "Enterprise"],
   },
   {
@@ -37,6 +40,7 @@ export const SUBPRODUCTS: Subproduct[] = [
     description:
       "Assesses wrongful behaviours including aggression, bullying, and harassment; highlights patterns and hotspots to guide prevention.",
     image: "/Images/OCAS.jpg",
+    thumb: "/Images/subproducts/ocas-thumb.jpg",
     includedInPackages: ["Starter", "Standard", "Enterprise"],
   },
   {
@@ -46,6 +50,7 @@ export const SUBPRODUCTS: Subproduct[] = [
     description:
       "Evaluates perceptions and dynamics that drive culture risk; developed and validated in Australia. Ideal for large or complex teams.",
     image: "/Images/WFBS.jpg",
+    thumb: "/Images/subproducts/wfbs-thumb.jpg",
     includedInPackages: ["Standard", "Enterprise"],
   },
   {
@@ -55,6 +60,7 @@ export const SUBPRODUCTS: Subproduct[] = [
     description:
       "Administered with strict anonymity. Aggregate insights inform targeted controls and leadership practice.",
     image: "/Images/IAT.jpg",
+    thumb: "/Images/subproducts/iat-thumb.jpg",
     includedInPackages: ["Enterprise"],
   },
   {
@@ -64,6 +70,7 @@ export const SUBPRODUCTS: Subproduct[] = [
     description:
       "Lightweight instruments scheduled monthly/quarterly with dashboards to show movement on key culture risk indicators.",
     image: "/Images/Culture Pulse Survey.jpg",
+    thumb: "/Images/subproducts/culture-pulse-thumb.jpg",
     includedInPackages: ["Starter", "Standard", "Enterprise"],
   },
   {
@@ -73,6 +80,7 @@ export const SUBPRODUCTS: Subproduct[] = [
     description:
       "Assesses leadership/organisational values and cultural fit. Useful for culture design and selection.",
     image: "/Images/Hogan MVPI.jpg",
+    thumb: "/Images/subproducts/hogan-mvpi-thumb.jpg",
     includedInPackages: ["Enterprise"],
   },
   {
@@ -82,6 +90,7 @@ export const SUBPRODUCTS: Subproduct[] = [
     description:
       "Identifies risk factors in leadership behaviour that amplify culture hazards; supports board-level oversight.",
     image: "/Images/Hogan HDS.jpg",
+    thumb: "/Images/subproducts/hogan-hds-thumb.jpg",
     includedInPackages: ["Enterprise"],
   },
   {
@@ -91,6 +100,7 @@ export const SUBPRODUCTS: Subproduct[] = [
     description:
       "Audit or draft a Code of Conduct aligned with psychosocial risk controls and procedural justice best-practice.",
     image: "/Images/Code of Conduct.jpg",
+    thumb: "/Images/subproducts/code-of-conduct-thumb.jpg",
     includedInPackages: ["Starter", "Standard", "Enterprise"],
   },
   {
@@ -100,7 +110,7 @@ export const SUBPRODUCTS: Subproduct[] = [
     description:
       "Audit or draft a Code of Ethics with implementation toolkit, training and governance integration.",
     image: "/Images/Code of Ethics.jpg",
+    thumb: "/Images/subproducts/code-of-ethics-thumb.jpg",
     includedInPackages: ["Standard", "Enterprise"],
   },
 ];
-
