@@ -18,7 +18,7 @@ export const SUBPRODUCTS: Subproduct[] = [
     short: "Psychosocial hazard mapping across workload, justice, relationships.",
     description:
       "Measures the psychosocial risk environment and flags existing/emerging hazards. Outputs include heatmaps, scores, and defensible indicators aligned to WHS/psychosocial duties.",
-    image: "/Images/subproducts/copsoq.jpg",
+    image: "/Images/COPSPQ.jpg",
     includedInPackages: ["Standard", "Enterprise"],
   },
   {
@@ -27,7 +27,7 @@ export const SUBPRODUCTS: Subproduct[] = [
     short: "Surfaces harassment, unwanted sexual attention, coercion, unsafe climates.",
     description:
       "Captures data on sexist remarks and sexual harassment to identify risk concentrations by unit or role, enabling targeted control measures.",
-    image: "/Images/subproducts/seq.jpg",
+    image: "/Images/SEQ.jpg",
     includedInPackages: ["Standard", "Enterprise"],
   },
   {
@@ -36,7 +36,7 @@ export const SUBPRODUCTS: Subproduct[] = [
     short: "Detects bullying, aggression, intimidation — overt and subtle.",
     description:
       "Assesses wrongful behaviours including aggression, bullying, and harassment; highlights patterns and hotspots to guide prevention.",
-    image: "/Images/subproducts/ocas.jpg",
+    image: "/Images/OCAS.jpg",
     includedInPackages: ["Starter", "Standard", "Enterprise"],
   },
   {
@@ -45,7 +45,7 @@ export const SUBPRODUCTS: Subproduct[] = [
     short: "Maps in-group favouritism, exclusion and covert harmful behaviours.",
     description:
       "Evaluates perceptions and dynamics that drive culture risk; developed and validated in Australia. Ideal for large or complex teams.",
-    image: "/Images/subproducts/wfbs.jpg",
+    image: "/Images/WFBS.jpg",
     includedInPackages: ["Standard", "Enterprise"],
   },
   {
@@ -54,7 +54,7 @@ export const SUBPRODUCTS: Subproduct[] = [
     short: "Surfaces unconscious biases that drive exclusion and unsafe dynamics.",
     description:
       "Administered with strict anonymity. Aggregate insights inform targeted controls and leadership practice.",
-    image: "/Images/subproducts/iat.jpg",
+    image: "/Images/IAT.jpg",
     includedInPackages: ["Enterprise"],
   },
   {
@@ -63,7 +63,7 @@ export const SUBPRODUCTS: Subproduct[] = [
     short: "Short, repeatable pulses to track change and sustain improvement.",
     description:
       "Lightweight instruments scheduled monthly/quarterly with dashboards to show movement on key culture risk indicators.",
-    image: "/Images/subproducts/pulse.jpg",
+    image: "/Images/Culture Pulse Survey.jpg",
     includedInPackages: ["Starter", "Standard", "Enterprise"],
   },
   {
@@ -72,7 +72,7 @@ export const SUBPRODUCTS: Subproduct[] = [
     short: "Values & motives alignment to desired culture.",
     description:
       "Assesses leadership/organisational values and cultural fit. Useful for culture design and selection.",
-    image: "/Images/subproducts/mvpi.jpg",
+    image: "/Images/Hogan MVPI.jpg",
     includedInPackages: ["Enterprise"],
   },
   {
@@ -81,7 +81,7 @@ export const SUBPRODUCTS: Subproduct[] = [
     short: "Leadership derailers & toxic risk profile.",
     description:
       "Identifies risk factors in leadership behaviour that amplify culture hazards; supports board-level oversight.",
-    image: "/Images/subproducts/hds.jpg",
+    image: "/Images/Hogan HDS.jpg",
     includedInPackages: ["Enterprise"],
   },
   {
@@ -90,7 +90,7 @@ export const SUBPRODUCTS: Subproduct[] = [
     short: "Modern, defensible conduct standards and roll-out.",
     description:
       "Audit or draft a Code of Conduct aligned with psychosocial risk controls and procedural justice best-practice.",
-    image: "/Images/subproducts/conduct.jpg",
+    image: "/Images/Code of Conduct.jpg",
     includedInPackages: ["Starter", "Standard", "Enterprise"],
   },
   {
@@ -99,7 +99,7 @@ export const SUBPRODUCTS: Subproduct[] = [
     short: "Ethical principles beyond compliance — embedded in practice.",
     description:
       "Audit or draft a Code of Ethics with implementation toolkit, training and governance integration.",
-    image: "/Images/subproducts/ethics.jpg",
+    image: "/Images/Code of Ethics.jpg",
     includedInPackages: ["Standard", "Enterprise"],
   },
 ];
