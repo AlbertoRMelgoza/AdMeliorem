@@ -1,8 +1,7 @@
 import Image from "next/image";
 import Link from "next/link";
 import type { CSSProperties } from "react";
-// NOTE: singular import to match your file name:
-import { SUBPRODUCTS } from "./subproduct";
+import { SUBPRODUCTS } from "./subproducts"; // <-- plural
 
 export const metadata = {
   title: "Culture Risk Diagnostic™ — Ad Meliorem",
@@ -42,18 +41,10 @@ export default function CRDPage() {
         scores and due-diligence evidence.
       </p>
 
-      {/* Hero image */}
       <div style={{ display: "flex", justifyContent: "center", margin: "24px 0" }}>
-        <Image
-          src="/Images/culture.jpg"
-          alt="Culture Risk Diagnostic illustration"
-          width={800}
-          height={400}
-          style={{ borderRadius: 12 }}
-        />
+        <Image src="/Images/culture.jpg" alt="Culture Risk Diagnostic illustration" width={800} height={400} style={{ borderRadius: 12 }} />
       </div>
 
-      {/* Purposes + tools (unchanged) */}
       <section style={card}>
         <h2 style={{ marginTop: 0 }}>The Culture Risk Diagnostic™ serves two purposes</h2>
         <p>
@@ -61,32 +52,15 @@ export default function CRDPage() {
           hidden culture risks or to evaluate the broader business environment:
         </p>
         <ol>
-          <li>
-            <strong>COPSOQ (Copenhagen Psychosocial Questionnaire)</strong> → Measures the psychosocial risk environment,
-            flagging existing risks and emerging hazards.
-          </li>
-          <li>
-            <strong>SEQ (Sexual Experience Questionnaire)</strong> → Captures data on sexist remarks, inappropriate sexual
-            advances, unwanted sexual attention, and sexual coercion. Results identify risk concentrations by unit or
-            department and allow hazards to be isolated.
-          </li>
-          <li>
-            <strong>OCAS (Overt–Covert Aggression Scale)</strong> → Assesses both overt and covert wrongful behaviours,
-            including aggression, bullying, and harassment.
-          </li>
-          <li>
-            <strong>WFBS (Workplace Feelings &amp; Behaviour Survey)</strong> → Evaluates in-group favouritism and covert
-            harmful behaviours by capturing perceptions and feelings; developed and validated in Australia.
-          </li>
-          <li>
-            <strong>IAT (Implicit Association Test)</strong> → Surfaces hidden biases and unconscious attitudes toward
-            outgroups, exposing cultural drivers of exclusion and unsafe dynamics; delivered in collaboration with Harvard
-            University.
-          </li>
+          <li><strong>COPSOQ</strong> → Measures the psychosocial risk environment.</li>
+          <li><strong>SEQ</strong> → Captures data on sexist remarks, harassment and coercion.</li>
+          <li><strong>OCAS</strong> → Assesses aggression, bullying and harassment.</li>
+          <li><strong>WFBS</strong> → Evaluates in-group favouritism and covert harmful behaviours.</li>
+          <li><strong>IAT</strong> → Surfaces hidden biases and exclusion dynamics.</li>
         </ol>
       </section>
 
-      {/* Subproducts grid with safe image handling */}
+      {/* Subproducts grid (thumb -> image -> placeholder) */}
       <section style={card}>
         <h2 style={{ marginTop: 0 }}>Subproducts & Tools</h2>
         <div style={grid}>
@@ -100,16 +74,7 @@ export default function CRDPage() {
                   alt={sp.title}
                   width={400}
                   height={200}
-                  style={{
-                    width: "100%",
-                    height: "160px",
-                    objectFit: "cover",
-                    borderRadius: 10,
-                  }}
-                  onError={(e) => {
-                    // runtime fallback if file missing
-                    (e.currentTarget as HTMLImageElement).src = "/Images/placeholder.jpg";
-                  }}
+                  style={{ width: "100%", height: "160px", objectFit: "cover", borderRadius: 10 }}
                 />
                 <div style={titleStyle}>{sp.title}</div>
                 <p style={shortStyle}>{sp.short}</p>
@@ -119,61 +84,33 @@ export default function CRDPage() {
         </div>
       </section>
 
-      {/* The rest of the page… (unchanged) */}
       <section style={card}>
         <h2 style={{ marginTop: 0 }}>Deliverable</h2>
         <p>
-          A regulator-ready report for key stakeholders with cultural risk scores and hazard mapping. The report is designed
-          to withstand regulator scrutiny, proving that leadership actively monitors and manages psychosocial culture risks
-          while also giving detailed insight into the organisation’s cultural environment — providing precise leading
-          indicators on possible harm.
+          A regulator-ready report for key stakeholders with cultural risk scores and hazard mapping. The report is designed to
+          withstand regulator scrutiny and provide precise leading indicators on possible harm.
         </p>
       </section>
 
       <section style={card}>
         <h2 style={{ marginTop: 0 }}>Why organisations purchase it</h2>
         <ul>
-          <li>
-            As a strategic risk control that turns culture into a measured, managed, and defensible governance area through
-            qualitative and quantitative methods.
-          </li>
-          <li>
-            To assess whether the organisation provides a psychosocially safe environment, particularly in relation to
-            high-liability hazards like sexual harassment, aggression, bullying, and harassment.
-          </li>
-          <li>
-            To gain leading indicators of risk — an early warning system before incidents multiply (Risk Culture).
-          </li>
-          <li>To isolate liability to individual behaviour by proving culture is monitored and controlled.</li>
-          <li>To satisfy regulators, who already investigate culture when claims escalate.</li>
-          <li>
-            To give boards and executives defensible evidence of due diligence in the highest-liability hazard category:
-            organisational culture.
-          </li>
-          <li>To transform your codes of conduct and code of ethics.</li>
+          <li>Turns culture into a measured, managed, defensible governance area.</li>
+          <li>Assesses psychosocial safety for high-liability hazards.</li>
+          <li>Delivers early-warning indicators before incidents multiply.</li>
+          <li>Demonstrates due diligence to regulators and boards.</li>
         </ul>
       </section>
 
       <section style={card}>
         <h2 style={{ marginTop: 0 }}>Deliverables (summary)</h2>
         <ul>
-          <li>Validated survey instruments (e.g., COPSOQ, SEQ) and targeted interviews</li>
-          <li>Key Culture Risk Indicators with thresholds and trend views</li>
-          <li>Precise Prevention Plans for the corporation</li>
+          <li>Validated survey instruments and targeted interviews</li>
+          <li>Key Culture Risk Indicators with thresholds and trends</li>
+          <li>Precise Prevention Plans</li>
         </ul>
         <p style={{ marginTop: 12 }}>
-          <a
-            href="/contact"
-            style={{
-              background: "#f1c40f",
-              color: "#000",
-              padding: "10px 18px",
-              borderRadius: 6,
-              fontWeight: 600,
-              textDecoration: "none",
-              display: "inline-block",
-            }}
-          >
+          <a href="/contact" style={{ background: "#f1c40f", color: "#000", padding: "10px 18px", borderRadius: 6, fontWeight: 600, textDecoration: "none", display: "inline-block" }}>
             Discuss CRD →
           </a>
         </p>
