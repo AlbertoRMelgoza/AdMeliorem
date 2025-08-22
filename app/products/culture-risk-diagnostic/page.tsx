@@ -43,7 +43,7 @@ export default function CRDPage() {
 
       {/* Subproducts grid (NO IMAGES) */}
       <section style={card}>
-        <h2 style={{ marginTop: 0 }}>Subproducts & Tools</h2>
+        <h2 style={{ marginTop: 0 }}>Subproducts </h2>
         <div style={grid}>
           {SUBPRODUCTS.map((sp) => (
             <Link key={sp.slug} href={`/products/culture-risk-diagnostic/${sp.slug}`} style={tile}>
