@@ -13,7 +13,7 @@ export const metadata = {
     type: "website",
     images: [
       {
-        url: "/Images/og-default.jpg",
+        url: "/Images/logo-ad-meliorem-Copy.jpg",
         width: 1200,
         height: 630,
         alt: "Ad Meliorem — Practical help when it matters",
