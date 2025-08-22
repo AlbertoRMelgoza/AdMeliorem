@@ -81,10 +81,12 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
                 lineHeight: 0,
               }}
             >
-              <img
-                src="/Images/logo-ad-meliorem-Copy.jpg"
-                alt="Ad Meliorem logo"
-                style={{ height: 28, display: "block" }}
+             <img
+               src="/Images/logo-ad-meliorem-Copy.jpg"   // 👈 match your actual file name
+               alt="Ad Meliorem logo"
+               style={{ height: 28, display: "block" }}
+               />
+
               />
             </span>
 
