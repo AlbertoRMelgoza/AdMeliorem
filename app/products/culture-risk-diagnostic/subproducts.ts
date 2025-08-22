@@ -113,4 +113,20 @@ export const SUBPRODUCTS: Subproduct[] = [
     thumb: "/Images/subproducts/code-of-ethics-thumb.jpg",
     includedInPackages: ["Standard", "Enterprise"],
   },
+  {
+  slug: "culture-risk-indicators",
+  title: "Culture Risk Indicators (Risk Culture)",
+  short: "Customisable indicators aligned to key risk domains.",
+  description:
+    "Risk culture indicators tailored to client needs. Examples: cyber security, industrial relations, health & safety, operating model, money laundering, anti-corruption, bribery, modern slavery. Flexible to measure any area relevant to governance and compliance.",
+  includedInPackages: ["Standard", "Enterprise"],
+},
+{
+  slug: "qualitative-interventions",
+  title: "Qualitative Interventions",
+  short: "Focus Groups • Interviews • Observations",
+  description:
+    "In-depth qualitative methods provide rich insights into cultural dynamics. Facilitates triangulation with survey results and delivers actionable recommendations that numbers alone cannot capture.",
+  includedInPackages: ["Starter", "Standard", "Enterprise"],
+},
 ];
