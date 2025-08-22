@@ -1,7 +1,7 @@
 import Image from "next/image";
 import Link from "next/link";
 import type { CSSProperties } from "react";
-import { SUBPRODUCTS } from "../subproducts"; // plural
+import { SUBPRODUCTS } from "../subproducts";
 
 type Props = { params: { slug: string } };
 
@@ -37,9 +37,6 @@ export default function SubproductPage({ params }: Props) {
   const wrap: CSSProperties = { maxWidth: 900, margin: "28px auto", padding: "0 16px", lineHeight: 1.65 };
   const card: CSSProperties = { background: "#111", border: "1px solid #222", borderRadius: 12, padding: 16, marginTop: 24 };
 
-  // Safe path even if filename has spaces
-  const heroSrc = encodeURI(sp.image ?? sp.thumb ?? "/Images/placeholder.jpg");
-
   return (
     <main style={wrap}>
       <p style={{ margin: "0 0 8px 0" }}>
@@ -51,8 +48,58 @@ export default function SubproductPage({ params }: Props) {
       <h1 style={{ marginTop: 0 }}>{sp.title}</h1>
       <p style={{ opacity: 0.9 }}>{sp.short}</p>
 
-      {/* Fixed-size hero frame */}
-      <div style={{ position: "relative", width: "100%", borderRadius: 12, overflow: "hidden", margin: "18px 0" }}>
-        {/* 16:9 via padding-top for broad TS/React compatibility */}
-        <div style={{ position: "relative", width: "100%", paddingTop: "56.25%" }}>
-          <Image src={heroSrc} alt={sp.title} fill sizes="(ma
+      {sp.image && (
+        <div style={{ display: "flex", justifyContent: "center", margin: "18px 0" }}>
+          <Image
+            src={sp.image}
+            alt={sp.title}
+            width={900}
+            height={420}
+            style={{ width: "100%", maxHeight: "360px", objectFit: "cover", borderRadius: 12 }}
+          />
+        </div>
+      )}
+
+      <section style={card}>
+        <h2 style={{ marginTop: 0 }}>Why it matters</h2>
+        <p>{sp.description}</p>
+        {sp.includedInPackages && (
+          <p style={{ opacity: 0.9 }}>
+            <strong>Included in:</strong> {sp.includedInPackages.join(" • ")}
+          </p>
+        )}
+      </section>
+
+      <section style={card}>
+        <h2 style={{ marginTop: 0 }}>How it works</h2>
+        <ul>
+          <li>Strict anonymity (minimum subgroup sizes enforced).</li>
+          <li>Configured for your organisation (unique link, open/close dates, optional domain gating).</li>
+          <li>Aggregated reporting only; no personal identifiers.</li>
+        </ul>
+      </section>
+
+      <section style={card}>
+        <h2 style={{ marginTop: 0 }}>What you receive</h2>
+        <ul>
+          <li>Hotspot and risk mapping relevant to {sp.title.split(" ")[0]} focus.</li>
+          <li>Key indicators and thresholds to guide proactive controls.</li>
+          <li>Executive briefing with recommendations from Alberto.</li>
+        </ul>
+      </section>
+
+      <section style={card}>
+        <h2 style={{ marginTop: 0 }}>Next step</h2>
+        <p>You can add this subproduct to a Culture Risk Diagnostic package, or run it as a standalone engagement.</p>
+        <div style={{ display: "flex", gap: 12, flexWrap: "wrap" }}>
+          <Link href="/contact" style={{ background: "#f1c40f", color: "#000", padding: "10px 18px", borderRadius: 6, fontWeight: 700, textDecoration: "none" }}>
+            Enquire / Add to Package →
+          </Link>
+          <a href={sp.cta?.href ?? "/contact"} style={{ border: "1px solid #444", padding: "10px 18px", borderRadius: 6, fontWeight: 600, textDecoration: "none", color: "#fff" }}>
+            {sp.cta?.label ?? "Purchase (Coming Soon)"}
+          </a>
+        </div>
+      </section>
+    </main>
+  );
+}
