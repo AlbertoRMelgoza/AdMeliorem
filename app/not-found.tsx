@@ -11,13 +11,14 @@ export default function NotFound() {
       }}
     >
       <h1 style={{ fontSize: "2rem", marginBottom: 16, color: "#f1c40f" }}>
-        Page Not Found
+        🚧 Coming Soon 🚧
       </h1>
       <p style={{ opacity: 0.85, marginBottom: 24 }}>
-        Sorry, the page you’re looking for doesn’t exist or is no longer available.
+        This page is under construction and will be available shortly.  
+        In the meantime, explore our other products or reach out if you’d like early access.
       </p>
       <a
-        href="/"
+        href="/products/culture-risk-diagnostic"
         style={{
           background: "#f1c40f",
           color: "#000",
@@ -27,7 +28,7 @@ export default function NotFound() {
           textDecoration: "none",
         }}
       >
-        ← Back to Home
+        ← Back to Culture Risk Diagnostics
       </a>
     </main>
   );
