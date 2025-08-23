@@ -1,8 +1,11 @@
 import type { CSSProperties } from "react";
-import TrafficCard from "../../../components/TrafficCard";          // ← relative
-import DashboardFilters from "../../../components/DashboardFilters"; // ← relative
-import { MOCK_AGGREGATE_COPSOQ } from "../../../lib/mock";          // ← relative
-import { MIN_GROUP_N } from "../../../lib/suppression";             // ← relative
+
+// ⬇️ four ../ to get from app/dashboard/[orgId]/[instanceId]/ to the project root
+import TrafficCard from "../../../../components/TrafficCard";
+import DashboardFilters from "../../../../components/DashboardFilters";
+import { MOCK_AGGREGATE_COPSOQ } from "../../../../lib/mock";
+import { MIN_GROUP_N } from "../../../../lib/suppression";
+
 
 type Params = { params: { orgId: string; instanceId: string } };
 
