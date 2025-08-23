@@ -1,6 +1,7 @@
 import Link from "next/link";
 import type { CSSProperties } from "react"; // <-- needed
 import { SUBPRODUCTS } from "../subproducts";
+import { SUBSUB_BY_PARENT } from "../subsubproducts";
 
 type Props = { params: { slug: string } };
 
@@ -84,6 +85,24 @@ export default function SubproductPage({ params }: Props) {
           <p style={{ whiteSpace: "pre-line" }}>{sp.reference}</p>
         </section>
       )}
+
+      {SUBSUB_BY_PARENT[sp.slug as "copsoq" | "seq" | "culture-pulse-surveys"]?.length > 0 && (
+  <section style={card}>
+    <h2 style={{ marginTop: 0 }}>Available modules</h2>
+    <div style={{ display: "grid", gridTemplateColumns: "repeat(auto-fill, minmax(260px, 1fr))", gap: 12 }}>
+      {SUBSUB_BY_PARENT[sp.slug as "copsoq" | "seq" | "culture-pulse-surveys"].map((m) => (
+        <a
+          key={m.slug}
+          href={`/products/culture-risk-diagnostic/${sp.slug}/${m.slug}`}
+          style={{ background: "#f1c40f", color: "#000", border: "1px solid #f1c40f", borderRadius: 12, padding: 14, textDecoration: "none", display: "block", fontWeight: 700 }}
+        >
+          <div>{m.title}</div>
+          <p style={{ margin: "6px 0 0 0", fontSize: 13 }}>{m.short}</p>
+        </a>
+      ))}
+    </div>
+  </section>
+)}
 
       <section style={card}>
         <h2 style={{ marginTop: 0 }}>Next step</h2>
