@@ -1,10 +1,20 @@
+ // app/api/checkout/session/route.ts
 import { NextRequest, NextResponse } from "next/server";
 import Stripe from "stripe";
 
-const stripe = new Stripe(process.env.STRIPE_SECRET_KEY!, { apiVersion: "2024-06-20" });
+// ✅ Stripe needs Node runtime (NOT edge)
+export const runtime = "nodejs";
 
-// Map each module slug to a Stripe Price ID
-// TODO: replace with your real price IDs from Stripe dashboard
+const STRIPE_SECRET_KEY = process.env.STRIPE_SECRET_KEY || "";
+const APP_BASE_URL = process.env.APP_BASE_URL || "http://localhost:3000";
+
+if (!STRIPE_SECRET_KEY) {
+  throw new Error("Missing STRIPE_SECRET_KEY in environment.");
+}
+
+const stripe = new Stripe(STRIPE_SECRET_KEY, { apiVersion: "2024-06-20" });
+
+// Map each module slug to a Stripe Price ID (replace with real IDs)
 const PRICE_BY_MODULE: Record<string, string> = {
   // COPSOQ modules
   "copsoq-demands-at-work": "price_xxx_demands",
@@ -17,7 +27,7 @@ const PRICE_BY_MODULE: Record<string, string> = {
   "seq-sexual-hostility": "price_xxx_seq_sexhostility",
   "seq-unwanted-sexual-attention": "price_xxx_seq_unwanted",
   "seq-sexual-coercion": "price_xxx_seq_coercion",
-  // Pulse modules (examples)
+  // Pulse modules
   "pulse-male-dominated-dynamics": "price_xxx_pulse_male",
   "pulse-female-dominated-dynamics": "price_xxx_pulse_female",
   "pulse-power-imbalances": "price_xxx_pulse_power",
@@ -34,13 +44,17 @@ export async function POST(req: NextRequest) {
   try {
     const { moduleSlug, parentSlug } = await req.json();
 
+    if (!moduleSlug || !parentSlug) {
+      return NextResponse.json({ error: "Missing moduleSlug or parentSlug" }, { status: 400 });
+    }
+
     const priceId = PRICE_BY_MODULE[moduleSlug];
     if (!priceId) {
       return NextResponse.json({ error: `No price configured for ${moduleSlug}` }, { status: 400 });
     }
 
-    const success = `${process.env.APP_BASE_URL}/products/culture-risk-diagnostic/${parentSlug}/${moduleSlug}?status=success`;
-    const cancel = `${process.env.APP_BASE_URL}/products/culture-risk-diagnostic/${parentSlug}/${moduleSlug}?status=cancelled`;
+    const success = `${APP_BASE_URL}/products/culture-risk-diagnostic/${parentSlug}/${moduleSlug}?status=success`;
+    const cancel = `${APP_BASE_URL}/products/culture-risk-diagnostic/${parentSlug}/${moduleSlug}?status=cancelled`;
 
     const session = await stripe.checkout.sessions.create({
       mode: "payment",
@@ -58,4 +72,3 @@ export async function POST(req: NextRequest) {
     return NextResponse.json({ error: e?.message || "Stripe error" }, { status: 500 });
   }
 }
-
