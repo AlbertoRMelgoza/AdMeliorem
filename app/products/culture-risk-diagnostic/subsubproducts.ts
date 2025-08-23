@@ -96,51 +96,51 @@ export const SUBSUB_COPSOQ: SubSubproduct[] = [
 // Measuring sexual harassment: Theoretical and psychometric advances.
 // Basic and Applied Social Psychology, 17, 425–445. http://dx.doi.org/10.1207/s15324834basp1704_2
 // ───────────────────────────────────────────────────────────────────────────────
-const SEQ_REF =
+const SHEQ_REF =
   "Fitzgerald, L. F., Drasgow, F., Hulin, C. L., Gelfand, M. J., & Magley, V. J. (1997). Antecedents and consequences of sexual harassment in organizations: A test of an integrated model. Journal of Applied Psychology, 82, 578–589. http://dx.doi.org/10.1037/0021-9010.82.4.578; Fitzgerald, L. F., Gelfand, M. J., & Drasgow, F. (1995). Measuring sexual harassment: Theoretical and psychometric advances. Basic and Applied Social Psychology, 17, 425–445. http://dx.doi.org/10.1207/s15324834basp1704_2";
 
-export const SUBSUB_SEQ: SubSubproduct[] = [
+export const SUBSUB_SHEQ: SubSubproduct[] = [
   {
-    parent: "seq",
-    slug: "seq-gender-harassment-sexist-hostility",
-    title: "SEQ: Gender Harassment / Sexist Hostility",
+    parent: "sheq",
+    slug: "sheq-gender-harassment-sexist-hostility",
+    title: "SHEQ: Gender Harassment / Sexist Hostility",
     short: "Sexist remarks and hostile gendered climates.",
     description:
       "Detects climates where sexist attitudes and gender-based hostility are normalised—early warnings for harm escalation.",
-    reference: SEQ_REF,
+    reference: SHEQ_REF,
     priceUSD: 2000,
     bundleEligible: true,
   },
   {
-    parent: "seq",
-    slug: "seq-sexual-hostility",
-    title: "SEQ: Sexual Hostility",
+    parent: "sheq",
+    slug: "sheq-sexual-hostility",
+    title: "SHEQ: Sexual Hostility",
     short: "Sexualised hostility and degrading content.",
     description:
       "Assesses hostile, sexualised behaviour and content that create unsafe cultural conditions even without direct targeting.",
-    reference: SEQ_REF,
+    reference: SHEQ_REF,
     priceUSD: 2000,
     bundleEligible: true,
   },
   {
-    parent: "seq",
-    slug: "seq-unwanted-sexual-attention",
-    title: "SEQ: Unwanted Sexual Attention",
+    parent: "sheq",
+    slug: "sheq-unwanted-sexual-attention",
+    title: "SHEQ: Unwanted Sexual Attention",
     short: "Unwelcome advances and persistent pursuit.",
     description:
       "Measures prevalence of unwanted sexual attention and repeated advances—often concentrated by unit/role.",
-    reference: SEQ_REF,
+    reference: SHEQ_REF,
     priceUSD: 2000,
     bundleEligible: true,
   },
   {
-    parent: "seq",
-    slug: "seq-sexual-coercion",
-    title: "SEQ: Sexual Coercion",
+    parent: "sheq",
+    slug: "sheq-sexual-coercion",
+    title: "SHEQ: Sexual Coercion",
     short: "Quid pro quo and coercive behaviour.",
     description:
       "Identifies coercive or transactional sexual behaviours with the highest liability exposure and regulatory interest.",
-    reference: SEQ_REF,
+    reference: SHEQ_REF,
     priceUSD: 2000,
     bundleEligible: true,
   },
