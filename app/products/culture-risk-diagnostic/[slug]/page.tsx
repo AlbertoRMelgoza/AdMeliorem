@@ -1,5 +1,5 @@
 import Link from "next/link";
-import type { CSSProperties } from "react"; // <-- needed
+import type { CSSProperties } from "react";
 import { SUBPRODUCTS } from "../subproducts";
 import { SUBSUB_BY_PARENT } from "../subsubproducts";
 
@@ -48,8 +48,35 @@ export default function SubproductPage({ params }: Props) {
       <h1 style={{ marginTop: 0 }}>{sp.title}</h1>
       <p style={{ opacity: 0.9 }}>{sp.short}</p>
 
-      {/* No hero image */}
+      {/* AVAILABLE MODULES — now shown first */}
+      {SUBSUB_BY_PARENT[sp.slug as "copsoq" | "sheq" | "culture-pulse-surveys"]?.length > 0 && (
+        <section style={card}>
+          <h2 style={{ marginTop: 0 }}>Available modules</h2>
+          <div style={{ display: "grid", gridTemplateColumns: "repeat(auto-fill, minmax(260px, 1fr))", gap: 12 }}>
+            {SUBSUB_BY_PARENT[sp.slug as "copsoq" | "seq" | "culture-pulse-surveys"].map((m) => (
+              <a
+                key={m.slug}
+                href={`/products/culture-risk-diagnostic/${sp.slug}/${m.slug}`}
+                style={{
+                  background: "#f1c40f",
+                  color: "#000",
+                  border: "1px solid #f1c40f",
+                  borderRadius: 12,
+                  padding: 14,
+                  textDecoration: "none",
+                  display: "block",
+                  fontWeight: 700,
+                }}
+              >
+                <div>{m.title}</div>
+                <p style={{ margin: "6px 0 0 0", fontSize: 13 }}>{m.short}</p>
+              </a>
+            ))}
+          </div>
+        </section>
+      )}
 
+      {/* Why it matters */}
       <section style={card}>
         <h2 style={{ marginTop: 0 }}>Why it matters</h2>
         <p>{sp.description}</p>
@@ -60,6 +87,7 @@ export default function SubproductPage({ params }: Props) {
         )}
       </section>
 
+      {/* How it works */}
       <section style={card}>
         <h2 style={{ marginTop: 0 }}>How it works</h2>
         <ul>
@@ -69,6 +97,7 @@ export default function SubproductPage({ params }: Props) {
         </ul>
       </section>
 
+      {/* What you receive */}
       <section style={card}>
         <h2 style={{ marginTop: 0 }}>What you receive</h2>
         <ul>
@@ -78,7 +107,7 @@ export default function SubproductPage({ params }: Props) {
         </ul>
       </section>
 
-      {/* References (only if present) */}
+      {/* References (if present) */}
       {sp.reference && (
         <section style={card}>
           <h2 style={{ marginTop: 0 }}>References</h2>
@@ -86,32 +115,21 @@ export default function SubproductPage({ params }: Props) {
         </section>
       )}
 
-      {SUBSUB_BY_PARENT[sp.slug as "copsoq" | "seq" | "culture-pulse-surveys"]?.length > 0 && (
-  <section style={card}>
-    <h2 style={{ marginTop: 0 }}>Available modules</h2>
-    <div style={{ display: "grid", gridTemplateColumns: "repeat(auto-fill, minmax(260px, 1fr))", gap: 12 }}>
-      {SUBSUB_BY_PARENT[sp.slug as "copsoq" | "seq" | "culture-pulse-surveys"].map((m) => (
-        <a
-          key={m.slug}
-          href={`/products/culture-risk-diagnostic/${sp.slug}/${m.slug}`}
-          style={{ background: "#f1c40f", color: "#000", border: "1px solid #f1c40f", borderRadius: 12, padding: 14, textDecoration: "none", display: "block", fontWeight: 700 }}
-        >
-          <div>{m.title}</div>
-          <p style={{ margin: "6px 0 0 0", fontSize: 13 }}>{m.short}</p>
-        </a>
-      ))}
-    </div>
-  </section>
-)}
-
-           <section style={card}>
+      {/* Next step */}
+      <section style={card}>
         <h2 style={{ marginTop: 0 }}>Next step</h2>
         <p>You can add this subproduct to a Culture Risk Diagnostic package, or run it as a standalone engagement.</p>
         <div style={{ display: "flex", gap: 12, flexWrap: "wrap" }}>
-          <Link href="/contact" style={{ background: "#f1c40f", color: "#000", padding: "10px 18px", borderRadius: 6, fontWeight: 700, textDecoration: "none" }}>
+          <Link
+            href="/contact"
+            style={{ background: "#f1c40f", color: "#000", padding: "10px 18px", borderRadius: 6, fontWeight: 700, textDecoration: "none" }}
+          >
             Enquire / Add to Package →
           </Link>
-          <a href={sp.cta?.href ?? "/contact"} style={{ border: "1px solid #444", padding: "10px 18px", borderRadius: 6, fontWeight: 600, textDecoration: "none", color: "#fff" }}>
+          <a
+            href={sp.cta?.href ?? "/contact"}
+            style={{ border: "1px solid #444", padding: "10px 18px", borderRadius: 6, fontWeight: 600, textDecoration: "none", color: "#fff" }}
+          >
             {sp.cta?.label ?? "Purchase (Coming Soon)"}
           </a>
         </div>
@@ -119,3 +137,4 @@ export default function SubproductPage({ params }: Props) {
     </main>
   );
 }
+
