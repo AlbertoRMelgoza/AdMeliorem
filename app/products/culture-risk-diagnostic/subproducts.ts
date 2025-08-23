@@ -27,8 +27,8 @@ export const SUBPRODUCTS: Subproduct[] = [
       "Kristensen, T. S., Hannerz, H., Hogh, A., & Borg, V. (2005). The Copenhagen Psychosocial Questionnaire — a tool for the assessment and improvement of the psychosocial work environment.",
   },
   {
-    slug: "seq",
-    title: "SEQ (Sexual Experiences Questionnaire)",
+    slug: "sheq",
+    title: "SHEQ (Sexual Harassment Experiences Questionnaire)",
     short: "Surfaces harassment, unwanted sexual attention, coercion, unsafe climates.",
     description:
       "Captures data on sexist remarks and sexual harassment to identify risk concentrations by unit or role, enabling targeted control measures.",
