@@ -1,38 +1,16 @@
 "use client";
 
-import { useState } from "react";
-
 type Props = {
-  moduleSlug: string;         // e.g. "copsoq-demands-at-work"
-  parentSlug: string;         // e.g. "copsoq"
-  label?: string;             // button label
+  moduleSlug?: string;
+  parentSlug?: string;
+  label?: string;
 };
 
-export default function BuyButton({ moduleSlug, parentSlug, label = "Buy Now" }: Props) {
-  const [loading, setLoading] = useState(false);
-
-  async function onClick() {
-    try {
-      setLoading(true);
-      const r = await fetch("/api/checkout/session", {
-        method: "POST",
-        headers: { "Content-Type": "application/json" },
-        body: JSON.stringify({ moduleSlug, parentSlug }),
-      });
-      const j = await r.json();
-      if (j.url) window.location.href = j.url;
-      else alert(j.error || "Could not start checkout.");
-    } catch (e: any) {
-      alert(e?.message || "Error starting checkout");
-    } finally {
-      setLoading(false);
-    }
-  }
-
+export default function BuyButton({ label = "Buy (Coming Soon)" }: Props) {
   return (
     <button
-      onClick={onClick}
-      disabled={loading}
+      disabled
+      title="Purchasing will be enabled soon. Please contact us to purchase."
       style={{
         background: "#f1c40f",
         color: "#000",
@@ -40,11 +18,11 @@ export default function BuyButton({ moduleSlug, parentSlug, label = "Buy Now" }:
         borderRadius: 6,
         fontWeight: 700,
         border: "none",
-        cursor: "pointer",
+        cursor: "not-allowed",
+        opacity: 0.6,
       }}
     >
-      {loading ? "Starting…" : label}
+      {label}
     </button>
   );
 }
-
