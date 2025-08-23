@@ -104,11 +104,7 @@ export default function SubproductPage({ params }: Props) {
   </section>
 )}
 
-      // ...above you already rendered Why it matters, How it works, What you receive
-
-// ...then your existing “Next step” card comes after this
-
-      <section style={card}>
+           <section style={card}>
         <h2 style={{ marginTop: 0 }}>Next step</h2>
         <p>You can add this subproduct to a Culture Risk Diagnostic package, or run it as a standalone engagement.</p>
         <div style={{ display: "flex", gap: 12, flexWrap: "wrap" }}>
