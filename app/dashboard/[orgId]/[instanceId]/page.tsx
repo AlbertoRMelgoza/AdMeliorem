@@ -4,10 +4,12 @@ import type { CSSProperties } from "react";
 import TrafficCard from "../../../../components/TrafficCard";
 import DashboardFilters from "../../../../components/DashboardFilters";
 import { MOCK_AGGREGATE_COPSOQ } from "../../../../lib/mock";
-import { MIN_GROUP_N } from "../../../../lib/suppression";
-
+import { getAggregate } from "../../../../lib/get-aggregate";
 
 type Params = { params: { orgId: string; instanceId: string } };
+
+const db = await getAggregate(params.instanceId);
+const data = db || MOCK_AGGREGATE_COPSOQ;
 
 export default async function DashboardPage({ params }: Params) {
   const data = MOCK_AGGREGATE_COPSOQ;
