@@ -1,18 +1,18 @@
 import type { CSSProperties } from "react";
 
-// ⬇️ four ../ to get from app/dashboard/[orgId]/[instanceId]/ to the project root
+// four ../ to reach project root from app/dashboard/[orgId]/[instanceId]/
 import TrafficCard from "../../../../components/TrafficCard";
 import DashboardFilters from "../../../../components/DashboardFilters";
+import { MIN_GROUP_N } from "../../../../lib/suppression";
 import { MOCK_AGGREGATE_COPSOQ } from "../../../../lib/mock";
 import { getAggregate } from "../../../../lib/get-aggregate";
 
 type Params = { params: { orgId: string; instanceId: string } };
 
-const db = await getAggregate(params.instanceId);
-const data = db || MOCK_AGGREGATE_COPSOQ;
-
 export default async function DashboardPage({ params }: Params) {
-  const data = MOCK_AGGREGATE_COPSOQ;
+  // ✅ params is available here, so fetch inside the component
+  const db = await getAggregate(params.instanceId);
+  const data = db || MOCK_AGGREGATE_COPSOQ;
 
   const wrap: CSSProperties = { maxWidth: 1000, margin: "28px auto", padding: "0 16px", lineHeight: 1.65 };
   const card: CSSProperties = { background: "#111", border: "1px solid #222", borderRadius: 12, padding: 16, marginTop: 24 };
