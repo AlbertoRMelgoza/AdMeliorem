@@ -265,7 +265,7 @@ export const SUBSUBPRODUCTS: SubSubproduct[] = [
 // Quick lookup by parent, e.g., SUBSUB_BY_PARENT['copsoq']
 export const SUBSUB_BY_PARENT: Record<SubSubproduct["parent"], SubSubproduct[]> = {
   copsoq: SUBSUB_COPSOQ,
-  seq: SUBSUB_SHEQ,
+  sheq: SUBSUB_SHEQ,
   "culture-pulse-surveys": SUBSUB_PULSE,
 };
 
