@@ -1,3 +1,5 @@
+export const dynamic = "force-dynamic"; // don't prerender at build
+
 import type { CSSProperties } from "react";
 
 // four ../ to reach project root from app/dashboard/[orgId]/[instanceId]/
