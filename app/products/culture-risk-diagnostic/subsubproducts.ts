@@ -2,8 +2,8 @@
 
 // A purchasable “sub-subproduct” (a domain or category under a survey/product)
 export type SubSubproduct = {
-  // parent subproduct slug: 'copsoq' | 'seq' | 'culture-pulse-surveys'
-  parent: "copsoq" | "seq" | "culture-pulse-surveys";
+  // parent subproduct slug: 'copsoq' | 'sheq' | 'culture-pulse-surveys'
+  parent: "copsoq" | "sheq" | "culture-pulse-surveys";
   // unique slug within site, e.g., 'copsoq-demands-at-work'
   slug: string;
   title: string;
