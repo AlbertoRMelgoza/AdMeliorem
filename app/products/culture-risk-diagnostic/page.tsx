@@ -5,7 +5,7 @@ import { SUBPRODUCTS } from "./subproducts";
 export const metadata = {
   title: "Culture Risk Diagnostic™ — Ad Meliorem",
   description:
-    "A forensic cultural assessment with leading indicators, risk scores and evidence of due diligence.",
+    "A forensic cultural assessment with leading indicators, risk scores and evidence of due diligence, with the intention to minimise financial and reputational liability for your business.",
 };
 
 export default function CRDPage() {
