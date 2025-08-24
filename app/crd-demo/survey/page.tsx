@@ -1,7 +1,7 @@
 'use client';
 
 import { useEffect, useState } from 'react';
-import { getSupabaseClient } from '../../lib/supabase-client'; // NOTE: relative path
+import { getSupabaseClient } from '../../../lib/supabase-client'; // NOTE: 3 dots up
 
 const DEMO_CODE = 'copsoq-demo';
 
@@ -35,12 +35,8 @@ export default function SurveyDemo() {
     e.preventDefault();
     if (!instanceId) return;
     setStatus('Submitting...');
-    const payload = Object.fromEntries(
-      Object.entries(answers).map(([k, v]) => [k, String(v)])
-    );
-    const { error } = await supabase
-      .from('survey_responses')
-      .insert({ instance_id: instanceId, answers: payload });
+    const payload = Object.fromEntries(Object.entries(answers).map(([k, v]) => [k, String(v)]));
+    const { error } = await supabase.from('survey_responses').insert({ instance_id: instanceId, answers: payload });
     setStatus(error ? 'Submit failed: ' + error.message : 'Thank you! Your response was recorded.');
   }
 
@@ -55,12 +51,9 @@ export default function SurveyDemo() {
             <div style={{ display: 'flex', gap: '1rem', flexWrap: 'wrap' }}>
               {Array.from({ length: (q.scale_max ?? 5) - (q.scale_min ?? 1) + 1 }, (_, i) => (q.scale_min ?? 1) + i).map((val) => (
                 <label key={val}>
-                  <input
-                    type="radio"
-                    name={q.item_key}
+                  <input type="radio" name={q.item_key}
                     onChange={() => setAnswers({ ...answers, [q.item_key]: val })}
-                    required
-                  /> {val}
+                    required /> {val}
                 </label>
               ))}
             </div>
