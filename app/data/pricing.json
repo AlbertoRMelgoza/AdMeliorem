@@ -1,38 +1,128 @@
 [
   {
-    "pricing_catalogue": "Product / Service",
-    "unnamed:_1": "Description",
-    "unnamed:_2": "Price (AUD)",
-    "unnamed:_3": "Billing / Usage",
-    "__sheet": "Sheet1"
+    "pricing_catalogue":"Product \/ Service",
+    "unnamed:_1":"Description",
+    "unnamed:_2":"Price (AUD)",
+    "unnamed:_3":"Billing \/ Usage",
+    "__sheet":"Sheet1"
   },
   {
-    "pricing_catalogue": "—",
-    "unnamed:_1": "—",
-    "unnamed:_2": "—",
-    "unnamed:_3": "—",
-    "__sheet": "Sheet1"
+    "pricing_catalogue":"Procedural Justice Framework™",
+    "unnamed:_1":"Minimise liability, ensure due process across incidents",
+    "unnamed:_2":4000,
+    "unnamed:_3":"Per Use",
+    "__sheet":"Sheet1"
   },
   {
-    "pricing_catalogue": "Culture Risk Diagnostic™",
-    "unnamed:_1": "Org-wide diagnostic; report & debrief",
-    "unnamed:_2": "…",
-    "unnamed:_3": "fixed",
-    "__sheet": "Sheet1"
+    "pricing_catalogue":"Culture Risk Diagnostic™\n*Subproducts & Modules (Included in Culture Risk Diagnostic™ Subscription)",
+    "unnamed:_1":"Full subscription: culture\/psychosocial diagnostics, all modules",
+    "unnamed:_2":15000,
+    "unnamed:_3":"Per Year Subscription (Includes All Modules Below)",
+    "__sheet":"Sheet1"
   },
   {
-    "pricing_catalogue": "SHSARC™",
-    "unnamed:_1": "Sexual harassment specific assessment & response capability",
-    "unnamed:_2": "…",
-    "unnamed:_3": "fixed",
-    "__sheet": "Sheet1"
+    "pricing_catalogue":"SHSARC™ & RCABH™ Workshops",
+    "unnamed:_1":"Controlling for Sexual Harassment\/Aggression-Bullying, up to 20 participants",
+    "unnamed:_2":750,
+    "unnamed:_3":"Per Participant",
+    "__sheet":"Sheet1"
   },
   {
-    "pricing_catalogue": "Training / Workshops",
-    "unnamed:_1": "Half-day facilitation incl. materials",
-    "unnamed:_2": "…",
-    "unnamed:_3": "per session",
-    "__sheet": "Sheet1"
+    "pricing_catalogue":"Culture Risk Diagnostic™ Subproducts and Modules",
+    "unnamed:_1":"Description",
+    "unnamed:_2":"Price (AUD)",
+    "unnamed:_3":"Billing \/ Usage",
+    "__sheet":"Sheet1"
+  },
+  {
+    "pricing_catalogue":"COPSOQ Full",
+    "unnamed:_1":"Comprehensive annual psychosocial assessment",
+    "unnamed:_2":3750,
+    "unnamed:_3":"Per Year Subscription allowing to you utilise each module as per your convenience",
+    "__sheet":"Sheet1"
+  },
+  {
+    "pricing_catalogue":"COPSOQ Modules 5 ",
+    "unnamed:_1":"Demands at Work, Work Organisation and Job Content, Interpersonal relations and leadership, Work-individual interface, and Social Capital",
+    "unnamed:_2":"$750 each",
+    "unnamed:_3":"Per Use",
+    "__sheet":"Sheet1"
+  },
+  {
+    "pricing_catalogue":"SHEQ Full",
+    "unnamed:_1":"Annual Sexual Harassment Experiences Analysis",
+    "unnamed:_2":3000,
+    "unnamed:_3":"Per Year Subscription allowing to you utilise each module as per your convenience",
+    "__sheet":"Sheet1"
+  },
+  {
+    "pricing_catalogue":"SHEQ Modules 4",
+    "unnamed:_1":"Gender Harassment\/Sexist Hostility, Sexual Hostility, Unwanted sexual attention, Sexual Coercion",
+    "unnamed:_2":"$750 each",
+    "unnamed:_3":"Per Use",
+    "__sheet":"Sheet1"
+  },
+  {
+    "pricing_catalogue":"Pulse Surveys Suite",
+    "unnamed:_1":"Full annual toxic culture monitoring (all topics)",
+    "unnamed:_2":3000,
+    "unnamed:_3":"Per Year Subscription allowing to you utilise each module as per your convenience",
+    "__sheet":"Sheet1"
+  },
+  {
+    "pricing_catalogue":"Pulse Survey: per topic",
+    "unnamed:_1":"Male-dominated dynamics, Female-dominated dynamics, Power imbalances, Speak-up tolerance, Conflicts of Interest, Values in practice, Beliefs, Attitudes, Emotion, and Decision-Making",
+    "unnamed:_2":"$300 each",
+    "unnamed:_3":"Per Use",
+    "__sheet":"Sheet1"
+  },
+  {
+    "pricing_catalogue":"Qualitative Interventions",
+    "unnamed:_1":"1hr interview\/focus group, analysis\/report",
+    "unnamed:_2":750,
+    "unnamed:_3":"Per Session (1 hour)",
+    "__sheet":"Sheet1"
+  },
+  {
+    "pricing_catalogue":"Code of Conduct\/Ethics Review",
+    "unnamed:_1":"Review and development",
+    "unnamed:_2":"$750 each",
+    "unnamed:_3":"Per review and development",
+    "__sheet":"Sheet1"
+  },
+  {
+    "pricing_catalogue":"Other Services",
+    "unnamed:_1":"Description",
+    "unnamed:_2":"Price (AUD)",
+    "unnamed:_3":"Billing \/ Usage",
+    "__sheet":"Sheet1"
+  },
+  {
+    "pricing_catalogue":"Mediation",
+    "unnamed:_1":"Accredited workplace mediation",
+    "unnamed:_2":3000,
+    "unnamed:_3":"Per Session",
+    "__sheet":"Sheet1"
+  },
+  {
+    "pricing_catalogue":"Negotiation",
+    "unnamed:_1":"Coaching, prep, structuring executive outcomes",
+    "unnamed:_2":3000,
+    "unnamed:_3":"Per Session",
+    "__sheet":"Sheet1"
+  },
+  {
+    "pricing_catalogue":"Premium Resources Library",
+    "unnamed:_1":"ISOs, sample policies, templates, best-practice guides, codes portal",
+    "unnamed:_2":1000,
+    "unnamed:_3":"Per Year (Subscription)",
+    "__sheet":"Sheet1"
+  },
+  {
+    "pricing_catalogue":"Basic Resources & Samples",
+    "unnamed:_1":"Entry-level for lead generation",
+    "unnamed:_2":"Free",
+    "unnamed:_3":"Free",
+    "__sheet":"Sheet1"
   }
 ]
-
