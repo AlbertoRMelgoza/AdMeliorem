@@ -61,7 +61,7 @@ export default function Page() {
       </section>
 
       <section style={{ border: "1px solid #222", borderRadius: 12, padding: 16, marginBottom: 16 }}>
-        <h2 style={{ margin: 0, fontSize: 20 }}>Sample policies and standards (see price catalogue for fees)</h2>
+        <h2 style={{ margin: 0, fontSize: 20 }}>Sample policies and standards (see price catalogue)</h2>
         <div style={{ display: "grid", gap: 8, gridTemplateColumns: "repeat(auto-fit, minmax(260px, 1fr))", marginTop: 8 }}>
           {policies.map((p, i) => (
             <div key={i} style={{ border: "1px solid #222", borderRadius: 10, padding: 12 }}>
