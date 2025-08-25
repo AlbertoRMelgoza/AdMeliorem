@@ -122,12 +122,22 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
             <a href="/principles" style={{ color: brand.text, textDecoration: "none" }}>
               Principles
             </a>
+            <a href="/resources" style:{{ color: brand.text, textDecoration: "none" }}>
+              Resources
+            </a>
             <a href="/whitepapers" style={{ color: brand.text, textDecoration: "none" }}>
               Whitepapers
             </a>
+            <a href="/newsfeed" style={{ coloer: brand.text, textDecoration: "none" }}>
+              Newsfeed
+            </a>
+            <a href="/price catalogue" style={{ color: brand.text, textDecoration: "none" }}>
+              Price Catalogue
+            </a>  
             <a href="/contact" style={{ color: brand.text, textDecoration: "none" }}>
               Contact
             </a>
+           
           </nav>
         </header>
 
