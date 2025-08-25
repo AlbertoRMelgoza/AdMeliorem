@@ -30,7 +30,7 @@ function inferTopic(title: string): Topic {
 }
 
 function useLocalLikes() {
-  const KEY = "newsfeed_likes_v1";
+  const KEY = "Newsfeed_likes_v1";
   const [likes, setLikes] = useState<Record<string, true>>({});
   useEffect(() => { try { const raw = localStorage.getItem(KEY); if (raw) setLikes(JSON.parse(raw)); } catch {} }, []);
   useEffect(() => { try { localStorage.setItem(KEY, JSON.stringify(likes)); } catch {} }, [likes]);
@@ -51,12 +51,12 @@ export default function Page() {
   useEffect(() => {
     (async () => {
       try {
-        const res = await fetch("/api/newsfeed?ts=" + Date.now(), { cache: "no-store" });
+        const res = await fetch("/api/Newsfeed?ts=" + Date.now(), { cache: "no-store" });
         const data = await res.json();
         if (data?.error) setApiError(data.error);
         setItems(Array.isArray(data?.items) ? data.items : []);
       } catch (e: any) {
-        setApiError(e?.message || "Failed to load newsfeed.");
+        setApiError(e?.message || "Failed to load Newsfeed.");
         setItems([]);
       } finally {
         setLoading(false);
