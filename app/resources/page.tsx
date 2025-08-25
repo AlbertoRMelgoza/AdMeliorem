@@ -2,13 +2,6 @@
 
 import React from 'react';
 import Link from 'next/link';
-import {
-  HelpCircle,
-  FileText as FileTextIcon,
-  ShieldQuestion,
-  FileWarning,
-  ExternalLink,
-} from 'lucide-react';
 
 const PRICE_AUD = process.env.NEXT_PUBLIC_RESOURCES_PRICE ?? 'TBD';
 
@@ -31,7 +24,7 @@ const faq = [
   },
 ];
 
-// Use join('\\n') to avoid template-string copy/paste issues.
+// Build markdown bodies with join to avoid template-string copy issues
 const policies = [
   {
     title: 'Psychosocial Risk Management Policy',
@@ -112,7 +105,7 @@ export default function ResourcesPage() {
     <main className="mx-auto max-w-5xl px-4 py-10 space-y-10">
       <section className="rounded-2xl border p-6 shadow-sm bg-white">
         <div className="flex items-center gap-3">
-          <FileTextIcon className="h-6 w-6" />
+          <span aria-hidden>📚</span>
           <h1 className="text-2xl font-semibold">Resource Library</h1>
         </div>
         <p className="mt-2 text-muted-foreground">
@@ -123,7 +116,7 @@ export default function ResourcesPage() {
 
       <section className="rounded-2xl border p-6 shadow-sm bg-white">
         <div className="mb-4 flex items-center gap-3">
-          <HelpCircle className="h-5 w-5" />
+          <span aria-hidden>❓</span>
           <h2 className="text-xl font-semibold">FAQs (ISOs & psychosocial risk)</h2>
         </div>
         <ul className="space-y-4">
@@ -163,7 +156,7 @@ export default function ResourcesPage() {
 
       <section className="rounded-2xl border p-6 shadow-sm bg-white">
         <div className="mb-4 flex items-center gap-3">
-          <ShieldQuestion className="h-5 w-5" />
+          <span aria-hidden>🛡️</span>
           <h2 className="text-xl font-semibold">Sample policies & standards</h2>
         </div>
         <div className="grid gap-4 sm:grid-cols-2">
@@ -177,8 +170,7 @@ export default function ResourcesPage() {
                 onClick={() => downloadText(p.filename, p.body)}
                 className="mt-4 inline-flex items-center justify-center rounded-xl border px-3 py-2 text-sm hover:bg-gray-50"
               >
-                <FileWarning className="mr-2 h-4 w-4" />
-                Download .md
+                ⬇️ Download .md
               </button>
             </article>
           ))}
@@ -190,7 +182,7 @@ export default function ResourcesPage() {
 
       <section className="rounded-2xl border p-6 shadow-sm bg-white">
         <div className="mb-4 flex items-center gap-3">
-          <ExternalLink className="h-5 w-5" />
+          <span aria-hidden>🔗</span>
           <h2 className="text-xl font-semibold">Codes of Practice & official guidance</h2>
         </div>
         <ul className="grid gap-3 sm:grid-cols-2">
