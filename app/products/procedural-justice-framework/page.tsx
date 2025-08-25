@@ -34,12 +34,12 @@ export default function PJFPage() {
 
       {/* How it functions as a critical control */}
       <section style={card}>
-        <h2 style={{ marginTop: 0 }}>How it functions as a critical control</h2>
-        <p>This framework functions as a critical control by embedding:</p>
+        <h2 style={{ marginTop: 0 }}>Why Procedural Justice is your most powerful liability control?</h2>
+        <p>This framework functions as your sinbel most effective line of defence by embedding:</p>
         <ul>
           <li>
-            <strong>Fair &amp; Defensible Complaint Handling Systems</strong> → aligned with WHS Codes of Practice,
-            Respect@Work, and regulator expectations.
+            <strong>Fair &amp; Defensible Complaint Handling Systems</strong> → not just policies, but live-ready systems
+            aligned to WHS Codes of Practice, The Codes, Respect@Work, and modern regulatory expectations.
           </li>
           <li>
             <strong>Investigation Protocols</strong> → consistent, transparent, and procedurally fair, reducing disputes
@@ -71,9 +71,11 @@ export default function PJFPage() {
       <section style={card}>
         <h2 style={{ marginTop: 0 }}>What you get</h2>
         <ul>
-          <li>Workflow and roles for intake, triage, assessment, and investigation</li>
-          <li>Quality checks aligned to fairness, transparency and defensibility</li>
-        </ul>
+          <li>End-to-end workflows detailing every role and setep from compliant intake, triage, assessment, and investigation, ensuring nothing is missed and every action is defensible</li>
+          <li>Built-in quality checks and documentation designed for fairness, transparency, and regulator ready evidence, turning process into your strongest shield</li>
+          <li>Practical tools: ready-to-use templated, protocols, and tailored coaching so every incident reponse is consistent, fair, and auditable </li>
+          
+                   </ul>
         <p style={{ marginTop: 12 }}>
           <a
             href="/contact"
