@@ -1,1 +1,38 @@
+[
+  {
+    "pricing_catalogue": "Product / Service",
+    "unnamed:_1": "Description",
+    "unnamed:_2": "Price (AUD)",
+    "unnamed:_3": "Billing / Usage",
+    "__sheet": "Sheet1"
+  },
+  {
+    "pricing_catalogue": "—",
+    "unnamed:_1": "—",
+    "unnamed:_2": "—",
+    "unnamed:_3": "—",
+    "__sheet": "Sheet1"
+  },
+  {
+    "pricing_catalogue": "Culture Risk Diagnostic™",
+    "unnamed:_1": "Org-wide diagnostic; report & debrief",
+    "unnamed:_2": "…",
+    "unnamed:_3": "fixed",
+    "__sheet": "Sheet1"
+  },
+  {
+    "pricing_catalogue": "SHSARC™",
+    "unnamed:_1": "Sexual harassment specific assessment & response capability",
+    "unnamed:_2": "…",
+    "unnamed:_3": "fixed",
+    "__sheet": "Sheet1"
+  },
+  {
+    "pricing_catalogue": "Training / Workshops",
+    "unnamed:_1": "Half-day facilitation incl. materials",
+    "unnamed:_2": "…",
+    "unnamed:_3": "per session",
+    "__sheet": "Sheet1"
+  }
+]
 
