@@ -1,49 +1,43 @@
 import React from "react";
+import path from "node:path";
+import fs from "node:fs/promises";
 
-export const runtime = "nodejs";       // stable on Vercel
-export const dynamic = "force-dynamic";
-export const revalidate = 0;           // always fetch fresh from the API
+export const runtime = "nodejs"; // allow fs on Vercel Node runtime
 
 type AnyRow = Record<string, unknown>;
+type Row = { item: string; description: string; price: string; billing: string };
 
-function normalize(raw: AnyRow[]) {
-  // Map Excel-export field names to clean headers
+function normalize(raw: AnyRow[]): Row[] {
   const rows = raw.map((r) => ({
-    item: String(r["pricing_catalogue"] ?? "").trim(),
-    description: r["unnamed:_1"] != null ? String(r["unnamed:_1"]).trim() : "",
-    price: r["unnamed:_2"] ?? "",
-    billing: r["unnamed:_3"] != null ? String(r["unnamed:_3"]).trim() : "",
+    item: String(r?.["pricing_catalogue"] ?? "").trim(),
+    description: r?.["unnamed:_1"] != null ? String(r["unnamed:_1"]).trim() : "",
+    price: String(r?.["unnamed:_2"] ?? "").trim(),
+    billing: r?.["unnamed:_3"] != null ? String(r["unnamed:_3"]).trim() : "",
   }));
 
-  // Drop header/divider rows
+  // Drop the Excel header row and divider rows
   const isAllDash = (v: string) => ["—", "-", "…", ""].includes(v.trim());
   return rows.filter((row) => {
     if (row.item.toLowerCase() === "product / service") return false; // header row
-    const cells = [
-      row.item,
-      row.description,
-      row.price != null ? String(row.price) : "",
-      row.billing,
-    ].map((v) => String(v).trim());
+    const cells = [row.item, row.description, row.price, row.billing].map((v) => v.trim());
     return !cells.every(isAllDash);
   });
 }
 
-async function getRows() {
-  // Build a base URL that always works on Vercel & locally
-  const base =
-    process.env.NEXT_PUBLIC_BASE_URL ||
-    (process.env.VERCEL_URL ? `https://${process.env.VERCEL_URL}` : "http://localhost:3000");
-
-  const res = await fetch(`${base}/api/pricing`, { cache: "no-store" });
-  if (!res.ok) return [];
-  const data = (await res.json()) as unknown;
-  if (!Array.isArray(data)) return [];
-  return normalize(data as AnyRow[]);
+async function readPricing(): Promise<Row[]> {
+  try {
+    const file = path.join(process.cwd(), "app", "data", "pricing.json");
+    const raw = await fs.readFile(file, "utf8");
+    const data = JSON.parse(raw);
+    if (!Array.isArray(data)) return [];
+    return normalize(data as AnyRow[]);
+  } catch {
+    return [];
+  }
 }
 
 export default async function PricingPage() {
-  const rows = await getRows();
+  const rows = await readPricing();
 
   const cell: React.CSSProperties = {
     border: "1px solid #222",
@@ -51,11 +45,8 @@ export default async function PricingPage() {
     verticalAlign: "top",
   };
 
-  const fmtPrice = (v: unknown) => {
-    const s = String(v ?? "").trim();
-    if (/^[0-9]+(\.[0-9]+)?$/.test(s)) return `AUD ${Number(s).toLocaleString()}`;
-    return s;
-  };
+  const fmtPrice = (s: string) =>
+    /^[0-9]+(\.[0-9]+)?$/.test(s) ? `AUD ${Number(s).toLocaleString()}` : s;
 
   return (
     <main style={{ maxWidth: 960, margin: "0 auto", padding: "24px 16px" }}>
@@ -63,8 +54,7 @@ export default async function PricingPage() {
 
       {!rows.length ? (
         <p style={{ fontSize: 14, opacity: 0.8 }}>
-          No pricing found. Confirm <code>/api/pricing</code> returns an array, or set
-          <code> NEXT_PUBLIC_BASE_URL</code> in Vercel to your site URL.
+          No pricing found. Ensure <code>app/data/pricing.json</code> exists, is committed, and is a top-level JSON array.
         </p>
       ) : (
         <div style={{ overflowX: "auto", border: "1px solid #222", borderRadius: 12 }}>
