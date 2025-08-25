@@ -18,7 +18,7 @@ const PAPERS: Paper[] = [
   },
   {
     title:
-      "Your payroll is not just an expense, I control culture risk so your people control ROI",
+      "Your payroll is not just an expense, I control culture risk so your corporation get the ROI from human capital",
     blurb:
       "Links culture-risk controls to productivity, retention, and measurable ROI across the payroll base.",
     slug: "payroll-roi-through-culture-risk-control",
