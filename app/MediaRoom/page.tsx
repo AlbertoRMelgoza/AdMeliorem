@@ -7,6 +7,34 @@ export const dynamic = "force-dynamic";
 type Item = { title: string; link: string; pubDate: string; source: string };
 type CountsMap = Record<string, { like: number; share: number }>;
 
+// before
+const KEY = "newsfeed_likes_v1";
+// after
+const KEY = "mediaroom_likes_v1";
+
+// headlines loader
+// before (two-path fallback)
+return await fetchJSON(`/api/Newsfeed?ts=${ts}`);
+// after (and keep the lowercase fallback)
+return await fetchJSON(`/api/MediaRoom?ts=${ts}`);
+
+// metrics
+// before
+"/api/Newsfeed/metrics"
+// after
+"/api/MediaRoom/metrics"
+
+// comments
+// before
+"/api/Newsfeed/comments"
+// after
+"/api/MediaRoom/comments"
+
+// fallback line below it
+return await fetchJSON(`/api/newsfeed?ts=${ts}`);
+// change to:
+return await fetchJSON(`/api/mediaroom?ts=${ts}`);
+
 const YELLOW = { color: "#f1c40f", textDecoration: "underline" } as const;
 const REFRESH_MS = 120_000;
 
