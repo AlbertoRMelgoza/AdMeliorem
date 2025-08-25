@@ -39,73 +39,96 @@ const OUTLETS: { name: string; domain: string }[] = [
   { name: "Reuters", domain: "reuters.com" },
 ];
 
-function outletUrl(name: string, domain: string) {
+function buildOutletUrl(domain: string) {
   const q = `site:${domain} (${QUERY_TERMS.join(" OR ")})`;
-  return {
-    name,
-    url: `https://news.google.com/rss/search?q=${encodeURIComponent(q)}&hl=en-AU&gl=AU&ceid=AU:en`,
-  };
+  return `https://news.google.com/rss/search?q=${encodeURIComponent(q)}&hl=en-AU&gl=AU&ceid=AU:en`;
 }
-
 const GLOBAL_URL = (() => {
   const q = `(${QUERY_TERMS.join(" OR ")})`;
   return `https://news.google.com/rss/search?q=${encodeURIComponent(q)}&hl=en-AU&gl=AU&ceid=AU:en`;
 })();
 
-function between(s: string, start: string, end: string) {
-  const a = s.indexOf(start); if (a === -1) return null;
-  const b = s.indexOf(end, a + start.length); if (b === -1) return null;
-  return s.slice(a + start.length, b);
+function unCdata(s: string) {
+  return s.replace(/^<!\[CDATA\[/, "").replace(/\]\]>$/, "");
 }
-function stripCdata(s: string) {
-  return s.replace("<![CDATA[", "").replace("]]>", "");
+function pick(xml: string, tag: string) {
+  const m = xml.match(new RegExp(`<${tag}>([\\s\\S]*?)<\\/${tag}>`, "i"));
+  return m ? unCdata(m[1]).trim() : "";
 }
 function parseRss(xml: string): { title: string; link: string; pubDate: string }[] {
-  const chunks = xml.split("<item>").slice(1);
-  const items = chunks.map((chunk) => {
-    const titleRaw = between(chunk, "<title>", "</title>") ?? "";
-    const linkRaw = between(chunk, "<link>", "</link>") ?? "";
-    const dateRaw = between(chunk, "<pubDate>", "</pubDate>") ?? "";
-    const title = stripCdata(titleRaw).trim();
-    const link = stripCdata(linkRaw).trim();
-    const pubDate = new Date((stripCdata(dateRaw).trim()) || Date.now()).toISOString();
-    return { title, link, pubDate };
+  const items: { title: string; link: string; pubDate: string }[] = [];
+  const re = /<item>([\s\S]*?)<\/item>/gi;
+  let m: RegExpExecArray | null;
+  while ((m = re.exec(xml))) {
+    const chunk = m[1];
+    const title = pick(chunk, "title");
+    const link = pick(chunk, "link");
+    const pubDateRaw = pick(chunk, "pubDate");
+    const pubDate = new Date(pubDateRaw || Date.now()).toISOString();
+    if (title && link) items.push({ title, link, pubDate });
+  }
+  return items;
+}
+
+async function fetchRss(url: string): Promise<string> {
+  const res = await fetch(url, {
+    cache: "no-store",
+    headers: {
+      "User-Agent":
+        "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/124 Safari/537.36",
+      Accept: "application/rss+xml, application/xml;q=0.9, */*;q=0.8",
+    },
   });
-  return items.filter((i) => i.title && i.link);
+  if (!res.ok) throw new Error(`RSS fetch ${res.status} ${res.statusText}`);
+  return await res.text();
 }
 
 export async function GET() {
   try {
-    const feeds = OUTLETS.map((o) => outletUrl(o.name, o.domain));
-    const requests = [
-      ...feeds.map(async (f) => {
-        const res = await fetch(f.url, { cache: "no-store" });
-        const xml = await res.text();
-        return parseRss(xml).map<Item>((i) => ({ ...i, source: f.name }));
+    const reqs: Promise<Item[]>[] = [
+      ...OUTLETS.map(async ({ name, domain }) => {
+        try {
+          const xml = await fetchRss(buildOutletUrl(domain));
+          return parseRss(xml).map((i) => ({ ...i, source: name }));
+        } catch {
+          return []; // ignore a single outlet failure
+        }
       }),
       (async () => {
-        const res = await fetch(GLOBAL_URL, { cache: "no-store" });
-        const xml = await res.text();
-        return parseRss(xml).map<Item>((i) => ({ ...i, source: "Google News" }));
+        try {
+          const xml = await fetchRss(GLOBAL_URL);
+          return parseRss(xml).map((i) => ({ ...i, source: "Google News" }));
+        } catch {
+          return [];
+        }
       })(),
     ];
 
-    const settled = await Promise.allSettled(requests);
-    const all: Item[] = settled.flatMap((r) => (r.status === "fulfilled" ? r.value : []));
+    const settled = await Promise.all(reqs);
+    const all = settled.flat();
 
     const seen = new Set<string>();
     const deduped: Item[] = [];
     for (const it of all) {
       const key = (it.link || it.title).replace(/(\?|#).+$/, "");
-      if (!seen.has(key)) { seen.add(key); deduped.push(it); }
+      if (!seen.has(key)) {
+        seen.add(key);
+        deduped.push(it);
+      }
     }
 
     deduped.sort((a, b) => +new Date(b.pubDate) - +new Date(a.pubDate));
+    const limited = deduped.slice(0, 100);
+
+    if (!limited.length) {
+      // surface a helpful error instead of silent empty
+      return NextResponse.json({ error: "No results parsed from RSS." }, { status: 200 });
+    }
     return NextResponse.json(
-      { count: deduped.length, items: deduped.slice(0, 100) },
+      { count: limited.length, items: limited },
       { headers: { "Cache-Control": "s-maxage=300, stale-while-revalidate=600" } }
     );
   } catch (e: any) {
-    return NextResponse.json({ error: e.message }, { status: 500 });
+    return NextResponse.json({ error: e.message || String(e) }, { status: 500 });
   }
 }
