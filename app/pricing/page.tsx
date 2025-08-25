@@ -1,53 +1,68 @@
-import React from 'react';
-import fs from 'node:fs';
-import path from 'node:path';
+import React from "react";
+import fs from "node:fs";
+import path from "node:path";
 
-export const runtime = 'nodejs';   // ensure we can use fs/path on the server
-export const revalidate = 60;      // ISR cache (1 minute)
+export const runtime = "nodejs";
+export const revalidate = 60;
 
 type Row = Record<string, unknown>;
 
+// Read from public/data first (always deployed), then fallback to data/
 function readPricing(): Row[] {
-  try {
-    const file = path.join(process.cwd(), 'data', 'pricing.json');
-    const raw = fs.readFileSync(file, 'utf8');
-    const json = JSON.parse(raw);
-    return Array.isArray(json) ? (json as Row[]) : [];
-  } catch {
-    // If file missing or invalid, show an empty table + hint
-    return [];
+  const candidates = [
+    path.join(process.cwd(), "public", "data", "pricing.json"),
+    path.join(process.cwd(), "data", "pricing.json"),
+  ];
+  for (const p of candidates) {
+    try {
+      if (fs.existsSync(p)) {
+        const raw = fs.readFileSync(p, "utf8");
+        const json = JSON.parse(raw);
+        return Array.isArray(json) ? (json as Row[]) : [];
+      }
+    } catch {
+      // keep trying next path
+    }
   }
+  return [];
 }
 
 function Table({ rows }: { rows: Row[] }) {
   if (!rows.length) {
     return (
-      <p className="text-sm text-muted-foreground">
-        No pricing found. Make sure <code>data/pricing.json</code> exists, is committed, and is a JSON array.
+      <p style={{ fontSize: 14, opacity: 0.8 }}>
+        No pricing found. Ensure <code>public/data/pricing.json</code> exists,
+        is committed, and is a JSON array.
       </p>
     );
   }
 
   const columns = Array.from(new Set(rows.flatMap((r) => Object.keys(r))));
 
+  const cellStyle: React.CSSProperties = {
+    border: "1px solid #222",
+    padding: "8px 10px",
+    verticalAlign: "top",
+  };
+
   return (
-    <div className="overflow-x-auto rounded-xl border">
-      <table className="min-w-full text-sm">
-        <thead className="bg-gray-50">
+    <div style={{ overflowX: "auto", border: "1px solid #222", borderRadius: 12 }}>
+      <table style={{ width: "100%", borderCollapse: "collapse", fontSize: 14 }}>
+        <thead style={{ background: "#111" }}>
           <tr>
             {columns.map((c) => (
-              <th key={c} className="px-3 py-2 text-left font-medium capitalize">
-                {c.replace(/_/g, ' ')}
+              <th key={c} style={{ ...cellStyle, textAlign: "left", fontWeight: 600 }}>
+                {c.replace(/_/g, " ")}
               </th>
             ))}
           </tr>
         </thead>
         <tbody>
           {rows.map((r, i) => (
-            <tr key={i} className="border-t">
+            <tr key={i}>
               {columns.map((c) => (
-                <td key={c} className="px-3 py-2 align-top">
-                  {String((r as any)[c] ?? '')}
+                <td key={c} style={cellStyle}>
+                  {String((r as any)[c] ?? "")}
                 </td>
               ))}
             </tr>
@@ -60,18 +75,10 @@ function Table({ rows }: { rows: Row[] }) {
 
 export default async function PricingPage() {
   const rows = readPricing();
-
   return (
-    <main className="mx-auto max-w-6xl px-4 py-10 space-y-6">
-      <h1 className="text-2xl font-semibold">Pricing Catalogue</h1>
-      <p className="text-sm text-muted-foreground">
-        This table reads from <code>data/pricing.json</code>. Update that file and redeploy to refresh.
-      </p>
+    <main style={{ maxWidth: 960, margin: "0 auto", padding: "24px 16px" }}>
+      <h1 style={{ fontSize: 28, margin: 0, marginBottom: 12 }}>Pricing Catalogue</h1>
       <Table rows={rows} />
-      <div className="flex gap-3">
-        <a className="inline-flex rounded-xl border px-3 py-2 text-sm" href="/api/pricing.csv">Download CSV</a>
-        <a className="inline-flex rounded-xl border px-3 py-2 text-sm" href="/api/pricing">View JSON API</a>
-      </div>
     </main>
   );
 }
