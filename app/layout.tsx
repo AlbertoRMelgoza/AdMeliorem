@@ -95,26 +95,27 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
             </span>
           </a>
 
-          {/* Navigation */}
-          <nav
-            style={{
-              marginLeft: "auto",
-              display: "flex",
-              gap: 16,
-              flexWrap: "wrap",
-            }}
-          >
-            <a href="/" style={{ color: brand.accent, textDecoration: "none" }}>Home</a>
-            <a href="/about" style={{ color: brand.text, textDecoration: "none" }}>About</a>
-            <a href="/products" style={{ color: brand.text, textDecoration: "none" }}>Products</a>
-            <a href="/evidence" style={{ color: brand.text, textDecoration: "none" }}>Evidence</a>
-            <a href="/principles" style={{ color: brand.text, textDecoration: "none" }}>Principles</a>
-            <a href="/resources" style={{ color: brand.text, textDecoration: "none" }}>Resources</a>
-            <a href="/whitepapers" style={{ color: brand.text, textDecoration: "none" }}>Whitepapers</a>
-            <a href="/feed" style={{ color: brand.text, textDecoration: "none" }}>Newsfeed</a>
-            <a href="/pricing" style={{ color: brand.text, textDecoration: "none" }}>Price Catalogue</a>
-            <a href="/contact" style={{ color: brand.text, textDecoration: "none" }}>Contact</a>
-          </nav>
+         {/* Navigation */}
+<nav
+  style={{
+    marginLeft: "auto",
+    display: "flex",
+    gap: 16,
+    flexWrap: "wrap",
+  }}
+>
+  <a href="/" style={{ color: brand.accent, textDecoration: "none" }}>Home</a>
+  <a href="/about" style={{ color: brand.text, textDecoration: "none" }}>About</a>
+  <a href="/products" style={{ color: brand.text, textDecoration: "none" }}>Products</a>
+  <a href="/evidence" style={{ color: brand.text, textDecoration: "none" }}>Evidence</a>
+  <a href="/principles" style={{ color: brand.text, textDecoration: "none" }}>Principles</a>
+  <a href="/resources" style={{ color: brand.text, textDecoration: "none" }}>Resources</a>
+  <a href="/whitepapers" style={{ color: brand.text, textDecoration: "none" }}>Whitepapers</a>
+  <a href="/feed" style={{ color: brand.text, textDecoration: "none" }}>Newsfeed</a>
+  <a href="/pricing" style={{ color: brand.text, textDecoration: "none" }}>Price Catalogue</a>
+  <a href="/contact" style={{ color: brand.text, textDecoration: "none" }}>Contact</a>
+</nav>
+
         </header>
 
         {/* Page content */}
