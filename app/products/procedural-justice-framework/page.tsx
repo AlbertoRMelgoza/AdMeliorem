@@ -35,7 +35,7 @@ export default function PJFPage() {
       {/* How it functions as a critical control */}
       <section style={card}>
         <h2 style={{ marginTop: 0 }}>Why Procedural Justice is your most powerful liability control?</h2>
-        <p>This framework functions as your sinbel most effective line of defence by embedding:</p>
+        <p>This framework functions as your single most effective line of defence by embedding:</p>
         <ul>
           <li>
             <strong>Fair &amp; Defensible Complaint Handling Systems</strong> → not just policies, but live-ready systems
@@ -71,9 +71,9 @@ export default function PJFPage() {
       <section style={card}>
         <h2 style={{ marginTop: 0 }}>What you get</h2>
         <ul>
-          <li>End-to-end workflows detailing every role and setep from compliant intake, triage, assessment, and investigation, ensuring nothing is missed and every action is defensible</li>
+          <li>End-to-end workflows detailing every role and setup from compliant intake, triage, assessment, and investigation, ensuring nothing is missed and every action is defensible</li>
           <li>Built-in quality checks and documentation designed for fairness, transparency, and regulator ready evidence, turning process into your strongest shield</li>
-          <li>Practical tools: ready-to-use templated, protocols, and tailored coaching so every incident reponse is consistent, fair, and auditable </li>
+          <li>Practical tools: ready-to-use templates, protocols, and tailored coaching so every incident reponse is consistent, fair, and auditable </li>
           
                    </ul>
         <p style={{ marginTop: 12 }}>
