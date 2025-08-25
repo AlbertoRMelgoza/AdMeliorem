@@ -64,15 +64,15 @@ export default function AboutPage() {
 
           <div style={card}>
             <p>
-              I help organisations proactively control psychosocial risks with a focus on sexual
+              With intensive, research and applied work, I help organisations proactively control psychosocial risks (now regulated) with a focus on sexual
               harassment, aggression, bullying, and procedural justice. My approach combines
               evidence-based tools, regulator-ready documentation, and pragmatic delivery tailored to
               the realities of each business.
             </p>
             <p>
-              Over 20 years I’ve advised on complex complaints, designed defensible investigation
+              Over 20 years I have advised on complex incidents, assist with external investigation
               processes, and delivered organisation-wide prevention programs. I routinely work with
-              validated diagnostics (e.g., COPSOQ, SEQ) to surface hotspots and establish Key Culture
+              validated diagnostics (e.g., COPSOQ, SEQ, OCAS, WFBS, IAT) to surface hotspots and establish Key Culture
               Risk Indicators that leadership can actually act on.
             </p>
             <p>
