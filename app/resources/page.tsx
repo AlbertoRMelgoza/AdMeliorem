@@ -15,8 +15,8 @@ export default function Page() {
       a: "No. Codes of Practice and WHS regulations are the legal baseline; ISO standards are voluntary guidance that strengthen your system."
     },
     {
-      q: "Where do culture risks fit?",
-      a: "Culture risk overlaps with psychosocial risk (for example, bullying and harassment). Track drivers, controls, and early-warning indicators."
+      q: "Is toxic culture an identified hazard or risk under the NSW or QLD codes?",
+      a: "No toxic culture is not identified hazard or risk under the codes, yet toxic culture causes financial liability and individual harm."
     }
   ];
 
@@ -61,7 +61,7 @@ export default function Page() {
       </section>
 
       <section style={{ border: "1px solid #222", borderRadius: 12, padding: 16, marginBottom: 16 }}>
-        <h2 style={{ margin: 0, fontSize: 20 }}>Sample policies and standards (paid)</h2>
+        <h2 style={{ margin: 0, fontSize: 20 }}>Sample policies and standards (see price catalogue for a price)</h2>
         <div style={{ display: "grid", gap: 8, gridTemplateColumns: "repeat(auto-fit, minmax(260px, 1fr))", marginTop: 8 }}>
           {policies.map((p, i) => (
             <div key={i} style={{ border: "1px solid #222", borderRadius: 10, padding: 12 }}>
