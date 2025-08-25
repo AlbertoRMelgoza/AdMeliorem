@@ -1,61 +1,36 @@
 "use client";
 
 import { useEffect, useState } from "react";
+import type { CSSProperties } from "react";
 
 export const dynamic = "force-dynamic";
 
 type Item = { title: string; link: string; pubDate: string; source: string };
 type CountsMap = Record<string, { like: number; share: number }>;
 
-// before
-const KEY = "newsfeed_likes_v1";
-// after
-const KEY = "mediaroom_likes_v1";
-
-// headlines loader
-// before (two-path fallback)
-return await fetchJSON(`/api/Newsfeed?ts=${ts}`);
-// after (and keep the lowercase fallback)
-return await fetchJSON(`/api/MediaRoom?ts=${ts}`);
-
-// metrics
-// before
-"/api/Newsfeed/metrics"
-// after
-"/api/MediaRoom/metrics"
-
-// comments
-// before
-"/api/Newsfeed/comments"
-// after
-"/api/MediaRoom/comments"
-
-// fallback line below it
-return await fetchJSON(`/api/newsfeed?ts=${ts}`);
-// change to:
-return await fetchJSON(`/api/mediaroom?ts=${ts}`);
-
 const YELLOW = { color: "#f1c40f", textDecoration: "underline" } as const;
 const REFRESH_MS = 120_000;
 
-/** Only keep items about YOUR hazards */
+/** Only YOUR hazards */
 const HAZARD_RULES: Array<{ label: string; phrases: string[] }> = [
-  { label: "Toxic culture", phrases: ["toxic culture", "toxic workplace", "culture risk", "corporate culture risk"] },
-  { label: "Sexual harassment", phrases: ["sexual harassment", "workplace sexual harassment"] },
-  { label: "Sexual assault", phrases: ["sexual assault", "workplace sexual assault"] },
-  { label: "Bullying", phrases: ["workplace bullying", "bullying at work", "workplace bullying and harassment"] },
-  { label: "Workplace aggression", phrases: ["workplace aggression", "aggression at work"] },
-  { label: "Workplace misconduct", phrases: ["workplace misconduct", "employee misconduct", "corporate misconduct"] },
-  { label: "Procedural justice", phrases: ["procedural justice"] },
-  { label: "Workplace harassment", phrases: ["workplace harassment"] },
+  { label: "Toxic culture",            phrases: ["toxic culture", "toxic workplace", "culture risk", "corporate culture risk"] },
+  { label: "Sexual harassment",        phrases: ["sexual harassment", "workplace sexual harassment"] },
+  { label: "Sexual assault",           phrases: ["sexual assault", "workplace sexual assault"] },
+  { label: "Bullying",                 phrases: ["workplace bullying", "bullying at work", "workplace bullying and harassment"] },
+  { label: "Workplace aggression",     phrases: ["workplace aggression", "aggression at work"] },
+  { label: "Workplace misconduct",     phrases: ["workplace misconduct", "employee misconduct", "corporate misconduct"] },
+  { label: "Procedural justice",       phrases: ["procedural justice"] },
+  { label: "Workplace harassment",     phrases: ["workplace harassment"] },
 ];
 
-/** Require at least one “work context” term to avoid school/TV/sports noise */
+/** Require an obvious work context to avoid TV/sports/school noise */
 const WORK_TERMS = ["workplace", "work", "employer", "company", "corporate", "business", "organisation", "organization", "office"];
 
-/** Block News Corp outlets to avoid hard paywalls */
+/** Block common hard paywalls (News Corp) */
 const BLOCKED_DOMAINS = ["wsj.com", "theaustralian.com.au", "thetimes.co.uk", "couriermail.com.au"];
 const BLOCKED_SOURCES = ["WSJ", "The Australian", "The Times", "Courier-Mail"];
+
+/* ---------------- helpers ---------------- */
 
 function inWorkContext(text: string) {
   const t = text.toLowerCase();
@@ -81,11 +56,11 @@ function isBlocked(link: string, source?: string | null) {
 }
 
 function useLocalLikes() {
-  const KEY = "newsfeed_likes_v1";
+  const KEY = "mediaroom_likes_v1";
   const [likes, setLikes] = useState<Record<string, true>>({});
   useEffect(() => { try { const raw = localStorage.getItem(KEY); if (raw) setLikes(JSON.parse(raw)); } catch {} }, []);
   useEffect(() => { try { localStorage.setItem(KEY, JSON.stringify(likes)); } catch {} }, [likes]);
-  const toggle = (link: string) => setLikes((p) => { const n = { ...p }; n[link] ? delete n[link] : (n[link] = true); return n; });
+  const toggle = (link: string) => setLikes(p => { const n = { ...p }; n[link] ? delete n[link] : (n[link] = true); return n; });
   const liked = (link: string) => Boolean(likes[link]);
   return { liked, toggle };
 }
@@ -98,15 +73,44 @@ async function fetchJSON(url: string, init?: RequestInit) {
   return res.json();
 }
 
-// Try uppercase path first, then lowercase (handles case mismatches)
+/** Headlines: try MediaRoom, then mediaroom, then legacy Newsfeed paths */
 async function fetchHeadlines() {
   const ts = Date.now();
+  const tries = [
+    `/api/MediaRoom?ts=${ts}`,
+    `/api/mediaroom?ts=${ts}`,
+    `/api/Newsfeed?ts=${ts}`,
+    `/api/newsfeed?ts=${ts}`,
+  ];
+  for (const u of tries) {
+    try { return await fetchJSON(u); } catch { /* next */ }
+  }
+  throw new Error("No headlines endpoint available");
+}
+
+/** Metrics/comments POST with graceful fallback to legacy paths */
+async function postJSONWithFallback(pathA: string, pathB: string, body: any) {
   try {
-    return await fetchJSON(`/api/Newsfeed?ts=${ts}`);
+    return await fetchJSON(pathA, {
+      method: "POST",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify(body),
+    });
   } catch {
-    return await fetchJSON(`/api/newsfeed?ts=${ts}`);
+    return await fetchJSON(pathB, {
+      method: "POST",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify(body),
+    });
   }
 }
+async function getCommentsWithFallback(link: string) {
+  const enc = encodeURIComponent(link);
+  try { return await fetchJSON(`/api/MediaRoom/comments?link=${enc}`); }
+  catch { return await fetchJSON(`/api/Newsfeed/comments?link=${enc}`); }
+}
+
+/* ---------------- page ---------------- */
 
 export default function Page() {
   const [items, setItems] = useState<Array<Item & { hazard: string }>>([]);
@@ -124,12 +128,10 @@ export default function Page() {
         const data = await fetchHeadlines();
         if (!cancelled) {
           const raw: Item[] = Array.isArray(data?.items) ? data.items : [];
-          // 1) block paywalled sources; 2) classify hazard; 3) keep only recognised hazards
           const next = raw
             .filter((it) => !isBlocked(it.link, it.source))
             .map((it) => ({ ...it, hazard: classifyHazard(it.title) || "" }))
-            .filter((it) => it.hazard);
-
+            .filter((it) => it.hazard); // keep only recognised hazards
           setItems(next);
           setApiError(data?.error || null);
           setUpdatedAt(new Date());
@@ -145,16 +147,16 @@ export default function Page() {
     return () => { cancelled = true; clearInterval(id); };
   }, []);
 
-  // Load like/share counts for the filtered items
+  // Load like/share counts
   useEffect(() => {
     (async () => {
       if (!items.length) { setCounts({}); return; }
       try {
-        const data = await fetchJSON("/api/Newsfeed/metrics", {
-          method: "POST",
-          headers: { "Content-Type": "application/json" },
-          body: JSON.stringify({ action: "get", links: items.map(i => ({ link: i.link, title: i.title })) }),
-        });
+        const data = await postJSONWithFallback(
+          "/api/MediaRoom/metrics",
+          "/api/Newsfeed/metrics",
+          { action: "get", links: items.map(i => ({ link: i.link, title: i.title })) }
+        );
         setCounts(data?.counts || {});
       } catch {
         setCounts({});
@@ -165,27 +167,27 @@ export default function Page() {
   const handleToggleLike = async (it: Item) => {
     toggle(it.link); // optimistic
     try {
-      await fetchJSON("/api/Newsfeed/metrics", {
-        method: "POST",
-        headers: { "Content-Type": "application/json" },
-        body: JSON.stringify({ action: "toggleLike", link: it.link, title: it.title }),
-      });
-      const data = await fetchJSON("/api/Newsfeed/metrics", {
-        method: "POST",
-        headers: { "Content-Type": "application/json" },
-        body: JSON.stringify({ action: "get", links: [{ link: it.link, title: it.title }] }),
-      });
+      await postJSONWithFallback(
+        "/api/MediaRoom/metrics",
+        "/api/Newsfeed/metrics",
+        { action: "toggleLike", link: it.link, title: it.title }
+      );
+      const data = await postJSONWithFallback(
+        "/api/MediaRoom/metrics",
+        "/api/Newsfeed/metrics",
+        { action: "get", links: [{ link: it.link, title: it.title }] }
+      );
       setCounts(c => ({ ...c, ...data.counts }));
     } catch {}
   };
 
   const handleShare = async (it: Item) => {
     try {
-      await fetchJSON("/api/Newsfeed/metrics", {
-        method: "POST",
-        headers: { "Content-Type": "application/json" },
-        body: JSON.stringify({ action: "share", link: it.link, title: it.title }),
-      });
+      await postJSONWithFallback(
+        "/api/MediaRoom/metrics",
+        "/api/Newsfeed/metrics",
+        { action: "share", link: it.link, title: it.title }
+      );
       setCounts(c => {
         const cur = c[it.link] || { like: 0, share: 0 };
         return { ...c, [it.link]: { ...cur, share: cur.share + 1 } };
@@ -249,9 +251,11 @@ export default function Page() {
   );
 }
 
-function btn(): React.CSSProperties {
+function btn(): CSSProperties {
   return { border: "1px solid #222", borderRadius: 10, padding: "6px 10px", background: "transparent", color: "inherit", cursor: "pointer" };
 }
+
+/* ---------------- comments ---------------- */
 
 function CommentsBlock({ item }: { item: Item }) {
   const [open, setOpen] = useState(false);
@@ -264,7 +268,7 @@ function CommentsBlock({ item }: { item: Item }) {
   const load = async () => {
     setLoading(true);
     try {
-      const data = await fetchJSON("/api/Newsfeed/comments?link=" + encodeURIComponent(item.link));
+      const data = await getCommentsWithFallback(item.link);
       setList(Array.isArray(data?.comments) ? data.comments : []);
       setMsg(null);
     } catch {
@@ -280,11 +284,11 @@ function CommentsBlock({ item }: { item: Item }) {
     if (!body.trim()) return;
     setLoading(true);
     try {
-      await fetchJSON("/api/Newsfeed/comments", {
-        method: "POST",
-        headers: { "Content-Type": "application/json" },
-        body: JSON.stringify({ link: item.link, title: item.title, name, body }),
-      });
+      await postJSONWithFallback(
+        "/api/MediaRoom/comments",
+        "/api/Newsfeed/comments",
+        { link: item.link, title: item.title, name, body }
+      );
       setBody("");
       setMsg("Submitted for review.");
       await load();
