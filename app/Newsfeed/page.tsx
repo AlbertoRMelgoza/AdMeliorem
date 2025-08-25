@@ -2,6 +2,8 @@
 
 import { useEffect, useMemo, useState } from "react";
 
+export const dynamic = "force-dynamic";
+
 type Item = { title: string; link: string; pubDate: string; source: string };
 
 const TOPICS = [
@@ -23,9 +25,7 @@ const YELLOW = { color: "#f1c40f", textDecoration: "underline" } as const;
 
 function inferTopic(title: string): Topic {
   const t = title.toLowerCase();
-  for (const key of TOPICS) {
-    if (t.includes(key.toLowerCase())) return key;
-  }
+  for (const key of TOPICS) if (t.includes(key.toLowerCase())) return key;
   return "all";
 }
 
@@ -34,11 +34,7 @@ function useLocalLikes() {
   const [likes, setLikes] = useState<Record<string, true>>({});
   useEffect(() => { try { const raw = localStorage.getItem(KEY); if (raw) setLikes(JSON.parse(raw)); } catch {} }, []);
   useEffect(() => { try { localStorage.setItem(KEY, JSON.stringify(likes)); } catch {} }, [likes]);
-  const toggle = (link: string) => setLikes((prev) => {
-    const next = { ...prev };
-    if (next[link]) delete next[link]; else next[link] = true;
-    return next;
-  });
+  const toggle = (link: string) => setLikes(p => { const n = { ...p }; n[link] ? delete n[link] : (n[link] = true); return n; });
   const liked = (link: string) => Boolean(likes[link]);
   return { liked, toggle };
 }
@@ -46,19 +42,21 @@ function useLocalLikes() {
 export default function Page() {
   const [items, setItems] = useState<Item[]>([]);
   const [loading, setLoading] = useState(true);
+  const [apiError, setApiError] = useState<string | null>(null);
 
   const [topic, setTopic] = useState<Topic>("all");
   const [source, setSource] = useState<string>("all");
-
   const { liked, toggle } = useLocalLikes();
 
   useEffect(() => {
     (async () => {
       try {
-        const res = await fetch("/api/newsfeed", { cache: "no-store" });
+        const res = await fetch("/api/newsfeed?ts=" + Date.now(), { cache: "no-store" });
         const data = await res.json();
+        if (data?.error) setApiError(data.error);
         setItems(Array.isArray(data?.items) ? data.items : []);
-      } catch {
+      } catch (e: any) {
+        setApiError(e?.message || "Failed to load newsfeed.");
         setItems([]);
       } finally {
         setLoading(false);
@@ -76,9 +74,7 @@ export default function Page() {
   const mailtoFor = (it: Item, userComment: string) => {
     const to = "am@albertormelgoza.com";
     const subject = encodeURIComponent(`Newsfeed comment: ${it.title}`);
-    const body = encodeURIComponent(
-      `Article: ${it.title}\nLink: ${it.link}\n\nComment:\n${userComment}\n\n(From site newsfeed)`
-    );
+    const body = encodeURIComponent(`Article: ${it.title}\nLink: ${it.link}\n\nComment:\n${userComment}\n\n(From site newsfeed)`);
     return `mailto:${to}?subject=${subject}&body=${body}`;
   };
 
@@ -86,8 +82,7 @@ export default function Page() {
     <main style={{ maxWidth: 960, margin: "0 auto", padding: "24px 16px" }}>
       <h1 style={{ margin: 0, fontSize: 24 }}>Newsfeed</h1>
       <p style={{ marginTop: 8, opacity: 0.85 }}>
-        Headlines matched to your products (sexual harassment, bullying, aggression, harassment, culture, procedural justice,
-        psychosocial risk management, mediation, negotiation) from AFR, FT, WSJ, News Corp titles, NYT, Sky (UK & AU), ABC, and more.
+        Headlines matched to your products from AFR, FT, WSJ, News Corp titles, NYT, Sky (UK & AU), ABC, and more. (Some links may be paywalled.)
       </p>
 
       {/* Filters */}
@@ -109,6 +104,8 @@ export default function Page() {
 
       {loading ? (
         <p style={{ opacity: 0.8 }}>Loading…</p>
+      ) : apiError ? (
+        <p style={{ opacity: 0.8 }}>No results yet. {apiError}</p>
       ) : !filtered.length ? (
         <p style={{ opacity: 0.8 }}>No results. Try a different filter.</p>
       ) : (
@@ -120,7 +117,7 @@ export default function Page() {
                 {new Date(it.pubDate).toLocaleString()} · {it.source}
                 {it._topic !== "all" ? <> · {shortLabel(it._topic as Topic)}</> : null}
               </div>
-              <LikeAndComment link={it.link} liked={liked(it.link)} toggle={() => toggle(it.link)} mailtoFor={(c) => mailtoFor(it, c)} />
+              <LikeAndComment item={it} liked={liked(it.link)} toggle={() => toggle(it.link)} mailto={(c) => mailtoFor(it, c)} />
             </li>
           ))}
         </ul>
@@ -149,16 +146,12 @@ function shortLabel(t: Topic) {
   }
 }
 
-function LikeAndComment({ link, liked, toggle, mailtoFor }: { link: string; liked: boolean; toggle: () => void; mailtoFor: (c: string) => string }) {
+function LikeAndComment({ item, liked, toggle, mailto }: { item: Item; liked: boolean; toggle: () => void; mailto: (text: string) => string }) {
   const [open, setOpen] = useState(false);
   const [text, setText] = useState("");
   return (
     <div style={{ display: "flex", gap: 8, alignItems: "center", marginTop: 10, flexWrap: "wrap" }}>
-      <button
-        onClick={toggle}
-        style={{ border: "1px solid #222", borderRadius: 10, padding: "6px 10px", background: liked ? "#111" : "transparent", color: "inherit", cursor: "pointer" }}
-        aria-pressed={liked}
-      >
+      <button onClick={toggle} style={{ border: "1px solid #222", borderRadius: 10, padding: "6px 10px", background: liked ? "#111" : "transparent", color: "inherit", cursor: "pointer" }} aria-pressed={liked}>
         {liked ? "Liked" : "Like"}
       </button>
       {!open ? (
@@ -168,7 +161,7 @@ function LikeAndComment({ link, liked, toggle, mailtoFor }: { link: string; like
       ) : (
         <>
           <input value={text} onChange={(e) => setText(e.target.value)} placeholder="Write a comment…" style={{ border: "1px solid #222", borderRadius: 8, padding: "6px 10px", minWidth: 240, background: "transparent", color: "inherit" }} />
-          <a href={mailtoFor(text)} style={{ border: "1px solid #222", borderRadius: 10, padding: "6px 10px", ...YELLOW }} onClick={() => { setOpen(false); setText(""); }}>
+          <a href={mailto(text)} style={{ border: "1px solid #222", borderRadius: 10, padding: "6px 10px", ...YELLOW }} onClick={() => { setOpen(false); setText(""); }}>
             Send
           </a>
           <button onClick={() => { setOpen(false); setText(""); }} style={{ border: "1px solid #222", borderRadius: 10, padding: "6px 10px", background: "transparent", color: "inherit", cursor: "pointer" }}>
