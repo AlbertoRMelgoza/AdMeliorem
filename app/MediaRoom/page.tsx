@@ -10,36 +10,12 @@ type CountsMap = Record<string, { like: number; share: number }>;
 const YELLOW = { color: "#f1c40f", textDecoration: "underline" } as const;
 const REFRESH_MS = 120_000;
 
-// STRICT topics you want (nothing else)
-const ALLOWED_PHRASES = [
-  "sexual harassment",
-  "workplace sexual harassment",
-  "sexual assault",
-  "workplace sexual assault",
-  "bullying at work",
-  "workplace bullying",
-  "workplace aggression",
-  "workplace misconduct",
-  "procedural justice",
-  "workplace harassment",
-  "toxic culture",
-  "toxic workplace",
-  "culture risk",
-  "corporate culture risk",
-  "toxic corporate culture",
-] as const;
-
-function isAllowed(title: string, source?: string) {
-  const t = (title + " " + (source || "")).toLowerCase();
-  return ALLOWED_PHRASES.some((p) => t.includes(p));
-}
-
 function useLocalLikes() {
   const KEY = "newsfeed_likes_v1";
   const [likes, setLikes] = useState<Record<string, true>>({});
   useEffect(() => { try { const raw = localStorage.getItem(KEY); if (raw) setLikes(JSON.parse(raw)); } catch {} }, []);
   useEffect(() => { try { localStorage.setItem(KEY, JSON.stringify(likes)); } catch {} }, [likes]);
-  const toggle = (link: string) => setLikes((p) => { const n = { ...p }; n[link] ? delete n[link] : (n[link] = true); return n; });
+  const toggle = (link: string) => setLikes(p => { const n = { ...p }; n[link] ? delete n[link] : (n[link] = true); return n; });
   const liked = (link: string) => Boolean(likes[link]);
   return { liked, toggle };
 }
@@ -59,16 +35,14 @@ export default function Page() {
   const [updatedAt, setUpdatedAt] = useState<Date | null>(null);
   const { liked, toggle } = useLocalLikes();
 
-  // Load headlines (polling)
+  // Load headlines (poll)
   useEffect(() => {
     let cancelled = false;
     const load = async () => {
       try {
         const data = await fetchJSON("/api/Newsfeed?ts=" + Date.now());
         if (!cancelled) {
-          const raw = Array.isArray(data?.items) ? data.items : [];
-          // ⭐ Filter to ONLY the allowed topics
-          const next = raw.filter((it) => isAllowed(it.title, it.source));
+          const next = Array.isArray(data?.items) ? data.items : [];
           setItems(next);
           setApiError(data?.error || null);
           setUpdatedAt(new Date());
@@ -84,7 +58,7 @@ export default function Page() {
     return () => { cancelled = true; clearInterval(id); };
   }, []);
 
-  // Load like/share counts for the filtered items
+  // Load like/share counts
   useEffect(() => {
     (async () => {
       if (!items.length) { setCounts({}); return; }
@@ -114,7 +88,7 @@ export default function Page() {
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify({ action: "get", links: [{ link: it.link, title: it.title }] }),
       });
-      setCounts((c) => ({ ...c, ...data.counts }));
+      setCounts(c => ({ ...c, ...data.counts }));
     } catch {}
   };
 
@@ -125,7 +99,7 @@ export default function Page() {
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify({ action: "share", link: it.link, title: it.title }),
       });
-      setCounts((c) => {
+      setCounts(c => {
         const cur = c[it.link] || { like: 0, share: 0 };
         return { ...c, [it.link]: { ...cur, share: cur.share + 1 } };
       });
