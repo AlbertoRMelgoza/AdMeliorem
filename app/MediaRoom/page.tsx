@@ -88,7 +88,7 @@ async function fetchHeadlines() {
   throw new Error("No headlines endpoint available");
 }
 
-/** Metrics/comments POST with graceful fallback to legacy paths */
+/** Metrics POST with graceful fallback to legacy paths */
 async function postJSONWithFallback(pathA: string, pathB: string, body: any) {
   try {
     return await fetchJSON(pathA, {
@@ -103,11 +103,6 @@ async function postJSONWithFallback(pathA: string, pathB: string, body: any) {
       body: JSON.stringify(body),
     });
   }
-}
-async function getCommentsWithFallback(link: string) {
-  const enc = encodeURIComponent(link);
-  try { return await fetchJSON(`/api/MediaRoom/comments?link=${enc}`); }
-  catch { return await fetchJSON(`/api/Newsfeed/comments?link=${enc}`); }
 }
 
 /* ---------------- page ---------------- */
@@ -240,7 +235,6 @@ export default function Page() {
                   <button onClick={() => handleShare(it)} style={btn()}>
                     Share · {c.share}
                   </button>
-                  <CommentsBlock item={it} />
                 </div>
               </li>
             );
@@ -253,90 +247,4 @@ export default function Page() {
 
 function btn(): CSSProperties {
   return { border: "1px solid #222", borderRadius: 10, padding: "6px 10px", background: "transparent", color: "inherit", cursor: "pointer" };
-}
-
-/* ---------------- comments ---------------- */
-
-function CommentsBlock({ item }: { item: Item }) {
-  const [open, setOpen] = useState(false);
-  const [loading, setLoading] = useState(false);
-  const [list, setList] = useState<Array<{ id: number; name: string; body: string; created_at: string }>>([]);
-  const [name, setName] = useState("");
-  const [body, setBody] = useState("");
-  const [msg, setMsg] = useState<string | null>(null);
-
-  const load = async () => {
-    setLoading(true);
-    try {
-      const data = await getCommentsWithFallback(item.link);
-      setList(Array.isArray(data?.comments) ? data.comments : []);
-      setMsg(null);
-    } catch {
-      setMsg("Failed to load comments");
-    } finally {
-      setLoading(false);
-    }
-  };
-
-  useEffect(() => { if (open) load(); }, [open]);
-
-  const submit = async () => {
-    if (!body.trim()) return;
-    setLoading(true);
-    try {
-      await postJSONWithFallback(
-        "/api/MediaRoom/comments",
-        "/api/Newsfeed/comments",
-        { link: item.link, title: item.title, name, body }
-      );
-      setBody("");
-      setMsg("Submitted for review.");
-      await load();
-    } catch {
-      setMsg("Failed to submit comment");
-    } finally {
-      setLoading(false);
-    }
-  };
-
-  return (
-    <div>
-      {!open ? (
-        <button onClick={() => setOpen(true)} style={btn()}>
-          Comments {list.length ? `(${list.length})` : ""}
-        </button>
-      ) : (
-        <div style={{ border: "1px solid #222", borderRadius: 10, padding: 10, marginTop: 6, maxWidth: 800 }}>
-          <div style={{ display: "flex", justifyContent: "space-between", alignItems: "center", marginBottom: 6 }}>
-            <strong>Comments</strong>
-            <button onClick={() => setOpen(false)} style={btn()}>Close</button>
-          </div>
-
-          {loading ? <p style={{ opacity: 0.8 }}>Loading…</p> : list.length ? (
-            <ul style={{ listStyle: "none", padding: 0, display: "grid", gap: 8 }}>
-              {list.map((c) => (
-                <li key={c.id} style={{ border: "1px solid #222", borderRadius: 8, padding: 8 }}>
-                  <div style={{ fontSize: 12, opacity: 0.75, marginBottom: 4 }}>
-                    {c.name} · {new Date(c.created_at).toLocaleString()}
-                  </div>
-                  <div>{c.body}</div>
-                </li>
-              ))}
-            </ul>
-          ) : (
-            <p style={{ opacity: 0.8 }}>No comments yet.</p>
-          )}
-
-          <div style={{ marginTop: 10, display: "grid", gap: 6 }}>
-            <input value={name} onChange={(e) => setName(e.target.value)} placeholder="Name (optional)" style={{ border: "1px solid #222", borderRadius: 8, padding: "6px 10px", background: "transparent", color: "inherit" }} />
-            <textarea value={body} onChange={(e) => setBody(e.target.value)} placeholder="Add a comment…" rows={3} style={{ border: "1px solid #222", borderRadius: 8, padding: "6px 10px", background: "transparent", color: "inherit" }} />
-            <div style={{ display: "flex", gap: 8, alignItems: "center" }}>
-              <button onClick={submit} style={btn()}>Submit</button>
-              {msg ? <span style={{ fontSize: 12, opacity: 0.75 }}>{msg}</span> : null}
-            </div>
-          </div>
-        </div>
-      )}
-    </div>
-  );
 }
