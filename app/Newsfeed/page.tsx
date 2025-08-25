@@ -2,6 +2,14 @@
 
 import { useEffect, useMemo, useState } from "react";
 
+export const dynamic = "force-dynamic"; // keep
+const REFRESH_MS = 120_000; // 2 minutes — change to taste
+
+async function fetchJSON(url: string) {
+  const res = await fetch(url, { cache: "no-store" });
+  return res.json();
+}
+
 export const dynamic = "force-dynamic";
 
 type Item = { title: string; link: string; pubDate: string; source: string };
@@ -82,9 +90,7 @@ export default function Page() {
     <main style={{ maxWidth: 960, margin: "0 auto", padding: "24px 16px" }}>
       <h1 style={{ margin: 0, fontSize: 24 }}>Newsfeed</h1>
       <p style={{ marginTop: 8, opacity: 0.85 }}>
-        Headlines matched to your products from AFR, FT, WSJ, News Corp titles, NYT, Sky (UK & AU), ABC, and more. (Some links may be paywalled.)
-      </p>
-
+        
       {/* Filters */}
       <div style={{ display: "flex", gap: 12, margin: "12px 0 16px", flexWrap: "wrap" }}>
         <div style={{ display: "flex", gap: 8, flexWrap: "wrap" }}>
