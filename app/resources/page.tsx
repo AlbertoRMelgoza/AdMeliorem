@@ -1,19 +1,32 @@
 'use client'
+**Expected behaviours** — Respect, inclusion, zero tolerance for bullying/harassment.
 
 
-const policies = [
-{
-title: 'Psychosocial Risk Management Policy',
-filename: 'psychosocial-risk-policy.md',
-body: `# Psychosocial Risk Management Policy\n\n**Purpose** — Set commitments to eliminate or minimise psychosocial risks as far as reasonably practicable.\n\n**Scope** — All workers, contractors and visitors.\n\n**Principles** — Consultation, prevention-first, trauma‑informed response, confidentiality.\n\n**Roles & Responsibilities** — Officers, managers, workers, HSRs.\n\n**Risk Management** — Identify hazards (work design, environment, behaviours), assess risks, implement controls, verify effectiveness.\n\n**Reporting & Support** — No detriment for reporting; early access to support and adjustments.\n\n**Review** — Annual review or after any notifiable incident.\n`}
-,{
-title: 'Workplace Culture & Conduct Standard',
-filename: 'culture-conduct-standard.md',
-body: `# Workplace Culture & Conduct Standard\n\n**Expected behaviours** — Respect, inclusion, zero tolerance for bullying/harassment.\n\n**Leadership duties** — Model behaviours, act on early signals, ensure psychological safety.\n\n**Consultation** — Genuine and regular; workers can raise concerns without fear.\n\n**Measurement** — Track lead/lag indicators: workload, role clarity, EAP usage, time off, claims.\n`}
+**Leadership duties** — Model behaviours, act on early signals, ensure psychological safety.
+
+
+**Consultation** — Genuine and regular; workers can raise concerns without fear.
+
+
+**Measurement** — Track lead/lag indicators: workload, role clarity, EAP usage, time off, claims.
+`}
 ,{
 title: 'Incident Response & Support Procedure',
 filename: 'incident-response-procedure.md',
-body: `# Incident Response & Support Procedure\n\n**When to activate** — Any psychosocial hazard exposure or complaint.\n\n**Immediate actions** — Ensure safety, listen, document, offer supports (EAP, medical, adjustments).\n\n**Investigation** — Impartial, timely, respect confidentiality.\n\n**Follow-up** — Monitor harm, test control effectiveness, close the loop with workers.\n`}
+body: `# Incident Response & Support Procedure
+
+
+**When to activate** — Any psychosocial hazard exposure or complaint.
+
+
+**Immediate actions** — Ensure safety, listen, document, offer supports (EAP, medical, adjustments).
+
+
+**Investigation** — Impartial, timely, respect confidentiality.
+
+
+**Follow-up** — Monitor harm, test control effectiveness, close the loop with workers.
+`}
 ]
 
 
@@ -43,7 +56,7 @@ return (
 <main className="mx-auto max-w-5xl px-4 py-10 space-y-10">
 <section className="rounded-2xl border p-6 shadow-sm bg-white">
 <div className="flex items-center gap-3">
-<FileText className="h-6 w-6"/>
+<FileTextIcon className="h-6 w-6"/>
 <h1 className="text-2xl font-semibold">Resource Library</h1>
 </div>
 <p className="mt-2 text-muted-foreground">Access FAQs, ready-to-use policy templates, and official Codes of Practice. <span className="font-medium">Price:</span> {PRICE_AUD} (AUD)</p>
