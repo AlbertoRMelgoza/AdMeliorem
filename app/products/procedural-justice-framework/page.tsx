@@ -15,8 +15,10 @@ export default function PJFPage() {
     <main style={wrap}>
       <h1 style={{ marginTop: 0 }}>Procedural Justice Framework™</h1>
       <p>
-        The Procedural Justice Framework™ establishes fair, transparent and defensible complaint handling and
-        investigation processes that prevent escalation and contain liability.
+         When a psychosocial hazard or workplace incident arises, financial and reputational liability escalates fastest
+         where processes are weak or inconsistent. The Procedural Justice Framework™ closes this gap, establishing industry-best, regulator
+         ready protocols for managing incidents, so your organisation prevents escalation, demonstrates fairness, and protects against 
+         psychosocial risks or hazards. 
       </p>
 
       {/* Image lives at: AdMeliorem/public/Images/justice.jpg */}
