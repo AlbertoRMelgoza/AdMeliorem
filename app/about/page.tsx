@@ -81,8 +81,8 @@ export default function AboutPage() {
               control), and RCABH™ (risk control for aggression, bullying & harassment).
             </p>
             <p>
-              My commitment is simple, helping your corporation being proactive by: prevent harm, improve culture, and reduce liability with a
-              clear path from strategy to practice.
+              My commitment is simple, helping your corporation being proactive by: preventing individual harm, preventing culture risk to materialise, and reducing liability with a
+              clear path from risk management, compliance to succesful execution of strategy.
             </p>
 
             <p style={{ marginTop: 16 }}>
