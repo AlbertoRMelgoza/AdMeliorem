@@ -1,34 +1,37 @@
 "use client";
 
-import { useEffect, useMemo, useState } from "react";
+import { useEffect, useState } from "react";
 
 export const dynamic = "force-dynamic";
 
 type Item = { title: string; link: string; pubDate: string; source: string };
 type CountsMap = Record<string, { like: number; share: number }>;
 
-const TOPICS = [
-  "sexual harassment at work",
-  "bullying at work",
-  "aggression at work",
-  "harassment at work",
-  "toxic culture at work",
-  "culture at work",
-  "corporate culture",
-  "procedural justice",
-  "psychosocial risk management",
-  "mediation",
-  "negotiation",
-] as const;
-type Topic = (typeof TOPICS)[number] | "all";
-
 const YELLOW = { color: "#f1c40f", textDecoration: "underline" } as const;
 const REFRESH_MS = 120_000;
 
-function inferTopic(title: string): Topic {
-  const t = title.toLowerCase();
-  for (const key of TOPICS) if (t.includes(key.toLowerCase())) return key;
-  return "all";
+// STRICT topics you want (nothing else)
+const ALLOWED_PHRASES = [
+  "sexual harassment",
+  "workplace sexual harassment",
+  "sexual assault",
+  "workplace sexual assault",
+  "bullying at work",
+  "workplace bullying",
+  "workplace aggression",
+  "workplace misconduct",
+  "procedural justice",
+  "workplace harassment",
+  "toxic culture",
+  "toxic workplace",
+  "culture risk",
+  "corporate culture risk",
+  "toxic corporate culture",
+] as const;
+
+function isAllowed(title: string, source?: string) {
+  const t = (title + " " + (source || "")).toLowerCase();
+  return ALLOWED_PHRASES.some((p) => t.includes(p));
 }
 
 function useLocalLikes() {
@@ -43,8 +46,8 @@ function useLocalLikes() {
 
 async function fetchJSON(url: string, init?: RequestInit) {
   const res = await fetch(url, { cache: "no-store", ...init });
-  const ctype = res.headers.get("content-type") || "";
-  if (!ctype.includes("application/json")) throw new Error(await res.text());
+  const ct = res.headers.get("content-type") || "";
+  if (!ct.includes("application/json")) throw new Error(await res.text());
   return res.json();
 }
 
@@ -54,20 +57,19 @@ export default function Page() {
   const [loading, setLoading] = useState(true);
   const [apiError, setApiError] = useState<string | null>(null);
   const [updatedAt, setUpdatedAt] = useState<Date | null>(null);
-
-  const [topic, setTopic] = useState<Topic>("all");
-  const [source, setSource] = useState<string>("all");
   const { liked, toggle } = useLocalLikes();
 
-  // load headlines (poll) — still using /api/Newsfeed for now
+  // Load headlines (polling)
   useEffect(() => {
     let cancelled = false;
     const load = async () => {
       try {
         const data = await fetchJSON("/api/Newsfeed?ts=" + Date.now());
         if (!cancelled) {
-          const items = Array.isArray(data?.items) ? data.items : [];
-          setItems(items);
+          const raw = Array.isArray(data?.items) ? data.items : [];
+          // ⭐ Filter to ONLY the allowed topics
+          const next = raw.filter((it) => isAllowed(it.title, it.source));
+          setItems(next);
           setApiError(data?.error || null);
           setUpdatedAt(new Date());
         }
@@ -82,7 +84,7 @@ export default function Page() {
     return () => { cancelled = true; clearInterval(id); };
   }, []);
 
-  // load counts whenever items change
+  // Load like/share counts for the filtered items
   useEffect(() => {
     (async () => {
       if (!items.length) { setCounts({}); return; }
@@ -98,10 +100,6 @@ export default function Page() {
       }
     })();
   }, [items]);
-
-  const sources = useMemo(() => ["all", ...Array.from(new Set(items.map((i) => i.source))).sort()], [items]);
-  const enriched = useMemo(() => items.map((it) => ({ ...it, _topic: inferTopic(it.title) })), [items]);
-  const filtered = enriched.filter((i: any) => (topic === "all" || i._topic === topic) && (source === "all" || i.source === source));
 
   const handleToggleLike = async (it: Item) => {
     toggle(it.link); // optimistic UI
@@ -143,7 +141,7 @@ export default function Page() {
     <main style={{ maxWidth: 960, margin: "0 auto", padding: "24px 16px" }}>
       <h1 style={{ margin: 0, fontSize: 24 }}>MediaRoom</h1>
 
-      <div style={{ display: "flex", justifyContent: "space-between", alignItems: "center", margin: "8px 0 4px" }}>
+      <div style={{ display: "flex", justifyContent: "space-between", alignItems: "center", margin: "8px 0 12px" }}>
         <span style={{ fontSize: 12, opacity: 0.7 }}>
           {updatedAt ? `Updated ${updatedAt.toLocaleTimeString()}` : loading ? "Loading…" : "Updated just now"}
         </span>
@@ -155,46 +153,28 @@ export default function Page() {
         </button>
       </div>
 
-      {/* Filters */}
-      <div style={{ display: "flex", gap: 12, margin: "12px 0 16px", flexWrap: "wrap" }}>
-        <div style={{ display: "flex", gap: 8, flexWrap: "wrap" }}>
-          <span style={{ opacity: 0.75, fontSize: 12 }}>Topic:</span>
-          <button onClick={() => setTopic("all")} style={btn(topic === "all")}>All</button>
-          {TOPICS.map((t) => (
-            <button key={t} onClick={() => setTopic(t)} style={btn(topic === t)}>{shortLabel(t)}</button>
-          ))}
-        </div>
-        <div style={{ display: "flex", gap: 8, flexWrap: "wrap" }}>
-          <span style={{ opacity: 0.75, fontSize: 12 }}>Source:</span>
-          {sources.map((s) => (
-            <button key={s} onClick={() => setSource(s)} style={btn(source === s)}>{s}</button>
-          ))}
-        </div>
-      </div>
-
       {loading ? (
         <p style={{ opacity: 0.8 }}>Loading…</p>
       ) : apiError ? (
         <p style={{ opacity: 0.8 }}>No results yet. {apiError}</p>
-      ) : !filtered.length ? (
-        <p style={{ opacity: 0.8 }}>No results. Try a different filter.</p>
+      ) : !items.length ? (
+        <p style={{ opacity: 0.8 }}>No results.</p>
       ) : (
         <ul style={{ padding: 0, listStyle: "none", display: "grid", gap: 12 }}>
-          {filtered.map((it: any, i: number) => {
+          {items.map((it, i) => {
             const c = counts[it.link] || { like: 0, share: 0 };
             return (
               <li key={`${it.link}-${i}`} style={{ border: "1px solid #222", borderRadius: 12, padding: 12 }}>
                 <a href={it.link} target="_blank" rel="noopener noreferrer" style={YELLOW}>{it.title}</a>
                 <div style={{ fontSize: 12, opacity: 0.75, marginTop: 6 }}>
                   {new Date(it.pubDate).toLocaleString()} · {it.source}
-                  {it._topic !== "all" ? <> · {shortLabel(it._topic as Topic)}</> : null}
                 </div>
 
                 <div style={{ display: "flex", gap: 10, alignItems: "center", marginTop: 10, flexWrap: "wrap" }}>
-                  <button onClick={() => handleToggleLike(it)} style={btn(false)} aria-pressed={liked(it.link)}>
+                  <button onClick={() => handleToggleLike(it)} style={btn()} aria-pressed={liked(it.link)}>
                     {liked(it.link) ? "Liked" : "Like"} · {c.like}
                   </button>
-                  <button onClick={() => handleShare(it)} style={btn(false)}>
+                  <button onClick={() => handleShare(it)} style={btn()}>
                     Share · {c.share}
                   </button>
                   <CommentsBlock item={it} />
@@ -208,24 +188,8 @@ export default function Page() {
   );
 }
 
-function btn(active: boolean): React.CSSProperties {
-  return { border: "1px solid #222", borderRadius: 10, padding: "6px 10px", background: active ? "#111" : "transparent", color: "inherit", cursor: "pointer" };
-}
-function shortLabel(t: Topic) {
-  switch (t) {
-    case "sexual harassment at work": return "Sexual harassment";
-    case "bullying at work": return "Bullying";
-    case "aggression at work": return "Aggression";
-    case "harassment at work": return "Harassment";
-    case "toxic culture at work": return "Toxic culture";
-    case "culture at work": return "Culture";
-    case "corporate culture": return "Corporate culture";
-    case "procedural justice": return "Procedural justice";
-    case "psychosocial risk management": return "Psychosocial risk";
-    case "mediation": return "Mediation";
-    case "negotiation": return "Negotiation";
-    default: return "All";
-  }
+function btn(): React.CSSProperties {
+  return { border: "1px solid #222", borderRadius: 10, padding: "6px 10px", background: "transparent", color: "inherit", cursor: "pointer" };
 }
 
 function CommentsBlock({ item }: { item: Item }) {
@@ -262,7 +226,7 @@ function CommentsBlock({ item }: { item: Item }) {
       });
       setBody("");
       setMsg("Submitted for review.");
-      await load(); // reload approved (new one is pending)
+      await load();
     } catch {
       setMsg("Failed to submit comment");
     } finally {
@@ -273,14 +237,14 @@ function CommentsBlock({ item }: { item: Item }) {
   return (
     <div>
       {!open ? (
-        <button onClick={() => setOpen(true)} style={btn(false)}>
+        <button onClick={() => setOpen(true)} style={btn()}>
           Comments {list.length ? `(${list.length})` : ""}
         </button>
       ) : (
         <div style={{ border: "1px solid #222", borderRadius: 10, padding: 10, marginTop: 6, maxWidth: 800 }}>
           <div style={{ display: "flex", justifyContent: "space-between", alignItems: "center", marginBottom: 6 }}>
             <strong>Comments</strong>
-            <button onClick={() => setOpen(false)} style={btn(false)}>Close</button>
+            <button onClick={() => setOpen(false)} style={btn()}>Close</button>
           </div>
 
           {loading ? <p style={{ opacity: 0.8 }}>Loading…</p> : list.length ? (
@@ -302,7 +266,7 @@ function CommentsBlock({ item }: { item: Item }) {
             <input value={name} onChange={(e) => setName(e.target.value)} placeholder="Name (optional)" style={{ border: "1px solid #222", borderRadius: 8, padding: "6px 10px", background: "transparent", color: "inherit" }} />
             <textarea value={body} onChange={(e) => setBody(e.target.value)} placeholder="Add a comment…" rows={3} style={{ border: "1px solid #222", borderRadius: 8, padding: "6px 10px", background: "transparent", color: "inherit" }} />
             <div style={{ display: "flex", gap: 8, alignItems: "center" }}>
-              <button onClick={submit} style={btn(false)}>Submit</button>
+              <button onClick={submit} style={btn()}>Submit</button>
               {msg ? <span style={{ fontSize: 12, opacity: 0.75 }}>{msg}</span> : null}
             </div>
           </div>
