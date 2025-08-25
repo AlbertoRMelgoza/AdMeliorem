@@ -71,7 +71,7 @@ export default function Page() {
 
       {/* Products & Services */}
       <section>
-        <h2 style={h2}>My Products &amp; Services</h2>
+        <h2 style={h2}>My Products </h2>
 
         <h3 style={{ marginTop: 16 }}>Flagship Products (™)</h3>
         <div style={{ display: "grid", gridTemplateColumns: "repeat(2, 1fr)", gap: 16 }}>
