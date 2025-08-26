@@ -7,16 +7,16 @@ export const metadata = {
     "Neutral, confidential facilitation to resolve disputes and protect working relationships.",
 };
 
-<p style={{ margin: "0 0 8px 0" }}>
-  <a href="/products" style={{ color: "#f1c40f", textDecoration: "none", fontWeight: 700 }}>
-    ← Back to Products
-  </a>
-</p>
-
 export default function MediationPage() {
   const wrap: CSSProperties = { maxWidth: 1000, margin: "28px auto", padding: "0 16px", lineHeight: 1.65 };
   const card: CSSProperties = { background: "#111", border: "1px solid #222", borderRadius: 12, padding: 16, marginTop: 24 };
 
+  <p style={{ margin: "0 0 8px 0" }}>
+  <a href="/products" style={{ color: "#f1c40f", textDecoration: "none", fontWeight: 700 }}>
+    ← Back to Products
+  </a>
+</p>
+  
   return (
     <main style={wrap}>
       <h1 style={{ marginTop: 0 }}>Mediation Services</h1>
