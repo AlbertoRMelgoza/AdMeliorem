@@ -4,27 +4,40 @@
 import { useState } from "react";
 
 type Props = {
-  name: string;
+  name: string;           // product/service name for Stripe
   price: number;          // AUD amount to charge (e.g., 750)
-  quantity?: number;
+  quantity?: number;      // default 1
+  termsUrl?: string;      // where your terms live (default: /terms)
+  termsVersion?: string;  // bump when you update terms (stored in Stripe metadata)
   children?: React.ReactNode;
 };
 
-export default function BuyNow({ name, price, quantity = 1, children }: Props) {
+export default function BuyNow({
+  name,
+  price,
+  quantity = 1,
+  termsUrl = "/terms",
+  termsVersion = "1.0",
+  children,
+}: Props) {
   const [open, setOpen] = useState(false);
   const [busy, setBusy] = useState(false);
+  const [agree, setAgree] = useState(false);
   const [error, setError] = useState<string | null>(null);
 
   async function startCheckout() {
     try {
+      if (!agree) return;
       setBusy(true);
       setError(null);
-      // Always use ad-hoc price data (no Price IDs)
+
       const res = await fetch("/api/create-checkout-session", {
         method: "POST",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify({
-          items: [{ name, price, quantity }],
+          items: [{ name, price, quantity }], // always ad-hoc amount
+          agreed: true,
+          termsVersion,
         }),
       });
 
@@ -61,7 +74,6 @@ export default function BuyNow({ name, price, quantity = 1, children }: Props) {
         </div>
       )}
 
-      {/* Very simple terms modal */}
       {open && (
         <div
           role="dialog"
@@ -77,8 +89,8 @@ export default function BuyNow({ name, price, quantity = 1, children }: Props) {
         >
           <div
             style={{
-              maxWidth: 700,
-              width: "90%",
+              maxWidth: 720,
+              width: "92%",
               background: "#111",
               border: "1px solid #333",
               borderRadius: 12,
@@ -87,23 +99,36 @@ export default function BuyNow({ name, price, quantity = 1, children }: Props) {
             }}
           >
             <h3 style={{ marginTop: 0 }}>Terms &amp; Conditions</h3>
-            <p style={{ opacity: 0.9, marginTop: 8 }}>
-              By clicking <strong>Agree &amp; Pay</strong>, you confirm you’ve
-              read and agree to the{" "}
+
+            <p style={{ opacity: 0.9 }}>
+              Please review our{" "}
               <a
-                href="/terms"
+                href={termsUrl}
                 target="_blank"
                 rel="noreferrer"
                 style={{ color: "#f1c40f", fontWeight: 700 }}
               >
                 Terms and Conditions
-              </a>
-              .
+              </a>{" "}
+              before proceeding.
             </p>
 
-            <div style={{ display: "flex", gap: 8, marginTop: 12 }}>
+            <label style={{ display: "flex", gap: 10, alignItems: "flex-start", marginTop: 8 }}>
+              <input
+                type="checkbox"
+                checked={agree}
+                onChange={(e) => setAgree(e.target.checked)}
+                style={{ marginTop: 4 }}
+              />
+              <span>
+                I have read and agree to the Terms and Conditions.
+              </span>
+            </label>
+
+            <div style={{ display: "flex", gap: 8, marginTop: 16 }}>
               <button
                 onClick={() => setOpen(false)}
+                disabled={busy}
                 style={{
                   border: "1px solid #444",
                   background: "transparent",
@@ -113,22 +138,23 @@ export default function BuyNow({ name, price, quantity = 1, children }: Props) {
                   fontWeight: 600,
                   cursor: "pointer",
                 }}
-                disabled={busy}
               >
                 Cancel
               </button>
+
               <button
                 onClick={startCheckout}
+                disabled={!agree || busy}
                 style={{
-                  background: "#f1c40f",
+                  background: agree ? "#f1c40f" : "#6c6c6c",
                   color: "#000",
                   padding: "10px 18px",
                   borderRadius: 6,
                   fontWeight: 700,
                   border: "none",
-                  cursor: "pointer",
+                  cursor: !agree || busy ? "not-allowed" : "pointer",
                 }}
-                disabled={busy}
+                aria-disabled={!agree || busy}
               >
                 {busy ? "Processing…" : "Agree & Pay"}
               </button>
