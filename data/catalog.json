@@ -1,5 +1,321 @@
-# from your repo root
-cp /path/to/download/catalog.json data/catalog.json
-git add data/catalog.json
-git commit -m "Fix catalog JSON"
-git push
+[
+  {
+    "productId": "prod_SvfapSt6D63btl",
+    "priceId": "price_1RzoFcI3l2fmoUA7UWsg9Y9U",
+    "name": "Negotiation",
+    "description": "Clarifying leverage, pressure-test scenarios, rehearse critical moves, and structure defensible agreements aligned to your objectives",
+    "currency": "AUD",
+    "priceAUD": 30.0,
+    "interval": "month",
+    "intervalCount": 1,
+    "url": null
+  },
+  {
+    "productId": "prod_SvfZZih3VXIvGt",
+    "priceId": "price_1RzoDyI3l2fmoUA7HNXfkrHH",
+    "name": "Mediation",
+    "description": "Providing assertive mediation services to minimise liability",
+    "currency": "AUD",
+    "priceAUD": 30.0,
+    "interval": "month",
+    "intervalCount": 1,
+    "url": null
+  },
+  {
+    "productId": "prod_SvfWu1kgKRySIY",
+    "priceId": "price_1RzoBcI3l2fmoUA7t3yt4YdI",
+    "name": "Procedural Justice Framework\u2122",
+    "description": "Allowing you minimise liability through a Procedural Justice Framework\u2122 that works  ",
+    "currency": "AUD",
+    "priceAUD": 40.0,
+    "interval": "month",
+    "intervalCount": 1,
+    "url": null
+  },
+  {
+    "productId": "prod_SvfRZ2LQ7bOB5j",
+    "priceId": "price_1Rzo6PI3l2fmoUA7DukRSODM",
+    "name": "RCABH\u2122 \u2014 Risk Control Aggression, Bullying & Harassment workshop",
+    "description": "Price is per participant",
+    "currency": "AUD",
+    "priceAUD": 7.5,
+    "interval": "month",
+    "intervalCount": 1,
+    "url": null
+  },
+  {
+    "productId": "prod_SvfQCEx051Y3v7",
+    "priceId": "price_1Rzo5aI3l2fmoUA7VuzKGqcr",
+    "name": "SHSARC\u2122 Sexual harassment & Sexual Assault Risk Control Workshop",
+    "description": "Price is per participant ",
+    "currency": "AUD",
+    "priceAUD": 7.5,
+    "interval": "month",
+    "intervalCount": 1,
+    "url": null
+  },
+  {
+    "productId": "prod_SvfBXpQlRrBaqP",
+    "priceId": "price_1RznrPI3l2fmoUA7EODLJphs",
+    "name": "Culture Risk Indicators (Risk Culture)",
+    "description": "Culture Risk Indicators for better decision making",
+    "currency": "AUD",
+    "priceAUD": 7.5,
+    "interval": "month",
+    "intervalCount": 1,
+    "url": null
+  },
+  {
+    "productId": "prod_SvfABRMq74RjNN",
+    "priceId": "price_1RznqYI3l2fmoUA7mXcIfjIi",
+    "name": "Qualitative interventions",
+    "description": "Interviews and Focus Groups to further understand culture risk ",
+    "currency": "AUD",
+    "priceAUD": 7.5,
+    "interval": "month",
+    "intervalCount": 1,
+    "url": null
+  },
+  {
+    "productId": "prod_Svf67pt0McoJC9",
+    "priceId": "price_1RznmGI3l2fmoUA7Nu5lV2XP",
+    "name": "Review and development of Code of Ethics",
+    "description": "Code of Ethics review and development ",
+    "currency": "AUD",
+    "priceAUD": 7.5,
+    "interval": "month",
+    "intervalCount": 1,
+    "url": null
+  },
+  {
+    "productId": "prod_Svf5yjHlYNsder",
+    "priceId": "price_1RznlFI3l2fmoUA7DJ3CAuXh",
+    "name": "Review and development of Code of Conduct",
+    "description": "Code of Conduct review and development ",
+    "currency": "AUD",
+    "priceAUD": 7.5,
+    "interval": "month",
+    "intervalCount": 1,
+    "url": null
+  },
+  {
+    "productId": "prod_Svf41DPLlU8Rny",
+    "priceId": "price_1RznkTI3l2fmoUA7I5h9eU62",
+    "name": "Overt Covert Aggression Questionnaire OCAS",
+    "description": "Allows to understand overt and covert wrongful behaviour at work key for bullying, harassment and aggression awareness",
+    "currency": "AUD",
+    "priceAUD": 22.5,
+    "interval": "month",
+    "intervalCount": 6,
+    "url": null
+  },
+  {
+    "productId": "prod_Svf2cgHZVZpqE7",
+    "priceId": "price_1RzniXI3l2fmoUA7zRbc9Qb3",
+    "name": "Culture Risk Pulse Survey: Decision Making",
+    "description": "Identifying risks associated with decision making at your workplace",
+    "currency": "AUD",
+    "priceAUD": 3.0,
+    "interval": "month",
+    "intervalCount": 1,
+    "url": null
+  },
+  {
+    "productId": "prod_Svf26iEtp0PiNp",
+    "priceId": "price_1RznhxI3l2fmoUA7c5BAYrFC",
+    "name": "Culture Risk Pulse Survey: Emotion",
+    "description": "Identifying risks associated with Emotion at your workplace",
+    "currency": "AUD",
+    "priceAUD": 3.0,
+    "interval": "month",
+    "intervalCount": 1,
+    "url": null
+  },
+  {
+    "productId": "prod_Svf1Ma69nlubEc",
+    "priceId": "price_1RznhMI3l2fmoUA76iIYcIRI",
+    "name": "Culture Risk Pulse Survey: Attitudes",
+    "description": "Identifying risks associated with attitudes at your workplace",
+    "currency": "AUD",
+    "priceAUD": 3.0,
+    "interval": "month",
+    "intervalCount": 1,
+    "url": null
+  },
+  {
+    "productId": "prod_Svf0oZ7hVN1F45",
+    "priceId": "price_1Rzng8I3l2fmoUA7oDEJpqo1",
+    "name": "Culture Risk Pulse Survey: Beliefs",
+    "description": "Identifying risks associated with beliefs at your workplace",
+    "currency": "AUD",
+    "priceAUD": 3.0,
+    "interval": "month",
+    "intervalCount": 1,
+    "url": null
+  },
+  {
+    "productId": "prod_Svez50IkC9zVDx",
+    "priceId": "price_1RznfFI3l2fmoUA7MPNusrP1",
+    "name": "Culture Risk Pulse Survey: Values in Practice",
+    "description": "Identifying risks associated with values at your workplace",
+    "currency": "AUD",
+    "priceAUD": 3.0,
+    "interval": "month",
+    "intervalCount": 1,
+    "url": null
+  },
+  {
+    "productId": "prod_SvexXBboIxtxzu",
+    "priceId": "price_1RzndyI3l2fmoUA72sYIlXgz",
+    "name": "Culture Risk Pulse Survey: Conflict of Interest",
+    "description": "Identifying risks associated with conflict of interest at your workplace",
+    "currency": "AUD",
+    "priceAUD": 3.0,
+    "interval": "month",
+    "intervalCount": 1,
+    "url": null
+  },
+  {
+    "productId": "prod_SvewG3c0am7t5J",
+    "priceId": "price_1RzncxI3l2fmoUA7nWfaVlek",
+    "name": "Culture Risk Pulse Survey: Speak-Up Tolerance",
+    "description": "Identifying risks associated with speaking up tolerance at your workplace",
+    "currency": "AUD",
+    "priceAUD": 3.0,
+    "interval": "month",
+    "intervalCount": 1,
+    "url": null
+  },
+  {
+    "productId": "prod_SvevuMpPmB1SN9",
+    "priceId": "price_1RznbrI3l2fmoUA7gQmpexZ4",
+    "name": "Culture Risk Pulse Survey: Power Imbalances",
+    "description": "Identifying risks associated with power imbalances at your workplace ",
+    "currency": "AUD",
+    "priceAUD": 3.0,
+    "interval": "month",
+    "intervalCount": 1,
+    "url": null
+  },
+  {
+    "productId": "prod_SveuWKptSN7JgQ",
+    "priceId": "price_1RznaXI3l2fmoUA7nIKxOU2l",
+    "name": "Culture Pulse Risk Survey: Female Dominated Dynamics",
+    "description": "Identifying risks associated with a female dominated workplace ",
+    "currency": "AUD",
+    "priceAUD": 3.0,
+    "interval": "month",
+    "intervalCount": 1,
+    "url": null
+  },
+  {
+    "productId": "prod_SvetfGjVCNr0cV",
+    "priceId": "price_1RznZGI3l2fmoUA75rwVreFS",
+    "name": "Culture Risk Pulse Survey: Male dominated dynamics",
+    "description": "Identifying risks associated with a male dominated workplace ",
+    "currency": "AUD",
+    "priceAUD": 3.0,
+    "interval": "month",
+    "intervalCount": 1,
+    "url": null
+  },
+  {
+    "productId": "prod_Svere7GFYNgHg4",
+    "priceId": "price_1RznXLI3l2fmoUA749Q98TJ5",
+    "name": "Culture Risk Pulse Surveys",
+    "description": "This subscription allows your corporation to identify toxic culture aspects happening on a yearly basis.",
+    "currency": "AUD",
+    "priceAUD": 30.0,
+    "interval": "year",
+    "intervalCount": 1,
+    "url": null
+  },
+  {
+    "productId": "prod_Svep4mUXhziLVv",
+    "priceId": "price_1RznVmI3l2fmoUA7z29zhVVa",
+    "name": "SHEQ: Sexual Coercion",
+    "description": "Allowing your corporation to identify sexual harassment risk through awareness of sexual coercion",
+    "currency": "AUD",
+    "priceAUD": 7.5,
+    "interval": "month",
+    "intervalCount": 1,
+    "url": null
+  },
+  {
+    "productId": "prod_SveoYaa942AAjg",
+    "priceId": "price_1RznUeI3l2fmoUA7D00gp3gr",
+    "name": "SHEQ: Unwanted sexual attention",
+    "description": "Allows your corporation to understand sexual harassment risk from an unwanted sexual attention view",
+    "currency": "AUD",
+    "priceAUD": 7.5,
+    "interval": "month",
+    "intervalCount": 1,
+    "url": null
+  },
+  {
+    "productId": "prod_SvenvGNC0W9smA",
+    "priceId": "price_1RznTbI3l2fmoUA7v8maKr4P",
+    "name": "SHEQ: Sexual Hostility",
+    "description": "Allows to assess sexual harassment risk at you corporation through sexual hostility ",
+    "currency": "AUD",
+    "priceAUD": 7.5,
+    "interval": "month",
+    "intervalCount": 1,
+    "url": null
+  },
+  {
+    "productId": "prod_Svelbou1y69BYQ",
+    "priceId": "price_1RznRwI3l2fmoUA79i4u47MP",
+    "name": "SHEQ: Gender Harassment/Sexist Hostility",
+    "description": "Allowing to measure risks associated with gender harassment/sexist hostility",
+    "currency": "AUD",
+    "priceAUD": 7.5,
+    "interval": "month",
+    "intervalCount": 1,
+    "url": null
+  },
+  {
+    "productId": "prod_SvecFyPjn5zGwe",
+    "priceId": "price_1RznJQI3l2fmoUA78mNN9A2M",
+    "name": "SHEQ (Sexual Harassment Experiences Questionnaire)",
+    "description": "Allowing your corporation to identify risks associated with sexual harassment in your structure. ",
+    "currency": "AUD",
+    "priceAUD": 30.0,
+    "interval": "year",
+    "intervalCount": 1,
+    "url": null
+  },
+  {
+    "productId": "prod_SveKGyKIO9KWvV",
+    "priceId": "price_1Rzn1kI3l2fmoUA78dSJgaW4",
+    "name": "COPSOQ: Social Capital",
+    "description": "This module allows your business to be aware of the psychosocial environment associated with Social Capital ",
+    "currency": "AUD",
+    "priceAUD": 7.5,
+    "interval": "month",
+    "intervalCount": 1,
+    "url": null
+  },
+  {
+    "productId": "prod_SveJ5OCrTGJnLX",
+    "priceId": "price_1Rzn0bI3l2fmoUA7tYh3P4Zo",
+    "name": "COPSOQ: Work-Individual Interface",
+    "description": "This module allows your business to be aware of the environment associated with Work-Individual Interface",
+    "currency": "AUD",
+    "priceAUD": 7.5,
+    "interval": "month",
+    "intervalCount": 1,
+    "url": null
+  },
+  {
+    "productId": "prod_SveHNte4Qfj7x3",
+    "priceId": "price_1Rzmz0I3l2fmoUA7I8pwx1Pg",
+    "name": "COPSOQ: Interpersonal Relations & Leaderships",
+    "description": "This module allows to measure the psychosocial safe environment related with Interpersonal Relations & Leadership ",
+    "currency": "AUD",
+    "priceAUD": 7.5,
+    "interval": "month",
+    "intervalCount": 1,
+    "url": null
+  }
+]
