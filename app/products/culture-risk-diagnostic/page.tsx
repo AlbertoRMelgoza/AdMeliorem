@@ -1,6 +1,41 @@
 import Link from "next/link";
 import type { CSSProperties } from "react";
 import { SUBPRODUCTS } from "./subproducts";
+import BuyNow from "../../../components/BuyNow";
+
+type CatalogItem = { name?: string; priceId?: string };
+
+async function getCatalog(): Promise<CatalogItem[]> {
+  const mod = await import("../../../data/catalog.json");
+  return (mod as any).default as CatalogItem[];
+}
+
+// Display-only price labels per subproduct
+const PRICE_LABEL_BY_SLUG: Record<string, string> = {
+  copsoq: "A$ 3,750.00 — annual subscription",
+  sheq: "A$ 3,000.00 — annual subscription",
+  "culture-pulse-surveys": "A$ 3,000.00 — annual subscription",
+  "qualitative-interventions": "A$ 750.00 — per session (1 hour)",
+  "code-of-conduct": "A$ 750.00 — per review",
+  "code-of-ethics": "A$ 750.00 — per review",
+  ocas: "A$ 2,500.00 — per engagement",
+  wfbs: "A$ 2,500.00 — per engagement",
+  // (no public price provided)
+  "culture-risk-indicators": "Contact for quote",
+};
+
+// Keywords to find Stripe Price IDs in your catalog.json
+const PRICE_KEYWORD_BY_SLUG: Record<string, string> = {
+  copsoq: "copsoq subscription",
+  sheq: "sheq subscription",
+  "culture-pulse-surveys": "pulse subscription",
+  "qualitative-interventions": "qualitative interventions",
+  "code-of-conduct": "code of conduct",
+  "code-of-ethics": "code of ethics",
+  ocas: "ocas",
+  wfbs: "wfbs",
+  "culture-risk-indicators": "culture risk indicators",
+};
 
 export const metadata = {
   title: "Culture Risk Diagnostic™ — Ad Meliorem",
@@ -8,7 +43,9 @@ export const metadata = {
     "A forensic cultural assessment with leading indicators, risk scores and evidence of due diligence, with the intention to minimise financial and reputational liability for your business.",
 };
 
-export default function CRDPage() {
+export default async function CRDPage() {
+  const catalog = await getCatalog();
+
   const wrap: CSSProperties = { maxWidth: 1000, margin: "28px auto", padding: "0 16px", lineHeight: 1.65 };
   const card: CSSProperties = { background: "#111", border: "1px solid #222", borderRadius: 12, padding: 16, marginTop: 24 };
 
@@ -20,7 +57,7 @@ export default function CRDPage() {
   };
 
   const tile: CSSProperties = {
-    background: "#f1c40f", // yellow
+    background: "#f1c40f",
     color: "#000",
     border: "1px solid #f1c40f",
     borderRadius: 12,
@@ -31,7 +68,15 @@ export default function CRDPage() {
   };
 
   const titleStyle: CSSProperties = { margin: 0, fontSize: 16, lineHeight: 1.35 };
-  const shortStyle: CSSProperties = { margin: "6px 0 0 0", fontSize: 13, opacity: 0.9, fontWeight: 500 };
+  const shortStyle: CSSProperties = { margin: "6px 0 8px 0", fontSize: 13, opacity: 0.9, fontWeight: 500 };
+  const priceStyle: CSSProperties = { margin: 0, fontSize: 14, fontWeight: 700 };
+
+  const priceIdForSlug = (slug: string): string | null => {
+    const kw = PRICE_KEYWORD_BY_SLUG[slug];
+    if (!kw) return null;
+    const hit = catalog.find((it) => it?.name?.toLowerCase().includes(kw.toLowerCase()));
+    return hit?.priceId ?? null;
+  };
 
   return (
     <main style={wrap}>
@@ -41,16 +86,47 @@ export default function CRDPage() {
         scores and due-diligence evidence.
       </p>
 
-      {/* Subproducts grid (NO IMAGES) */}
+      {/* Subproducts grid WITH prices and Buy buttons when priceId is available */}
       <section style={card}>
-        <h2 style={{ marginTop: 0 }}>Subproducts </h2>
+        <h2 style={{ marginTop: 0 }}>Subproducts</h2>
         <div style={grid}>
-          {SUBPRODUCTS.map((sp) => (
-            <Link key={sp.slug} href={`/products/culture-risk-diagnostic/${sp.slug}`} style={tile}>
-              <p style={titleStyle}>{sp.title}</p>
-              <p style={shortStyle}>{sp.short}</p>
-            </Link>
-          ))}
+          {SUBPRODUCTS.map((sp) => {
+            const label = PRICE_LABEL_BY_SLUG[sp.slug];
+            const priceId = priceIdForSlug(sp.slug);
+
+            return (
+              <div key={sp.slug} style={{ display: "flex", flexDirection: "column", gap: 8 }}>
+                <Link href={`/products/culture-risk-diagnostic/${sp.slug}`} style={tile}>
+                  <p style={titleStyle}>{sp.title}</p>
+                  <p style={shortStyle}>{sp.short}</p>
+                  {label ? <p style={priceStyle}>{label}</p> : null}
+                </Link>
+
+                {priceId ? (
+                  <div>
+                    <BuyNow priceId={priceId} name={sp.title} price={0}>
+                      Buy Now
+                    </BuyNow>
+                  </div>
+                ) : (
+                  <div>
+                    <a
+                      href="/contact"
+                      style={{
+                        border: "1px solid #444",
+                        padding: "8px 12px",
+                        borderRadius: 8,
+                        color: "#fff",
+                        textDecoration: "none",
+                      }}
+                    >
+                      Enquire / Request invoice
+                    </a>
+                  </div>
+                )}
+              </div>
+            );
+          })}
         </div>
       </section>
 
