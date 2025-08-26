@@ -29,13 +29,7 @@ export default function MediationPage() {
           style={{ borderRadius: 12 }}
         />
       </div>
-
-  <p style={{ margin: "0 0 8px 0" }}>
-  <a href="/products" style={{ color: "#f1c40f", textDecoration: "none", fontWeight: 700 }}>
-    ← Back to Products
-      </a>
-    </p>
-      
+    
       <section style={card}>
         <h2 style={{ marginTop: 0 }}>When to use</h2>
         <ul>
@@ -59,6 +53,12 @@ export default function MediationPage() {
             Enquire about mediation →
           </a>
         </p>
+     
+      <p style={{ margin: "0 0 8px 0" }}>
+  <a href="/products" style={{ color: "#f1c40f", textDecoration: "none", fontWeight: 700 }}>
+    ← Back to Products
+      </a>
+    </p>
       </section>
     </main>
   );
