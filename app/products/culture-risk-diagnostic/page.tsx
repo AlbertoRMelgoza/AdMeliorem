@@ -129,6 +129,13 @@ export default function CRDPage() {
   return (
     <main style={wrap}>
       <h1 style={{ marginTop: 0 }}>Culture Risk Diagnostic™</h1>
+
+      <p style={{ margin: "0 0 8px 0" }}>
+  <a href="/products" style={{ color: "#f1c40f", textDecoration: "none", fontWeight: 700 }}>
+    ← Back to Products
+  </a>
+</p>
+
       <p>
         The Culture Risk Diagnostic™ provides leading indicators, risk scores and due-diligence evidence. Choose a
         subproduct to see modules and details.
