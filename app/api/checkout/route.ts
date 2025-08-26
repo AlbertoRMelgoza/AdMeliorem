@@ -1,5 +1,5 @@
 import { NextResponse } from "next/server";
-import { stripe } from "../../lib/stripe"; // NOTE: two dots is correct path
+import stripe from "../../lib/stripe"; // ← correct path + default import
 
 // Minimal in-file product list (in cents). We'll expand after testing.
 const PRODUCTS: Record<string, { name: string; unitAmount: number }> = {
