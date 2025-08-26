@@ -1,10 +1,9 @@
 import Stripe from "stripe";
 
-const key = process.env.STRIPE_SECRET_KEY;
-if (!key) {
-  throw new Error("Missing STRIPE_SECRET_KEY env var");
+if (!process.env.STRIPE_SECRET_KEY) {
+  throw new Error("STRIPE_SECRET_KEY is missing");
 }
 
-export const stripe = new Stripe(key, {
-  apiVersion: "2023-10-16", // ← match the version your Stripe SDK expects
+export const stripe = new Stripe(process.env.STRIPE_SECRET_KEY, {
+  apiVersion: "2024-06-20",
 });
