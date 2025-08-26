@@ -1,57 +1,14 @@
 import Link from "next/link";
 import type { CSSProperties } from "react";
-import BuyButton from "./BuyButton";
-import { getSubSubproduct, SUBSUB_BY_PARENT, type SubSubproduct } from "../../subsubproducts";
+import BuyButton from "../../BuyButton"; // ← uses the Terms modal
+import { getSubSubproduct, SUBSUBPRODUCTS } from "../../subsubproducts";
 
-// Display labels
-const MODULE_PRICE_LABEL: Record<SubSubproduct["parent"], string> = {
-  copsoq: "A$ 750.00 — per module",
-  sheq: "A$ 750.00 — per module",
-  "culture-pulse-surveys": "A$ 300.00 — per module",
-};
-
-// Fallback amounts in AUD used if no Stripe priceId exists yet
-const FALLBACK_PRICE_BY_PARENT: Record<SubSubproduct["parent"], number> = {
-  copsoq: 750,
-  sheq: 750,
-  "culture-pulse-surveys": 300,
-};
-
-// Optional: fill these when you create Stripe Prices for each module
-const PRICE_ID_BY_MODULE: Record<string, string | undefined> = {
-  // COPSOQ
-  "copsoq-demands-at-work": undefined,
-  "copsoq-work-organisation-job-content": undefined,
-  "copsoq-interpersonal-relations-leadership": undefined,
-  "copsoq-work-individual-interface": undefined,
-  "copsoq-social-capital": undefined,
-  // SHEQ
-  "sheq-gender-harassment-sexist-hostility": undefined,
-  "sheq-sexual-hostility": undefined,
-  "sheq-unwanted-sexual-attention": undefined,
-  "sheq-sexual-coercion": undefined,
-  // Culture Pulse
-  "pulse-male-dominated-dynamics": undefined,
-  "pulse-female-dominated-dynamics": undefined,
-  "pulse-power-imbalances": undefined,
-  "pulse-speak-up-tolerance": undefined,
-  "pulse-conflicts-of-interest": undefined,
-  "pulse-values-in-practice": undefined,
-  "pulse-beliefs": undefined,
-  "pulse-attitudes": undefined,
-  "pulse-emotion": undefined,
-  "pulse-decision-making": undefined,
-};
-
-type Props = { params: { slug: SubSubproduct["parent"]; module: string } };
-
-export async function generateStaticParams() {
-  const params: Props["params"][] = [];
-  (Object.keys(SUBSUB_BY_PARENT) as Array<SubSubproduct["parent"]>).forEach((parent) => {
-    SUBSUB_BY_PARENT[parent].forEach((m) => params.push({ slug: parent, module: m.slug }));
-  });
-  return params;
+// Build all module pages
+export function generateStaticParams() {
+  return SUBSUBPRODUCTS.map((m) => ({ slug: m.parent, module: m.slug }));
 }
+
+type Props = { params: { slug: "copsoq" | "sheq" | "culture-pulse-surveys"; module: string } };
 
 export async function generateMetadata({ params }: Props) {
   const m = getSubSubproduct(params.module);
@@ -61,60 +18,110 @@ export async function generateMetadata({ params }: Props) {
   };
 }
 
+// Fallback charge amounts (AUD) when no Stripe priceId is provided
+const FALLBACK_BY_PARENT: Record<"copsoq" | "sheq" | "culture-pulse-surveys", number> = {
+  copsoq: 750,
+  sheq: 750,
+  "culture-pulse-surveys": 300,
+};
+
+// Optional: paste Stripe price IDs keyed by module slug (prefer these if you have them)
+const PRICE_ID_BY_MODULE: Record<string, string | undefined> = {
+  // "copsoq-demands-at-work": "price_XXXX",
+  // "copsoq-work-organisation-job-content": "price_XXXX",
+  // "copsoq-interpersonal-relations-leadership": "price_XXXX",
+  // "copsoq-work-individual-interface": "price_XXXX",
+  // "copsoq-social-capital": "price_XXXX",
+  // "sheq-gender-harassment-sexist-hostility": "price_XXXX",
+  // "sheq-sexual-hostility": "price_XXXX",
+  // "sheq-unwanted-sexual-attention": "price_XXXX",
+  // "sheq-sexual-coercion": "price_XXXX",
+  // "pulse-male-dominated-dynamics": "price_XXXX",
+  // "pulse-female-dominated-dynamics": "price_XXXX",
+  // "pulse-power-imbalances": "price_XXXX",
+  // "pulse-speak-up-tolerance": "price_XXXX",
+  // "pulse-conflicts-of-interest": "price_XXXX",
+  // "pulse-values-in-practice": "price_XXXX",
+  // "pulse-beliefs": "price_XXXX",
+  // "pulse-attitudes": "price_XXXX",
+  // "pulse-emotion": "price_XXXX",
+  // "pulse-decision-making": "price_XXXX",
+};
+
 export default function ModulePage({ params }: Props) {
   const m = getSubSubproduct(params.module);
-  if (!m) {
+
+  const wrap: CSSProperties = { maxWidth: 1000, margin: "28px auto", padding: "0 16px", lineHeight: 1.65 };
+  const card: CSSProperties = { background: "#111", border: "1px solid #222", borderRadius: 12, padding: 16, marginTop: 24 };
+
+  if (!m || m.parent !== params.slug) {
     return (
-      <main style={{ maxWidth: 900, margin: "28px auto", padding: "0 16px" }}>
+      <main style={wrap}>
         <h1>Not found</h1>
         <p>This module does not exist.</p>
         <p>
           <Link href={`/products/culture-risk-diagnostic/${params.slug}`} style={{ color: "#f1c40f", textDecoration: "none", fontWeight: 700 }}>
-            ← Back
+            ← Back to {params.slug.replace(/-/g, " ").toUpperCase()}
           </Link>
         </p>
       </main>
     );
   }
 
-  const wrap: CSSProperties = { maxWidth: 900, margin: "28px auto", padding: "0 16px", lineHeight: 1.65 };
-  const card: CSSProperties = { background: "#111", border: "1px solid #222", borderRadius: 12, padding: 16, marginTop: 24 };
+  // Display label based on parent
+  const priceLabel =
+    m.parent === "culture-pulse-surveys" ? "A$ 300.00 — per module" : "A$ 750.00 — per module";
 
-  const displayLabel = MODULE_PRICE_LABEL[m.parent];
-  const fallbackPrice = FALLBACK_PRICE_BY_PARENT[m.parent]; // AUD
-  const priceId = PRICE_ID_BY_MODULE[m.slug]; // optional
+  const priceId = PRICE_ID_BY_MODULE[m.slug];
+  const fallback = FALLBACK_BY_PARENT[m.parent];
 
   return (
     <main style={wrap}>
       <p style={{ margin: "0 0 8px 0" }}>
-        <Link href={`/products/culture-risk-diagnostic/${params.slug}`} style={{ color: "#f1c40f", textDecoration: "none", fontWeight: 700 }}>
-          ← {params.slug === "copsoq" ? "COPSOQ" : params.slug === "sheq" ? "SHEQ" : "Culture Pulse Surveys"}
+        <Link href="/products/culture-risk-diagnostic" style={{ color: "#f1c40f", textDecoration: "none", fontWeight: 700 }}>
+          ← Culture Risk Diagnostic™
+        </Link>{" "}
+        ·{" "}
+        <Link href={`/products/culture-risk-diagnostic/${m.parent}`} style={{ color: "#f1c40f", textDecoration: "none", fontWeight: 700 }}>
+          {m.parent.toUpperCase()}
         </Link>
       </p>
 
       <h1 style={{ marginTop: 0 }}>{m.title}</h1>
       <p style={{ opacity: 0.9 }}>{m.short}</p>
 
-      <section style={card}>
-        <h2 style={{ marginTop: 0 }}>Price</h2>
-        <p style={{ fontWeight: 700 }}>{displayLabel}</p>
-
-        {/* Always show Buy button. If priceId is present, it’s used.
-            Otherwise we charge the fallback amount via name+price (AUD) — Terms checkbox applies. */}
-        <BuyButton priceId={priceId} name={m.title} price={fallbackPrice}>
+      {/* BUY NOW */}
+      <section style={{ ...card, display: "flex", alignItems: "center", justifyContent: "space-between", gap: 12 }}>
+        <div>
+          <div style={{ fontWeight: 700 }}>{priceLabel}</div>
+          <div style={{ fontSize: 13, opacity: 0.8, marginTop: 4 }}>
+            Instant checkout with Terms &amp; Conditions.
+          </div>
+        </div>
+        <BuyButton priceId={priceId} name={m.title} price={fallback}>
           Buy Now
         </BuyButton>
       </section>
 
+      {/* Why it matters */}
       <section style={card}>
-        <h2 style={{ marginTop: 0 }}>What it covers</h2>
+        <h2 style={{ marginTop: 0 }}>Why it matters</h2>
         <p>{m.description}</p>
         {m.reference && (
-          <>
-            <h3 style={{ marginTop: 16 }}>References</h3>
-            <p style={{ whiteSpace: "pre-line" }}>{m.reference}</p>
-          </>
+          <p style={{ opacity: 0.85 }}>
+            <strong>Reference:</strong> {m.reference}
+          </p>
         )}
+      </section>
+
+      {/* What you receive */}
+      <section style={card}>
+        <h2 style={{ marginTop: 0 }}>What you receive</h2>
+        <ul>
+          <li>Risk mapping and indicators focused on this domain.</li>
+          <li>Actionable recommendations and Prevention Plan inputs.</li>
+          <li>Executive briefing from Alberto with targeted controls.</li>
+        </ul>
       </section>
     </main>
   );
