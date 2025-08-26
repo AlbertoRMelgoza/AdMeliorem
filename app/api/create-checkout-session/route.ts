@@ -1,17 +1,13 @@
 import Stripe from "stripe";
-import { NextResponse } from "next/server";
+import { NextRequest, NextResponse } from "next/server";
 
-export const runtime = "nodejs"; // ensure Node runtime for Stripe SDK
+export const runtime = "nodejs"; // use Node runtime (Stripe needs it)
 
-// ✅ Option 1 (recommended now): don't pin the version; uses your account default
-const stripe = new Stripe(process.env.STRIPE_SECRET_KEY!);
+const stripe = new Stripe(process.env.STRIPE_SECRET_KEY!); // use account default API version
 
-// ✅ Option 2 (also fine): pin to the version your SDK supports
-// const stripe = new Stripe(process.env.STRIPE_SECRET_KEY!, { apiVersion: "2023-10-16" });
-
-export async function POST(request: Request) {
-  // ...rest of your handler unchanged...
-}
+export async function POST(req: NextRequest) {
+  try {
+    const { items = [], customer_email } = await req.json();
 
     if (!Array.isArray(items) || items.length === 0) {
       return NextResponse.json({ error: "Cart is empty." }, { status: 400 });
@@ -24,16 +20,16 @@ export async function POST(request: Request) {
       }
       return {
         price_data: {
-          currency: "aud",            // change if needed
+          currency: "aud", // change if needed
           product_data: { name: it.name },
-          unit_amount
+          unit_amount,
         },
-        quantity: it.quantity
+        quantity: it.quantity,
       };
     });
 
     const origin =
-      request.headers.get("origin") ??
+      req.headers.get("origin") ??
       process.env.NEXT_PUBLIC_SITE_URL ??
       "http://localhost:3000";
 
@@ -45,13 +41,13 @@ export async function POST(request: Request) {
       billing_address_collection: "auto",
       success_url: `${origin}/success?session_id={CHECKOUT_SESSION_ID}`,
       cancel_url: `${origin}/cart`,
-      shipping_address_collection: { allowed_countries: ["AU", "NZ", "US"] }
+      shipping_address_collection: { allowed_countries: ["AU", "NZ", "US"] },
     });
 
     return NextResponse.json({ url: session.url });
   } catch (err: any) {
     return NextResponse.json(
-      { error: err.message ?? "Server error" },
+      { error: err?.message ?? "Server error" },
       { status: 500 }
     );
   }
