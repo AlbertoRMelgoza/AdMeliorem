@@ -1,7 +1,5 @@
-mkdir -p data
-# move your downloaded file into the repo’s data folder:
-# (on mac/windows, you can drag-drop; or if in terminal:)
-# mv /path/to/download/catalog.json data/catalog.json
+# from your repo root
+cp /path/to/download/catalog.json data/catalog.json
 git add data/catalog.json
-git commit -m "Add product catalog"
+git commit -m "Fix catalog JSON"
 git push
