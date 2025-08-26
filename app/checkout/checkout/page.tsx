@@ -1,20 +1,30 @@
 "use client";
 
-import { useMemo, useState } from "react";
+import { useMemo, useState, type CSSProperties } from "react";
 import { PRODUCTS, type SKU } from "@/app/lib/products";
 
 type BasketRow = { sku: SKU; name: string; unitPrice: number; qty: number };
+
 const YELLOW = { color: "#f1c40f", textDecoration: "underline" } as const;
 
+// format numbers like A$4,000 (no cents shown)
+const fmtAUD = (amount: number) =>
+  new Intl.NumberFormat("en-AU", {
+    style: "currency",
+    currency: "AUD",
+    minimumFractionDigits: 0,
+    maximumFractionDigits: 0,
+  }).format(amount);
+
 export default function CheckoutPage() {
-  // Build the selectable catalogue from PRODUCTS
+  // Build the selectable catalogue from PRODUCTS (unit_amount is in cents → dollars)
   const catalogue: BasketRow[] = useMemo(
     () =>
       (Object.entries(PRODUCTS) as [SKU, (typeof PRODUCTS)[SKU]][]).map(
         ([sku, p]) => ({
           sku,
           name: p.name,
-          unitPrice: Math.round(p.unit_amount / 100), // cents → dollars
+          unitPrice: Math.round(p.unit_amount / 100), // 400000 → 4000
           qty: 0,
         })
       ),
@@ -53,7 +63,7 @@ export default function CheckoutPage() {
       alert(data?.error || "Checkout failed");
       return;
     }
-    location.href = data.url;
+    location.href = data.url; // redirect to Stripe Checkout
   };
 
   return (
@@ -78,9 +88,7 @@ export default function CheckoutPage() {
           >
             <div>
               <div style={{ fontWeight: 600 }}>{it.name}</div>
-              <div style={{ opacity: 0.8 }}>
-                AUD {it.unitPrice.toLocaleString()}
-              </div>
+              <div style={{ opacity: 0.8 }}>{fmtAUD(it.unitPrice)}</div>
             </div>
             <div style={{ display: "flex", alignItems: "center", gap: 8 }}>
               <button onClick={() => updateQty(it.sku, -1)} style={btn()}>
@@ -119,12 +127,7 @@ export default function CheckoutPage() {
             onChange={(e) => setTerms(e.target.checked)}
           />
           I agree to the{" "}
-          <a
-            href="/terms"
-            style={YELLOW}
-            target="_blank"
-            rel="noreferrer"
-          >
+          <a href="/terms" style={YELLOW} target="_blank" rel="noreferrer">
             contract / terms & conditions
           </a>
           .
@@ -139,7 +142,7 @@ export default function CheckoutPage() {
           alignItems: "center",
         }}
       >
-        <strong>Total: AUD {total.toLocaleString()}</strong>
+        <strong>Total: {fmtAUD(total)}</strong>
         <button
           onClick={checkout}
           style={btn()}
@@ -160,7 +163,7 @@ export default function CheckoutPage() {
   );
 }
 
-function btn(): React.CSSProperties {
+function btn(): CSSProperties {
   return {
     border: "1px solid #222",
     borderRadius: 10,
