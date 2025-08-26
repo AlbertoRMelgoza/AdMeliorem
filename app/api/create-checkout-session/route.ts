@@ -11,11 +11,13 @@ if (!STRIPE_SECRET) {
   throw new Error("Missing Stripe secret key (STRIPE_SECRET_KEY[_LIVE])");
 }
 
-const stripe = new Stripe(STRIPE_SECRET, { apiVersion: "2024-06-20" });
+// 👇 use the version your SDK typings support
+const stripe = new Stripe(STRIPE_SECRET, { apiVersion: "2023-10-16" });
+// (Alternatively, you can omit apiVersion entirely)
 
 type CheckoutItem =
-  | { name: string; price: number; quantity?: number } // ad-hoc item
-  | { priceId: string; quantity?: number; name?: string }; // Stripe price
+  | { name: string; price: number; quantity?: number }           // ad-hoc
+  | { priceId: string; quantity?: number; name?: string };       // Stripe Price
 
 function getBaseUrl(req: Request) {
   const host = req.headers.get("x-forwarded-host") ?? req.headers.get("host");
@@ -35,14 +37,12 @@ export async function POST(req: Request) {
 
     const line_items: Stripe.Checkout.SessionCreateParams.LineItem[] = items.map(
       (it: any) => {
-        // If you passed a Stripe Price ID, use it directly
         if (it.priceId) {
           return {
             price: String(it.priceId),
             quantity: Number(it.quantity ?? 1),
           };
         }
-        // Otherwise build on-the-fly price data
         const unit = Math.round(Number(it.price ?? 0) * 100);
         return {
           price_data: {
