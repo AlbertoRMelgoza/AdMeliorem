@@ -1,13 +1,17 @@
 import Stripe from "stripe";
 import { NextResponse } from "next/server";
 
-const stripe = new Stripe(process.env.STRIPE_SECRET_KEY!, {
-  apiVersion: "2024-06-20"
-});
+export const runtime = "nodejs"; // ensure Node runtime for Stripe SDK
+
+// ✅ Option 1 (recommended now): don't pin the version; uses your account default
+const stripe = new Stripe(process.env.STRIPE_SECRET_KEY!);
+
+// ✅ Option 2 (also fine): pin to the version your SDK supports
+// const stripe = new Stripe(process.env.STRIPE_SECRET_KEY!, { apiVersion: "2023-10-16" });
 
 export async function POST(request: Request) {
-  try {
-    const { items = [], customer_email } = await request.json();
+  // ...rest of your handler unchanged...
+}
 
     if (!Array.isArray(items) || items.length === 0) {
       return NextResponse.json({ error: "Cart is empty." }, { status: 400 });
