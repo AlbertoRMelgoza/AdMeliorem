@@ -1,6 +1,12 @@
 import Image from "next/image";
 import type { CSSProperties } from "react";
 
+<p style={{ margin: "0 0 8px 0" }}>
+  <a href="/products" style={{ color: "#f1c40f", textDecoration: "none", fontWeight: 700 }}>
+    ← Back to Products
+  </a>
+</p>
+
 export const metadata = {
   title: "Mediation Services — Ad Meliorem",
   description:
