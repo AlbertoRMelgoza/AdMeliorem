@@ -1,18 +1,17 @@
 import type { CSSProperties } from "react";
 import Link from "next/link";
-import Stripe from "stripe";
 import BuyNow from "../../components/BuyNow";
 
-export const runtime = "nodejs";          // ensure Node runtime (server-side)
-export const dynamic = "force-dynamic";   // fetch live prices each request (or change to revalidate)
+export const runtime = "nodejs";      // ensure Node runtime
+export const revalidate = 0;          // don’t cache (always fresh from Stripe)
 
 type CatalogItem = {
   productId?: string;
   priceId?: string;
   name: string;
   description?: string | null;
-  currency?: string | null;   // fallback display
-  priceAUD?: number | null;   // fallback display
+  currency?: string | null;
+  priceAUD?: number | null;
   url?: string | null;
 };
 
@@ -22,16 +21,25 @@ async function getCatalog(): Promise<CatalogItem[]> {
   return (mod as any).default as CatalogItem[];
 }
 
-// Get live price from Stripe for a Price ID
-async function getLivePrice(priceId?: string): Promise<{ amount: number | null; currency: string | null }> {
-  if (!priceId) return { amount: null, currency: null };
-  const key = process.env.STRIPE_SECRET_KEY || process.env.STRIPE_SECRET;
-  if (!key) return { amount: null, currency: null };
-  const stripe = new Stripe(key);
-  const price = await stripe.prices.retrieve(priceId);
-  const amount = (price.unit_amount ?? null) !== null ? (price.unit_amount as number) / 100 : null;
-  const currency = (price.currency || "").toUpperCase() || null;
-  return { amount, currency };
+// Get live price from Stripe (safe: dynamic import + try/catch)
+async function getLivePrice(
+  priceId?: string
+): Promise<{ amount: number | null; currency: string | null }> {
+  try {
+    if (!priceId) return { amount: null, currency: null };
+    const key = process.env.STRIPE_SECRET_KEY || process.env.STRIPE_SECRET;
+    if (!key) return { amount: null, currency: null };
+    const { default: Stripe } = await import("stripe");
+    const stripe = new Stripe(key);
+    const price = await stripe.prices.retrieve(String(priceId));
+    const amount =
+      price.unit_amount != null ? Number(price.unit_amount) / 100 : null;
+    const currency = price.currency ? price.currency.toUpperCase() : null;
+    return { amount, currency };
+  } catch (e) {
+    console.error("getLivePrice error:", e);
+    return { amount: null, currency: null };
+  }
 }
 
 export const metadata = {
@@ -51,7 +59,7 @@ export default async function ProductsIndex() {
   const mediation = pick("mediation");
   const negotiation = pick("negotiation");
 
-  // 🔐 Fetch live prices (server-side) so display matches Stripe Checkout exactly
+  // Live Stripe prices (won’t throw)
   const shsarcLive = await getLivePrice(shsarc?.priceId);
   const proceduralLive = await getLivePrice(procedural?.priceId);
   const cultureLive = await getLivePrice(culture?.priceId);
@@ -66,11 +74,11 @@ export default async function ProductsIndex() {
   const linkStyle: CSSProperties = { textDecoration: "none", color: "inherit" };
   const price: CSSProperties = { fontWeight: 600, marginTop: 8 };
 
-  const showPrice = (live: { amount: number | null; currency: string | null }, fallback?: CatalogItem) => {
+  const showPrice = (live: { amount: number | null; currency: string | null }, fb?: CatalogItem) => {
     if (live.amount != null) return `${live.currency ?? "AUD"} ${live.amount.toFixed(2)}`;
-    if (fallback?.priceAUD != null) return `A$${fallback.priceAUD.toFixed(2)}`;
+    if (fb?.priceAUD != null) return `A$${fb.priceAUD.toFixed(2)}`;
     return "Price shown at checkout";
-    };
+  };
 
   return (
     <main style={wrap}>
