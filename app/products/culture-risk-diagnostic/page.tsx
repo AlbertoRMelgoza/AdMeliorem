@@ -10,18 +10,19 @@ async function getCatalog(): Promise<CatalogItem[]> {
   return (mod as any).default as CatalogItem[];
 }
 
-// Display-only price labels per subproduct
-const PRICE_LABEL_BY_SLUG: Record<string, string> = {
-  copsoq: "A$ 3,750.00 — annual subscription",
-  sheq: "A$ 3,000.00 — annual subscription",
-  "culture-pulse-surveys": "A$ 3,000.00 — annual subscription",
-  "qualitative-interventions": "A$ 750.00 — per session (1 hour)",
-  "code-of-conduct": "A$ 750.00 — per review",
-  "code-of-ethics": "A$ 750.00 — per review",
-  ocas: "A$ 2,500.00 — per engagement",
-  wfbs: "A$ 2,500.00 — per engagement",
-  // (no public price provided)
-  "culture-risk-indicators": "Contact for quote",
+// Hard-wire Stripe Price IDs for subproducts
+const PRICE_ID_BY_SLUG: Record<string, string | undefined> = {
+  copsoq: "price_XXXXXXXX_copsoq_annual_3750",                 // A$3,750/yr
+  sheq: "price_XXXXXXXX_sheq_annual_3000",                     // A$3,000/yr
+  "culture-pulse-surveys": "price_XXXXXXXX_pulse_annual_3000", // A$3,000/yr
+
+  ocas: "price_XXXXXXXX_ocas_2500",                            // A$2,500/engagement
+  wfbs: "price_XXXXXXXX_wfbs_2500",                            // A$2,500/engagement
+
+  "code-of-conduct": "price_XXXXXXXX_coc_750",                 // A$750/review
+  "code-of-ethics": "price_XXXXXXXX_coe_750",                  // A$750/review
+  "qualitative-interventions": "price_XXXXXXXX_qual_750",      // A$750/session
+  "culture-risk-indicators": "price_XXXXXXXX_cri",             // if you created one; else leave undefined
 };
 
 // Keywords to find Stripe Price IDs in your catalog.json
