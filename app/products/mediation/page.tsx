@@ -1,17 +1,17 @@
 import Image from "next/image";
 import type { CSSProperties } from "react";
 
-<p style={{ margin: "0 0 8px 0" }}>
-  <a href="/products" style={{ color: "#f1c40f", textDecoration: "none", fontWeight: 700 }}>
-    ← Back to Products
-  </a>
-</p>
-
 export const metadata = {
   title: "Mediation Services — Ad Meliorem",
   description:
     "Neutral, confidential facilitation to resolve disputes and protect working relationships.",
 };
+
+<p style={{ margin: "0 0 8px 0" }}>
+  <a href="/products" style={{ color: "#f1c40f", textDecoration: "none", fontWeight: 700 }}>
+    ← Back to Products
+  </a>
+</p>
 
 export default function MediationPage() {
   const wrap: CSSProperties = { maxWidth: 1000, margin: "28px auto", padding: "0 16px", lineHeight: 1.65 };
