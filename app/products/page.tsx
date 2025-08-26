@@ -1,10 +1,7 @@
-// app/products/page.tsx  (SERVER component – no "use client")
+// app/products/page.tsx  (SERVER component — do NOT add "use client")
 import type { CSSProperties } from "react";
 import Link from "next/link";
-
-// ⬇️ Use the SAME client button you already use on subproduct pages.
-// If your file is named BuyNow.tsx instead, just change the import accordingly.
-import BuyButton from "../../components/BuyButton";
+import BuyNow from "../../components/BuyNow"; // ✅ correct file name
 
 export const metadata = {
   title: "Products & Services — Ad Meliorem",
@@ -38,6 +35,7 @@ export default function ProductsIndex() {
         Select a product or service to see the full outline, deliverables, and outcomes.
       </p>
 
+      {/* Terms link visible on this page too */}
       <div style={{ fontSize: 13, opacity: 0.85 }}>
         By purchasing you agree to our{" "}
         <a href="/terms" style={{ color: "#f1c40f", fontWeight: 700 }}>
@@ -56,9 +54,9 @@ export default function ProductsIndex() {
           </Link>
           <div style={priceText}>A$ 750.00 — per person (max 20 per workshop)</div>
           <div style={{ marginTop: 10 }}>
-            <BuyButton name="SHSARC™ & RCABH™ — Risk Control Programs" price={750}>
+            <BuyNow name="SHSARC™ & RCABH™ — Risk Control Programs" price={750}>
               Buy Now
-            </BuyButton>
+            </BuyNow>
           </div>
         </article>
 
@@ -72,9 +70,9 @@ export default function ProductsIndex() {
           </Link>
           <div style={priceText}>A$ 4,000.00 — per use</div>
           <div style={{ marginTop: 10 }}>
-            <BuyButton name="Procedural Justice Framework™" price={4000}>
+            <BuyNow name="Procedural Justice Framework™" price={4000}>
               Buy Now
-            </BuyButton>
+            </BuyNow>
           </div>
         </article>
 
@@ -88,9 +86,9 @@ export default function ProductsIndex() {
           </Link>
           <div style={priceText}>A$ 15,000.00 — annual subscription</div>
           <div style={{ marginTop: 10 }}>
-            <BuyButton name="Culture Risk Diagnostic™" price={15000}>
+            <BuyNow name="Culture Risk Diagnostic™" price={15000}>
               Buy Now
-            </BuyButton>
+            </BuyNow>
           </div>
         </article>
 
@@ -104,9 +102,9 @@ export default function ProductsIndex() {
           </Link>
           <div style={priceText}>A$ 3,000.00 — per session</div>
           <div style={{ marginTop: 10 }}>
-            <BuyButton name="Mediation Services" price={3000}>
+            <BuyNow name="Mediation Services" price={3000}>
               Buy Now
-            </BuyButton>
+            </BuyNow>
           </div>
         </article>
 
@@ -120,9 +118,9 @@ export default function ProductsIndex() {
           </Link>
           <div style={priceText}>A$ 3,000.00 — per session</div>
           <div style={{ marginTop: 10 }}>
-            <BuyButton name="Negotiation Services" price={3000}>
+            <BuyNow name="Negotiation Services" price={3000}>
               Buy Now
-            </BuyButton>
+            </BuyNow>
           </div>
         </article>
       </div>
