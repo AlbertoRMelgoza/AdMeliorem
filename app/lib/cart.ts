@@ -1,8 +1,10 @@
 // app/lib/cart.ts
-// Tiny client-side cart stored in localStorage
+// Tiny client-side cart stored in localStorage (no external helpers)
 
-import { PRODUCTS, isLeaf } from "./products";
-import type { Sku } from "./products";
+import { PRODUCTS } from "./products";
+
+// Derive the SKU type from the PRODUCTS map
+export type Sku = keyof typeof PRODUCTS;
 
 type Cart = Record<Sku, number>;
 
@@ -16,7 +18,9 @@ function read(): Cart {
     const obj = JSON.parse(raw) as Record<string, number>;
     const out = {} as Cart;
     for (const [k, v] of Object.entries(obj)) {
-      if (typeof v === "number" && v > 0) out[k as Sku] = Math.floor(v);
+      if (typeof v === "number" && v > 0 && (k as Sku) in PRODUCTS) {
+        out[k as Sku] = Math.floor(v);
+      }
     }
     return out;
   } catch {
@@ -66,8 +70,11 @@ export function lines() {
 /** Sum total in cents (AUD) based on PRODUCTS price table */
 export function totalCents(): number {
   return lines().reduce((sum, ln) => {
-    const p = PRODUCTS[ln.sku];
-    if (p && isLeaf(p)) return sum + p.unit_amount * ln.qty;
+    const p: any = PRODUCTS[ln.sku];
+    // treat entries with a numeric unit_amount as purchasable leaf products
+    if (p && typeof p.unit_amount === "number") {
+      return sum + p.unit_amount * ln.qty;
+    }
     return sum;
   }, 0);
 }
