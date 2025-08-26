@@ -1,15 +1,44 @@
 import type { CSSProperties } from "react";
 import Link from "next/link";
+import BuyNow from "../../components/BuyNow";
+
+// If your repo path differs, adjust this import to "../../data/catalog.json"
+type CatalogItem = {
+  productId?: string;
+  priceId?: string;
+  name: string;
+  description?: string | null;
+  currency?: string | null;
+  priceAUD?: number | null;
+  url?: string | null;
+};
+
+// Server component can load JSON at build time
+async function getCatalog(): Promise<CatalogItem[]> {
+  // eslint-disable-next-line @typescript-eslint/no-unsafe-return
+  const mod = await import("../../data/catalog.json");
+  return (mod as any).default as CatalogItem[];
+}
 
 export const metadata = {
   title: "Products & Services — Ad Meliorem",
   description: "Frameworks, diagnostics, and services to prevent harm and protect value.",
 };
 
-export default function ProductsIndex() {
-  const wrap: CSSProperties = { maxWidth: 1100, margin: "28px auto", padding: "0 16px", lineHeight: 1.65 };
+export default async function ProductsIndex() {
+  const catalog = await getCatalog();
 
-  // Inline styles (replacing the missing CSS module)
+  // helper: find first item whose name includes a keyword (case-insensitive)
+  const pick = (needle: string) =>
+    catalog.find((it) => it?.name?.toLowerCase().includes(needle.toLowerCase()));
+
+  const shsarc = pick("shsarc");
+  const procedural = pick("procedural justice");
+  const culture = pick("culture risk");
+  const mediation = pick("mediation");
+  const negotiation = pick("negotiation");
+
+  const wrap: CSSProperties = { maxWidth: 1100, margin: "28px auto", padding: "0 16px", lineHeight: 1.65 };
   const grid: CSSProperties = { display: "grid", gap: 24, marginTop: 24 };
   const card: CSSProperties = {
     background: "#111",
@@ -18,10 +47,10 @@ export default function ProductsIndex() {
     padding: 16,
     transition: "transform 0.2s ease",
   };
-  const cardHover: CSSProperties = { transform: "translateY(-4px)" }; // for future use if you add events
   const title: CSSProperties = { margin: "0 0 8px", fontSize: 18, color: "#f1c40f" };
   const blurb: CSSProperties = { fontSize: 14, color: "#bdbdbd" };
-  const linkStyle: CSSProperties = { textDecoration: "none", color: "inherit", display: "block" };
+  const linkStyle: CSSProperties = { textDecoration: "none", color: "inherit" };
+  const price: CSSProperties = { fontWeight: 600, marginTop: 8 };
 
   return (
     <main style={wrap}>
@@ -31,60 +60,105 @@ export default function ProductsIndex() {
       </p>
 
       <div style={grid}>
-        <Link href="/products/shsarc-rcabh" style={linkStyle}>
-          <article style={card}>
-            <div>
-              <h3 style={title}>SHSARC™ &amp; RCABH™ — Risk Control Programs</h3>
-              <p style={blurb}>
-                Two flagship risk control programs through talent management that produce regulator-ready Prevention Plans.
-              </p>
-            </div>
-          </article>
-        </Link>
+        {/* SHSARC / RCABH */}
+        <article style={card}>
+          <Link href="/products/shsarc-rcabh" style={linkStyle}>
+            <h3 style={title}>SHSARC™ &amp; RCABH™ — Risk Control Programs</h3>
+            <p style={blurb}>
+              Two flagship risk control programs through talent management that produce regulator-ready Prevention Plans.
+            </p>
+          </Link>
+          {shsarc && (
+            <>
+              <div style={price}>
+                {shsarc.priceAUD != null ? `A$${shsarc.priceAUD.toFixed(2)}` : "Price shown at checkout"}
+              </div>
+              <div style={{ marginTop: 10 }}>
+                <BuyNow name={shsarc.name} price={shsarc.priceAUD ?? 0}>Buy Now</BuyNow>
+              </div>
+            </>
+          )}
+        </article>
 
-        <Link href="/products/procedural-justice-framework" style={linkStyle}>
-          <article style={card}>
-            <div>
-              <h3 style={title}>Procedural Justice Framework™</h3>
-              <p style={blurb}>
-                Fair, transparent, defensible processes that prevent escalation and contain liability.
-              </p>
-            </div>
-          </article>
-        </Link>
+        {/* Procedural Justice Framework */}
+        <article style={card}>
+          <Link href="/products/procedural-justice-framework" style={linkStyle}>
+            <h3 style={title}>Procedural Justice Framework™</h3>
+            <p style={blurb}>
+              Fair, transparent, defensible processes that prevent escalation and contain liability.
+            </p>
+          </Link>
+          {procedural && (
+            <>
+              <div style={price}>
+                {procedural.priceAUD != null ? `A$${procedural.priceAUD.toFixed(2)}` : "Price shown at checkout"}
+              </div>
+              <div style={{ marginTop: 10 }}>
+                <BuyNow name={procedural.name} price={procedural.priceAUD ?? 0}>Buy Now</BuyNow>
+              </div>
+            </>
+          )}
+        </article>
 
-        <Link href="/products/culture-risk-diagnostic" style={linkStyle}>
-          <article style={card}>
-            <div>
-              <h3 style={title}>Culture Risk Diagnostic™</h3>
-              <p style={blurb}>
-                Precise culture risk assessments with qualitative and quantitative methods, culture risk indicators, and due-diligence evidence.
-              </p>
-            </div>
-          </article>
-        </Link>
+        {/* Culture Risk Diagnostic */}
+        <article style={card}>
+          <Link href="/products/culture-risk-diagnostic" style={linkStyle}>
+            <h3 style={title}>Culture Risk Diagnostic™</h3>
+            <p style={blurb}>
+              Precise culture risk assessments with qualitative and quantitative methods, culture risk indicators, and due-diligence evidence.
+            </p>
+          </Link>
+          {culture && (
+            <>
+              <div style={price}>
+                {culture.priceAUD != null ? `A$${culture.priceAUD.toFixed(2)}` : "Price shown at checkout"}
+              </div>
+              <div style={{ marginTop: 10 }}>
+                <BuyNow name={culture.name} price={culture.priceAUD ?? 0}>Buy Now</BuyNow>
+              </div>
+            </>
+          )}
+        </article>
 
-        <Link href="/products/mediation" style={linkStyle}>
-          <article style={card}>
-            <div>
-              <h3 style={title}>Mediation Services</h3>
-              <p style={blurb}>
-                Neutral, confidential facilitation to resolve disputes and protect working relationships.
-              </p>
-            </div>
-          </article>
-        </Link>
+        {/* Mediation */}
+        <article style={card}>
+          <Link href="/products/mediation" style={linkStyle}>
+            <h3 style={title}>Mediation Services</h3>
+            <p style={blurb}>
+              Neutral, confidential facilitation to resolve disputes and protect working relationships.
+            </p>
+          </Link>
+          {mediation && (
+            <>
+              <div style={price}>
+                {mediation.priceAUD != null ? `A$${mediation.priceAUD.toFixed(2)}` : "Price shown at checkout"}
+              </div>
+              <div style={{ marginTop: 10 }}>
+                <BuyNow name={mediation.name} price={mediation.priceAUD ?? 0}>Buy Now</BuyNow>
+              </div>
+            </>
+          )}
+        </article>
 
-        <Link href="/products/negotiation" style={linkStyle}>
-          <article style={card}>
-            <div>
-              <h3 style={title}>Negotiation Services</h3>
-              <p style={blurb}>
-                Structured preparation, leverage mapping, rehearsal, and deal support.
-              </p>
-            </div>
-          </article>
-        </Link>
+        {/* Negotiation */}
+        <article style={card}>
+          <Link href="/products/negotiation" style={linkStyle}>
+            <h3 style={title}>Negotiation Services</h3>
+            <p style={blurb}>
+              Structured preparation, leverage mapping, rehearsal, and deal support.
+            </p>
+          </Link>
+          {negotiation && (
+            <>
+              <div style={price}>
+                {negotiation.priceAUD != null ? `A$${negotiation.priceAUD.toFixed(2)}` : "Price shown at checkout"}
+              </div>
+              <div style={{ marginTop: 10 }}>
+                <BuyNow name={negotiation.name} price={negotiation.priceAUD ?? 0}>Buy Now</BuyNow>
+              </div>
+            </>
+          )}
+        </article>
       </div>
     </main>
   );
