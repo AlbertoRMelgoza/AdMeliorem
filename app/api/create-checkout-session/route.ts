@@ -1,9 +1,11 @@
+// app/api/create-checkout-session/route.ts
 import { NextResponse } from "next/server";
 import Stripe from "stripe";
 
-// Pick live if present (Production), else fall back to test key
+export const runtime = "nodejs";
+
 const STRIPE_SECRET =
-  process.env.STRIPE_SECRET_KEY_LIVE || process.env.STRIPE_SECRET_KEY;
+  process.env.STRIPE_SECRET_KEY_LIVE ?? process.env.STRIPE_SECRET_KEY;
 
 if (!STRIPE_SECRET) {
   throw new Error("Missing Stripe secret key (STRIPE_SECRET_KEY[_LIVE])");
@@ -11,25 +13,49 @@ if (!STRIPE_SECRET) {
 
 const stripe = new Stripe(STRIPE_SECRET, { apiVersion: "2024-06-20" });
 
+type CheckoutItem =
+  | { name: string; price: number; quantity?: number } // ad-hoc item
+  | { priceId: string; quantity?: number; name?: string }; // Stripe price
+
+function getBaseUrl(req: Request) {
+  const host = req.headers.get("x-forwarded-host") ?? req.headers.get("host");
+  const proto = req.headers.get("x-forwarded-proto") ?? "https";
+  if (host) return `${proto}://${host}`;
+  if (process.env.VERCEL_URL) return `https://${process.env.VERCEL_URL}`;
+  return "http://localhost:3000";
+}
+
 export async function POST(req: Request) {
   try {
-    const body = await req.json() as { items?: Array<{ name: string; price: number; quantity?: number }> };
-    const items = body?.items ?? [];
-    if (!Array.isArray(items) || items.length === 0) {
+    const body = (await req.json()) as { items?: CheckoutItem[] };
+    const items = Array.isArray(body?.items) ? body.items : [];
+    if (items.length === 0) {
       return NextResponse.json({ error: "Cart is empty." }, { status: 400 });
     }
 
-    const line_items = items.map((it) => ({
-      price_data: {
-        currency: "aud",
-        product_data: { name: it.name },
-        unit_amount: Math.round((it.price ?? 0) * 100),
-      },
-      quantity: it.quantity ?? 1,
-    }));
+    const line_items: Stripe.Checkout.SessionCreateParams.LineItem[] = items.map(
+      (it: any) => {
+        // If you passed a Stripe Price ID, use it directly
+        if (it.priceId) {
+          return {
+            price: String(it.priceId),
+            quantity: Number(it.quantity ?? 1),
+          };
+        }
+        // Otherwise build on-the-fly price data
+        const unit = Math.round(Number(it.price ?? 0) * 100);
+        return {
+          price_data: {
+            currency: "aud",
+            product_data: { name: String(it.name ?? "Product") },
+            unit_amount: unit,
+          },
+          quantity: Number(it.quantity ?? 1),
+        };
+      }
+    );
 
-    const isProd = !!process.env.VERCEL_ENV && process.env.VERCEL_ENV === "production";
-    const baseUrl = isProd ? "https://albertormelgoza.com" : "http://localhost:3000";
+    const baseUrl = getBaseUrl(req);
 
     const session = await stripe.checkout.sessions.create({
       mode: "payment",
@@ -43,34 +69,7 @@ export async function POST(req: Request) {
 
     return NextResponse.json({ url: session.url });
   } catch (err: any) {
-    return NextResponse.json({ error: err?.message ?? "Server error" }, { status: 500 });
-  }
-}
-    }
-
-    const line_items = items.map((it) => ({
-      price: String(it.priceId),
-      quantity: Math.max(1, Number(it.quantity ?? 1)),
-    }));
-
-    const origin =
-      req.headers.get("origin") ??
-      process.env.NEXT_PUBLIC_SITE_URL ??
-      "http://localhost:3000";
-
-    const session = await stripe.checkout.sessions.create({
-      mode: "payment",
-      line_items,
-      customer_email: customer_email || undefined,
-      allow_promotion_codes: true,
-      billing_address_collection: "auto",
-      success_url: `${origin}/success?session_id={CHECKOUT_SESSION_ID}`,
-      cancel_url: `${origin}/cart`,
-      shipping_address_collection: { allowed_countries: ["AU", "NZ", "US"] },
-    });
-
-    return NextResponse.json({ url: session.url });
-  } catch (err: any) {
+    console.error("checkout error", err);
     return NextResponse.json(
       { error: err?.message ?? "Server error" },
       { status: 500 }
