@@ -12,25 +12,20 @@
     "next": "14.2.5",
     "react": "18.2.0",
     "react-dom": "18.2.0",
+    "stripe": "^14.25.0",
     "@vercel/analytics": "latest",
     "@vercel/speed-insights": "latest",
     "@supabase/supabase-js": "^2.42.0",
+    "rss-parser": "^3.13.0",
+    "pg": "^8.11.3",
     "tailwindcss": "^3.4.3",
     "postcss": "^8.4.31",
-    "autoprefixer": "^10.4.16",
-    "pg": "^8.11.3",
-    "rss-parser": "^3.13.0",
-    "stripe": "^14.25.0"
+    "autoprefixer": "^10.4.16"
   },
   "devDependencies": {
     "typescript": "^5.4.0",
     "@types/node": "^20.11.30",
     "@types/react": "^18.2.66",
     "@types/react-dom": "^18.2.18"
-  },
-  "dependencies": {
-    "stripe": "^14.25.0",
-    "next": "^14.2.5",
-    "react": "^18.2.0",
-    "react-dom": "^18.2.0"
+  }
 }
