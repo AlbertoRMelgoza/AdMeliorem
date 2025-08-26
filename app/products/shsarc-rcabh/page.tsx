@@ -46,6 +46,13 @@ export default function TrainingPrograms() {
     style={{ borderRadius: 12 }}
   />
 </div>
-   </main>
+  
+    <p style={{ margin: "0 0 8px 0" }}>
+  <a href="/products" style={{ color: "#f1c40f", textDecoration: "none", fontWeight: 700 }}>
+    ← Back to Products
+      </a>
+    </p>
+    
+    </main>
   );
 }
