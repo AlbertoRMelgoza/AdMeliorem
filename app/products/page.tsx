@@ -2,9 +2,6 @@ import type { CSSProperties } from "react";
 import Link from "next/link";
 import BuyNow from "../../components/BuyNow";
 
-export const runtime = "nodejs";      // ensure Node runtime
-export const revalidate = 0;          // don’t cache (always fresh from Stripe)
-
 type CatalogItem = {
   productId?: string;
   priceId?: string;
@@ -15,31 +12,10 @@ type CatalogItem = {
   url?: string | null;
 };
 
-// Load the static catalog
+// Load your catalog to grab the correct Stripe priceIds
 async function getCatalog(): Promise<CatalogItem[]> {
   const mod = await import("../../data/catalog.json");
   return (mod as any).default as CatalogItem[];
-}
-
-// Get live price from Stripe (safe: dynamic import + try/catch)
-async function getLivePrice(
-  priceId?: string
-): Promise<{ amount: number | null; currency: string | null }> {
-  try {
-    if (!priceId) return { amount: null, currency: null };
-    const key = process.env.STRIPE_SECRET_KEY || process.env.STRIPE_SECRET;
-    if (!key) return { amount: null, currency: null };
-    const { default: Stripe } = await import("stripe");
-    const stripe = new Stripe(key);
-    const price = await stripe.prices.retrieve(String(priceId));
-    const amount =
-      price.unit_amount != null ? Number(price.unit_amount) / 100 : null;
-    const currency = price.currency ? price.currency.toUpperCase() : null;
-    return { amount, currency };
-  } catch (e) {
-    console.error("getLivePrice error:", e);
-    return { amount: null, currency: null };
-  }
 }
 
 export const metadata = {
@@ -59,12 +35,14 @@ export default async function ProductsIndex() {
   const mediation = pick("mediation");
   const negotiation = pick("negotiation");
 
-  // Live Stripe prices (won’t throw)
-  const shsarcLive = await getLivePrice(shsarc?.priceId);
-  const proceduralLive = await getLivePrice(procedural?.priceId);
-  const cultureLive = await getLivePrice(culture?.priceId);
-  const mediationLive = await getLivePrice(mediation?.priceId);
-  const negotiationLive = await getLivePrice(negotiation?.priceId);
+  // 🔴 DISPLAY PRICES (text labels only). Charges still come from Stripe via priceId.
+  const PRICE_LABEL = {
+    shsarc: "A$ 750.00 — per person (max 20 per workshop)",
+    procedural: "A$ 4,000.00 — per use",
+    culture: "A$ 15,000.00 — annual subscription",
+    mediation: "A$ 3,000.00 — per session",
+    negotiation: "A$ 3,000.00 — per session",
+  } as const;
 
   const wrap: CSSProperties = { maxWidth: 1100, margin: "28px auto", padding: "0 16px", lineHeight: 1.65 };
   const grid: CSSProperties = { display: "grid", gap: 24, marginTop: 24 };
@@ -73,12 +51,6 @@ export default async function ProductsIndex() {
   const blurb: CSSProperties = { fontSize: 14, color: "#bdbdbd" };
   const linkStyle: CSSProperties = { textDecoration: "none", color: "inherit" };
   const price: CSSProperties = { fontWeight: 600, marginTop: 8 };
-
-  const showPrice = (live: { amount: number | null; currency: string | null }, fb?: CatalogItem) => {
-    if (live.amount != null) return `${live.currency ?? "AUD"} ${live.amount.toFixed(2)}`;
-    if (fb?.priceAUD != null) return `A$${fb.priceAUD.toFixed(2)}`;
-    return "Price shown at checkout";
-  };
 
   return (
     <main style={wrap}>
@@ -98,9 +70,10 @@ export default async function ProductsIndex() {
           </Link>
           {shsarc && (
             <>
-              <div style={price}>{showPrice(shsarcLive, shsarc)}</div>
+              <div style={price}>{PRICE_LABEL.shsarc}</div>
               <div style={{ marginTop: 10 }}>
-                <BuyNow priceId={shsarc.priceId} name={shsarc.name} price={shsarc.priceAUD ?? 0}>
+                {/* Uses Stripe priceId; the number above is only display */}
+                <BuyNow priceId={shsarc.priceId} name={shsarc.name} price={0}>
                   Buy Now
                 </BuyNow>
               </div>
@@ -118,9 +91,9 @@ export default async function ProductsIndex() {
           </Link>
           {procedural && (
             <>
-              <div style={price}>{showPrice(proceduralLive, procedural)}</div>
+              <div style={price}>{PRICE_LABEL.procedural}</div>
               <div style={{ marginTop: 10 }}>
-                <BuyNow priceId={procedural.priceId} name={procedural.name} price={procedural.priceAUD ?? 0}>
+                <BuyNow priceId={procedural.priceId} name={procedural.name} price={0}>
                   Buy Now
                 </BuyNow>
               </div>
@@ -138,9 +111,9 @@ export default async function ProductsIndex() {
           </Link>
           {culture && (
             <>
-              <div style={price}>{showPrice(cultureLive, culture)}</div>
+              <div style={price}>{PRICE_LABEL.culture}</div>
               <div style={{ marginTop: 10 }}>
-                <BuyNow priceId={culture.priceId} name={culture.name} price={culture.priceAUD ?? 0}>
+                <BuyNow priceId={culture.priceId} name={culture.name} price={0}>
                   Buy Now
                 </BuyNow>
               </div>
@@ -158,9 +131,9 @@ export default async function ProductsIndex() {
           </Link>
           {mediation && (
             <>
-              <div style={price}>{showPrice(mediationLive, mediation)}</div>
+              <div style={price}>{PRICE_LABEL.mediation}</div>
               <div style={{ marginTop: 10 }}>
-                <BuyNow priceId={mediation.priceId} name={mediation.name} price={mediation.priceAUD ?? 0}>
+                <BuyNow priceId={mediation.priceId} name={mediation.name} price={0}>
                   Buy Now
                 </BuyNow>
               </div>
@@ -178,9 +151,9 @@ export default async function ProductsIndex() {
           </Link>
           {negotiation && (
             <>
-              <div style={price}>{showPrice(negotiationLive, negotiation)}</div>
+              <div style={price}>{PRICE_LABEL.negotiation}</div>
               <div style={{ marginTop: 10 }}>
-                <BuyNow priceId={negotiation.priceId} name={negotiation.name} price={negotiation.priceAUD ?? 0}>
+                <BuyNow priceId={negotiation.priceId} name={negotiation.name} price={0}>
                   Buy Now
                 </BuyNow>
               </div>
