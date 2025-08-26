@@ -67,7 +67,7 @@ export default function AboutPage() {
               With intensive, research and applied work, I help organisations proactively control psychosocial risks (now regulated) with a focus on sexual
               harassment, aggression, bullying, and procedural justice. My approach combines
               evidence-based tools, regulator-ready documentation, and pragmatic delivery tailored to
-              the realities of each business. I have a PhD (UQ) and Masters of Research (RMIT) on Organisational Behaviour and Management, with COSO Certifications 
+              the realities of each business. I have a PhD (UQ) and Masters of Business Research (RMIT) related to Organisational Behaviour and Management, with COSO Certifications 
               on Risk Management and Internal Control. I am certified director and board secretary by GCC Board of Directors Institute. 
             </p>
             <p>
