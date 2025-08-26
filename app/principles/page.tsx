@@ -20,20 +20,7 @@ export default function PrinciplesPage() {
         These statements set out how Ad Meliorem operates — with fairness, integrity, and respect for people and Country.
       </p>
 
-      {/* AdMeliorem\public\Images\ethics.jpg */}
-      <div style={{ display: "flex", justifyContent: "center", margin: "24px 0" }}>
-        <Image
-          src="/Images/ethics.jpg"
-          alt="Principles guiding Ad Meliorem — integrity, fairness, and respect"
-          width={900}
-          height={500}
-          style={{ borderRadius: 12, width: "100%", height: "auto", maxWidth: 900 }}
-          sizes="(max-width: 960px) 100vw, 900px"
-          priority
-        />
-      </div>
-
-      {/* Quick navigation */}
+       {/* Quick navigation */}
       <nav aria-label="Page sections" style={{ marginTop: 8 }}>
         <a href="#conduct" style={linklike}>Code of Conduct</a>{" · "}
         <a href="#ethics" style={linklike}>Code of Ethics</a>{" · "}
@@ -87,9 +74,22 @@ export default function PrinciplesPage() {
           I commit to upholding this Code in every facet of my business. When uncertainty arises, I choose the path of
           integrity, sustainability, and fairness.
         </p>
+        
       </section>
+      {/* AdMeliorem\public\Images\ethics.jpg */}
+      <div style={{ display: "flex", justifyContent: "center", margin: "24px 0" }}>
+        <Image
+          src="/Images/ethics.jpg"
+          alt="Principles guiding Ad Meliorem — integrity, fairness, and respect"
+          width={900}
+          height={500}
+          style={{ borderRadius: 12, width: "100%", height: "auto", maxWidth: 900 }}
+          sizes="(max-width: 960px) 100vw, 900px"
+          priority
+        />
+      </div>
 
-      {/* Code of Ethics */}
+           {/* Code of Ethics */}
       <section id="ethics" style={section}>
         <h2 style={listHead}>Ad Meliorem – Code of Ethics (Virtue Ethics Framework)</h2>
         <h3 style={{ marginTop: 12 }}>Introduction</h3>
