@@ -2,7 +2,6 @@ import type { CSSProperties } from "react";
 import Link from "next/link";
 import BuyNow from "../../components/BuyNow";
 
-// If your repo path differs, adjust this import to "../../data/catalog.json"
 type CatalogItem = {
   productId?: string;
   priceId?: string;
@@ -13,9 +12,8 @@ type CatalogItem = {
   url?: string | null;
 };
 
-// Server component can load JSON at build time
+// Load JSON at build time
 async function getCatalog(): Promise<CatalogItem[]> {
-  // eslint-disable-next-line @typescript-eslint/no-unsafe-return
   const mod = await import("../../data/catalog.json");
   return (mod as any).default as CatalogItem[];
 }
@@ -28,7 +26,6 @@ export const metadata = {
 export default async function ProductsIndex() {
   const catalog = await getCatalog();
 
-  // helper: find first item whose name includes a keyword (case-insensitive)
   const pick = (needle: string) =>
     catalog.find((it) => it?.name?.toLowerCase().includes(needle.toLowerCase()));
 
@@ -40,13 +37,7 @@ export default async function ProductsIndex() {
 
   const wrap: CSSProperties = { maxWidth: 1100, margin: "28px auto", padding: "0 16px", lineHeight: 1.65 };
   const grid: CSSProperties = { display: "grid", gap: 24, marginTop: 24 };
-  const card: CSSProperties = {
-    background: "#111",
-    border: "1px solid #333",
-    borderRadius: 8,
-    padding: 16,
-    transition: "transform 0.2s ease",
-  };
+  const card: CSSProperties = { background: "#111", border: "1px solid #333", borderRadius: 8, padding: 16 };
   const title: CSSProperties = { margin: "0 0 8px", fontSize: 18, color: "#f1c40f" };
   const blurb: CSSProperties = { fontSize: 14, color: "#bdbdbd" };
   const linkStyle: CSSProperties = { textDecoration: "none", color: "inherit" };
@@ -74,7 +65,9 @@ export default async function ProductsIndex() {
                 {shsarc.priceAUD != null ? `A$${shsarc.priceAUD.toFixed(2)}` : "Price shown at checkout"}
               </div>
               <div style={{ marginTop: 10 }}>
-                <BuyNow name={shsarc.name} price={shsarc.priceAUD ?? 0}>Buy Now</BuyNow>
+                <BuyNow priceId={shsarc.priceId} name={shsarc.name} price={shsarc.priceAUD ?? 0}>
+                  Buy Now
+                </BuyNow>
               </div>
             </>
           )}
@@ -94,7 +87,9 @@ export default async function ProductsIndex() {
                 {procedural.priceAUD != null ? `A$${procedural.priceAUD.toFixed(2)}` : "Price shown at checkout"}
               </div>
               <div style={{ marginTop: 10 }}>
-                <BuyNow name={procedural.name} price={procedural.priceAUD ?? 0}>Buy Now</BuyNow>
+                <BuyNow priceId={procedural.priceId} name={procedural.name} price={procedural.priceAUD ?? 0}>
+                  Buy Now
+                </BuyNow>
               </div>
             </>
           )}
@@ -114,7 +109,9 @@ export default async function ProductsIndex() {
                 {culture.priceAUD != null ? `A$${culture.priceAUD.toFixed(2)}` : "Price shown at checkout"}
               </div>
               <div style={{ marginTop: 10 }}>
-                <BuyNow name={culture.name} price={culture.priceAUD ?? 0}>Buy Now</BuyNow>
+                <BuyNow priceId={culture.priceId} name={culture.name} price={culture.priceAUD ?? 0}>
+                  Buy Now
+                </BuyNow>
               </div>
             </>
           )}
@@ -134,7 +131,9 @@ export default async function ProductsIndex() {
                 {mediation.priceAUD != null ? `A$${mediation.priceAUD.toFixed(2)}` : "Price shown at checkout"}
               </div>
               <div style={{ marginTop: 10 }}>
-                <BuyNow name={mediation.name} price={mediation.priceAUD ?? 0}>Buy Now</BuyNow>
+                <BuyNow priceId={mediation.priceId} name={mediation.name} price={mediation.priceAUD ?? 0}>
+                  Buy Now
+                </BuyNow>
               </div>
             </>
           )}
@@ -154,7 +153,9 @@ export default async function ProductsIndex() {
                 {negotiation.priceAUD != null ? `A$${negotiation.priceAUD.toFixed(2)}` : "Price shown at checkout"}
               </div>
               <div style={{ marginTop: 10 }}>
-                <BuyNow name={negotiation.name} price={negotiation.priceAUD ?? 0}>Buy Now</BuyNow>
+                <BuyNow priceId={negotiation.priceId} name={negotiation.name} price={negotiation.priceAUD ?? 0}>
+                  Buy Now
+                </BuyNow>
               </div>
             </>
           )}
