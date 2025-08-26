@@ -39,18 +39,6 @@ export default function EvidencePage() {
         culture improvement.
       </p>
 
-      {/* AdMeliorem\public\Images\feedback.jpg */}
-      <div style={{ display: "flex", justifyContent: "center", margin: "24px 0" }}>
-        <Image
-          src="/Images/feedback.jpg"  // ← place your image at public/images/evidence.jpg
-          alt="Preventing harm and embedding fairness"
-          width={900}
-          height={500}
-          style={{ borderRadius: 12, width: "100%", height: "auto", maxWidth: 900 }}
-          sizes="(max-width: 960px) 100vw, 900px"
-        />
-      </div>
-
       {/* Headline evidence blocks */}
       <section style={section}>
         <h2 style={{ marginTop: 0 }}>Preventing Harm in Complex Sexual Harassment Cases</h2>
@@ -116,6 +104,18 @@ export default function EvidencePage() {
         </div>
       </section>
 
+  {/* AdMeliorem\public\Images\feedback.jpg */}
+      <div style={{ display: "flex", justifyContent: "center", margin: "24px 0" }}>
+        <Image
+          src="/Images/feedback.jpg"  // ← place your image at public/images/evidence.jpg
+          alt="Preventing harm and embedding fairness"
+          width={900}
+          height={500}
+          style={{ borderRadius: 12, width: "100%", height: "auto", maxWidth: 900 }}
+          sizes="(max-width: 960px) 100vw, 900px"
+        />
+      </div>
+      
       {/* Optional CTA */}
       <section style={section}>
         <h2 style={{ marginTop: 0 }}>Discuss your situation</h2>
