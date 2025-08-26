@@ -20,19 +20,7 @@ export default function TrainingPrograms() {
         regulator-ready Prevention Plans.
       </p>
 
-      {/* AdMeliorem\public\Images\courses.jpg */}
-     <div style={{ display: "flex", justifyContent: "center", margin: "24px 0" }}>
-  <Image
-    src="/Images/courses.jpg"
-    alt="Training programs illustration"
-    width={800}
-    height={400}
-    style={{ borderRadius: 12 }}
-  />
-</div>
-
-
-      <section style={block} id="shsarc">
+            <section style={block} id="shsarc">
         <h2 style={{ marginTop: 0 }}>SHSARC™</h2>
         <p>
           A 3-day, 11-module workshop focused on prevention, awareness, and isolating wrongful
@@ -47,6 +35,17 @@ export default function TrainingPrograms() {
           claims arise, and to respond immediately when an incident happens.
         </p>
       </section>
-    </main>
+    
+{/* AdMeliorem\public\Images\courses.jpg */}
+     <div style={{ display: "flex", justifyContent: "center", margin: "24px 0" }}>
+  <Image
+    src="/Images/courses.jpg"
+    alt="Training programs illustration"
+    width={800}
+    height={400}
+    style={{ borderRadius: 12 }}
+  />
+</div>
+   </main>
   );
 }
