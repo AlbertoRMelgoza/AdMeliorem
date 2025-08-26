@@ -61,7 +61,7 @@ const SUBPRODUCTS = [
     slug: "culture-risk-indicators",
     title: "Culture Risk Indicators (Risk Culture)",
     short: "Customisable indicators aligned to key risk domains.",
-    priceLabel: "Contact for quote",
+    priceLabel: "A$ 3,000.00 - annual subscription",
   },
 ];
 
