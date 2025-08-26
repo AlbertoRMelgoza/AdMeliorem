@@ -1,32 +1,55 @@
 import Link from "next/link";
 import type { CSSProperties } from "react";
 import { SUBPRODUCTS } from "./subproducts";
-import BuyNow from "../../../components/BuyNow";
+import BuyNow from "../../components/BuyNow";
 
+// ───────────────────────────────────────────────────────────────────────────────
+// Optional catalog lookup (used if you keep data/catalog.json in the repo root)
+// ───────────────────────────────────────────────────────────────────────────────
 type CatalogItem = { name?: string; priceId?: string };
-
 async function getCatalog(): Promise<CatalogItem[]> {
-  const mod = await import("../../../data/catalog.json");
+  const mod = await import("../../../data/catalog.json"); // repo-root /data/catalog.json
   return (mod as any).default as CatalogItem[];
 }
 
-// Hard-wire Stripe Price IDs for subproducts
-const PRICE_ID_BY_SLUG: Record<string, string | undefined> = {
-  copsoq: "price_XXXXXXXX_copsoq_annual_3750",                 // A$3,750/yr
-  sheq: "price_XXXXXXXX_sheq_annual_3000",                     // A$3,000/yr
-  "culture-pulse-surveys": "price_XXXXXXXX_pulse_annual_3000", // A$3,000/yr
-
-  ocas: "price_XXXXXXXX_ocas_2500",                            // A$2,500/engagement
-  wfbs: "price_XXXXXXXX_wfbs_2500",                            // A$2,500/engagement
-
-  "code-of-conduct": "price_XXXXXXXX_coc_750",                 // A$750/review
-  "code-of-ethics": "price_XXXXXXXX_coe_750",                  // A$750/review
-  "qualitative-interventions": "price_XXXXXXXX_qual_750",      // A$750/session
-  "culture-risk-indicators": "price_XXXXXXXX_cri",             // if you created one; else leave undefined
+// ───────────────────────────────────────────────────────────────────────────────
+// Display-only price labels (text shown on each tile)
+// ───────────────────────────────────────────────────────────────────────────────
+const PRICE_LABEL_BY_SLUG: Record<string, string> = {
+  copsoq: "A$ 3,750.00 — annual subscription",
+  sheq: "A$ 3,000.00 — annual subscription",
+  "culture-pulse-surveys": "A$ 3,000.00 — annual subscription",
+  "qualitative-interventions": "A$ 750.00 — per session (1 hour)",
+  "code-of-conduct": "A$ 750.00 — per review",
+  "code-of-ethics": "A$ 750.00 — per review",
+  ocas: "A$ 2,500.00 — per engagement",
+  wfbs: "A$ 2,500.00 — per engagement",
+  "culture-risk-indicators": "Contact for quote",
 };
 
-// Keywords to find Stripe Price IDs in your catalog.json
-const PRICE_KEYWORD_BY_SLUG: Record<string, string> = {
+// ───────────────────────────────────────────────────────────────────────────────
+// Hard-wired Stripe Price IDs for each subproduct (fill with your real price_…)
+// If a slug is undefined here, we’ll try to find a priceId via catalog.json;
+// if still none is found, we’ll show “Enquire / Request invoice”.
+// ───────────────────────────────────────────────────────────────────────────────
+const PRICE_ID_BY_SLUG: Record<string, string | undefined> = {
+  // Annual subscriptions
+  copsoq: undefined,                  // e.g. "price_XXXXXXXX_copsoq_annual_3750"
+  sheq: undefined,                    // e.g. "price_XXXXXXXX_sheq_annual_3000"
+  "culture-pulse-surveys": undefined, // e.g. "price_XXXXXXXX_pulse_annual_3000"
+
+  // One-off / per engagement
+  ocas: undefined, // set when ready
+  wfbs: undefined, // set when ready (you added WFBS later — paste its price_… id here)
+
+  "code-of-conduct": "price_1RznlFI3l2fmoUA7DJ3CAuXh",
+  "code-of-ethics": "price_1RznmGI3l2fmoUA7Nu5lV2XP",
+  "qualitative-interventions": "price_1RznqYI3l2fmoUA7mXcIfjIi",
+  "culture-risk-indicators": "price_1RznrPI3l2fmoUA7EODLJphs",
+};
+
+// If you want to auto-find priceIds from data/catalog.json by name:
+const PRICE_KEYWORD_BY_SLUG: Record<string, string | undefined> = {
   copsoq: "copsoq subscription",
   sheq: "sheq subscription",
   "culture-pulse-surveys": "pulse subscription",
@@ -41,7 +64,7 @@ const PRICE_KEYWORD_BY_SLUG: Record<string, string> = {
 export const metadata = {
   title: "Culture Risk Diagnostic™ — Ad Meliorem",
   description:
-    "A forensic cultural assessment with leading indicators, risk scores and evidence of due diligence, with the intention to minimise financial and reputational liability for your business.",
+    "A forensic cultural assessment that maps hotspots and provides leading indicators, risk scores and evidence of due diligence.",
 };
 
 export default async function CRDPage() {
@@ -72,7 +95,10 @@ export default async function CRDPage() {
   const shortStyle: CSSProperties = { margin: "6px 0 8px 0", fontSize: 13, opacity: 0.9, fontWeight: 500 };
   const priceStyle: CSSProperties = { margin: 0, fontSize: 14, fontWeight: 700 };
 
+  // Helper: prefer hard-wired map; else try catalog.json keyword match
   const priceIdForSlug = (slug: string): string | null => {
+    const pinned = PRICE_ID_BY_SLUG[slug];
+    if (pinned) return pinned;
     const kw = PRICE_KEYWORD_BY_SLUG[slug];
     if (!kw) return null;
     const hit = catalog.find((it) => it?.name?.toLowerCase().includes(kw.toLowerCase()));
@@ -83,11 +109,11 @@ export default async function CRDPage() {
     <main style={wrap}>
       <h1 style={{ marginTop: 0 }}>Culture Risk Diagnostic™</h1>
       <p>
-        The Culture Risk Diagnostic™ is a forensic assessment that maps hotspots and provides leading indicators, risk
-        scores and due-diligence evidence.
+        The Culture Risk Diagnostic™ provides leading indicators, risk scores and due-diligence evidence. Choose a subproduct to see modules,
+        deliverables, and purchase options.
       </p>
 
-      {/* Subproducts grid WITH prices and Buy buttons when priceId is available */}
+      {/* Subproducts grid with price labels + Buy buttons when priceId is available */}
       <section style={card}>
         <h2 style={{ marginTop: 0 }}>Subproducts</h2>
         <div style={grid}>
@@ -134,8 +160,8 @@ export default async function CRDPage() {
       <section style={card}>
         <h2 style={{ marginTop: 0 }}>Deliverable</h2>
         <p>
-          A regulator-ready report for key stakeholders with cultural risk scores and hazard mapping. The report is
-          designed to withstand regulator scrutiny and provide precise leading indicators of harm.
+          A regulator-ready report with cultural risk scores and hazard mapping, built to withstand regulator scrutiny and provide precise
+          early-warning indicators of harm.
         </p>
       </section>
 
@@ -152,9 +178,9 @@ export default async function CRDPage() {
       <section style={card}>
         <h2 style={{ marginTop: 0 }}>Deliverables (summary)</h2>
         <ul>
-          <li>Validated survey instruments and targeted interviews</li>
-          <li>Key Culture Risk Indicators with thresholds and trend views</li>
-          <li>Precise Prevention Plans</li>
+          <li>Validated survey instruments and targeted interviews.</li>
+          <li>Key Culture Risk Indicators with thresholds and trend views.</li>
+          <li>Precise Prevention Plans.</li>
         </ul>
         <p style={{ marginTop: 12 }}>
           <a
