@@ -1,43 +1,51 @@
+import { NextResponse } from "next/server";
 import Stripe from "stripe";
-import { NextRequest, NextResponse } from "next/server";
 
-export const runtime = "nodejs";
+// Pick live if present (Production), else fall back to test key
+const STRIPE_SECRET =
+  process.env.STRIPE_SECRET_KEY_LIVE || process.env.STRIPE_SECRET_KEY;
 
-type CartItem = { priceId: string; quantity?: number };
+if (!STRIPE_SECRET) {
+  throw new Error("Missing Stripe secret key (STRIPE_SECRET_KEY[_LIVE])");
+}
 
-export async function POST(req: NextRequest) {
-  const key =
-    process.env.STRIPE_SECRET_KEY ??
-    process.env.STRIPE_SECRET ??
-    "";
+const stripe = new Stripe(STRIPE_SECRET, { apiVersion: "2024-06-20" });
 
-  if (!key) {
-    return NextResponse.json(
-      { error: "Missing STRIPE_SECRET_KEY in Vercel project settings." },
-      { status: 500 }
-    );
-  }
-
-  const stripe = new Stripe(key);
-
+export async function POST(req: Request) {
   try {
-    const { items = [], customer_email } = (await req.json()) as {
-      items: CartItem[];
-      customer_email?: string;
-    };
-
+    const body = await req.json() as { items?: Array<{ name: string; price: number; quantity?: number }> };
+    const items = body?.items ?? [];
     if (!Array.isArray(items) || items.length === 0) {
       return NextResponse.json({ error: "Cart is empty." }, { status: 400 });
     }
 
-    // ✅ Require Price IDs only
-    for (const it of items) {
-      if (!it?.priceId) {
-        return NextResponse.json(
-          { error: "Each item must include a Stripe priceId." },
-          { status: 400 }
-        );
-      }
+    const line_items = items.map((it) => ({
+      price_data: {
+        currency: "aud",
+        product_data: { name: it.name },
+        unit_amount: Math.round((it.price ?? 0) * 100),
+      },
+      quantity: it.quantity ?? 1,
+    }));
+
+    const isProd = !!process.env.VERCEL_ENV && process.env.VERCEL_ENV === "production";
+    const baseUrl = isProd ? "https://albertormelgoza.com" : "http://localhost:3000";
+
+    const session = await stripe.checkout.sessions.create({
+      mode: "payment",
+      line_items,
+      billing_address_collection: "auto",
+      shipping_address_collection: { allowed_countries: ["AU", "NZ", "US"] },
+      success_url: `${baseUrl}/success?session_id={CHECKOUT_SESSION_ID}`,
+      cancel_url: `${baseUrl}/products`,
+      metadata: { site: "Ad Meliorem" },
+    });
+
+    return NextResponse.json({ url: session.url });
+  } catch (err: any) {
+    return NextResponse.json({ error: err?.message ?? "Server error" }, { status: 500 });
+  }
+}
     }
 
     const line_items = items.map((it) => ({
