@@ -1,25 +1,19 @@
 import Stripe from "stripe";
 import { NextRequest, NextResponse } from "next/server";
 
-export const runtime = "nodejs"; // Stripe SDK needs Node runtime
+export const runtime = "nodejs";
 
-type CartItem =
-  | { priceId: string; quantity?: number } // preferred: Stripe Price ID
-  | { name: string; price: number; quantity?: number }; // fallback: name + unit price (AUD)
+type CartItem = { priceId: string; quantity?: number };
 
 export async function POST(req: NextRequest) {
-  // Read key at runtime (works on Vercel Preview/Prod)
   const key =
     process.env.STRIPE_SECRET_KEY ??
-    process.env.STRIPE_SECRET ?? // optional fallback var name
+    process.env.STRIPE_SECRET ??
     "";
 
   if (!key) {
     return NextResponse.json(
-      {
-        error:
-          "Server is missing STRIPE_SECRET_KEY. Add it in Vercel → Project → Settings → Environment Variables (Production + Preview) and redeploy.",
-      },
+      { error: "Missing STRIPE_SECRET_KEY in Vercel project settings." },
       { status: 500 }
     );
   }
@@ -36,31 +30,20 @@ export async function POST(req: NextRequest) {
       return NextResponse.json({ error: "Cart is empty." }, { status: 400 });
     }
 
-    // Build line_items: prefer Stripe Price IDs if present
-    const line_items = items.map((it) => {
-      const qty = Math.max(1, Number((it as any).quantity ?? 1));
-
-      if ("priceId" in it && it.priceId) {
-        return { price: String(it.priceId), quantity: qty };
+    // ✅ Require Price IDs only
+    for (const it of items) {
+      if (!it?.priceId) {
+        return NextResponse.json(
+          { error: "Each item must include a Stripe priceId." },
+          { status: 400 }
+        );
       }
+    }
 
-      if ("name" in it && "price" in it) {
-        const unit_amount = Math.round(Number(it.price) * 100);
-        if (!it.name || !Number.isFinite(unit_amount) || unit_amount <= 0) {
-          throw new Error("Invalid item payload (name/price).");
-        }
-        return {
-          price_data: {
-            currency: "aud",
-            product_data: { name: it.name },
-            unit_amount,
-          },
-          quantity: qty,
-        };
-      }
-
-      throw new Error("Invalid cart item.");
-    });
+    const line_items = items.map((it) => ({
+      price: String(it.priceId),
+      quantity: Math.max(1, Number(it.quantity ?? 1)),
+    }));
 
     const origin =
       req.headers.get("origin") ??
@@ -75,7 +58,7 @@ export async function POST(req: NextRequest) {
       billing_address_collection: "auto",
       success_url: `${origin}/success?session_id={CHECKOUT_SESSION_ID}`,
       cancel_url: `${origin}/cart`,
-      shipping_address_collection: { allowed_countries: ["AU", "NZ", "US"] }, // adjust if needed
+      shipping_address_collection: { allowed_countries: ["AU", "NZ", "US"] },
     });
 
     return NextResponse.json({ url: session.url });
