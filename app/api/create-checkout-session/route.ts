@@ -1,11 +1,27 @@
 import Stripe from "stripe";
 import { NextRequest, NextResponse } from "next/server";
 
-export const runtime = "nodejs"; // use Node runtime (Stripe needs it)
-
-const stripe = new Stripe(process.env.STRIPE_SECRET_KEY!); // use account default API version
+export const runtime = "nodejs";
 
 export async function POST(req: NextRequest) {
+  // ✅ Read key at runtime and fail clearly if missing
+  const key =
+    process.env.STRIPE_SECRET_KEY ??
+    process.env.STRIPE_SECRET ?? // fallback name, just in case
+    "";
+
+  if (!key) {
+    return NextResponse.json(
+      {
+        error:
+          "Server is missing STRIPE_SECRET_KEY. Add it in Vercel → Project → Settings → Environment Variables (Production + Preview) and redeploy.",
+      },
+      { status: 500 }
+    );
+  }
+
+  const stripe = new Stripe(key);
+
   try {
     const { items = [], customer_email } = await req.json();
 
@@ -20,7 +36,7 @@ export async function POST(req: NextRequest) {
       }
       return {
         price_data: {
-          currency: "aud", // change if needed
+          currency: "aud",
           product_data: { name: it.name },
           unit_amount,
         },
