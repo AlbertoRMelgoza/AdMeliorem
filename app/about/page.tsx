@@ -68,7 +68,7 @@ export default function AboutPage() {
               harassment, aggression, bullying, and procedural justice. My approach combines
               evidence-based tools, regulator-ready documentation, and pragmatic delivery tailored to
               the realities of each business. I have a PhD (UQ) and Masters of Business Research (RMIT) related to Organisational Behaviour and Management, with COSO Certifications 
-              on Risk Management and Internal Control. I am certified director and board secretary by GCC Board of Directors Institute. 
+              on Risk Management and Internal Control. I am certified director and board secretary by GCC Board of Directors Institute, and hold a Diploma on Health and Safety by NSW Tafe. 
             </p>
             <p>
               Over 20 years I have advised on complex incidents, assist with external investigation
@@ -84,6 +84,7 @@ export default function AboutPage() {
             <p>
               My commitment is simple, helping your corporation being proactive by: preventing individual harm, preventing culture risk to materialise, and reducing liability with a
               clear path from risk management, compliance to succesful execution of strategy.
+              I am member of the American Psychological Association, The Gladstone Engineering Alliance, The Tattersalls Club, and The Resolution Institute.
             </p>
 
             <p style={{ marginTop: 16 }}>
