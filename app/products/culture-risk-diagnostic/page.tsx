@@ -207,7 +207,20 @@ export default function CRDPage() {
     We also enforce strict anonymity and minimum subgroup sizes for reporting.
   </p>
 </section>
-      
+
+      <p style={{ opacity: 0.9 }}>{sp.short}</p>
+
+<p style={{ marginTop: 8 }}>
+  <a
+    href="/docs/alchemer-security-whitepaper.pdf"
+    target="_blank"
+    rel="noopener noreferrer"
+    style={{ color: "#f1c40f", fontWeight: 700, textDecoration: "none" }}
+  >
+    View Alchemer Security White Paper →
+  </a>
+</p>
+
       <section style={card}>
         <h2 style={{ marginTop: 0 }}>Deliverable</h2>
         <p>
