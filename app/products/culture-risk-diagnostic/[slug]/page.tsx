@@ -107,6 +107,50 @@ export default function SubproductPage({ params }: Props) {
       <h1 style={{ marginTop: 0 }}>{sp.title}</h1>
       <p style={{ opacity: 0.9 }}>{sp.short}</p>
 
+{/* Partner + privacy note */}
+<div style={{ margin: "12px 0 0 0" }}>
+  <span
+    style={{
+      display: "inline-block",
+      background: "#f1c40f",
+      color: "#000",
+      borderRadius: 9999,
+      padding: "4px 10px",
+      fontWeight: 700,
+      fontSize: 12,
+    }}
+  >
+    Data collected via Alchemer
+  </span>
+</div>
+
+<section style={card} id="data-safety">
+  <h2 style={{ marginTop: 0 }}>Data safety &amp; privacy</h2>
+  <p>
+    We partner with <strong>Alchemer</strong> to run secure collection for Culture Risk
+    Diagnostic engagements. Alchemer provides enterprise-grade controls:
+  </p>
+  <ul>
+    <li>AES-256 encryption at rest and TLS in transit; encrypted backups.</li>
+    <li>Hosted on AWS with VPC isolation, WAF, and fault-tolerant design.</li>
+    <li>Independent certifications: SOC 2 Type II and ISO 27001.</li>
+    <li>Committed 99.9% service uptime for surveys and app access.</li>
+  </ul>
+  <p style={{ marginTop: 10 }}>
+    <a
+      href="/docs/alchemer-security-whitepaper.pdf"
+      style={{ color: "#f1c40f", textDecoration: "none", fontWeight: 700 }}
+      target="_blank"
+      rel="noopener noreferrer"
+    >
+      View Alchemer Security White Paper →
+    </a>
+  </p>
+  <p style={{ opacity: 0.9, marginTop: 10 }}>
+    We also enforce strict anonymity and minimum subgroup sizes for reporting.
+  </p>
+</section>
+      
       {/* If this subproduct has modules, show them with prices + Buy Now for each module */}
       {modules.length > 0 ? (
         <section style={card}>
