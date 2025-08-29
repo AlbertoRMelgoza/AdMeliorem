@@ -138,7 +138,7 @@ export default function SubproductPage({ params }: Props) {
   </ul>
   <p style={{ marginTop: 10 }}>
     <a
-      href="/docs/alchemer-security-whitepaper.pdf"
+      href="/docs/alchemer-security-whitepaper-091824.pdf"
       style={{ color: "#f1c40f", textDecoration: "none", fontWeight: 700 }}
       target="_blank"
       rel="noopener noreferrer"
