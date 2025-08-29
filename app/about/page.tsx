@@ -89,14 +89,14 @@ export default function AboutPage() {
               </div>
               <div style={{ background:"#0f0f0f", border:"1px solid #222", borderRadius:10, padding:12 }}>
                 <div style={{ fontSize:22, fontWeight:800 }}>High-stakes</div>
-                <div style={{ opacity:0.9 }}>Negotiations & mediation that keep projects moving</div>
+                <div style={{ opacity:0.9 }}>Negotiations & mediation that avoid litigation</div>
               </div>
             </div>
           </section>
 
           {/* Aha proof */}
           <section style={card}>
-            <h2 style={{ marginTop: 0 }}>Aha proof</h2>
+            <h2 style={{ marginTop: 0 }}>Global proof</h2>
             <ul>
               <li>
                 <strong>PEMEX:</strong> Culture &amp; trust architecture through crisis—aligned labour, social licence,
@@ -197,7 +197,7 @@ export default function AboutPage() {
               <li><strong>PhD – OB (UQ)</strong>; <strong>MBR – OB (RMIT-U)</strong></li>
               <li>COSO (ERM &amp; Internal Control); Certified Director &amp; Board Secretary (GCC BDI); WHS Diploma (TAFE NSW)</li>
               <li>Awards: Academy of Management &amp; British Academy of Management Best Paper</li>
-              <li>Memberships: American Psychological Association (APA_ Gladstone Engineering Alliance (GEA); The Resolution Institute</li>
+              <li>Memberships: American Psychological Association (APA); Gladstone Engineering Alliance (GEA); The Resolution Institute</li>
               <li>Ex Aramco, Ex Deloitte, Ex Pemex</li>
             </ul>
           </section>
