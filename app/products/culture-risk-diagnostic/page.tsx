@@ -1,6 +1,8 @@
 import Link from "next/link";
 import type { CSSProperties } from "react";
-import BuyButton from "./BuyButton"; // make sure this file exists in the same folder
+// If BuyButton lives at app/products/components/BuyButton.tsx use this:
+import BuyButton from "../components/BuyButton";
+// If you actually put it in the same folder as this file, change to: `./BuyButton`
 
 export const metadata = {
   title: "Culture Risk Diagnostic™ — Ad Meliorem",
@@ -10,15 +12,13 @@ export const metadata = {
 
 // ─────────────────────────────────────────────────────────────
 // Subproducts: display labels + fallback charge amounts (AUD)
-// Every tile will show Buy Now. If you later add Stripe price_…
-// IDs in PRICE_ID_BY_SLUG below, those will be used instead.
 // ─────────────────────────────────────────────────────────────
 type Tile = {
   slug: string;
   title: string;
   short: string;
   priceLabel: string;    // what the user sees
-  fallbackPrice: number; // what we'll charge if no Stripe priceId is set
+  fallbackPrice: number; // charge if no Stripe priceId is configured
 };
 
 const SUBPRODUCTS: Tile[] = [
@@ -87,8 +87,8 @@ const SUBPRODUCTS: Tile[] = [
   },
 ];
 
-// Optional: paste your real Stripe price IDs here to charge Stripe prices
-const PRICE_ID_BY_SLUG: Record<string, string | undefined> = {
+// Optional: put your real Stripe price IDs here if you want to use them
+const PRICE_ID_BY_SLUG: Record<Tile["slug"], string | undefined> = {
   // copsoq: "price_XXXXXXXXXXXXXXXX",
   // sheq: "price_YYYYYYYYYYYYYYYY",
   // ocas: "price_ZZZZZZZZZZZZZZZZ",
@@ -131,10 +131,10 @@ export default function CRDPage() {
       <h1 style={{ marginTop: 0 }}>Culture Risk Diagnostic™</h1>
 
       <p style={{ margin: "0 0 8px 0" }}>
-  <a href="/products" style={{ color: "#f1c40f", textDecoration: "none", fontWeight: 700 }}>
-    ← Back to Products
-  </a>
-</p>
+        <a href="/products" style={{ color: "#f1c40f", textDecoration: "none", fontWeight: 700 }}>
+          ← Back to Products
+        </a>
+      </p>
 
       <p>
         The Culture Risk Diagnostic™ provides leading indicators, risk scores and due-diligence evidence. Choose a
@@ -146,7 +146,6 @@ export default function CRDPage() {
         <div style={grid}>
           {SUBPRODUCTS.map((sp) => {
             const priceId = PRICE_ID_BY_SLUG[sp.slug];
-
             return (
               <div key={sp.slug} style={{ display: "flex", flexDirection: "column", gap: 8 }}>
                 <Link href={`/products/culture-risk-diagnostic/${sp.slug}`} style={tile}>
@@ -164,62 +163,60 @@ export default function CRDPage() {
         </div>
       </section>
 
-{/* Partner + privacy note */}
-<div style={{ margin: "12px 0 0 0" }}>
-  <span
-    style={{
-      display: "inline-block",
-      background: "#f1c40f",
-      color: "#000",
-      borderRadius: 9999,
-      padding: "4px 10px",
-      fontWeight: 700,
-      fontSize: 12,
-    }}
-  >
-    Data collected via Alchemer
-  </span>
-</div>
+      {/* Partner + privacy note */}
+      <div style={{ margin: "12px 0 0 0" }}>
+        <span
+          style={{
+            display: "inline-block",
+            background: "#f1c40f",
+            color: "#000",
+            borderRadius: 9999,
+            padding: "4px 10px",
+            fontWeight: 700,
+            fontSize: 12,
+          }}
+        >
+          Data collected via Alchemer
+        </span>
+      </div>
 
-<section style={card} id="data-safety">
-  <h2 style={{ marginTop: 0 }}>Data safety &amp; privacy</h2>
-  <p>
-    We partner with <strong>Alchemer</strong> to run secure collection for Culture Risk
-    Diagnostic engagements. Alchemer provides enterprise-grade controls:
-  </p>
-  <ul>
-    <li>AES-256 encryption at rest and TLS in transit; encrypted backups.</li>
-    <li>Hosted on AWS with VPC isolation, WAF, and fault-tolerant design.</li>
-    <li>Independent certifications: SOC 2 Type II and ISO 27001.</li>
-    <li>Committed 99.9% service uptime for surveys and app access.</li>
-  </ul>
-  </p>
-  <p style={{ opacity: 0.9, marginTop: 10 }}>
-    We also enforce strict anonymity and minimum subgroup sizes for reporting.
-  </p>
-</section>
+      <section style={card} id="data-safety">
+        <h2 style={{ marginTop: 0 }}>Data safety &amp; privacy</h2>
+        <p>
+          We partner with <strong>Alchemer</strong> to run secure collection for Culture Risk Diagnostic engagements.
+          Alchemer provides enterprise-grade controls:
+        </p>
+        <ul>
+          <li>AES-256 encryption at rest and TLS in transit; encrypted backups.</li>
+          <li>Hosted on AWS with VPC isolation, WAF, and fault-tolerant design.</li>
+          <li>Independent certifications: SOC 2 Type II and ISO 27001.</li>
+          <li>Committed 99.9% service uptime for surveys and app access.</li>
+        </ul>
+        <p style={{ opacity: 0.9, marginTop: 10 }}>
+          We also enforce strict anonymity and minimum subgroup sizes for reporting.
+        </p>
+      </section>
 
-     <p style={{ marginTop: 8 }}>
-  <strong>Data security:</strong> We partner with{" "}
-  <a
-    href="https://www.alchemer.com/"
-    target="_blank"
-    rel="noopener noreferrer"
-    style={{ color: "#f1c40f", fontWeight: 700, textDecoration: "none" }}
-  >
-    Alchemer
-  </a>{" "}
-  for survey delivery. Read the{" "}
-  <a
-    href="/docs/alchemer-security-whitepaper.pdf"
-    target="_blank"
-    rel="noopener noreferrer"
-    style={{ color: "#f1c40f", fontWeight: 700, textDecoration: "none" }}
-  >
-    Alchemer Security White Paper →
-  </a>
-</p>
-
+      <p style={{ marginTop: 8 }}>
+        <strong>Data security:</strong> We partner with{" "}
+        <a
+          href="https://www.alchemer.com/"
+          target="_blank"
+          rel="noopener noreferrer"
+          style={{ color: "#f1c40f", fontWeight: 700, textDecoration: "none" }}
+        >
+          Alchemer
+        </a>{" "}
+        for survey delivery. Read the{" "}
+        <a
+          href="/docs/alchemer-security-whitepaper.pdf"
+          target="_blank"
+          rel="noopener noreferrer"
+          style={{ color: "#f1c40f", fontWeight: 700, textDecoration: "none" }}
+        >
+          Alchemer Security White Paper →
+        </a>
+      </p>
 
       <section style={card}>
         <h2 style={{ marginTop: 0 }}>Deliverable</h2>
