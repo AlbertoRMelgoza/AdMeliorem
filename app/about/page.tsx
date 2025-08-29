@@ -56,7 +56,7 @@ export default function AboutPage() {
         {/* Photo */}
         <div style={leftCol}>
           <div style={photoBox}>
-            {/* Put your image at: /public/Images/alberto.jpg */}
+            {/* Ensure this exists: /public/Images/alberto.jpg */}
             <img
               src="/Images/alberto.jpg"
               alt="Alberto R. Melgoza, founder of Ad Meliorem"
@@ -72,49 +72,72 @@ export default function AboutPage() {
           <p style={subhead}>The systems side of culture, psychosocial risk, and high-stakes negotiation.</p>
           <p style={{ ...subhead, marginBottom: 12 }}>
             30+ years building regulator-ready culture systems, negotiation playbooks, and psychosocial risk controls
-            that stakeholders and boards respect at a global scale.
+            that boards and investigators respect.
           </p>
 
           {/* Results at a glance */}
-          <section style={{ background:"#111", border:"1px solid #222", borderRadius:12, padding:16, marginTop:12 }}>
-            <h2 style={{ marginTop:0 }}>Results at a glance</h2>
-            <div style={{ display:"grid", gridTemplateColumns:"repeat(auto-fit, minmax(180px,1fr))", gap:12, marginTop:8 }}>
-              <div style={{ background:"#0f0f0f", border:"1px solid #222", borderRadius:10, padding:12 }}>
-                <div style={{ fontSize:22, fontWeight:800 }}>Pre-regulation</div>
-                <div style={{ opacity:0.9 }}>Psychosocial controls designed years before mandates</div>
+          <section style={{ background: "#111", border: "1px solid #222", borderRadius: 12, padding: 16, marginTop: 12 }}>
+            <h2 style={{ marginTop: 0 }}>Results at a glance</h2>
+            <div style={{ display: "grid", gridTemplateColumns: "repeat(auto-fit, minmax(180px,1fr))", gap: 12, marginTop: 8 }}>
+              <div style={{ background: "#0f0f0f", border: "1px solid #222", borderRadius: 10, padding: 12 }}>
+                <div style={{ fontSize: 22, fontWeight: 800 }}>Pre-regulation</div>
+                <div style={{ opacity: 0.9 }}>Psychosocial controls designed years before mandates</div>
               </div>
-              <div style={{ background:"#0f0f0f", border:"1px solid #222", borderRadius:10, padding:12 }}>
-                <div style={{ fontSize:22, fontWeight:800 }}>Board-grade</div>
-                <div style={{ opacity:0.9 }}>Indicators & dossiers used for executive assurance</div>
+              <div style={{ background: "#0f0f0f", border: "1px solid #222", borderRadius: 10, padding: 12 }}>
+                <div style={{ fontSize: 22, fontWeight: 800 }}>90+ indicators</div>
+                <div style={{ opacity: 0.9 }}>Board-grade risk-culture indicators & dossiers</div>
               </div>
-              <div style={{ background:"#0f0f0f", border:"1px solid #222", borderRadius:10, padding:12 }}>
-                <div style={{ fontSize:22, fontWeight:800 }}>High-stakes</div>
-                <div style={{ opacity:0.9 }}>Negotiations & mediation that avoid litigation</div>
+              <div style={{ background: "#0f0f0f", border: "1px solid #222", borderRadius: 10, padding: 12 }}>
+                <div style={{ fontSize: 22, fontWeight: 800 }}>High-stakes</div>
+                <div style={{ opacity: 0.9 }}>Negotiation & mediation that keep projects moving</div>
               </div>
             </div>
           </section>
 
+          {/* Early trust badge (privacy/security up-front) */}
+          <div style={{ marginTop: 12 }}>
+            <span style={badge}>Data collected via Alchemer</span>
+          </div>
+
           {/* Aha proof */}
           <section style={card}>
-            <h2 style={{ marginTop: 0 }}>Global proof</h2>
-            <ul>
-              <li>
-                <strong>PEMEX:</strong> Culture &amp; trust architecture through crisis—aligned labour, social licence,
-                and executive negotiation so critical projects could move.
-              </li>
-              <li>
-                <strong>Aramco:</strong> Governance &amp; culture mechanisms through the world’s largest IPO and
-                mega-transactions—tying behaviour to board-level assurance.
-              </li>
-              <li>
-                <strong>Aesthetic Management (2000s):</strong> Psychosocial risk controls <em>before regulation</em>,
-                turning policy into live, defensible practice.
-              </li>
-              <li>
-                <strong>Negotiation &amp; Mediation:</strong> Structured agreements across government, energy &amp;
-                finance—reducing litigation risk and reputational drag.
-              </li>
+            <h2 style={{ marginTop: 0 }}>Aha proof</h2>
+
+            <p style={{ marginBottom: 6 }}>
+              <strong>PEMEX:</strong> Avoided numerous industrial action threats by applying in-depth negotiation expertise,
+              rigorous culture risk analysis, and a time-to-agreement strategy—resulting in:
+            </p>
+            <ul style={{ marginTop: 0 }}>
+              <li>Zero industrial stoppages across key change initiatives.</li>
+              <li>Preserved operational continuity and avoided multimillion-dollar disruptions.</li>
+              <li>Enhanced trust and alignment among labour, management, and executive teams.</li>
             </ul>
+
+            <p style={{ marginBottom: 6 }}>
+              <strong>Aramco:</strong> Mentored project and external consultants on culture risk, enabling a smooth and
+              diligent IPO transformation on the Tadawul. Results included:
+            </p>
+            <ul style={{ marginTop: 0 }}>
+              <li>Record-setting IPO valuation of US$1.88T (largest listed company at the time).</li>
+              <li>US$25.6B initial corporate financing, up to US$29.4B post-IPO—fueling strategic M&amp;A and procurement.</li>
+              <li>Facilitated high-value deals and JVs—moving from multimillion to multibillion-dollar transactions.</li>
+              <li>Increased staff productivity via continuous development programs.</li>
+              <li>Elevated investor and board confidence in culture risk management—positive DD, successful post-IPO communications, strong market response.</li>
+            </ul>
+
+            <p style={{ marginBottom: 6 }}>
+              <strong>QDoE:</strong> Adopted <strong>14+</strong> recommendations to uplift the psychosocial risk management framework,
+              including stronger confidentiality for incidents related to psychosocial hazards and risks.
+            </p>
+          </section>
+
+          {/* Testimonial */}
+          <section style={card}>
+            <h2 style={{ marginTop: 0 }}>What leaders say</h2>
+            <blockquote style={{ margin: 0, fontStyle: "italic", opacity: 0.95 }}>
+              “The best culture transformation we have experienced at this company.”
+            </blockquote>
+            <div style={{ marginTop: 6, opacity: 0.85 }}>— Senior Vice President &amp; CFO, Aramco</div>
           </section>
 
           {/* What I do */}
@@ -130,12 +153,12 @@ export default function AboutPage() {
                 remediation so processes are fair, transparent, and auditable.
               </li>
               <li>
-                <strong>Negotiation &amp; Mediation</strong> — helping you understand leverage, what’s at stake, and what
-                not to lose.
+                <strong>Negotiation &amp; Mediation</strong> — leverage mapping, rehearsal, and live counsel for
+                high-stakes agreements.
               </li>
               <li>
                 <strong>Assurance &amp; Governance</strong> — board-grade indicators and regulator-ready dossiers that
-                evidence duty-of-care.
+                prove duty-of-care and cut litigation exposure and reputational drag.
               </li>
             </ul>
           </section>
@@ -158,17 +181,14 @@ export default function AboutPage() {
             </ul>
           </section>
 
-          {/* Partner & privacy */}
-          <div style={{ marginTop: 12 }}>
-            <span style={badge}>Data collected via Alchemer</span>
-          </div>
+          {/* Partner & privacy (details + white paper) */}
           <section style={card}>
             <h2 style={{ marginTop: 0 }}>Partner for data management &amp; privacy</h2>
             <p>
               Data collection via <strong>Alchemer</strong> with enterprise-grade security (SOC 2, ISO 27001, AES-256 at
               rest / TLS in transit, AWS).{" "}
               <a
-                href="/docs/alchemer-security-whitepaper-091824.pdf" // update if your filename differs
+                href="/docs/alchemer-security-whitepaper-091824.pdf"
                 target="_blank"
                 rel="noopener noreferrer"
                 style={{ color: "#f1c40f", fontWeight: 700, textDecoration: "none" }}
@@ -190,19 +210,19 @@ export default function AboutPage() {
             </ul>
           </section>
 
-          {/* Credentials (updated as requested) */}
+          {/* Credentials */}
           <section style={card}>
             <h2 style={{ marginTop: 0 }}>Credentials</h2>
             <ul style={{ margin: 0 }}>
-              <li><strong>PhD – OB (UQ)</strong>; <strong>MBR – OB (RMIT-U)</strong></li>
+              <li><strong>PhD – OB (UQ)</strong>; <strong>MBR – OB (RMIT)</strong></li>
               <li>COSO (ERM &amp; Internal Control); Certified Director &amp; Board Secretary (GCC BDI); WHS Diploma (TAFE NSW)</li>
               <li>Awards: Academy of Management &amp; British Academy of Management Best Paper</li>
-              <li>Memberships: American Psychological Association (APA); Gladstone Engineering Alliance (GEA); The Resolution Institute</li>
+              <li>Memberships: Gladstone Engineering Alliance (GEA); The Resolution Institute</li>
               <li>Ex Aramco, Ex Deloitte, Ex Pemex</li>
             </ul>
           </section>
 
-          {/* CTA */}
+          {/* Primary CTA */}
           <p style={{ marginTop: 16 }}>
             <Link
               href="/contact"
@@ -216,7 +236,22 @@ export default function AboutPage() {
                 textDecoration: "none",
               }}
             >
-              Schedule a confidential discussion →
+              Schedule a confidential 20-min consult →
+            </Link>
+          </p>
+
+          {/* Repeat CTA at bottom (sticky) */}
+          <p style={{ marginTop: 6 }}>
+            <Link
+              href="/contact"
+              style={{
+                display: "inline-block",
+                color: "#f1c40f",
+                fontWeight: 700,
+                textDecoration: "none",
+              }}
+            >
+              Prefer email? Message me here →
             </Link>
           </p>
         </div>
