@@ -1,8 +1,6 @@
 import Link from "next/link";
 import type { CSSProperties } from "react";
-// If BuyButton lives at app/products/components/BuyButton.tsx use this:
-import BuyButton from "../components/BuyButton";
-// If you actually put it in the same folder as this file, change to: `./BuyButton`
+import BuyButton from "./BuyButton"; // make sure this file exists in the same folder
 
 export const metadata = {
   title: "Culture Risk Diagnostic™ — Ad Meliorem",
@@ -12,48 +10,55 @@ export const metadata = {
 
 // ─────────────────────────────────────────────────────────────
 // Subproducts: display labels + fallback charge amounts (AUD)
+// Every tile will show Buy Now. If you later add Stripe price_…
+// IDs in PRICE_ID_BY_SLUG below, those will be used instead.
 // ─────────────────────────────────────────────────────────────
 type Tile = {
   slug: string;
   title: string;
   short: string;
   priceLabel: string;    // what the user sees
-  fallbackPrice: number; // charge if no Stripe priceId is configured
+  fallbackPrice: number; // what we'll charge if no Stripe priceId is set
 };
 
 const SUBPRODUCTS: Tile[] = [
   {
     slug: "copsoq",
     title: "COPSOQ (Copenhagen Psychosocial Questionnaire)",
-    short: "Psychosocial hazard mapping across workload, justice, relationships.",
+    short:
+      "Psychosocial hazard mapping across workload, justice, relationships.",
     priceLabel: "A$ 3,750.00 — annual subscription",
     fallbackPrice: 3750,
   },
   {
     slug: "sheq",
     title: "SHEQ (Sexual Harassment Experiences Questionnaire)",
-    short: "Surfaces harassment, unwanted sexual attention, coercion, unsafe climates.",
+    short:
+      "Surfaces harassment, unwanted sexual attention, coercion, unsafe climates.",
     priceLabel: "A$ 3,000.00 — annual subscription",
     fallbackPrice: 3000,
   },
   {
     slug: "ocas",
     title: "OCAS (Overt–Covert Aggression Scale)",
-    short: "Detects bullying, aggression, intimidation — overt and subtle.",
+    short:
+      "Detects bullying, aggression, intimidation — overt and subtle.",
     priceLabel: "A$ 2,250.00 — per engagement",
     fallbackPrice: 2250,
   },
   {
     slug: "wfbs",
     title: "WFBS (Workplace Feelings & Behaviour Survey)",
-    short: "Maps in-group favouritism, exclusion and covert harmful behaviours.",
+    short:
+      "Maps in-group favouritism, exclusion and covert harmful behaviours.",
     priceLabel: "A$ 2,250.00 — per engagement",
     fallbackPrice: 2250,
   },
   {
     slug: "culture-pulse-surveys",
     title: "Culture Pulse Surveys",
-    short: "Short, repeatable pulses to track change and sustain improvement.",
+    short:
+      "Short, repeatable pulses to track change and sustain improvement.",
     priceLabel: "A$ 3,000.00 — annual subscription",
     fallbackPrice: 3000,
   },
@@ -67,7 +72,8 @@ const SUBPRODUCTS: Tile[] = [
   {
     slug: "code-of-ethics",
     title: "Review / Development of Code of Ethics",
-    short: "Ethical principles beyond compliance — embedded in practice.",
+    short:
+      "Ethical principles beyond compliance — embedded in practice.",
     priceLabel: "A$ 750.00 — per review",
     fallbackPrice: 750,
   },
@@ -87,8 +93,8 @@ const SUBPRODUCTS: Tile[] = [
   },
 ];
 
-// Optional: put your real Stripe price IDs here if you want to use them
-const PRICE_ID_BY_SLUG: Record<Tile["slug"], string | undefined> = {
+// Optional: paste your real Stripe price IDs here to charge Stripe prices
+const PRICE_ID_BY_SLUG: Record<string, string | undefined> = {
   // copsoq: "price_XXXXXXXXXXXXXXXX",
   // sheq: "price_YYYYYYYYYYYYYYYY",
   // ocas: "price_ZZZZZZZZZZZZZZZZ",
@@ -101,8 +107,19 @@ const PRICE_ID_BY_SLUG: Record<Tile["slug"], string | undefined> = {
 };
 
 export default function CRDPage() {
-  const wrap: CSSProperties = { maxWidth: 1000, margin: "28px auto", padding: "0 16px", lineHeight: 1.65 };
-  const card: CSSProperties = { background: "#111", border: "1px solid #222", borderRadius: 12, padding: 16, marginTop: 24 };
+  const wrap: CSSProperties = {
+    maxWidth: 1000,
+    margin: "28px auto",
+    padding: "0 16px",
+    lineHeight: 1.65,
+  };
+  const card: CSSProperties = {
+    background: "#111",
+    border: "1px solid #222",
+    borderRadius: 12,
+    padding: 16,
+    marginTop: 24,
+  };
 
   const grid: CSSProperties = {
     display: "grid",
@@ -131,14 +148,17 @@ export default function CRDPage() {
       <h1 style={{ marginTop: 0 }}>Culture Risk Diagnostic™</h1>
 
       <p style={{ margin: "0 0 8px 0" }}>
-        <a href="/products" style={{ color: "#f1c40f", textDecoration: "none", fontWeight: 700 }}>
+        <a
+          href="/products"
+          style={{ color: "#f1c40f", textDecoration: "none", fontWeight: 700 }}
+        >
           ← Back to Products
         </a>
       </p>
 
       <p>
-        The Culture Risk Diagnostic™ provides leading indicators, risk scores and due-diligence evidence. Choose a
-        subproduct to see modules and details.
+        The Culture Risk Diagnostic™ provides leading indicators, risk scores
+        and due-diligence evidence. Choose a subproduct to see modules and details.
       </p>
 
       <section style={card}>
@@ -146,9 +166,16 @@ export default function CRDPage() {
         <div style={grid}>
           {SUBPRODUCTS.map((sp) => {
             const priceId = PRICE_ID_BY_SLUG[sp.slug];
+
             return (
-              <div key={sp.slug} style={{ display: "flex", flexDirection: "column", gap: 8 }}>
-                <Link href={`/products/culture-risk-diagnostic/${sp.slug}`} style={tile}>
+              <div
+                key={sp.slug}
+                style={{ display: "flex", flexDirection: "column", gap: 8 }}
+              >
+                <Link
+                  href={`/products/culture-risk-diagnostic/${sp.slug}`}
+                  style={tile}
+                >
                   <p style={titleStyle}>{sp.title}</p>
                   <p style={shortStyle}>{sp.short}</p>
                   <p style={priceStyle}>{sp.priceLabel}</p>
@@ -183,8 +210,8 @@ export default function CRDPage() {
       <section style={card} id="data-safety">
         <h2 style={{ marginTop: 0 }}>Data safety &amp; privacy</h2>
         <p>
-          We partner with <strong>Alchemer</strong> to run secure collection for Culture Risk Diagnostic engagements.
-          Alchemer provides enterprise-grade controls:
+          We partner with <strong>Alchemer</strong> to run secure collection for
+          Culture Risk Diagnostic engagements. Alchemer provides enterprise-grade controls:
         </p>
         <ul>
           <li>AES-256 encryption at rest and TLS in transit; encrypted backups.</li>
@@ -195,34 +222,33 @@ export default function CRDPage() {
         <p style={{ opacity: 0.9, marginTop: 10 }}>
           We also enforce strict anonymity and minimum subgroup sizes for reporting.
         </p>
+        <p style={{ marginTop: 8 }}>
+          <strong>Data security:</strong> We partner with{" "}
+          <a
+            href="https://www.alchemer.com/"
+            target="_blank"
+            rel="noopener noreferrer"
+            style={{ color: "#f1c40f", fontWeight: 700, textDecoration: "none" }}
+          >
+            Alchemer
+          </a>{" "}
+          for survey delivery. Read the{" "}
+          <a
+            href="/docs/alchemer-security-whitepaper.pdf"
+            target="_blank"
+            rel="noopener noreferrer"
+            style={{ color: "#f1c40f", fontWeight: 700, textDecoration: "none" }}
+          >
+            Alchemer Security White Paper →
+          </a>
+        </p>
       </section>
-
-      <p style={{ marginTop: 8 }}>
-        <strong>Data security:</strong> We partner with{" "}
-        <a
-          href="https://www.alchemer.com/"
-          target="_blank"
-          rel="noopener noreferrer"
-          style={{ color: "#f1c40f", fontWeight: 700, textDecoration: "none" }}
-        >
-          Alchemer
-        </a>{" "}
-        for survey delivery. Read the{" "}
-        <a
-          href="/docs/alchemer-security-whitepaper.pdf"
-          target="_blank"
-          rel="noopener noreferrer"
-          style={{ color: "#f1c40f", fontWeight: 700, textDecoration: "none" }}
-        >
-          Alchemer Security White Paper →
-        </a>
-      </p>
 
       <section style={card}>
         <h2 style={{ marginTop: 0 }}>Deliverable</h2>
         <p>
-          A regulator-ready report with cultural risk scores and hazard mapping, built to withstand regulator scrutiny
-          and provide precise early-warning indicators of harm.
+          A regulator-ready report with cultural risk scores and hazard mapping, built
+          to withstand regulator scrutiny and provide precise early-warning indicators of harm.
         </p>
       </section>
 
