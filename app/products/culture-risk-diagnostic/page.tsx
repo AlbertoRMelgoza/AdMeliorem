@@ -208,18 +208,27 @@ export default function CRDPage() {
   </p>
 </section>
 
-      <p style={{ opacity: 0.9 }}>{sp.short}</p>
-
-<p style={{ marginTop: 8 }}>
+     <p style={{ marginTop: 8 }}>
+  <strong>Data security:</strong> We partner with{" "}
+  <a
+    href="https://www.alchemer.com/"
+    target="_blank"
+    rel="noopener noreferrer"
+    style={{ color: "#f1c40f", fontWeight: 700, textDecoration: "none" }}
+  >
+    Alchemer
+  </a>{" "}
+  for survey delivery. Read the{" "}
   <a
     href="/docs/alchemer-security-whitepaper.pdf"
     target="_blank"
     rel="noopener noreferrer"
     style={{ color: "#f1c40f", fontWeight: 700, textDecoration: "none" }}
   >
-    View Alchemer Security White Paper →
+    Alchemer Security White Paper →
   </a>
 </p>
+
 
       <section style={card}>
         <h2 style={{ marginTop: 0 }}>Deliverable</h2>
