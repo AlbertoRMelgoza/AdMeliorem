@@ -193,15 +193,6 @@ export default function CRDPage() {
     <li>Independent certifications: SOC 2 Type II and ISO 27001.</li>
     <li>Committed 99.9% service uptime for surveys and app access.</li>
   </ul>
-  <p style={{ marginTop: 10 }}>
-    <a
-      href="/docs/alchemer-security-whitepaper.pdf"
-      style={{ color: "#f1c40f", textDecoration: "none", fontWeight: 700 }}
-      target="_blank"
-      rel="noopener noreferrer"
-    >
-      View Alchemer Security White Paper →
-    </a>
   </p>
   <p style={{ opacity: 0.9, marginTop: 10 }}>
     We also enforce strict anonymity and minimum subgroup sizes for reporting.
