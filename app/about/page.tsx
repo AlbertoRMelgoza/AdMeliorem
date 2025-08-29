@@ -217,7 +217,7 @@ export default function AboutPage() {
               <li><strong>PhD – OB (UQ)</strong>; <strong>MBR – OB (RMIT)</strong></li>
               <li>COSO (ERM &amp; Internal Control); Certified Director &amp; Board Secretary (GCC BDI); WHS Diploma (TAFE NSW)</li>
               <li>Awards: Academy of Management &amp; British Academy of Management Best Paper</li>
-              <li>Memberships: Gladstone Engineering Alliance (GEA); The Resolution Institute</li>
+              <li>Memberships: American Psychology Association (APA); Gladstone Engineering Alliance (GEA); The Resolution Institute</li>
               <li>Ex Aramco, Ex Deloitte, Ex Pemex</li>
             </ul>
           </section>
