@@ -234,7 +234,7 @@ export default function CRDPage() {
           </a>{" "}
           for survey delivery. Read the{" "}
           <a
-            href="/docs/alchemer-security-whitepaper.pdf"
+            href="/docs/alchemer-security-whitepaper-091824.pdf"
             target="_blank"
             rel="noopener noreferrer"
             style={{ color: "#f1c40f", fontWeight: 700, textDecoration: "none" }}
