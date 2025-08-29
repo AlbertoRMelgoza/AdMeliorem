@@ -56,7 +56,7 @@ const PRICE_LABEL_BY_SLUG: Record<Slug, string> = {
   "culture-risk-indicators": "A$ 750.00 — per product",
 };
 
-// OPTIONAL: paste Stripe price IDs per subproduct (if you want to charge Stripe prices)
+// OPTIONAL: Stripe price IDs per subproduct (if you want Stripe Prices instead of ad-hoc)
 const PRICE_ID_BY_SLUG: Partial<Record<Slug, string>> = {
   // copsoq: "price_XXXXXXXXXXXX",
   // sheq: "price_YYYYYYYYYYYY",
@@ -68,8 +68,9 @@ export default function SubproductPage({ params }: Props) {
 
   // Modules only exist for these three; others return [] so we don't crash
   const modules =
-    (SUBSUB_BY_PARENT as Partial<Record<Slug, Array<{ slug: string; title: string; short: string }>>>)[params.slug] ??
-    [];
+    (SUBSUB_BY_PARENT as Partial<
+      Record<Slug, Array<{ slug: string; title: string; short: string }>>
+    >)[params.slug] ?? [];
 
   const wrap: CSSProperties = { maxWidth: 1000, margin: "28px auto", padding: "0 16px", lineHeight: 1.65 };
   const card: CSSProperties = { background: "#111", border: "1px solid #222", borderRadius: 12, padding: 16, marginTop: 24 };
@@ -107,50 +108,50 @@ export default function SubproductPage({ params }: Props) {
       <h1 style={{ marginTop: 0 }}>{sp.title}</h1>
       <p style={{ opacity: 0.9 }}>{sp.short}</p>
 
-{/* Partner + privacy note */}
-<div style={{ margin: "12px 0 0 0" }}>
-  <span
-    style={{
-      display: "inline-block",
-      background: "#f1c40f",
-      color: "#000",
-      borderRadius: 9999,
-      padding: "4px 10px",
-      fontWeight: 700,
-      fontSize: 12,
-    }}
-  >
-    Data collected via Alchemer
-  </span>
-</div>
+      {/* Partner + privacy note */}
+      <div style={{ margin: "12px 0 0 0" }}>
+        <span
+          style={{
+            display: "inline-block",
+            background: "#f1c40f",
+            color: "#000",
+            borderRadius: 9999,
+            padding: "4px 10px",
+            fontWeight: 700,
+            fontSize: 12,
+          }}
+        >
+          Data collected via Alchemer
+        </span>
+      </div>
 
-<section style={card} id="data-safety">
-  <h2 style={{ marginTop: 0 }}>Data safety &amp; privacy</h2>
-  <p>
-    We partner with <strong>Alchemer</strong> to run secure collection for Culture Risk
-    Diagnostic engagements. Alchemer provides enterprise-grade controls:
-  </p>
-  <ul>
-    <li>AES-256 encryption at rest and TLS in transit; encrypted backups.</li>
-    <li>Hosted on AWS with VPC isolation, WAF, and fault-tolerant design.</li>
-    <li>Independent certifications: SOC 2 Type II and ISO 27001.</li>
-    <li>Committed 99.9% service uptime for surveys and app access.</li>
-  </ul>
-  <p style={{ marginTop: 10 }}>
-    <a
-      href="/docs/alchemer-security-whitepaper-091824.pdf"
-      style={{ color: "#f1c40f", textDecoration: "none", fontWeight: 700 }}
-      target="_blank"
-      rel="noopener noreferrer"
-    >
-      View Alchemer Security White Paper →
-    </a>
-  </p>
-  <p style={{ opacity: 0.9, marginTop: 10 }}>
-    We also enforce strict anonymity and minimum subgroup sizes for reporting.
-  </p>
-</section>
-      
+      <section style={card} id="data-safety">
+        <h2 style={{ marginTop: 0 }}>Data safety &amp; privacy</h2>
+        <p>
+          We partner with <strong>Alchemer</strong> to run secure collection for Culture Risk Diagnostic engagements.
+          Alchemer provides enterprise-grade controls:
+        </p>
+        <ul>
+          <li>AES-256 encryption at rest and TLS in transit; encrypted backups.</li>
+          <li>Hosted on AWS with VPC isolation, WAF, and fault-tolerant design.</li>
+          <li>Independent certifications: SOC 2 Type II and ISO 27001.</li>
+          <li>Committed 99.9% service uptime for surveys and app access.</li>
+        </ul>
+        <p style={{ marginTop: 10 }}>
+          <a
+            href="/docs/alchemer-security-whitepaper-091824.pdf"
+            style={{ color: "#f1c40f", textDecoration: "none", fontWeight: 700 }}
+            target="_blank"
+            rel="noopener noreferrer"
+          >
+            View Alchemer Security White Paper →
+          </a>
+        </p>
+        <p style={{ opacity: 0.9, marginTop: 10 }}>
+          We also enforce strict anonymity and minimum subgroup sizes for reporting.
+        </p>
+      </section>
+
       {/* If this subproduct has modules, show them with prices + Buy Now for each module */}
       {modules.length > 0 ? (
         <section style={card}>
