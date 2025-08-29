@@ -72,34 +72,52 @@ export default function AboutPage() {
           <p style={subhead}>The systems side of culture, psychosocial risk, and high-stakes negotiation.</p>
           <p style={{ ...subhead, marginBottom: 12 }}>
             30+ years building regulator-ready culture systems, negotiation playbooks, and psychosocial risk controls
-            that boards and investigators respect.
+            that stakeholders and boards respect at a global scale.
           </p>
+
+          {/* Results at a glance */}
+          <section style={{ background:"#111", border:"1px solid #222", borderRadius:12, padding:16, marginTop:12 }}>
+            <h2 style={{ marginTop:0 }}>Results at a glance</h2>
+            <div style={{ display:"grid", gridTemplateColumns:"repeat(auto-fit, minmax(180px,1fr))", gap:12, marginTop:8 }}>
+              <div style={{ background:"#0f0f0f", border:"1px solid #222", borderRadius:10, padding:12 }}>
+                <div style={{ fontSize:22, fontWeight:800 }}>Pre-regulation</div>
+                <div style={{ opacity:0.9 }}>Psychosocial controls designed years before mandates</div>
+              </div>
+              <div style={{ background:"#0f0f0f", border:"1px solid #222", borderRadius:10, padding:12 }}>
+                <div style={{ fontSize:22, fontWeight:800 }}>Board-grade</div>
+                <div style={{ opacity:0.9 }}>Indicators & dossiers used for executive assurance</div>
+              </div>
+              <div style={{ background:"#0f0f0f", border:"1px solid #222", borderRadius:10, padding:12 }}>
+                <div style={{ fontSize:22, fontWeight:800 }}>High-stakes</div>
+                <div style={{ opacity:0.9 }}>Negotiations & mediation that keep projects moving</div>
+              </div>
+            </div>
+          </section>
 
           {/* Aha proof */}
           <section style={card}>
             <h2 style={{ marginTop: 0 }}>Aha proof</h2>
             <ul>
               <li>
-                <strong>PEMEX:</strong> Led culture &amp; trust architecture during crisis/complex change—aligning labour,
-                social license, and executive negotiation so projects could move.
+                <strong>PEMEX:</strong> Culture &amp; trust architecture through crisis—aligned labour, social licence,
+                and executive negotiation so critical projects could move.
               </li>
               <li>
-                <strong>Aramco:</strong> Built and led governance &amp; culture mechanisms through the largest IPO in
-                history; negotiations that transform not only the company but the country; mega-scale transactions and
-                global scrutiny—tying behaviour to board-level assurance.
+                <strong>Aramco:</strong> Governance &amp; culture mechanisms through the world’s largest IPO and
+                mega-transactions—tying behaviour to board-level assurance.
               </li>
               <li>
-                <strong>Aesthetic Management (2000s):</strong> Designed psychosocial risk controls years before regulation,
-                closing the gap between policy and live practice.
+                <strong>Aesthetic Management (2000s):</strong> Psychosocial risk controls <em>before regulation</em>,
+                turning policy into live, defensible practice.
               </li>
               <li>
-                <strong>Negotiation &amp; Mediation:</strong> Structured high-stakes agreements across government, energy,
-                and finance—reducing risk of litigation and reputational drag.
+                <strong>Negotiation &amp; Mediation:</strong> Structured agreements across government, energy &amp;
+                finance—reducing litigation risk and reputational drag.
               </li>
             </ul>
           </section>
 
-          {/* What you do */}
+          {/* What I do */}
           <section style={card}>
             <h2 style={{ marginTop: 0 }}>What I do</h2>
             <ul>
@@ -108,7 +126,7 @@ export default function AboutPage() {
                 with thresholds; anonymity built-in; regulator-aligned reporting.
               </li>
               <li>
-                <strong>Procedural Justice</strong> — building defensible complaint handling, triage, investigations, and
+                <strong>Procedural Justice</strong> — defensible complaint handling, triage, investigations, and
                 remediation so processes are fair, transparent, and auditable.
               </li>
               <li>
@@ -134,7 +152,7 @@ export default function AboutPage() {
                 <strong>Culture Risk Diagnostic™</strong> — Forensic mapping of hotspots with early-warning indicators.
               </li>
               <li>
-                <strong>SHSARC™ / RCABH™</strong> — Critical controls for sexual harassment, aggression, bullying &
+                <strong>SHSARC™ / RCABH™</strong> — Critical controls for sexual harassment, aggression, bullying &amp;
                 harassment—outputs are <em>Prevention Plans</em> that withstand scrutiny.
               </li>
             </ul>
@@ -148,10 +166,9 @@ export default function AboutPage() {
             <h2 style={{ marginTop: 0 }}>Partner for data management &amp; privacy</h2>
             <p>
               Data collection via <strong>Alchemer</strong> with enterprise-grade security (SOC 2, ISO 27001, AES-256 at
-              rest / TLS in transit, AWS).
-              {" "}
+              rest / TLS in transit, AWS).{" "}
               <a
-                href="/docs/alchemer-security-whitepaper-091824.pdf"
+                href="/docs/alchemer-security-whitepaper-091824.pdf" // update if your filename differs
                 target="_blank"
                 rel="noopener noreferrer"
                 style={{ color: "#f1c40f", fontWeight: 700, textDecoration: "none" }}
@@ -169,18 +186,20 @@ export default function AboutPage() {
               <li>Sunwater — board-level risk-culture indicators for decision-making.</li>
               <li>Newcrest — uplifted psychosocial governance &amp; response.</li>
               <li>Suncorp — risk-culture metrics adopted by board &amp; exec.</li>
-              <li>Aramco — Led culture risk and transformation for the largest IPO in history; led key negotiations.</li>
+              <li>Aramco — led culture risk and transformation for the largest IPO in history; led key negotiations.</li>
             </ul>
           </section>
 
-          {/* Credentials */}
+          {/* Credentials (updated as requested) */}
           <section style={card}>
             <h2 style={{ marginTop: 0 }}>Credentials</h2>
-            <p style={{ margin: 0 }}>
-              PhD (UQ), MBR (RMIT), COSO (ERM &amp; Internal Control), Certified Director &amp; Board Secretary (GCC BDI),
-              WHS Diploma (TAFE NSW). Awards: Academy of Management &amp; British Academy of Management best papers.
-              Member: APA. Ex Aramco, Ex Deloitte, Ex Pemex.
-            </p>
+            <ul style={{ margin: 0 }}>
+              <li><strong>PhD – OB (UQ)</strong>; <strong>MBR – OB (RMIT-U)</strong></li>
+              <li>COSO (ERM &amp; Internal Control); Certified Director &amp; Board Secretary (GCC BDI); WHS Diploma (TAFE NSW)</li>
+              <li>Awards: Academy of Management &amp; British Academy of Management Best Paper</li>
+              <li>Memberships: American Psychological Association (APA_ Gladstone Engineering Alliance (GEA); The Resolution Institute</li>
+              <li>Ex Aramco, Ex Deloitte, Ex Pemex</li>
+            </ul>
           </section>
 
           {/* CTA */}
