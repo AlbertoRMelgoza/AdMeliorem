@@ -192,7 +192,7 @@ async function fetchJSON(url: string, init?: RequestInit) {
 /** Headlines: try MediaRoom, then mediaroom, then legacy Newsfeed paths */
 async function fetchHeadlines() {
   const ts = Date.now();
-  const tries = [`/api/MediaRoom?ts=${ts}`, `/api/mediaroom?ts=${ts}`, `/api/Newsfeed?ts=${ts}`, `/api/newsfeed?ts=${ts}`];
+  const tries = [`/api/MediaRoom?ts=${ts}`, `/api/MediaRoom?ts=${ts}`, `/api/newsfeed?ts=${ts}`, `/api/newsfeed?ts=${ts}`];
   for (const u of tries) {
     try {
       return await fetchJSON(u);
@@ -298,7 +298,7 @@ export default function Page() {
         return;
       }
       try {
-        const data = await postJSONWithFallback("/api/MediaRoom/metrics", "/api/Newsfeed/metrics", {
+        const data = await postJSONWithFallback("/api/MediaRoom/metrics", "/api/newsfeed/metrics", {
           action: "get",
           links: items.map((i) => ({ link: i.link, title: i.title })),
         });
@@ -312,12 +312,12 @@ export default function Page() {
   const handleToggleLike = async (it: Item) => {
     toggle(it.link);
     try {
-      await postJSONWithFallback("/api/MediaRoom/metrics", "/api/Newsfeed/metrics", {
+      await postJSONWithFallback("/api/MediaRoom/metrics", "/api/newsfeed/metrics", {
         action: "toggleLike",
         link: it.link,
         title: it.title,
       });
-      const data = await postJSONWithFallback("/api/MediaRoom/metrics", "/api/Newsfeed/metrics", {
+      const data = await postJSONWithFallback("/api/MediaRoom/metrics", "/api/newsfeed/metrics", {
         action: "get",
         links: [{ link: it.link, title: it.title }],
       });
@@ -327,7 +327,7 @@ export default function Page() {
 
   const handleShare = async (it: Item) => {
     try {
-      await postJSONWithFallback("/api/MediaRoom/metrics", "/api/Newsfeed/metrics", {
+      await postJSONWithFallback("/api/MediaRoom/metrics", "/api/newsfeed/metrics", {
         action: "share",
         link: it.link,
         title: it.title,
