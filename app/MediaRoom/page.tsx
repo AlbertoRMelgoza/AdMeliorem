@@ -8,56 +8,54 @@ export const dynamic = "force-dynamic";
 
 /* ===================== CONFIG ===================== */
 
-// Recency window (days). Set in Vercel if you want to change it:
-// NEXT_PUBLIC_MEDIAROOM_MAX_AGE_DAYS=30
+// Recency window (days). Override in Vercel: NEXT_PUBLIC_MEDIAROOM_MAX_AGE_DAYS=30
 const MAX_AGE_DAYS = Number(process.env.NEXT_PUBLIC_MEDIAROOM_MAX_AGE_DAYS ?? 30);
 
-// Hard paywalls / outlets to block entirely
+// Block paywalls / unwanted outlets entirely
 const BLOCKED_DOMAINS = [
   "wsj.com",
   "theaustralian.com.au",
   "thetimes.co.uk",
   "couriermail.com.au",
-  // Paywalls
   "ft.com",
   "bloomberg.com",
   "afr.com",
-  "nytimes.com",
+  "nytimes.com"
 ];
 
-// Your approved outlets (domains)
+// Approved outlets
 const ALLOWED_DOMAINS = [
   "abc.net.au",
   "skynews.com.au",
   "theage.com.au",
   "smh.com.au",
   "worksafe.vic.gov.au",
-  "meaa.org",
+  "meaa.org"
 ];
 
-// Optional: match by source name (if your backend includes it)
+// Optional: approved source labels (if provided by your backend)
 const ALLOWED_SOURCES = [
   "ABC", "ABC News", "Australian Broadcasting Corporation",
   "Sky News Australia",
   "The Age",
   "Sydney Morning Herald", "SMH",
   "WorkSafe Victoria",
-  "MEAA", "Media, Entertainment & Arts Alliance",
+  "MEAA", "Media, Entertainment & Arts Alliance"
 ];
 
-// Enforce section paths (Business only, plus WorkSafe prosecutions page)
+// Enforce Business sections (and WorkSafe prosecutions)
 const ALLOWED_PATHS_BY_DOMAIN: Record<string, RegExp[]> = {
   "abc.net.au": [/^\/news\/business(\/|$)/i],
   "skynews.com.au": [/^\/business(\/|$)/i],
   "theage.com.au": [/^\/business(\/|$)/i],
   "smh.com.au": [/^\/business(\/|$)/i],
-  "worksafe.vic.gov.au": [/^\/prosecution-result-summaries-enforceable-undertakings(\/|$)/i],
-  // meaa.org → allow any path by default
+  "worksafe.vic.gov.au": [/^\/prosecution-result-summaries-enforceable-undertakings(\/|$)/i]
 };
 
 /* ===================== TYPES ===================== */
 
 type Item = { title: string; link: string; pubDate: string; source: string | null };
+type CuratedItem = Item & { hazard?: string; force?: boolean; __curated?: true };
 type CountsMap = Record<string, { like: number; share: number }>;
 
 /* ===================== CONSTANTS ===================== */
@@ -74,7 +72,7 @@ const HAZARD_RULES: Array<{ label: string; phrases: string[] }> = [
   { label: "Workplace aggression",     phrases: ["workplace aggression", "aggression at work"] },
   { label: "Workplace misconduct",     phrases: ["workplace misconduct", "employee misconduct", "corporate misconduct"] },
   { label: "Procedural justice",       phrases: ["procedural justice"] },
-  { label: "Workplace harassment",     phrases: ["workplace harassment"] },
+  { label: "Workplace harassment",     phrases: ["workplace harassment"] }
 ];
 
 // Require “work” context to reduce noise
@@ -104,14 +102,9 @@ function domainOf(link: string): string | null {
   }
 }
 
-function isBlocked(link: string, source?: string | null) {
+function isBlocked(link: string) {
   const host = domainOf(link);
-  if (host && BLOCKED_DOMAINS.some((d) => host.endsWith(d))) return true;
-  if (source) {
-    const s = source.toLowerCase();
-    // If you want to block by source label too, add here.
-  }
-  return false;
+  return !!(host && BLOCKED_DOMAINS.some((d) => host.endsWith(d)));
 }
 
 function isAllowedByWhitelist(link: string, source?: string | null) {
@@ -130,14 +123,10 @@ function isAllowedByWhitelist(link: string, source?: string | null) {
     return false;
   }
 
-  // Domain must match
   const domainOK = hasDomainWhitelist ? (host ? ALLOWED_DOMAINS.some((d) => host!.endsWith(d)) : false) : true;
-
-  // Path must match if rules exist for that domain
   const pathRules = host ? ALLOWED_PATHS_BY_DOMAIN[host] : undefined;
   const pathOK = pathRules ? pathRules.some((rx) => rx.test(path || "")) : true;
 
-  // Source label (if present) must match one of the allowed labels
   const s = (source || "").toLowerCase();
   const sourceOK = hasSourceWhitelist ? ALLOWED_SOURCES.some((allow) => s === allow.toLowerCase()) : true;
 
@@ -146,7 +135,7 @@ function isAllowedByWhitelist(link: string, source?: string | null) {
 
 function isRecent(pubDate: string) {
   const d = new Date(pubDate);
-  if (Number.isNaN(d.getTime())) return false; // invalid date
+  if (Number.isNaN(d.getTime())) return false;
   const ageDays = (Date.now() - d.getTime()) / 86_400_000;
   return ageDays <= MAX_AGE_DAYS;
 }
@@ -154,23 +143,9 @@ function isRecent(pubDate: string) {
 function useLocalLikes() {
   const KEY = "mediaroom_likes_v1";
   const [likes, setLikes] = useState<Record<string, true>>({});
-  useEffect(() => {
-    try {
-      const raw = localStorage.getItem(KEY);
-      if (raw) setLikes(JSON.parse(raw));
-    } catch {}
-  }, []);
-  useEffect(() => {
-    try {
-      localStorage.setItem(KEY, JSON.stringify(likes));
-    } catch {}
-  }, [likes]);
-  const toggle = (link: string) =>
-    setLikes((p) => {
-      const n = { ...p };
-      n[link] ? delete n[link] : (n[link] = true);
-      return n;
-    });
+  useEffect(() => { try { const raw = localStorage.getItem(KEY); if (raw) setLikes(JSON.parse(raw)); } catch {} }, []);
+  useEffect(() => { try { localStorage.setItem(KEY, JSON.stringify(likes)); } catch {} }, [likes]);
+  const toggle = (link: string) => setLikes(p => { const n = { ...p }; n[link] ? delete n[link] : (n[link] = true); return n; });
   const liked = (link: string) => Boolean(likes[link]);
   return { liked, toggle };
 }
@@ -183,67 +158,62 @@ async function fetchJSON(url: string, init?: RequestInit) {
   return res.json();
 }
 
-/** Headlines: try MediaRoom, then mediaroom, then legacy Newsfeed paths */
 async function fetchHeadlines() {
   const ts = Date.now();
-  const tries = [
-    `/api/MediaRoom?ts=${ts}`,
-    `/api/mediaroom?ts=${ts}`,
-    `/api/Newsfeed?ts=${ts}`,
-    `/api/newsfeed?ts=${ts}`,
-  ];
-  for (const u of tries) {
-    try {
-      return await fetchJSON(u);
-    } catch {
-      /* next */
-    }
-  }
+  const tries = [`/api/MediaRoom?ts=${ts}`, `/api/mediaroom?ts=${ts}`, `/api/Newsfeed?ts=${ts}`, `/api/newsfeed?ts=${ts}`];
+  for (const u of tries) { try { return await fetchJSON(u); } catch {} }
   throw new Error("No headlines endpoint available");
 }
 
-/** Metrics POST with graceful fallback to legacy paths */
-async function postJSONWithFallback(pathA: string, pathB: string, body: any) {
+async function fetchCurated(): Promise<CuratedItem[]> {
   try {
-    return await fetchJSON(pathA, {
-      method: "POST",
-      headers: { "Content-Type": "application/json" },
-      body: JSON.stringify(body),
-    });
+    const data = await fetchJSON(`/media/curated.json?ts=${Date.now()}`);
+    if (!Array.isArray(data)) return [];
+    return data.map((it: any) => ({ ...it, __curated: true })) as CuratedItem[];
   } catch {
-    return await fetchJSON(pathB, {
-      method: "POST",
-      headers: { "Content-Type": "application/json" },
-      body: JSON.stringify(body),
-    });
+    return [];
   }
 }
 
 /* ===================== PAGE ===================== */
 
 export default function Page() {
-  const [items, setItems] = useState<Array<Item & { hazard: string }>>([]);
+  const [items, setItems] = useState<Array<(Item|CuratedItem) & { hazard: string }>>([]);
   const [counts, setCounts] = useState<CountsMap>({});
   const [loading, setLoading] = useState(true);
   const [apiError, setApiError] = useState<string | null>(null);
   const [updatedAt, setUpdatedAt] = useState<Date | null>(null);
   const { liked, toggle } = useLocalLikes();
 
-  // Load headlines (polling)
   useEffect(() => {
     let cancelled = false;
     const load = async () => {
       try {
         const data = await fetchHeadlines();
+        const curated = await fetchCurated();
+
+        const raw: Item[] = Array.isArray(data?.items) ? data.items : [];
+
+        // Combine + dedupe by link (curated wins)
+        const map = new Map<string, Item | CuratedItem>();
+        for (const it of [...raw, ...curated]) {
+          if (!it?.link) continue;
+          map.set(it.link, it as any);
+        }
+        const combined = Array.from(map.values());
+
+        const next = combined
+          .filter((it) => !isBlocked(it.link))
+          .filter((it: any) => (it.__curated ? true : isAllowedByWhitelist(it.link, it.source)))
+          .filter((it: any) => (it.__curated && it.force ? true : isRecent(it.pubDate)))
+          .map((it: any) => {
+            const hazard = it.hazard || classifyHazard(it.title) || "";
+            return { ...it, hazard };
+          })
+          .filter((it) => it.hazard)
+          .sort((a, b) => new Date(b.pubDate).getTime() - new Date(a.pubDate).getTime());
+
         if (!cancelled) {
-          const raw: Item[] = Array.isArray(data?.items) ? data.items : [];
-          const next = raw
-            .filter((it) => !isBlocked(it.link, it.source))
-            .filter((it) => isAllowedByWhitelist(it.link, it.source))
-            .filter((it) => isRecent(it.pubDate))
-            .map((it) => ({ ...it, hazard: classifyHazard(it.title) || "" }))
-            .filter((it) => it.hazard)
-            .sort((a, b) => new Date(b.pubDate).getTime() - new Date(a.pubDate).getTime()); // newest first
           setItems(next);
           setApiError(data?.error || null);
           setUpdatedAt(new Date());
@@ -259,7 +229,7 @@ export default function Page() {
     return () => { cancelled = true; clearInterval(id); };
   }, []);
 
-  // Load like/share counts
+  // Metrics
   useEffect(() => {
     (async () => {
       if (!items.length) { setCounts({}); return; }
@@ -270,46 +240,32 @@ export default function Page() {
           { action: "get", links: items.map(i => ({ link: i.link, title: i.title })) }
         );
         setCounts(data?.counts || {});
-      } catch {
-        setCounts({});
-      }
+      } catch { setCounts({}); }
     })();
   }, [items]);
 
   const handleToggleLike = async (it: Item) => {
-    toggle(it.link); // optimistic
+    toggle(it.link);
     try {
-      await postJSONWithFallback(
-        "/api/MediaRoom/metrics",
-        "/api/Newsfeed/metrics",
-        { action: "toggleLike", link: it.link, title: it.title }
-      );
-      const data = await postJSONWithFallback(
-        "/api/MediaRoom/metrics",
-        "/api/Newsfeed/metrics",
-        { action: "get", links: [{ link: it.link, title: it.title }] }
-      );
+      await postJSONWithFallback("/api/MediaRoom/metrics", "/api/Newsfeed/metrics",
+        { action: "toggleLike", link: it.link, title: it.title });
+      const data = await postJSONWithFallback("/api/MediaRoom/metrics", "/api/Newsfeed/metrics",
+        { action: "get", links: [{ link: it.link, title: it.title }] });
       setCounts(c => ({ ...c, ...data.counts }));
     } catch {}
   };
 
   const handleShare = async (it: Item) => {
     try {
-      await postJSONWithFallback(
-        "/api/MediaRoom/metrics",
-        "/api/Newsfeed/metrics",
-        { action: "share", link: it.link, title: it.title }
-      );
+      await postJSONWithFallback("/api/MediaRoom/metrics", "/api/Newsfeed/metrics",
+        { action: "share", link: it.link, title: it.title });
       setCounts(c => {
         const cur = c[it.link] || { like: 0, share: 0 };
         return { ...c, [it.link]: { ...cur, share: cur.share + 1 } };
       });
     } catch {}
-    if (navigator.share) {
-      try { await navigator.share({ title: it.title, url: it.link }); } catch {}
-    } else {
-      try { await navigator.clipboard.writeText(it.link); alert("Link copied to clipboard"); } catch {}
-    }
+    if (navigator.share) { try { await navigator.share({ title: it.title, url: it.link }); } catch {} }
+    else { try { await navigator.clipboard.writeText(it.link); alert("Link copied to clipboard"); } catch {} }
   };
 
   return (
@@ -322,17 +278,12 @@ export default function Page() {
           {" • "}
           Showing last {MAX_AGE_DAYS} days
         </span>
-        <button
-          onClick={() => location.reload()}
-          style={{ border: "1px solid #222", borderRadius: 10, padding: "6px 10px", background: "transparent", color: "inherit", cursor: "pointer" }}
-        >
-          Refresh now
-        </button>
+        <button onClick={() => location.reload()} style={btn()}>Refresh now</button>
       </div>
 
-      {(ALLOWED_DOMAINS.length > 0 || ALLOWED_SOURCES.length > 0) && (
+      {(ALLOWED_DOMAINS.length > 0) && (
         <div style={{ fontSize: 12, opacity: 0.75, marginBottom: 8 }}>
-          Sources limited to approved outlets.
+          Sources limited to approved outlets; paywalled sites blocked.
         </div>
       )}
 
@@ -368,6 +319,22 @@ export default function Page() {
       )}
     </main>
   );
+}
+
+async function postJSONWithFallback(pathA: string, pathB: string, body: any) {
+  try {
+    return await fetchJSON(pathA, {
+      method: "POST",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify(body)
+    });
+  } catch {
+    return await fetchJSON(pathB, {
+      method: "POST",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify(body)
+    });
+  }
 }
 
 function btn(): CSSProperties {
