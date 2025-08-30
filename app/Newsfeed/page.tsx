@@ -1,206 +1,255 @@
+// app/newsfeed/page.tsx
 "use client";
 
 import { useEffect, useMemo, useState } from "react";
+import type { CSSProperties } from "react";
 
 export const dynamic = "force-dynamic";
 
-type Item = { title: string; link: string; pubDate: string; source: string };
+/* ---------------- CONFIG (same as MediaRoom) ---------------- */
 
-const TOPICS = [
-  "sexual harassment at work",
-  "bullying at work",
-  "aggression at work",
-  "harassment at work",
-  "toxic culture at work",
-  "culture at work",
-  "corporate culture",
-  "procedural justice",
-  "psychosocial risk management",
-  "mediation",
-  "negotiation",
-] as const;
-type Topic = (typeof TOPICS)[number] | "all";
+const MAX_AGE_DAYS = Number(process.env.NEXT_PUBLIC_MEDIAROOM_MAX_AGE_DAYS ?? 180);
+
+const BLOCKED_DOMAINS = [
+  "wsj.com",
+  "theaustralian.com.au",
+  "thetimes.co.uk",
+  "couriermail.com.au",
+  "ft.com",
+  "bloomberg.com",
+  "afr.com",
+  "nytimes.com",
+];
+
+const ALLOWED_DOMAINS = [
+  "abc.net.au",
+  "skynews.com.au",
+  "theage.com.au",
+  "smh.com.au",
+  "worksafe.vic.gov.au",
+  "meaa.org",
+];
+
+const ALLOWED_SOURCES = [
+  "ABC",
+  "ABC News",
+  "Australian Broadcasting Corporation",
+  "Sky News Australia",
+  "The Age",
+  "Sydney Morning Herald",
+  "SMH",
+  "WorkSafe Victoria",
+  "MEAA",
+  "Media, Entertainment & Arts Alliance",
+];
+
+/* ---------------- Types ---------------- */
+
+type Item = { title: string; link: string; pubDate: string; source: string | null };
+type CuratedItem = Item & { hazard?: string; force?: boolean; __curated?: true };
+type CountsMap = Record<string, { like: number; share: number }>;
+
+type DebugCounts = {
+  fetched: number;
+  afterDedupe: number;
+  afterPaywallBlock: number;
+  afterAllowlist: number;
+  afterRecency: number;
+  afterHazard: number;
+};
+
+/* ---------------- Hazards (same as MediaRoom, slightly expanded) ---------------- */
+
+const HAZARD_RULES: Array<{ label: string; phrases: string[] }> = [
+  { label: "Toxic culture",            phrases: ["toxic culture", "toxic workplace", "culture risk", "corporate culture risk"] },
+  { label: "Sexual harassment",        phrases: ["sexual harassment", "workplace sexual harassment"] },
+  { label: "Sexual assault",           phrases: ["sexual assault", "workplace sexual assault"] },
+  { label: "Bullying",                 phrases: ["workplace bullying", "bullying at work", "workplace bullying and harassment"] },
+  { label: "Workplace aggression",     phrases: ["workplace aggression", "aggression at work"] },
+  { label: "Workplace misconduct",     phrases: ["workplace misconduct", "employee misconduct", "corporate misconduct"] },
+  { label: "Procedural justice",       phrases: ["procedural justice"] },
+  { label: "Workplace harassment",     phrases: ["workplace harassment"] },
+];
+
+const WORK_TERMS = [
+  "workplace","work","employer","company","corporate","business","organisation","organization",
+  "office","university","campus","council","board","leadership","governance"
+];
 
 const YELLOW = { color: "#f1c40f", textDecoration: "underline" } as const;
-const REFRESH_MS = 120_000; // auto-refresh every 2 minutes
+const REFRESH_MS = 120_000;
 
-function inferTopic(title: string): Topic {
+/* ---------------- Helpers (mirroring MediaRoom) ---------------- */
+
+function inWorkContext(text: string) {
+  const t = text.toLowerCase();
+  return WORK_TERMS.some((w) => t.includes(w));
+}
+function classifyHazard(title: string): string | null {
   const t = title.toLowerCase();
-  for (const key of TOPICS) {
-    if (t.includes(key.toLowerCase())) return key;
-  }
-  return "all";
+  if (!inWorkContext(t)) return null;
+  for (const rule of HAZARD_RULES) if (rule.phrases.some((p) => t.includes(p))) return rule.label;
+  return null;
+}
+function domainOf(link: string): string | null {
+  try { return new URL(link).hostname.replace(/^www\./, ""); } catch { return null; }
+}
+function isBlocked(link: string) {
+  const host = domainOf(link);
+  return !!(host && BLOCKED_DOMAINS.some((d) => host.endsWith(d)));
+}
+// relaxed whitelist: domain OR source substring is enough
+function isAllowedByWhitelist(link: string, source?: string | null) {
+  const hasDomainWhitelist = ALLOWED_DOMAINS.length > 0;
+  const hasSourceWhitelist = ALLOWED_SOURCES.length > 0;
+  if (!hasDomainWhitelist && !hasSourceWhitelist) return true;
+  let host: string | null = null;
+  try { host = new URL(link).hostname.replace(/^www\./, ""); } catch { return false; }
+  const domainOK = hasDomainWhitelist ? (host ? ALLOWED_DOMAINS.some((d) => host!.endsWith(d)) : false) : true;
+  const s = (source || "").toLowerCase();
+  const sourceOK = hasSourceWhitelist ? ALLOWED_SOURCES.some((allow) => s.includes(allow.toLowerCase())) : true;
+  return domainOK || sourceOK;
+}
+function isRecent(pubDate: string) {
+  const d = new Date(pubDate);
+  if (Number.isNaN(d.getTime())) return false;
+  return (Date.now() - d.getTime()) / 86_400_000 <= MAX_AGE_DAYS;
 }
 
+async function fetchJSON(url: string, init?: RequestInit) {
+  const res = await fetch(url, { cache: "no-store", ...init });
+  if (!res.ok) throw new Error(`HTTP ${res.status}`);
+  const ct = res.headers.get("content-type") || "";
+  if (!ct.includes("application/json")) throw new Error("Not JSON");
+  return res.json();
+}
+// Try both API routes (case variants too), like MediaRoom does
+async function fetchHeadlines() {
+  const ts = Date.now();
+  const tries = [
+    `/api/MediaRoom?ts=${ts}`,
+    `/api/mediaroom?ts=${ts}`,
+    `/api/Newsfeed?ts=${ts}`,
+    `/api/newsfeed?ts=${ts}`,
+  ];
+  for (const u of tries) { try { return await fetchJSON(u); } catch {} }
+  return { items: [] };
+}
+async function fetchCurated(): Promise<CuratedItem[]> {
+  try {
+    const data = await fetchJSON(`/media/curated.json?ts=${Date.now()}`);
+    return Array.isArray(data) ? data.map((it: any) => ({ ...it, __curated: true })) : [];
+  } catch { return []; }
+}
+
+/* ---------------- Likes (client-only) ---------------- */
+
 function useLocalLikes() {
-  const KEY = "newsfeed_likes_v1";
+  const KEY = "newsfeed_likes_v2";
   const [likes, setLikes] = useState<Record<string, true>>({});
-  useEffect(() => {
-    try {
-      const raw = localStorage.getItem(KEY);
-      if (raw) setLikes(JSON.parse(raw));
-    } catch {}
-  }, []);
-  useEffect(() => {
-    try {
-      localStorage.setItem(KEY, JSON.stringify(likes));
-    } catch {}
-  }, [likes]);
-  const toggle = (link: string) =>
-    setLikes((prev) => {
-      const next = { ...prev };
-      if (next[link]) delete next[link];
-      else next[link] = true;
-      return next;
-    });
+  useEffect(() => { try { const raw = localStorage.getItem(KEY); if (raw) setLikes(JSON.parse(raw)); } catch {} }, []);
+  useEffect(() => { try { localStorage.setItem(KEY, JSON.stringify(likes)); } catch {} }, [likes]);
+  const toggle = (link: string) => setLikes(p => { const n = { ...p }; n[link] ? delete n[link] : (n[link] = true); return n; });
   const liked = (link: string) => Boolean(likes[link]);
   return { liked, toggle };
 }
 
-async function fetchJSON(url: string) {
-  const res = await fetch(url, { cache: "no-store" });
-  const ctype = res.headers.get("content-type") || "";
-  if (!res.ok || !ctype.includes("application/json")) {
-    const text = await res.text();
-    throw new Error(
-      `API ${res.status} ${res.statusText}. Non-JSON: ${text.slice(0, 80)}`
-    );
-  }
-  return res.json();
-}
+/* ---------------- Page ---------------- */
 
 export default function Page() {
-  const [items, setItems] = useState<Item[]>([]);
+  const [items, setItems] = useState<Array<(Item|CuratedItem) & { hazard: string }>>([]);
   const [loading, setLoading] = useState(true);
   const [apiError, setApiError] = useState<string | null>(null);
   const [updatedAt, setUpdatedAt] = useState<Date | null>(null);
-
-  const [topic, setTopic] = useState<Topic>("all");
-  const [source, setSource] = useState<string>("all");
+  const [dbg, setDbg] = useState<DebugCounts | null>(null);
   const { liked, toggle } = useLocalLikes();
 
   useEffect(() => {
     let cancelled = false;
-
     const load = async () => {
       try {
-        const data = await fetchJSON("/api/Newsfeed?ts=" + Date.now()); // UPPERCASE N
+        const [data, curated] = await Promise.all([fetchHeadlines(), fetchCurated()]);
+        const raw: Item[] = Array.isArray(data?.items) ? data.items : [];
+        const fetched = raw.length + curated.length;
+
+        // combine + dedupe by link (curated wins)
+        const map = new Map<string, Item | CuratedItem>();
+        for (const it of [...raw, ...curated]) { if (it?.link) map.set(it.link, it as any); }
+        const combined = Array.from(map.values());
+        const afterDedupe = combined.length;
+
+        const afterPaywallArr = combined.filter((it: any) => (it.__curated && it.force ? true : !isBlocked(it.link)));
+        const afterPaywallBlock = afterPaywallArr.length;
+
+        const afterAllowlistArr = afterPaywallArr.filter((it: any) => it.__curated ? true : isAllowedByWhitelist(it.link, it.source));
+        const afterAllowlist = afterAllowlistArr.length;
+
+        const afterRecencyArr = afterAllowlistArr.filter((it: any) => it.__curated && it.force ? true : isRecent(it.pubDate));
+        const afterRecency = afterRecencyArr.length;
+
+        const finalArr = afterRecencyArr
+          .map((it: any) => ({ ...it, hazard: it.hazard || classifyHazard(it.title) || "" }))
+          .filter((it) => it.hazard)
+          .sort((a, b) => new Date(b.pubDate).getTime() - new Date(a.pubDate).getTime());
+
+        const afterHazard = finalArr.length;
+
         if (!cancelled) {
-          setItems(Array.isArray(data?.items) ? data.items : []);
+          setItems(finalArr);
           setApiError(data?.error || null);
           setUpdatedAt(new Date());
+          setDbg({ fetched, afterDedupe, afterPaywallBlock, afterAllowlist, afterRecency, afterHazard });
         }
       } catch (e: any) {
-        if (!cancelled) {
-          setApiError(e?.message || "Failed to load Newsfeed.");
-          setItems([]);
-        }
+        if (!cancelled) { setApiError(e?.message || "Failed to load."); setItems([]); setDbg(null); }
       } finally {
         if (!cancelled) setLoading(false);
       }
     };
-
-    load(); // initial
-    const id = setInterval(load, REFRESH_MS); // poll
-    return () => {
-      cancelled = true;
-      clearInterval(id);
-    };
+    load();
+    const id = setInterval(load, REFRESH_MS);
+    return () => { cancelled = true; clearInterval(id); };
   }, []);
 
-  const sources = useMemo(
-    () => ["all", ...Array.from(new Set(items.map((i) => i.source))).sort()],
-    [items]
-  );
-
-  const enriched = useMemo(
-    () => items.map((it) => ({ ...it, _topic: inferTopic(it.title) })),
-    [items]
-  );
-
-  const filtered = enriched.filter(
-    (i: any) =>
-      (topic === "all" || i._topic === topic) &&
-      (source === "all" || i.source === source)
-  );
-
-  const mailtoFor = (it: Item, userComment: string) => {
-    const to = "am@albertormelgoza.com";
-    const subject = encodeURIComponent(`Newsfeed comment: ${it.title}`);
-    const body = encodeURIComponent(
-      `Article: ${it.title}\nLink: ${it.link}\n\nComment:\n${userComment}\n\n(From site newsfeed)`
-    );
-    return `mailto:${to}?subject=${subject}&body=${body}`;
-  };
+  // Optional: client-side source filter + topic tags
+  const sources = useMemo(() => ["all", ...Array.from(new Set(items.map(i => i.source || "Unknown"))).sort()], [items]);
+  const [source, setSource] = useState<string>("all");
+  const filtered = items.filter(i => source === "all" || (i.source || "Unknown") === source);
 
   return (
     <main style={{ maxWidth: 960, margin: "0 auto", padding: "24px 16px" }}>
       <h1 style={{ margin: 0, fontSize: 24 }}>Newsfeed</h1>
 
-      <div
-        style={{
-          display: "flex",
-          justifyContent: "space-between",
-          alignItems: "center",
-          margin: "8px 0 4px",
-        }}
-      >
+      <div style={{ display: "flex", justifyContent: "space-between", alignItems: "center", margin: "8px 0 12px" }}>
         <span style={{ fontSize: 12, opacity: 0.7 }}>
-          {updatedAt
-            ? `Updated ${updatedAt.toLocaleTimeString()}`
-            : loading
-            ? "Loading…"
-            : "Updated just now"}
+          {updatedAt ? `Updated ${updatedAt.toLocaleTimeString("en-AU")}` : loading ? "Loading…" : "Updated just now"} · Showing last {MAX_AGE_DAYS} days
         </span>
-        <button
-          onClick={async () => {
-            setLoading(true);
-            try {
-              const data = await fetchJSON("/api/Newsfeed?ts=" + Date.now());
-              setItems(Array.isArray(data?.items) ? data.items : []);
-              setApiError(data?.error || null);
-              setUpdatedAt(new Date());
-            } catch (e: any) {
-              setApiError(e?.message || "Failed to load Newsfeed.");
-              setItems([]);
-            } finally {
-              setLoading(false);
-            }
-          }}
-          style={{
-            border: "1px solid #222",
-            borderRadius: 10,
-            padding: "6px 10px",
-            background: "transparent",
-            color: "inherit",
-            cursor: "pointer",
-          }}
-        >
-          Refresh now
-        </button>
+        <button onClick={() => location.reload()} style={btn(false)}>Refresh now</button>
       </div>
 
-      {/* Filters */}
-      <div style={{ display: "flex", gap: 12, margin: "12px 0 16px", flexWrap: "wrap" }}>
-        <div style={{ display: "flex", gap: 8, flexWrap: "wrap" }}>
-          <span style={{ opacity: 0.75, fontSize: 12 }}>Topic:</span>
-          <button onClick={() => setTopic("all")} style={btn(topic === "all")}>
-            All
-          </button>
-          {TOPICS.map((t) => (
-            <button key={t} onClick={() => setTopic(t)} style={btn(topic === t)}>
-              {shortLabel(t)}
-            </button>
-          ))}
+      {!!ALLOWED_DOMAINS.length && (
+        <div style={{ fontSize: 12, opacity: 0.75, marginBottom: 8 }}>
+          Sources limited to approved outlets; paywalled sites blocked.
         </div>
-        <div style={{ display: "flex", gap: 8, flexWrap: "wrap" }}>
-          <span style={{ opacity: 0.75, fontSize: 12 }}>Source:</span>
-          {sources.map((s) => (
-            <button key={s} onClick={() => setSource(s)} style={btn(source === s)}>
-              {s}
-            </button>
-          ))}
+      )}
+
+      {dbg && (
+        <div style={{ fontSize: 12, opacity: 0.8, marginBottom: 12, display: "flex", gap: 10, flexWrap: "wrap" }}>
+          <span>Fetched: {dbg.fetched}</span>
+          <span>After dedupe: {dbg.afterDedupe}</span>
+          <span>After paywall: {dbg.afterPaywallBlock}</span>
+          <span>After allowlist: {dbg.afterAllowlist}</span>
+          <span>After recency: {dbg.afterRecency}</span>
+          <span>After hazard: {dbg.afterHazard}</span>
         </div>
+      )}
+
+      {/* Source filter */}
+      <div style={{ display: "flex", gap: 8, flexWrap: "wrap", margin: "8px 0 14px" }}>
+        <span style={{ opacity: 0.75, fontSize: 12 }}>Source:</span>
+        {sources.map((s) => (
+          <button key={s} onClick={() => setSource(s)} style={btn(source === s)}>{s}</button>
+        ))}
       </div>
 
       {loading ? (
@@ -208,32 +257,20 @@ export default function Page() {
       ) : apiError ? (
         <p style={{ opacity: 0.8 }}>No results yet. {apiError}</p>
       ) : !filtered.length ? (
-        <p style={{ opacity: 0.8 }}>No results. Try a different filter.</p>
+        <p style={{ opacity: 0.8 }}>No results.</p>
       ) : (
         <ul style={{ padding: 0, listStyle: "none", display: "grid", gap: 12 }}>
-          {filtered.map((it: any, i: number) => (
-            <li
-              key={`${it.link}-${i}`}
-              style={{ border: "1px solid #222", borderRadius: 12, padding: 12 }}
-            >
-              <a
-                href={it.link}
-                target="_blank"
-                rel="noopener noreferrer"
-                style={YELLOW}
-              >
-                {it.title}
-              </a>
+          {filtered.map((it, i) => (
+            <li key={`${it.link}-${i}`} style={{ border: "1px solid #222", borderRadius: 12, padding: 12 }}>
+              <a href={it.link} target="_blank" rel="noopener noreferrer" style={YELLOW}>{it.title}</a>
               <div style={{ fontSize: 12, opacity: 0.75, marginTop: 6 }}>
-                {new Date(it.pubDate).toLocaleString()} · {it.source}
-                {it._topic !== "all" ? <> · {shortLabel(it._topic as Topic)}</> : null}
+                {new Date(it.pubDate).toLocaleString("en-AU")} · {it.source || "Unknown"} · <span style={YELLOW as any}>Hazard: {it.hazard}</span>
               </div>
-              <LikeAndComment
-                item={it}
-                liked={liked(it.link)}
-                toggle={() => toggle(it.link)}
-                mailto={(c) => mailtoFor(it, c)}
-              />
+              <div style={{ display: "flex", gap: 8, marginTop: 10 }}>
+                <button onClick={() => toggle(it.link)} style={btn(false)} aria-pressed={liked(it.link)}>
+                  {liked(it.link) ? "Liked" : "Like"}
+                </button>
+              </div>
             </li>
           ))}
         </ul>
@@ -242,7 +279,7 @@ export default function Page() {
   );
 }
 
-function btn(active: boolean): React.CSSProperties {
+function btn(active: boolean): CSSProperties {
   return {
     border: "1px solid #222",
     borderRadius: 10,
@@ -251,137 +288,4 @@ function btn(active: boolean): React.CSSProperties {
     color: "inherit",
     cursor: "pointer",
   };
-}
-function shortLabel(t: Topic) {
-  switch (t) {
-    case "sexual harassment at work":
-      return "Sexual harassment";
-    case "bullying at work":
-      return "Bullying";
-    case "aggression at work":
-      return "Aggression";
-    case "harassment at work":
-      return "Harassment";
-    case "toxic culture at work":
-      return "Toxic culture";
-    case "culture at work":
-      return "Culture";
-    case "corporate culture":
-      return "Corporate culture";
-    case "procedural justice":
-      return "Procedural justice";
-    case "psychosocial risk management":
-      return "Psychosocial risk";
-    case "mediation":
-      return "Mediation";
-    case "negotiation":
-      return "Negotiation";
-    default:
-      return "All";
-  }
-}
-
-function LikeAndComment({
-  item,
-  liked,
-  toggle,
-  mailto,
-}: {
-  item: Item;
-  liked: boolean;
-  toggle: () => void;
-  mailto: (text: string) => string;
-}) {
-  const [open, setOpen] = useState(false);
-  const [text, setText] = useState("");
-
-  return (
-    <div
-      style={{
-        display: "flex",
-        gap: 8,
-        alignItems: "center",
-        marginTop: 10,
-        flexWrap: "wrap",
-      }}
-    >
-      <button
-        onClick={toggle}
-        style={{
-          border: "1px solid #222",
-          borderRadius: 10,
-          padding: "6px 10px",
-          background: liked ? "#111" : "transparent",
-          color: "inherit",
-          cursor: "pointer",
-        }}
-        aria-pressed={liked}
-      >
-        {liked ? "Liked" : "Like"}
-      </button>
-
-      {!open ? (
-        <button
-          onClick={() => setOpen(true)}
-          style={{
-            border: "1px solid #222",
-            borderRadius: 10,
-            padding: "6px 10px",
-            background: "transparent",
-            color: "inherit",
-            cursor: "pointer",
-          }}
-        >
-          Comment
-        </button>
-      ) : (
-        <>
-          <input
-            value={text}
-            onChange={(e) => setText(e.target.value)}
-            placeholder="Write a comment…"
-            style={{
-              border: "1px solid #222",
-              borderRadius: 8,
-              padding: "6px 10px",
-              minWidth: 240,
-              background: "transparent",
-              color: "inherit",
-            }}
-          />
-          <a
-            href={mailto(text)}
-            style={{
-              border: "1px solid #222",
-              borderRadius: 10,
-              padding: "6px 10px",
-              ...YELLOW,
-            }}
-            onClick={() => {
-              setOpen(false);
-              setText("");
-            }}
-          >
-            Send
-          </a>
-          <button
-            onClick={() => {
-              setOpen(false);
-              setText("");
-            }}
-            style={{
-              border: "1px solid #222",
-              borderRadius: 10,
-              padding: "6px 10px",
-              background: "transparent",
-              color: "inherit",
-              cursor: "pointer",
-            }}
-          >
-            Cancel
-          </button>
-        </>
-      )}
-    </div>
-  );
 }
