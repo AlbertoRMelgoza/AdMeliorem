@@ -11,7 +11,7 @@ export const dynamic = "force-dynamic";
 // Recency window (days). Override in Vercel: NEXT_PUBLIC_MEDIAROOM_MAX_AGE_DAYS=30
 const MAX_AGE_DAYS = Number(process.env.NEXT_PUBLIC_MEDIAROOM_MAX_AGE_DAYS ?? 30);
 
-// Block paywalls / unwanted outlets entirely
+// Block paywalls / unwanted outlets entirely (hard block)
 const BLOCKED_DOMAINS = [
   "wsj.com",
   "theaustralian.com.au",
@@ -20,36 +20,40 @@ const BLOCKED_DOMAINS = [
   "ft.com",
   "bloomberg.com",
   "afr.com",
-  "nytimes.com"
+  "nytimes.com",
 ];
 
-// Approved outlets
+// Approved outlets (domain whitelist)
 const ALLOWED_DOMAINS = [
   "abc.net.au",
   "skynews.com.au",
   "theage.com.au",
   "smh.com.au",
   "worksafe.vic.gov.au",
-  "meaa.org"
+  "meaa.org",
 ];
 
 // Optional: approved source labels (if provided by your backend)
 const ALLOWED_SOURCES = [
-  "ABC", "ABC News", "Australian Broadcasting Corporation",
+  "ABC",
+  "ABC News",
+  "Australian Broadcasting Corporation",
   "Sky News Australia",
   "The Age",
-  "Sydney Morning Herald", "SMH",
+  "Sydney Morning Herald",
+  "SMH",
   "WorkSafe Victoria",
-  "MEAA", "Media, Entertainment & Arts Alliance"
+  "MEAA",
+  "Media, Entertainment & Arts Alliance",
 ];
 
-// Enforce Business sections (and WorkSafe prosecutions)
+// Enforce specific sections (and WorkSafe prosecutions) per outlet
 const ALLOWED_PATHS_BY_DOMAIN: Record<string, RegExp[]> = {
   "abc.net.au": [/^\/news\/business(\/|$)/i],
   "skynews.com.au": [/^\/business(\/|$)/i],
-  "theage.com.au": [/^\/business(\/|$)/i],
-  "smh.com.au": [/^\/business(\/|$)/i],
-  "worksafe.vic.gov.au": [/^\/prosecution-result-summaries-enforceable-undertakings(\/|$)/i]
+  "theage.com.au": [/^\/business(\/|$)/i, /^\/work-and-careers(\/|$)/i, /^\/workplace(\/|$)/i],
+  "smh.com.au": [/^\/business(\/|$)/i, /^\/work-and-careers(\/|$)/i, /^\/workplace(\/|$)/i],
+  "worksafe.vic.gov.au": [/^\/prosecution-result-summaries-enforceable-undertakings(\/|$)/i],
 };
 
 /* ===================== TYPES ===================== */
@@ -65,18 +69,34 @@ const REFRESH_MS = 120_000;
 
 /** Only YOUR hazards */
 const HAZARD_RULES: Array<{ label: string; phrases: string[] }> = [
-  { label: "Toxic culture",            phrases: ["toxic culture", "toxic workplace", "culture risk", "corporate culture risk"] },
-  { label: "Sexual harassment",        phrases: ["sexual harassment", "workplace sexual harassment"] },
-  { label: "Sexual assault",           phrases: ["sexual assault", "workplace sexual assault"] },
-  { label: "Bullying",                 phrases: ["workplace bullying", "bullying at work", "workplace bullying and harassment"] },
-  { label: "Workplace aggression",     phrases: ["workplace aggression", "aggression at work"] },
-  { label: "Workplace misconduct",     phrases: ["workplace misconduct", "employee misconduct", "corporate misconduct"] },
-  { label: "Procedural justice",       phrases: ["procedural justice"] },
-  { label: "Workplace harassment",     phrases: ["workplace harassment"] }
+  { label: "Toxic culture", phrases: ["toxic culture", "toxic workplace", "culture risk", "corporate culture risk"] },
+  { label: "Sexual harassment", phrases: ["sexual harassment", "workplace sexual harassment"] },
+  { label: "Sexual assault", phrases: ["sexual assault", "workplace sexual assault"] },
+  { label: "Bullying", phrases: ["workplace bullying", "bullying at work", "workplace bullying and harassment"] },
+  { label: "Workplace aggression", phrases: ["workplace aggression", "aggression at work"] },
+  { label: "Workplace misconduct", phrases: ["workplace misconduct", "employee misconduct", "corporate misconduct"] },
+  { label: "Procedural justice", phrases: ["procedural justice"] },
+  { label: "Workplace harassment", phrases: ["workplace harassment"] },
 ];
 
-// Require “work” context to reduce noise
-const WORK_TERMS = ["workplace", "work ", "employer", "company", "corporate", "business", "organisation", "organization", "office"];
+// Wider “work context” so governance/board/university stories are included
+const WORK_TERMS = [
+  "workplace",
+  "work",
+  "employer",
+  "company",
+  "corporate",
+  "business",
+  "organisation",
+  "organization",
+  "office",
+  "university",
+  "campus",
+  "council",
+  "board",
+  "leadership",
+  "governance",
+];
 
 /* ===================== HELPERS ===================== */
 
@@ -128,7 +148,8 @@ function isAllowedByWhitelist(link: string, source?: string | null) {
   const pathOK = pathRules ? pathRules.some((rx) => rx.test(path || "")) : true;
 
   const s = (source || "").toLowerCase();
-  const sourceOK = hasSourceWhitelist ? ALLOWED_SOURCES.some((allow) => s === allow.toLowerCase()) : true;
+  // substring match, case-insensitive (source strings vary a lot)
+  const sourceOK = hasSourceWhitelist ? ALLOWED_SOURCES.some((allow) => s.includes(allow.toLowerCase())) : true;
 
   return domainOK && pathOK && sourceOK;
 }
@@ -143,9 +164,23 @@ function isRecent(pubDate: string) {
 function useLocalLikes() {
   const KEY = "mediaroom_likes_v1";
   const [likes, setLikes] = useState<Record<string, true>>({});
-  useEffect(() => { try { const raw = localStorage.getItem(KEY); if (raw) setLikes(JSON.parse(raw)); } catch {} }, []);
-  useEffect(() => { try { localStorage.setItem(KEY, JSON.stringify(likes)); } catch {} }, [likes]);
-  const toggle = (link: string) => setLikes(p => { const n = { ...p }; n[link] ? delete n[link] : (n[link] = true); return n; });
+  useEffect(() => {
+    try {
+      const raw = localStorage.getItem(KEY);
+      if (raw) setLikes(JSON.parse(raw));
+    } catch {}
+  }, []);
+  useEffect(() => {
+    try {
+      localStorage.setItem(KEY, JSON.stringify(likes));
+    } catch {}
+  }, [likes]);
+  const toggle = (link: string) =>
+    setLikes((p) => {
+      const n = { ...p };
+      n[link] ? delete n[link] : (n[link] = true);
+      return n;
+    });
   const liked = (link: string) => Boolean(likes[link]);
   return { liked, toggle };
 }
@@ -158,13 +193,21 @@ async function fetchJSON(url: string, init?: RequestInit) {
   return res.json();
 }
 
+/** Headlines: try MediaRoom, then mediaroom, then legacy Newsfeed paths */
 async function fetchHeadlines() {
   const ts = Date.now();
   const tries = [`/api/MediaRoom?ts=${ts}`, `/api/mediaroom?ts=${ts}`, `/api/Newsfeed?ts=${ts}`, `/api/newsfeed?ts=${ts}`];
-  for (const u of tries) { try { return await fetchJSON(u); } catch {} }
+  for (const u of tries) {
+    try {
+      return await fetchJSON(u);
+    } catch {
+      /* next */
+    }
+  }
   throw new Error("No headlines endpoint available");
 }
 
+/** Curated list: /public/media/curated.json */
 async function fetchCurated(): Promise<CuratedItem[]> {
   try {
     const data = await fetchJSON(`/media/curated.json?ts=${Date.now()}`);
@@ -178,7 +221,7 @@ async function fetchCurated(): Promise<CuratedItem[]> {
 /* ===================== PAGE ===================== */
 
 export default function Page() {
-  const [items, setItems] = useState<Array<(Item|CuratedItem) & { hazard: string }>>([]);
+  const [items, setItems] = useState<Array<(Item | CuratedItem) & { hazard: string }>>([]);
   const [counts, setCounts] = useState<CountsMap>({});
   const [loading, setLoading] = useState(true);
   const [apiError, setApiError] = useState<string | null>(null);
@@ -189,8 +232,7 @@ export default function Page() {
     let cancelled = false;
     const load = async () => {
       try {
-        const data = await fetchHeadlines();
-        const curated = await fetchCurated();
+        const [data, curated] = await Promise.all([fetchHeadlines().catch(() => ({ items: [] })), fetchCurated()]);
 
         const raw: Item[] = Array.isArray(data?.items) ? data.items : [];
 
@@ -203,14 +245,20 @@ export default function Page() {
         const combined = Array.from(map.values());
 
         const next = combined
-          .filter((it) => !isBlocked(it.link))
+          // allow curated+force to bypass paywall block
+          .filter((it: any) => (it.__curated && it.force ? true : !isBlocked(it.link)))
+          // allow curated items always; non-curated must be in allowlist
           .filter((it: any) => (it.__curated ? true : isAllowedByWhitelist(it.link, it.source)))
+          // allow curated+force to bypass recency window
           .filter((it: any) => (it.__curated && it.force ? true : isRecent(it.pubDate)))
+          // attach/compute hazard
           .map((it: any) => {
             const hazard = it.hazard || classifyHazard(it.title) || "";
             return { ...it, hazard };
           })
+          // keep only items with a hazard label
           .filter((it) => it.hazard)
+          // newest first
           .sort((a, b) => new Date(b.pubDate).getTime() - new Date(a.pubDate).getTime());
 
         if (!cancelled) {
@@ -219,53 +267,79 @@ export default function Page() {
           setUpdatedAt(new Date());
         }
       } catch (e: any) {
-        if (!cancelled) { setApiError(e?.message || "Failed to load"); setItems([]); }
+        if (!cancelled) {
+          setApiError(e?.message || "Failed to load");
+          setItems([]);
+        }
       } finally {
         if (!cancelled) setLoading(false);
       }
     };
     load();
     const id = setInterval(load, REFRESH_MS);
-    return () => { cancelled = true; clearInterval(id); };
+    return () => {
+      cancelled = true;
+      clearInterval(id);
+    };
   }, []);
 
   // Metrics
   useEffect(() => {
     (async () => {
-      if (!items.length) { setCounts({}); return; }
+      if (!items.length) {
+        setCounts({});
+        return;
+      }
       try {
-        const data = await postJSONWithFallback(
-          "/api/MediaRoom/metrics",
-          "/api/Newsfeed/metrics",
-          { action: "get", links: items.map(i => ({ link: i.link, title: i.title })) }
-        );
+        const data = await postJSONWithFallback("/api/MediaRoom/metrics", "/api/Newsfeed/metrics", {
+          action: "get",
+          links: items.map((i) => ({ link: i.link, title: i.title })),
+        });
         setCounts(data?.counts || {});
-      } catch { setCounts({}); }
+      } catch {
+        setCounts({});
+      }
     })();
   }, [items]);
 
   const handleToggleLike = async (it: Item) => {
     toggle(it.link);
     try {
-      await postJSONWithFallback("/api/MediaRoom/metrics", "/api/Newsfeed/metrics",
-        { action: "toggleLike", link: it.link, title: it.title });
-      const data = await postJSONWithFallback("/api/MediaRoom/metrics", "/api/Newsfeed/metrics",
-        { action: "get", links: [{ link: it.link, title: it.title }] });
-      setCounts(c => ({ ...c, ...data.counts }));
+      await postJSONWithFallback("/api/MediaRoom/metrics", "/api/Newsfeed/metrics", {
+        action: "toggleLike",
+        link: it.link,
+        title: it.title,
+      });
+      const data = await postJSONWithFallback("/api/MediaRoom/metrics", "/api/Newsfeed/metrics", {
+        action: "get",
+        links: [{ link: it.link, title: it.title }],
+      });
+      setCounts((c) => ({ ...c, ...data.counts }));
     } catch {}
   };
 
   const handleShare = async (it: Item) => {
     try {
-      await postJSONWithFallback("/api/MediaRoom/metrics", "/api/Newsfeed/metrics",
-        { action: "share", link: it.link, title: it.title });
-      setCounts(c => {
+      await postJSONWithFallback("/api/MediaRoom/metrics", "/api/Newsfeed/metrics", {
+        action: "share",
+        link: it.link,
+        title: it.title,
+      });
+      setCounts((c) => {
         const cur = c[it.link] || { like: 0, share: 0 };
         return { ...c, [it.link]: { ...cur, share: cur.share + 1 } };
       });
     } catch {}
-    if (navigator.share) { try { await navigator.share({ title: it.title, url: it.link }); } catch {} }
-    else { try { await navigator.clipboard.writeText(it.link); alert("Link copied to clipboard"); } catch {} }
+    if (navigator.share) {
+      try {
+        await navigator.share({ title: it.title, url: it.link });
+      } catch {}
+    } else {
+      try {
+        await navigator.clipboard.writeText(it.link);
+        alert("Link copied to clipboard");
+      } catch {}
+    }
   };
 
   return (
@@ -278,10 +352,12 @@ export default function Page() {
           {" • "}
           Showing last {MAX_AGE_DAYS} days
         </span>
-        <button onClick={() => location.reload()} style={btn()}>Refresh now</button>
+        <button onClick={() => location.reload()} style={btn()}>
+          Refresh now
+        </button>
       </div>
 
-      {(ALLOWED_DOMAINS.length > 0) && (
+      {!!ALLOWED_DOMAINS.length && (
         <div style={{ fontSize: 12, opacity: 0.75, marginBottom: 8 }}>
           Sources limited to approved outlets; paywalled sites blocked.
         </div>
@@ -299,9 +375,12 @@ export default function Page() {
             const c = counts[it.link] || { like: 0, share: 0 };
             return (
               <li key={`${it.link}-${i}`} style={{ border: "1px solid #222", borderRadius: 12, padding: 12 }}>
-                <a href={it.link} target="_blank" rel="noopener noreferrer" style={YELLOW}>{it.title}</a>
+                <a href={it.link} target="_blank" rel="noopener noreferrer" style={YELLOW}>
+                  {it.title}
+                </a>
                 <div style={{ fontSize: 12, opacity: 0.75, marginTop: 6 }}>
-                  {new Date(it.pubDate).toLocaleString("en-AU")} · {it.source || "Unknown"} · <span style={YELLOW as any}>Hazard: {it.hazard}</span>
+                  {new Date(it.pubDate).toLocaleString("en-AU")} · {it.source || "Unknown"} ·{" "}
+                  <span style={YELLOW as any}>Hazard: {it.hazard}</span>
                 </div>
 
                 <div style={{ display: "flex", gap: 10, alignItems: "center", marginTop: 10, flexWrap: "wrap" }}>
@@ -326,13 +405,13 @@ async function postJSONWithFallback(pathA: string, pathB: string, body: any) {
     return await fetchJSON(pathA, {
       method: "POST",
       headers: { "Content-Type": "application/json" },
-      body: JSON.stringify(body)
+      body: JSON.stringify(body),
     });
   } catch {
     return await fetchJSON(pathB, {
       method: "POST",
       headers: { "Content-Type": "application/json" },
-      body: JSON.stringify(body)
+      body: JSON.stringify(body),
     });
   }
 }
