@@ -6,7 +6,7 @@
     "source": "AFR",
     "hazard": "Toxic culture",
     "force": true,
-    "note": "High-stakes governance and culture risk story; manually curated."
+    "note": "How leadership and governance impact culture."
   },
   {
     "title": "Melbourne Cup booze-up ends in sexual harassment suit at Record Point",
@@ -15,7 +15,7 @@
     "source": "AFR",
     "hazard": "Sexual harassment",
     "force": true,
-    "note": "High-stakes governance and culture risk story; manually curated."
+    "note": "Sexual harassment is costly, I help you preventing it."
   },
   {
     "title": "KPMG, Deloitte and PwC exit 35 professionals over misconduct",
@@ -24,7 +24,7 @@
     "source": "AFR",
     "hazard": "Workplace misconduct",
     "force": true,
-    "note": "High-stakes governance and culture risk story; manually curated."
+    "note": "Glad to see toxic culture tackled."
   },
   {
     "title": "Workplace watchdog accused of bullying culture",
@@ -33,6 +33,6 @@
     "source": "ABC",
     "hazard": "Bullying",
     "force": true,
-    "note": "Historical reference; manually curated."
+    "note": "A concern that watchdog is engaging in wrongful behaviour."
   }
 ]
