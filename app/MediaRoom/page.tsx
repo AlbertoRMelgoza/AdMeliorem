@@ -9,7 +9,7 @@ export const dynamic = "force-dynamic";
 /* ===================== CONFIG ===================== */
 
 // Recency window (days). Override in Vercel: NEXT_PUBLIC_MEDIAROOM_MAX_AGE_DAYS=30
-const MAX_AGE_DAYS = Number(process.env.NEXT_PUBLIC_MEDIAROOM_MAX_AGE_DAYS ?? 30);
+const MAX_AGE_DAYS = Number(process.env.NEXT_PUBLIC_MEDIAROOM_MAX_AGE_DAYS ?? 180);
 
 // Block paywalls / unwanted outlets entirely (hard block)
 const BLOCKED_DOMAINS = [
@@ -47,20 +47,20 @@ const ALLOWED_SOURCES = [
   "Media, Entertainment & Arts Alliance",
 ];
 
-// Enforce specific sections (and WorkSafe prosecutions) per outlet
-const ALLOWED_PATHS_BY_DOMAIN: Record<string, RegExp[]> = {
-  "abc.net.au": [/^\/news\/business(\/|$)/i],
-  "skynews.com.au": [/^\/business(\/|$)/i],
-  "theage.com.au": [/^\/business(\/|$)/i, /^\/work-and-careers(\/|$)/i, /^\/workplace(\/|$)/i],
-  "smh.com.au": [/^\/business(\/|$)/i, /^\/work-and-careers(\/|$)/i, /^\/workplace(\/|$)/i],
-  "worksafe.vic.gov.au": [/^\/prosecution-result-summaries-enforceable-undertakings(\/|$)/i],
-};
-
 /* ===================== TYPES ===================== */
 
 type Item = { title: string; link: string; pubDate: string; source: string | null };
 type CuratedItem = Item & { hazard?: string; force?: boolean; __curated?: true };
 type CountsMap = Record<string, { like: number; share: number }>;
+
+type DebugCounts = {
+  fetched: number;
+  afterDedupe: number;
+  afterPaywallBlock: number;
+  afterAllowlist: number;
+  afterRecency: number;
+  afterHazard: number;
+};
 
 /* ===================== CONSTANTS ===================== */
 
@@ -127,31 +127,27 @@ function isBlocked(link: string) {
   return !!(host && BLOCKED_DOMAINS.some((d) => host.endsWith(d)));
 }
 
+// Whitelist logic (relaxed): domain OR source substring is enough
 function isAllowedByWhitelist(link: string, source?: string | null) {
   const hasDomainWhitelist = ALLOWED_DOMAINS.length > 0;
   const hasSourceWhitelist = ALLOWED_SOURCES.length > 0;
-
   if (!hasDomainWhitelist && !hasSourceWhitelist) return true;
 
   let host: string | null = null;
-  let path: string | null = null;
   try {
     const u = new URL(link);
     host = u.hostname.replace(/^www\./, "");
-    path = u.pathname;
   } catch {
     return false;
   }
 
   const domainOK = hasDomainWhitelist ? (host ? ALLOWED_DOMAINS.some((d) => host!.endsWith(d)) : false) : true;
-  const pathRules = host ? ALLOWED_PATHS_BY_DOMAIN[host] : undefined;
-  const pathOK = pathRules ? pathRules.some((rx) => rx.test(path || "")) : true;
 
   const s = (source || "").toLowerCase();
-  // substring match, case-insensitive (source strings vary a lot)
   const sourceOK = hasSourceWhitelist ? ALLOWED_SOURCES.some((allow) => s.includes(allow.toLowerCase())) : true;
 
-  return domainOK && pathOK && sourceOK;
+  // Either matches domain allowlist OR source allowlist
+  return domainOK || sourceOK;
 }
 
 function isRecent(pubDate: string) {
@@ -226,6 +222,7 @@ export default function Page() {
   const [loading, setLoading] = useState(true);
   const [apiError, setApiError] = useState<string | null>(null);
   const [updatedAt, setUpdatedAt] = useState<Date | null>(null);
+  const [dbg, setDbg] = useState<DebugCounts | null>(null);
   const { liked, toggle } = useLocalLikes();
 
   useEffect(() => {
@@ -235,6 +232,7 @@ export default function Page() {
         const [data, curated] = await Promise.all([fetchHeadlines().catch(() => ({ items: [] })), fetchCurated()]);
 
         const raw: Item[] = Array.isArray(data?.items) ? data.items : [];
+        const fetched = raw.length + curated.length;
 
         // Combine + dedupe by link (curated wins)
         const map = new Map<string, Item | CuratedItem>();
@@ -243,33 +241,42 @@ export default function Page() {
           map.set(it.link, it as any);
         }
         const combined = Array.from(map.values());
+        const afterDedupe = combined.length;
 
-        const next = combined
-          // allow curated+force to bypass paywall block
-          .filter((it: any) => (it.__curated && it.force ? true : !isBlocked(it.link)))
-          // allow curated items always; non-curated must be in allowlist
-          .filter((it: any) => (it.__curated ? true : isAllowedByWhitelist(it.link, it.source)))
-          // allow curated+force to bypass recency window
-          .filter((it: any) => (it.__curated && it.force ? true : isRecent(it.pubDate)))
-          // attach/compute hazard
+        const afterPaywallBlockArr = combined.filter((it: any) => (it.__curated && it.force ? true : !isBlocked(it.link)));
+        const afterPaywallBlock = afterPaywallBlockArr.length;
+
+        const afterAllowlistArr = afterPaywallBlockArr.filter((it: any) =>
+          it.__curated ? true : isAllowedByWhitelist(it.link, it.source)
+        );
+        const afterAllowlist = afterAllowlistArr.length;
+
+        const afterRecencyArr = afterAllowlistArr.filter((it: any) =>
+          it.__curated && it.force ? true : isRecent(it.pubDate)
+        );
+        const afterRecency = afterRecencyArr.length;
+
+        const finalArr = afterRecencyArr
           .map((it: any) => {
             const hazard = it.hazard || classifyHazard(it.title) || "";
             return { ...it, hazard };
           })
-          // keep only items with a hazard label
           .filter((it) => it.hazard)
-          // newest first
           .sort((a, b) => new Date(b.pubDate).getTime() - new Date(a.pubDate).getTime());
 
+        const afterHazard = finalArr.length;
+
         if (!cancelled) {
-          setItems(next);
+          setItems(finalArr);
           setApiError(data?.error || null);
           setUpdatedAt(new Date());
+          setDbg({ fetched, afterDedupe, afterPaywallBlock, afterAllowlist, afterRecency, afterHazard });
         }
       } catch (e: any) {
         if (!cancelled) {
           setApiError(e?.message || "Failed to load");
           setItems([]);
+          setDbg(null);
         }
       } finally {
         if (!cancelled) setLoading(false);
@@ -349,8 +356,7 @@ export default function Page() {
       <div style={{ display: "flex", justifyContent: "space-between", alignItems: "center", margin: "8px 0 12px" }}>
         <span style={{ fontSize: 12, opacity: 0.7 }}>
           {updatedAt ? `Updated ${updatedAt.toLocaleTimeString("en-AU")}` : loading ? "Loading…" : "Updated just now"}
-          {" • "}
-          Showing last {MAX_AGE_DAYS} days
+          {" • "}Showing last {MAX_AGE_DAYS} days
         </span>
         <button onClick={() => location.reload()} style={btn()}>
           Refresh now
@@ -360,6 +366,18 @@ export default function Page() {
       {!!ALLOWED_DOMAINS.length && (
         <div style={{ fontSize: 12, opacity: 0.75, marginBottom: 8 }}>
           Sources limited to approved outlets; paywalled sites blocked.
+        </div>
+      )}
+
+      {/* Diagnostics – remove later if you like */}
+      {dbg && (
+        <div style={{ fontSize: 12, opacity: 0.8, marginBottom: 12, display: "flex", gap: 10, flexWrap: "wrap" }}>
+          <span>Fetched: {dbg.fetched}</span>
+          <span>After dedupe: {dbg.afterDedupe}</span>
+          <span>After paywall: {dbg.afterPaywallBlock}</span>
+          <span>After allowlist: {dbg.afterAllowlist}</span>
+          <span>After recency: {dbg.afterRecency}</span>
+          <span>After hazard: {dbg.afterHazard}</span>
         </div>
       )}
 
