@@ -180,13 +180,20 @@ function useLocalLikes() {
   const liked = (link: string) => Boolean(likes[link]);
   return { liked, toggle };
 }
+async function fetchHeadlines() {
+  const ts = Date.now();
+  const tries = [
+    `/api/MediaRoom?ts=${ts}`, // current
+    `/api/mediaroom?ts=${ts}`, // legacy lowercase if you ever had it
+    `/api/Newsfeed?ts=${ts}`,  // legacy route (uppercase N)
+    `/api/newsfeed?ts=${ts}`,  // legacy lowercase
+  ];
+  for (const u of tries) {
+    try { return await fetchJSON(u); } catch {}
+  }
+  throw new Error("No headlines endpoint available");
+}
 
-async function fetchJSON(url: string, init?: RequestInit) {
-  const res = await fetch(url, { cache: "no-store", ...init });
-  if (!res.ok) throw new Error(`HTTP ${res.status}`);
-  const ct = res.headers.get("content-type") || "";
-  if (!ct.includes("application/json")) throw new Error("Not JSON");
-  return res.json();
 }
 
 /** Headlines: try MediaRoom, then mediaroom, then legacy Newsfeed paths */
