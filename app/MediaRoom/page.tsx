@@ -51,8 +51,7 @@ export default function MediaRoom() {
 
       <div style={{ margin: "8px 0 12px", fontSize: 12, opacity: 0.7 }}>
         {latest ? `Updated ${latest.toLocaleString("en-AU")}` : loading ? "Loading…" : "Updated just now"}
-        {" • "}Manual, curated list (no paywalled scraping).
-      </div>
+       </div>
 
       {err && <p style={{ opacity: 0.8 }}>No results yet. {err}</p>}
       {!loading && !items.length && <p style={{ opacity: 0.8 }}>No results.</p>}
