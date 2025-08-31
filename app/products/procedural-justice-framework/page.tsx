@@ -36,7 +36,8 @@ export default function PJFPage() {
       {/* Why it functions as a critical control */}
       <section style={card}>
         <h2 style={{ marginTop: 0 }}>Why procedural justice is your most powerful liability control</h2>
-        <p>This review strengthens your first line of defence by embedding:</p>
+            <p>This operational risk control strengthens your first line of defence by embedding:
+            </p>
         <ul>
           <li>
             <strong>Fair &amp; defensible complaint handling</strong> — not just policies, but <em>operational</em> practices aligned to
@@ -66,7 +67,7 @@ export default function PJFPage() {
       <section style={card}>
         <h2 style={{ marginTop: 0 }}>What you get</h2>
         <ul>
-          <li><strong>Process Review &amp; Gap Report</strong> — findings, risks, and priority fixes across intake, triage, assessment, and investigation.</li>
+          <li><strong>Critical Control &amp; Action Plan</strong> — roles, steps, triggers, and priority fixes across intake, triage, assessment, and investigation.</li>
           <li><strong>Evidence Pack Template</strong> — incident log with 10 critical controls (checkboxes), notes, deviations, and attestation.</li>
           <li><strong>Investigation Protocols</strong> — step-by-step procedures that are consistent, fair, and regulator-ready.</li>
           <li><strong>Manager/HR Toolkit</strong> — ready-to-use templates, scripts, and guidance to ensure consistent, auditable responses.</li>
