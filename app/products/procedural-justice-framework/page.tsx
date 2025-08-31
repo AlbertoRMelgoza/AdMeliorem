@@ -49,7 +49,7 @@ export default function PJFPage() {
             <strong>Remediation mechanisms</strong> — trusted ways to address harm, restore fairness, and maintain organisational integrity.
           </li>
           <li>
-            <strong>Toolkit &amp; training</strong> — practical templates and guidance for HR, managers, and investigators.
+            <strong>Toolkit &amp; coaching</strong> — practical templates and guidance for HR, managers, and investigators.
           </li>
         </ul>
 
@@ -70,7 +70,7 @@ export default function PJFPage() {
           <li><strong>Evidence Pack Template</strong> — incident log with 10 critical controls (checkboxes), notes, deviations, and attestation.</li>
           <li><strong>Investigation Protocols</strong> — step-by-step procedures that are consistent, fair, and regulator-ready.</li>
           <li><strong>Manager/HR Toolkit</strong> — ready-to-use templates, scripts, and guidance to ensure consistent, auditable responses.</li>
-          <li><strong>Optional training</strong> — targeted sessions to embed practices quickly.</li>
+          <li><strong>Optional coaching</strong> — targeted sessions to embed practices quickly.</li>
         </ul>
 
         <p style={{ marginTop: 12 }}>
