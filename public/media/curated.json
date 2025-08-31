@@ -29,10 +29,19 @@
   {
     "title": "Workplace watchdog accused of bullying culture",
     "link": "https://www.abc.net.au/news/2012-10-25/workplace-watchdog-accused-of-bullying,-intimidation/4334274",
-    "pubDate": "2012-10-25T09:00:00+10:00",
+    "pubDate": "2025-10-25T09:00:00+10:00",
     "source": "ABC",
     "hazard": "Bullying",
     "force": true,
     "note": "A concern that watchdog is engaging in wrongful behaviour."
   }
+ {
+    "title": "Risk culture lacking at Mercer’s $80b super fund",
+    "link": "https://www.afr.com/companies/financial-services/risk-culture-lacking-at-mercer-s-80b-super-fund-20250827-p5mq59",
+    "pubDate": "2025-08-31T16:33:00:00+10:00",
+    "source": "AFR",
+    "hazard": "Toxic Culture",
+    "force": true,
+    "note": "Important for APRA to regulate risk culture, it is not enforced at the moment."
+  },
 ]
