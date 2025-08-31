@@ -4,7 +4,7 @@ import type { CSSProperties } from "react";
 export const metadata = {
   title: "Procedural Justice Framework™ — Ad Meliorem",
   description:
-    "Fair, transparent, defensible processes that prevent escalation and contain liability.",
+    "A defensible, regulator-ready review that proves your incident processes are fair, consistent, and working in practice—without adding another system.",
 };
 
 export default function PJFPage() {
@@ -15,70 +15,68 @@ export default function PJFPage() {
     <main style={wrap}>
       <h1 style={{ marginTop: 0 }}>Procedural Justice Framework™</h1>
       <p>
-         When a psychosocial hazard or workplace incident arises, financial and reputational liability escalates fastest
-         where processes are weak or inconsistent. The Procedural Justice Framework™ closes this gap, establishing industry-best, regulator
-         ready protocols for managing incidents, so your organisation prevents escalation, demonstrates fairness, and protects against 
-         psychosocial risks or hazards. 
+        When a psychosocial hazard or workplace incident occurs, liability escalates fastest where processes are weak or
+        inconsistent. The Procedural Justice Framework™ is a <strong>defensible review</strong> that tests your live processes
+        end-to-end, so your organisation prevents escalation, demonstrates fairness, and protects against psychosocial risks—
+        <em>without adding another system</em>.
       </p>
 
       {/* Image lives at: AdMeliorem/public/Images/justice.jpg */}
       <div style={{ display: "flex", justifyContent: "center", margin: "24px 0" }}>
         <Image
           src="/Images/justice.jpg"
-          alt="Procedural Justice Framework illustration"
+          alt="Scales of justice representing fair and defensible processes"
           width={800}
           height={400}
           style={{ borderRadius: 12 }}
+          priority
         />
       </div>
 
-      {/* How it functions as a critical control */}
+      {/* Why it functions as a critical control */}
       <section style={card}>
-        <h2 style={{ marginTop: 0 }}>Why Procedural Justice is your most powerful liability control?</h2>
-        <p>This framework functions as your single most effective line of defence by embedding:</p>
+        <h2 style={{ marginTop: 0 }}>Why procedural justice is your most powerful liability control</h2>
+        <p>This review strengthens your first line of defence by embedding:</p>
         <ul>
           <li>
-            <strong>Fair &amp; Defensible Complaint Handling Systems</strong> → not just policies, but live-ready systems
-            aligned to WHS Codes of Practice, The Codes, Respect@Work, and modern regulatory expectations.
+            <strong>Fair &amp; defensible complaint handling</strong> — not just policies, but <em>operational</em> practices aligned to
+            modern regulatory expectations (e.g., WHS Codes of Practice, Respect@Work).
           </li>
           <li>
-            <strong>Investigation Protocols</strong> → consistent, transparent, and procedurally fair, reducing disputes
-            and escalation.
+            <strong>Investigation protocols</strong> — consistent, transparent, and procedurally fair to reduce disputes and escalation.
           </li>
           <li>
-            <strong>Remediation Mechanisms</strong> → trusted systems for addressing harm, restoring fairness, and
-            maintaining organisational integrity.
+            <strong>Remediation mechanisms</strong> — trusted ways to address harm, restore fairness, and maintain organisational integrity.
           </li>
           <li>
-            <strong>Toolkit &amp; Training</strong> → templates, guidance, and skill-building for HR, managers, and
-            investigators to apply procedural justice in practice.
+            <strong>Toolkit &amp; training</strong> — practical templates and guidance for HR, managers, and investigators.
           </li>
         </ul>
 
-        <p style={{ marginTop: 16 }}>By design, the Procedural Justice Framework™ enables organisations to:</p>
+        <p style={{ marginTop: 16 }}>Outcomes you can rely on:</p>
         <ul>
-          <li>Prevent costly escalation by eliminating gaps in process that regulators target.</li>
-          <li>Contain liability by demonstrating that systems — not just policies — are live and defensible.</li>
-          <li>Protect trust with employees and regulators by embedding fairness and transparency.</li>
-          <li>
-            Provide evidence of due diligence when psychosocial claims arise, shifting liability away from systemic
-            failure.
-          </li>
+          <li>Prevent costly escalation by closing process gaps regulators target.</li>
+          <li>Demonstrate due diligence with evidence you can show, not just policies.</li>
+          <li>Protect trust with employees and regulators through fairness and transparency.</li>
+          <li>Contain liability by proving systems are live, consistent, and defensible.</li>
         </ul>
       </section>
 
-      {/* What you get (at the end) */}
+      {/* What you get (deliverables) */}
       <section style={card}>
         <h2 style={{ marginTop: 0 }}>What you get</h2>
         <ul>
-          <li>End-to-end workflows detailing every role and setup from compliant intake, triage, assessment, and investigation, ensuring nothing is missed and every action is defensible</li>
-          <li>Built-in quality checks and documentation designed for fairness, transparency, and regulator ready evidence, turning process into your strongest shield</li>
-          <li>Practical tools: ready-to-use templates, protocols, and tailored coaching so every incident reponse is consistent, fair, and auditable </li>
-          
-                   </ul>
+          <li><strong>Process Review &amp; Gap Report</strong> — findings, risks, and priority fixes across intake, triage, assessment, and investigation.</li>
+          <li><strong>Evidence Pack Template</strong> — incident log with 10 critical controls (checkboxes), notes, deviations, and attestation.</li>
+          <li><strong>Investigation Protocols</strong> — step-by-step procedures that are consistent, fair, and regulator-ready.</li>
+          <li><strong>Manager/HR Toolkit</strong> — ready-to-use templates, scripts, and guidance to ensure consistent, auditable responses.</li>
+          <li><strong>Optional training</strong> — targeted sessions to embed practices quickly.</li>
+        </ul>
+
         <p style={{ marginTop: 12 }}>
           <a
             href="/contact"
+            aria-label="Book a 15-minute scoping call"
             style={{
               background: "#f1c40f",
               color: "#000",
@@ -89,17 +87,16 @@ export default function PJFPage() {
               display: "inline-block",
             }}
           >
-            Ask about PJF →
+            Book a 15-min scoping call →
           </a>
         </p>
       </section>
-    
-    <p style={{ margin: "0 0 8px 0" }}>
-  <a href="/products" style={{ color: "#f1c40f", textDecoration: "none", fontWeight: 700 }}>
-    ← Back to Products
-      </a>
-    </p>
-    
+
+      <p style={{ margin: "0 0 8px 0" }}>
+        <a href="/products" style={{ color: "#f1c40f", textDecoration: "none", fontWeight: 700 }}>
+          ← Back to Products
+        </a>
+      </p>
     </main>
   );
 }
