@@ -65,7 +65,7 @@ export default function ProductsIndex() {
           <Link href="/products/procedural-justice-framework" style={linkStyle}>
             <h3 style={title}>Procedural Justice Framework™</h3>
             <p style={blurb}>
-              Fair, transparent, defensible processes that prevent escalation and contain liability.
+              An operational risk control that embeds procedural fairness in incident handling—reducing psychosocial risk and liability without adding another system.
             </p>
           </Link>
           <div style={priceText}>A$ 4,000.00 — per use</div>
