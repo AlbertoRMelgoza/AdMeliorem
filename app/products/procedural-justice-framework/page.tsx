@@ -15,10 +15,10 @@ export default function PJFPage() {
     <main style={wrap}>
       <h1 style={{ marginTop: 0 }}>Procedural Justice Framework™</h1>
       <p>
-        When a psychosocial hazard or workplace incident occurs, liability escalates fastest where processes are weak or
-        inconsistent. The Procedural Justice Framework™ is a <strong>defensible review</strong> that tests your live processes
-        end-to-end, so your organisation prevents escalation, demonstrates fairness, and protects against psychosocial risks—
-        <em>without adding another system</em>.
+         When a psychosocial hazard or workplace incident occurs, liability escalates fastest where processes are weak or
+         inconsistent. The Procedural Justice Framework™ is an <strong>operational risk control</strong> that embeds procedural
+         fairness end-to-end, reducing the hazard of poor organisational justice so your organisation prevents escalation,
+         demonstrates fairness, and protects against psychosocial risks—<em>without adding another system</em>.
       </p>
 
       {/* Image lives at: AdMeliorem/public/Images/justice.jpg */}
