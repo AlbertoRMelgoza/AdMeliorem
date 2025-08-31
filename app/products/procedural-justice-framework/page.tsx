@@ -49,7 +49,7 @@ export default function PJFPage() {
             <strong>Remediation mechanisms</strong> — trusted ways to address harm, restore fairness, and maintain organisational integrity.
           </li>
           <li>
-            <strong>Toolkit &amp; coaching</strong> — practical templates and coaching for HR, Health and Safety, legal, and managers.
+            <strong>Toolkit &amp; coaching</strong> — practical templates and coaching for HR, Health and Safety, Legal, Compliance, and Managers.
           </li>
         </ul>
 
