@@ -43,15 +43,11 @@ export default function MediaRoom() {
     })();
   }, []);
 
-  const latest = items[0] ? new Date(items[0].pubDate) : null;
-
   return (
     <main style={{ maxWidth: 960, margin: "0 auto", padding: "24px 16px" }}>
       <h1 style={{ margin: 0, fontSize: 24 }}>MediaRoom</h1>
 
-      <div style={{ margin: "8px 0 12px", fontSize: 12, opacity: 0.7 }}>
-        {latest ? `Updated ${latest.toLocaleString("en-AU")}` : loading ? "Loading…" : "Updated just now"}
-       </div>
+      {/* Removed the Updated/Curated date header per request */}
 
       {err && <p style={{ opacity: 0.8 }}>No results yet. {err}</p>}
       {!loading && !items.length && <p style={{ opacity: 0.8 }}>No results.</p>}
@@ -60,11 +56,14 @@ export default function MediaRoom() {
         {items.map((it, i) => {
           const host = hostOf(it.link);
           const isPaywalled = it.paywalled ?? PAYWALL_DOMAINS.some(d => host.endsWith(d));
+          const d = new Date(it.pubDate);
+          const dateStr = isNaN(d.getTime()) ? "—" : d.toLocaleString("en-AU");
+
           return (
             <li key={`${it.link}-${i}`} style={{ border: "1px solid #222", borderRadius: 12, padding: 12 }}>
               <a href={it.link} target="_blank" rel="noopener noreferrer" style={YELLOW}>{it.title}</a>
               <div style={{ fontSize: 12, opacity: 0.75, marginTop: 6 }}>
-                {new Date(it.pubDate).toLocaleString("en-AU")} · {it.source || host}
+                {dateStr} · {it.source || host}
                 {it.hazard ? <> · <span style={{ color: "#f1c40f" }}>Hazard: {it.hazard}</span></> : null}
                 {isPaywalled ? <> · <span style={{ opacity: 0.8 }}>may require subscription</span></> : null}
               </div>
