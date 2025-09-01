@@ -137,7 +137,7 @@ export const SUBSUB_SHEQ: SubSubproduct[] = [
     parent: "sheq",
     slug: "sheq-sexual-coercion",
     title: "SHEQ: Sexual Coercion",
-    short: "Quid pro quo and coercive behaviour.",
+    short: "Coercive behaviour.",
     description:
       "Identifies coercive or transactional sexual behaviours with the highest liability exposure and regulatory interest.",
     reference: SHEQ_REF,
