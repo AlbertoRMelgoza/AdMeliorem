@@ -49,7 +49,7 @@ export const SUBPRODUCTS: Subproduct[] = [
   {
     slug: "wfbs",
     title: "WFBS (Workplace Feelings & Behaviour Survey)",
-    short: "Maps in-group favouritism, exclusion and covert harmful behaviours.",
+    short: "Maps in-group favouritism, exclusion and covert harmful feelings.",
     description:
       "Evaluates perceptions and dynamics that drive culture risk; developed and validated in Australia. Ideal for large or complex teams.",
     includedInPackages: ["Standard", "Enterprise"],
