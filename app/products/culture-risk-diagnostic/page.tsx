@@ -73,7 +73,7 @@ const SUBPRODUCTS: Tile[] = [
     slug: "code-of-ethics",
     title: "Review / Development of Code of Ethics",
     short:
-      "Ethical principles beyond compliance — embedded in practice.",
+      "Ethical principles beyond compliance to guide behaviour and decision making.",
     priceLabel: "A$ 750.00 — per review",
     fallbackPrice: 750,
   },
