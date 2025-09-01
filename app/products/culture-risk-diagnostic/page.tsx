@@ -56,9 +56,9 @@ const SUBPRODUCTS: Tile[] = [
   },
   {
     slug: "culture-pulse-surveys",
-    title: "Culture Pulse Surveys",
+    title: "Culture Risk Pulse Surveys",
     short:
-      "Short, repeatable pulses to track change and sustain improvement.",
+      "Short, repeatable pulses to track culture risks and control them.",
     priceLabel: "A$ 3,000.00 — annual subscription",
     fallbackPrice: 3000,
   },
