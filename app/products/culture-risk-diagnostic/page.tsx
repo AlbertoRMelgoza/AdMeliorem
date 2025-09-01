@@ -50,7 +50,7 @@ const SUBPRODUCTS: Tile[] = [
     slug: "wfbs",
     title: "WFBS (Workplace Feelings & Behaviour Survey)",
     short:
-      "Maps in-group favouritism, exclusion and covert harmful behaviours.",
+      "Maps in-group favouritism, exclusion and covert harmful feelings.",
     priceLabel: "A$ 2,250.00 — per engagement",
     fallbackPrice: 2250,
   },
