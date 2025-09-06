@@ -139,11 +139,7 @@ export default function Page() {
               Don’t wait for harm. Act now—lead the way in safer, more resilient workplaces.
             </p>
             <p style={{ marginTop: 12 }}>
-              <a
-                href="/contact"
-                style={cta}
-                aria-label="Contact me to request the August White Paper"
-              >
+              <a href="/contact" style={cta} aria-label="Contact me to request the August White Paper">
                 Contact me to request the White Paper →
               </a>
             </p>
@@ -185,19 +181,20 @@ export default function Page() {
             </div>
           </a>
 
-          {/* SHSARC™ & RCABH™ — single clickable card (no extra links) */}
+          {/* SHSARC™ & RCABH™ — single clickable card */}
           <a href="/products/shsarc-rcabh" style={{ color: "inherit", textDecoration: "none" }}>
             <div style={card}>
-               <h4 style={{ margin: "0 0 6px" }}>SHSARC™ &amp; RCABH™</h4>
-               <div style={prose}>
-                 <p style={{ margin: 0 }}>
-                 Target sexual harassment, assault, aggression, bullying, and harassment with comprehensive, documented,
-                 prevention-focused programs. You gain regulator-ready, step-by-step controls and frameworks—your defensible
-                 proof that you’ve acted on risk before it escalates into harm or legal action.
-              </p>
-          </div>
+              <h4 style={{ margin: "0 0 6px" }}>SHSARC™ &amp; RCABH™</h4>
+              <div style={prose}>
+                <p style={{ margin: 0 }}>
+                  Target sexual harassment, assault, aggression, bullying, and harassment with comprehensive, documented,
+                  prevention-focused programs. You gain regulator-ready, step-by-step controls and frameworks—your defensible
+                  proof that you’ve acted on risk before it escalates into harm or legal action.
+                </p>
+              </div>
+            </div>
+          </a>
         </div>
-      </div>
       </section>
 
       {/* Final CTA — EXACT STATEMENT */}
