@@ -10,8 +10,6 @@ export const metadata = {
 
 // ─────────────────────────────────────────────────────────────
 // Subproducts: display labels + fallback charge amounts (AUD)
-// Every tile will show Buy Now. If you later add Stripe price_…
-// IDs in PRICE_ID_BY_SLUG below, those will be used instead.
 // ─────────────────────────────────────────────────────────────
 type Tile = {
   slug: string;
@@ -22,88 +20,21 @@ type Tile = {
 };
 
 const SUBPRODUCTS: Tile[] = [
-  {
-    slug: "copsoq",
-    title: "COPSOQ (Copenhagen Psychosocial Questionnaire)",
-    short:
-      "Psychosocial hazard mapping across workload, justice, relationships.",
-    priceLabel: "A$ 3,750.00 — annual subscription",
-    fallbackPrice: 3750,
-  },
-  {
-    slug: "sheq",
-    title: "SHEQ (Sexual Harassment Experiences Questionnaire)",
-    short:
-      "Surfaces harassment, unwanted sexual attention, coercion, unsafe climates.",
-    priceLabel: "A$ 3,000.00 — annual subscription",
-    fallbackPrice: 3000,
-  },
-  {
-    slug: "ocas",
-    title: "OCAS (Overt–Covert Aggression Scale)",
-    short:
-      "Detects bullying, aggression, intimidation — overt and subtle.",
-    priceLabel: "A$ 2,250.00 — per engagement",
-    fallbackPrice: 2250,
-  },
-  {
-    slug: "wfbs",
-    title: "WFBS (Workplace Feelings & Behaviour Survey)",
-    short:
-      "Maps in-group favouritism, exclusion and covert feelings.",
-    priceLabel: "A$ 2,250.00 — per engagement",
-    fallbackPrice: 2250,
-  },
-  {
-    slug: "culture-pulse-surveys",
-    title: "Culture Risk Pulse Surveys",
-    short:
-      "Short, repeatable pulses to track culture risks to controlling them.",
-    priceLabel: "A$ 3,000.00 — annual subscription",
-    fallbackPrice: 3000,
-  },
-  {
-    slug: "code-of-conduct",
-    title: "Review / Development of Code of Conduct",
-    short: "Modern, defensible conduct standards and roll-out.",
-    priceLabel: "A$ 750.00 — per review",
-    fallbackPrice: 750,
-  },
-  {
-    slug: "code-of-ethics",
-    title: "Review / Development of Code of Ethics",
-    short:
-      "Ethical principles beyond compliance to guide behaviour and decision making.",
-    priceLabel: "A$ 750.00 — per review",
-    fallbackPrice: 750,
-  },
-  {
-    slug: "qualitative-interventions",
-    title: "Qualitative Interventions",
-    short: "Focus Groups • Interviews • Observations",
-    priceLabel: "A$ 750.00 — per session (1 hour)",
-    fallbackPrice: 750,
-  },
-  {
-    slug: "culture-risk-indicators",
-    title: "Culture Risk Indicators (Risk Culture)",
-    short: "Customisable indicators aligned to key risk domains.",
-    priceLabel: "A$ 750.00 — per product",
-    fallbackPrice: 750,
-  },
+  { slug: "copsoq", title: "COPSOQ (Copenhagen Psychosocial Questionnaire)", short: "Psychosocial hazard mapping across workload, justice, relationships.", priceLabel: "A$ 3,750.00 — annual subscription", fallbackPrice: 3750 },
+  { slug: "sheq", title: "SHEQ (Sexual Harassment Experiences Questionnaire)", short: "Surfaces harassment, unwanted sexual attention, coercion, unsafe climates.", priceLabel: "A$ 3,000.00 — annual subscription", fallbackPrice: 3000 },
+  { slug: "ocas", title: "OCAS (Overt–Covert Aggression Scale)", short: "Detects bullying, aggression, intimidation — overt and subtle.", priceLabel: "A$ 2,250.00 — per engagement", fallbackPrice: 2250 },
+  { slug: "wfbs", title: "WFBS (Workplace Feelings & Behaviour Survey)", short: "Maps in-group favouritism, exclusion and covert feelings.", priceLabel: "A$ 2,250.00 — per engagement", fallbackPrice: 2250 },
+  { slug: "culture-pulse-surveys", title: "Culture Risk Pulse Surveys", short: "Short, repeatable pulses to track culture risks to controlling them.", priceLabel: "A$ 3,000.00 — annual subscription", fallbackPrice: 3000 },
+  { slug: "code-of-conduct", title: "Review / Development of Code of Conduct", short: "Modern, defensible conduct standards and roll-out.", priceLabel: "A$ 750.00 — per review", fallbackPrice: 750 },
+  { slug: "code-of-ethics", title: "Review / Development of Code of Ethics", short: "Ethical principles beyond compliance to guide behaviour and decision making.", priceLabel: "A$ 750.00 — per review", fallbackPrice: 750 },
+  { slug: "qualitative-interventions", title: "Qualitative Interventions", short: "Focus Groups • Interviews • Observations", priceLabel: "A$ 750.00 — per session (1 hour)", fallbackPrice: 750 },
+  { slug: "culture-risk-indicators", title: "Culture Risk Indicators (Risk Culture)", short: "Customisable indicators aligned to key risk domains.", priceLabel: "A$ 750.00 — per product", fallbackPrice: 750 },
 ];
 
 // Optional: paste your real Stripe price IDs here to charge Stripe prices
 const PRICE_ID_BY_SLUG: Record<string, string | undefined> = {
   // copsoq: "price_XXXXXXXXXXXXXXXX",
-  // sheq: "price_YYYYYYYYYYYYYYYY",
-  // ocas: "price_ZZZZZZZZZZZZZZZZ",
-  // wfbs: "price_AAAAAAAAAAAAAAAA",
-  // "culture-pulse-surveys": "price_BBBBBBBBBBBBBBBB",
-  // "code-of-conduct": "price_CCCCCCCCCCCCCCCC",
-  // "code-of-ethics": "price_DDDDDDDDDDDDDDDD",
-  // "qualitative-interventions": "price_EEEEEEEEEEEEEEEE",
-  // "culture-risk-indicators": "price_FFFFFFFFFFFFFFFF",
+  // ...
 };
 
 export default function CRDPage() {
@@ -128,6 +59,7 @@ export default function CRDPage() {
     marginTop: 16,
   };
 
+  // UPDATED: add tap highlight for mobile
   const tile: CSSProperties = {
     background: "#f1c40f",
     color: "#000",
@@ -137,21 +69,21 @@ export default function CRDPage() {
     textDecoration: "none",
     display: "block",
     fontWeight: 700,
+    WebkitTapHighlightColor: "rgba(241, 196, 15, 0.35)", // ← tap ink
   };
 
   const titleStyle: CSSProperties = { margin: 0, fontSize: 16, lineHeight: 1.35 };
   const shortStyle: CSSProperties = { margin: "6px 0 8px 0", fontSize: 13, opacity: 0.9, fontWeight: 500 };
   const priceStyle: CSSProperties = { margin: 0, fontSize: 14, fontWeight: 700 };
+  // NEW: small cue text
+  const tapCue: CSSProperties = { marginTop: 8, fontWeight: 700, color: "#000" };
 
   return (
     <main style={wrap}>
       <h1 style={{ marginTop: 0 }}>Culture Risk Diagnostic™</h1>
 
       <p style={{ margin: "0 0 8px 0" }}>
-        <a
-          href="/products"
-          style={{ color: "#f1c40f", textDecoration: "none", fontWeight: 700 }}
-        >
+        <a href="/products" style={{ color: "#f1c40f", textDecoration: "none", fontWeight: 700 }}>
           ← Back to Products
         </a>
       </p>
@@ -168,17 +100,13 @@ export default function CRDPage() {
             const priceId = PRICE_ID_BY_SLUG[sp.slug];
 
             return (
-              <div
-                key={sp.slug}
-                style={{ display: "flex", flexDirection: "column", gap: 8 }}
-              >
-                <Link
-                  href={`/products/culture-risk-diagnostic/${sp.slug}`}
-                  style={tile}
-                >
+              <div key={sp.slug} style={{ display: "flex", flexDirection: "column", gap: 8 }}>
+                <Link href={`/products/culture-risk-diagnostic/${sp.slug}`} style={tile} aria-label={`View ${sp.title}`}>
                   <p style={titleStyle}>{sp.title}</p>
                   <p style={shortStyle}>{sp.short}</p>
                   <p style={priceStyle}>{sp.priceLabel}</p>
+                  {/* NEW: tap cue */}
+                  <div style={tapCue}>Tap to view →</div>
                 </Link>
 
                 <BuyButton priceId={priceId} name={sp.title} price={sp.fallbackPrice}>
