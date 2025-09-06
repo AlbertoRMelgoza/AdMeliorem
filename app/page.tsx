@@ -36,6 +36,18 @@ export default function Page() {
     textDecoration: "none",
   };
 
+  // Mobile-friendly link affordance
+  const tapLink: CSSProperties = {
+    color: "inherit",
+    textDecoration: "none",
+    WebkitTapHighlightColor: "rgba(241, 196, 15, 0.35)", // iOS tap ink
+  };
+  const tapCue: CSSProperties = {
+    marginTop: 12,
+    fontWeight: 700,
+    color: "#f1c40f",
+  };
+
   // Grids
   const heroGrid: CSSProperties = {
     display: "grid",
@@ -92,7 +104,7 @@ export default function Page() {
         </div>
       </section>
 
-      {/* Smart Solution / Thought Leadership — EXACT COPY */}
+      {/* Smart Solution / Thought Leadership — your copy */}
       <section style={{ marginTop: 32, display: "grid", gap: 16 }}>
         <div style={card}>
           <h2 style={{ ...h2, marginTop: 0 }}>Can you guarantee zero pscyhological harm in your organisation?</h2>
@@ -101,7 +113,7 @@ export default function Page() {
               No. As detailed in my August White Paper Edition, analysis of 47 significant Australian cases predicts that psychological and psychosocial harm claims occur across all industries,
               demonstrating that it is impossible to fully eliminate psychological harm—regardless of sector. In addition, my white paper confirms that claims arising from psychosocial hazards
               —such as bullying, harassment (including sexual harassment), aggression, procedural justice failures, toxic culture, and sexual assault— 
-              consistently lead to substantial financial liability, with real impact on reputation and social licence to operate.
+              consistently lead to substantial financial liability, with real impact on reputation and social license to operate.
             </p>
             <p style={{ marginTop: 12 }}>
               <a href="/contact" style={cta} aria-label="Contact me to request the August White Paper">
@@ -112,7 +124,7 @@ export default function Page() {
         </div>
 
         <div style={card}>
-          <h3 style={{ marginTop: 0 }}>More realities of psychological harm.</h3>
+          <h3 style={{ marginTop: 0 }}>More realitites of psychological harm!</h3>
           <div style={prose}>
             <p style={{ marginTop: 8 }}>
               Workplace harm is inherently unpredictable and impossible to eradicate. Incidents arise from a complex web of
@@ -122,7 +134,6 @@ export default function Page() {
               disputed. No model or method can capture the full scope and nuance of harm in the modern workplace.
             </p>
 
-            {/* NEW: financial consequences text */}
             <p style={{ marginTop: 12, marginBottom: 0 }}>
               <strong>The financial consequences are significant:</strong>
             </p>
@@ -158,20 +169,20 @@ export default function Page() {
               demonstrably protect your reputation, reduce liability, and help you set the benchmark for safety and compliance.
             </p>
             <p style={{ marginTop: 12, marginBottom: 0 }}>
-              Don’t let psychological harm to escalate. Stop liability to increase. Act now—lead the way in safer, more resilient workplaces.
+              Don’t wait for harm. Act now—lead the way in safer, more resilient workplaces.
             </p>
           </div>
         </div>
       </section>
 
-      {/* Products & Services — UPDATED COPY */}
+      {/* Products & Services — UPDATED COPY with mobile tap cues */}
       <section>
         <h2 style={h2}>My Products</h2>
 
         <h3 style={{ marginTop: 16 }}>Flagship Products (™)</h3>
         <div style={twoColCards}>
           {/* Procedural Justice Framework™ */}
-          <a href="/products/procedural-justice-framework" style={{ color: "inherit", textDecoration: "none" }}>
+          <a href="/products/procedural-justice-framework" style={tapLink} aria-label="View Procedural Justice Framework">
             <div style={card}>
               <h4 style={{ margin: "0 0 6px" }}>Procedural Justice Framework™</h4>
               <div style={prose}>
@@ -180,12 +191,13 @@ export default function Page() {
                   This toolkit guarantees your organisation is always regulator-ready, minimising legal exposure by
                   demonstrably meeting new WHS psychosocial hazard codes around procedural fairness and organisational justice.
                 </p>
+                <div style={tapCue}>Tap to view →</div>
               </div>
             </div>
           </a>
 
           {/* Culture Risk Diagnostic™ */}
-          <a href="/products/culture-risk-diagnostic" style={{ color: "inherit", textDecoration: "none" }}>
+          <a href="/products/culture-risk-diagnostic" style={tapLink} aria-label="View Culture Risk Diagnostic">
             <div style={card}>
               <h4 style={{ margin: "0 0 6px" }}>Culture Risk Diagnostic™</h4>
               <div style={prose}>
@@ -194,12 +206,13 @@ export default function Page() {
                   hotspots—ensuring you have complete visibility and never operate blind to emerging risk. This evidence-based
                   approach proves you are identifying and managing hazards before they become liabilities.
                 </p>
+                <div style={tapCue}>Tap to view →</div>
               </div>
             </div>
           </a>
 
           {/* SHSARC™ & RCABH™ — single clickable card */}
-          <a href="/products/shsarc-rcabh" style={{ color: "inherit", textDecoration: "none" }}>
+          <a href="/products/shsarc-rcabh" style={tapLink} aria-label="View SHSARC and RCABH">
             <div style={card}>
               <h4 style={{ margin: "0 0 6px" }}>SHSARC™ &amp; RCABH™</h4>
               <div style={prose}>
@@ -208,13 +221,14 @@ export default function Page() {
                   prevention-focused programs. You gain regulator-ready, step-by-step controls and frameworks—your defensible
                   proof that you’ve acted on risk before it escalates into harm or legal action.
                 </p>
+                <div style={tapCue}>Tap to view →</div>
               </div>
             </div>
           </a>
         </div>
       </section>
 
-      {/* Final CTA — EXACT STATEMENT */}
+      {/* Final CTA — your copy */}
       <section style={{ marginTop: 32 }}>
         <div style={{ ...card, background: "#151515" }}>
           <h2 style={{ ...h2, marginTop: 0 }}>Ready to prove you’re the leader in workplace safety?</h2>
