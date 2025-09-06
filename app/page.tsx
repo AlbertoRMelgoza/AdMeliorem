@@ -107,7 +107,7 @@ export default function Page() {
       {/* Smart Solution / Thought Leadership — your copy */}
       <section style={{ marginTop: 32, display: "grid", gap: 16 }}>
         <div style={card}>
-          <h2 style={{ ...h2, marginTop: 0 }}>Can you guarantee zero pscyhological harm in your organisation?</h2>
+          <h2 style={{ ...h2, marginTop: 0 }}>Can you guarantee zero psychological harm in your organisation?</h2>
           <div style={prose}>
             <p style={{ marginTop: 8, marginBottom: 0 }}>
               No. As detailed in my August White Paper Edition, analysis of 47 significant Australian cases predicts that psychological and psychosocial harm claims occur across all industries,
