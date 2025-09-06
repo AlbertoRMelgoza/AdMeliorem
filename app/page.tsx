@@ -103,6 +103,14 @@ export default function Page() {
               —such as bullying, harassment (including sexual harassment), aggression, procedural justice failures, toxic culture, and sexual assault— 
               consistently lead to substantial financial liability, with real impact on reputation and social license to operate.
             </p>
+          </p>
+            <p style={{ marginTop: 12 }}>
+              <a href="/contact" style={cta} aria-label="Contact me to request the August White Paper">
+                Contact me to request the White Paper →
+              </a>
+            </p>
+          </div>
+        </div>
           </div>
         </div>
 
@@ -140,12 +148,7 @@ export default function Page() {
             <p style={{ marginTop: 12, marginBottom: 0 }}>
               Don’t wait for harm. Act now—lead the way in safer, more resilient workplaces.
             </p>
-            <p style={{ marginTop: 12 }}>
-              <a href="/contact" style={cta} aria-label="Contact me to request the August White Paper">
-                Contact me to request the White Paper →
-              </a>
-            </p>
-          </div>
+           </div>
         </div>
       </section>
 
