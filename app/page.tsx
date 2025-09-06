@@ -127,11 +127,12 @@ export default function Page() {
           <h3 style={{ marginTop: 0 }}>More realities of psychological harm.</h3>
           <div style={prose}>
             <p style={{ marginTop: 8 }}>
-              Workplace harm is inherently unpredictable and impossible to eradicate. Incidents arise from a complex web of
-              human behaviours, organisational systems, cultural pressures, and ever-evolving legal standards. These factors
-              are often beyond the reach of any single assessment tool or professional’s control. Even with top clinical
-              expertise, assessments of psychological harm are frequently ambiguous, open to interpretation, and sometimes
-              disputed. No model or method can capture the full scope and nuance of harm in the modern workplace.
+              Workplace psychological harm is unpredictable and impossible to eradicate. Incidents arise from a complex web
+              involving individual behaviours, organisational systems, and cultural pressures. These factors are often beyond the reach 
+              of any single psychological assessment tool. Even with clinical expertise, psychological harm assessments can be subjective, 
+              open to interpretation, and sometimes disputed, potentially causing additional distress. No model or method can capture the
+              full scope and nuance of psychological harm in the modern workplace. The business impact is significant, with psychological 
+              injury claims among the most costly for employers.
             </p>
 
             <p style={{ marginTop: 12, marginBottom: 0 }}>
