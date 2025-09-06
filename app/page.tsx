@@ -69,15 +69,44 @@ export default function Page() {
         </div>
       </section>
 
-      {/* Smart Solution section */}
+      {/* Smart Solution / Thought Leadership — EXACT COPY PROVIDED */}
       <section style={{ marginTop: 32, display: "grid", gap: 16 }}>
-        {/* Hook */}
         <div style={card}>
-          <h2 style={{ marginTop: 0 }}>The Smart Solution for Safer Workplaces</h2>
-          <p style={{ margin: 0 }}>
-            <strong>Can you guarantee zero individual harm in your organisation?</strong><br />
-            No leader can—my August White Paper Edition proves that individual claims and incidents can never be entirely
-            eliminated, and even the best psychologists cannot always clearly assess harm.
+          <h2 style={{ marginTop: 0 }}>Can you guarantee zero harm in your organisation?</h2>
+          <p style={{ marginTop: 8, marginBottom: 0 }}>
+            My August White Paper Edition proves you can’t—no executive, no policy, and not even the most experienced
+            psychologist or clinical process can completely eliminate individual harm or definitively measure and resolve every claim.
+          </p>
+        </div>
+
+        <div style={card}>
+          <h3 style={{ marginTop: 0 }}>Why not?</h3>
+          <p style={{ marginTop: 8 }}>
+            Workplace harm is inherently unpredictable and impossible to eradicate. Incidents arise from a complex web of
+            human behaviours, organisational systems, cultural pressures, and ever-evolving legal standards. These factors
+            are often beyond the reach of any single assessment tool or professional’s control. Even with top clinical
+            expertise, assessments of psychological harm are frequently ambiguous, open to interpretation, and sometimes
+            disputed. No model or method can capture the full scope and nuance of harm in the modern workplace.
+          </p>
+        </div>
+
+        <div style={card}>
+          <h3 style={{ marginTop: 0 }}>What do regulators and courts expect?</h3>
+          <p style={{ marginTop: 8 }}>
+            They don’t expect perfection—but they do require hard evidence that your business has taken all practicable
+            steps to systematically prevent and control risks, not just react after people are harmed.
+          </p>
+        </div>
+
+        <div style={card}>
+          <h3 style={{ marginTop: 0 }}>This is where I make the difference.</h3>
+          <p style={{ marginTop: 8 }}>
+            While compliance is mandatory, our service delivers rapid, regulator-ready solutions: robust, proactive
+            prevention, psychosocial risk management, and clear, defensible documentation. We cut through complexity,
+            demonstrably protect your reputation, reduce liability, and help you set the benchmark for safety and compliance.
+          </p>
+          <p style={{ marginTop: 12, marginBottom: 0 }}>
+            Don’t wait for harm. Act now—lead the way in safer, more resilient workplaces.
           </p>
           <p style={{ marginTop: 12 }}>
             <a
@@ -96,61 +125,59 @@ export default function Page() {
             </a>
           </p>
         </div>
+      </section>
 
-        {/* Truth + Stakes */}
-        <div style={card}>
-          <p style={{ marginTop: 0 }}>
-            <strong>But your business CAN guarantee one thing:</strong><br />
-            That you have done everything possible to prevent harm, control risks, and demonstrate proactive compliance
-            to regulators, staff, and the public—even when incidents occur.
-          </p>
-          <p style={{ marginBottom: 0 }}>That’s where I come in.</p>
+      {/* Products & Services — UPDATED EXACTLY AS REQUESTED */}
+      <section>
+        <h2 style={h2}>My Products</h2>
+
+        <h3 style={{ marginTop: 16 }}>Flagship Products (™)</h3>
+        <div style={{ display: "grid", gridTemplateColumns: "repeat(2, 1fr)", gap: 16 }}>
+          {/* Procedural Justice Framework™ */}
+          <a href="/products/procedural-justice-framework" style={{ color: "inherit", textDecoration: "none" }}>
+            <div style={card}>
+              <h4 style={{ margin: "0 0 6px" }}>Procedural Justice Framework™</h4>
+              <p style={{ margin: 0 }}>
+                Delivers transparent, fair, and consistent processes for decision-making, complaints, and investigations.
+                This toolkit guarantees your organisation is always regulator-ready, minimising legal exposure by
+                demonstrably meeting new WHS psychosocial hazard codes around procedural fairness and organisational justice.
+              </p>
+            </div>
+          </a>
+
+          {/* Culture Risk Diagnostic™ */}
+          <a href="/products/culture-risk-diagnostic" style={{ color: "inherit", textDecoration: "none" }}>
+            <div style={card}>
+              <h4 style={{ margin: "0 0 6px" }}>Culture Risk Diagnostic™</h4>
+              <p style={{ margin: 0 }}>
+                Uses validated, real-time tools (COPSOQ, SEQ, IAT, OCAS, WFBS) to pinpoint culture and psychosocial risk
+                hotspots—ensuring you have complete visibility and never operate blind to emerging risk. This evidence-based
+                approach proves you are identifying and managing hazards before they become liabilities.
+              </p>
+            </div>
+          </a>
+
+          {/* SHSARC™ & RCABH™ (combined card) */}
+          <a href="/products/shsarc-rcabh" style={{ color: "inherit", textDecoration: "none" }}>
+            <div style={card}>
+              <h4 style={{ margin: "0 0 6px" }}>SHSARC™ &amp; RCABH™</h4>
+              <p style={{ margin: 0 }}>
+                Target sexual harassment, assault, aggression, bullying, and harassment with comprehensive, documented,
+                prevention-focused programs. You gain regulator-ready, step-by-step controls and frameworks—your defensible
+                proof that you’ve acted on risk before it escalates into harm or legal action.
+              </p>
+            </div>
+          </a>
         </div>
+      </section>
 
-        {/* When harm strikes */}
-        <div style={card}>
-          <h3 style={{ marginTop: 0 }}>When harm strikes, complexity explodes:</h3>
-          <ul style={{ margin: "8px 0 0 18px" }}>
-            <li>
-              Psychological assessments are slow and scarce (Australia faces a shortage of registered psychologists for
-              harm assessment).
-            </li>
-            <li>
-              Clinical answers are rarely clear—even experts can’t always define the full impact.
-            </li>
-            <li>Every delay increases your liability and reputational risk.</li>
-          </ul>
-        </div>
-
-        {/* Advantage + Proof */}
-        <div style={card}>
-          <h3 style={{ marginTop: 0 }}>Here’s your advantage:</h3>
-          <p style={{ marginTop: 0 }}>
-            We deliver immediate, regulator-ready psychosocial risk assessments and prevention solutions—no waitlists, no
-            ambiguity, just decisive, validated action.
-          </p>
-          <ul style={{ margin: "8px 0 0 18px" }}>
-            <li>
-              <strong>Instant credibility:</strong> Show regulators and the public concrete proof of your diligence,
-              safety leadership, and compliance—right now.
-            </li>
-            <li>
-              <strong>Stay out of crisis mode:</strong> We identify and control psychosocial risks before incidents
-              spiral, making compliance your strategic asset.
-            </li>
-            <li>
-              <strong>Make complexity manageable:</strong> Our practical, proven frameworks turn red tape into clear
-              action and executive peace of mind.
-            </li>
-            <li>
-              <strong>Prove your leadership:</strong> While others stall, you lead. Our assessments and solutions are
-              your documented evidence of care and responsibility—protecting your people and your organisation every step
-              of the way.
-            </li>
-          </ul>
-          <p style={{ marginTop: 12, marginBottom: 0 }}>
-            Don’t wait for harm—or for slow answers. Minimise complexity, reinforce trust, and stay ahead. That’s the
-            real smart solution.
+      {/* Final CTA — EXACT STATEMENT PROVIDED */}
+      <section style={{ marginTop: 32 }}>
+        <div style={{ ...card, background: "#151515" }}>
+          <h2 style={{ marginTop: 0 }}>Ready to prove you’re the leader in workplace safety?</h2>
+          <p style={{ marginTop: 8 }}>
+            Don’t let complexity or psychologist shortages leave your organisation exposed. Let’s future-proof your
+            compliance, reputation, and employee wellbeing—get protected today.
           </p>
           <p style={{ marginTop: 12 }}>
             <a
@@ -159,61 +186,15 @@ export default function Page() {
                 display: "inline-block",
                 backgroundColor: "#f1c40f",
                 color: "#000",
-                padding: "10px 18px",
+                padding: "12px 20px",
                 borderRadius: 6,
-                fontWeight: 600,
+                fontWeight: 700,
                 textDecoration: "none",
               }}
-              aria-label="Contact to get immediate, regulator-ready psychosocial risk assessments"
             >
-              Talk to us →
+              Contact me →
             </a>
           </p>
-        </div>
-      </section>
-
-      {/* Products & Services */}
-      <section>
-        <h2 style={h2}>My Products</h2>
-
-        <h3 style={{ marginTop: 16 }}>Flagship Products (™)</h3>
-        <div style={{ display: "grid", gridTemplateColumns: "repeat(2, 1fr)", gap: 16 }}>
-          <a href="/products/procedural-justice-framework" style={{ color: "inherit", textDecoration: "none" }}>
-            <div style={card}>
-              <h4 style={{ margin: "0 0 6px" }}>Procedural Justice Framework™</h4>
-              <p style={{ margin: 0 }}>
-                Toolkit + guidance for complaint handling &amp; investigations. Ensures fairness, transparency, and
-                defensibility.
-              </p>
-            </div>
-          </a>
-
-          <a href="/products/culture-risk-diagnostic" style={{ color: "inherit", textDecoration: "none" }}>
-            <div style={card}>
-              <h4 style={{ margin: "0 0 6px" }}>Culture Risk Diagnostic™</h4>
-              <p style={{ margin: 0 }}>
-                Validated tools (COPSOQ, SEQ, IAT, OCAS, WFBS) to map hotspots and deliver Key Culture Risk Indicators.
-              </p>
-            </div>
-          </a>
-
-          <a href="/products/shsarc" style={{ color: "inherit", textDecoration: "none" }}>
-            <div style={card}>
-              <h4 style={{ margin: "0 0 6px" }}>SHSARC™ — Sexual harassment &amp; sexual assault risk control</h4>
-              <p style={{ margin: 0 }}>
-                3-day, 11-module talent management program focused on prevention, indicators, and defensible controls.
-              </p>
-            </div>
-          </a>
-
-          <a href="/products/rcabh" style={{ color: "inherit", textDecoration: "none" }}>
-            <div style={card}>
-              <h4 style={{ margin: "0 0 6px" }}>RCABH™ — Risk control aggression, bullying &amp; harassment</h4>
-              <p style={{ margin: 0 }}>
-                4-day, 13-module talent management program delivering practical, regulator-ready prevention measures.
-              </p>
-            </div>
-          </a>
         </div>
       </section>
     </main>
