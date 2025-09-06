@@ -170,7 +170,7 @@ export default function Page() {
               demonstrably protect your reputation, reduce liability, and help you set the benchmark for safety and compliance.
             </p>
             <p style={{ marginTop: 12, marginBottom: 0 }}>
-              Don’t wait for harm. Act now—lead the way in safer, more resilient workplaces.
+              Don’t wait for individual harm to escalate. Stop liability to increase. Act now—lead the way in safer, more resilient workplaces.
             </p>
           </div>
         </div>
