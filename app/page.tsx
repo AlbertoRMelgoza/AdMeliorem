@@ -112,13 +112,29 @@ export default function Page() {
         </div>
 
         <div style={card}>
-          <h3 style={{ marginTop: 0 }}>More realities of psychological harm.</h3>
+          <h3 style={{ marginTop: 0 }}>More realitites of psychological harm.</h3>
           <div style={prose}>
             <p style={{ marginTop: 8 }}>
-              Workplace psychological harm is unpredictable and impossible to eradicate. Incidents result from a complex web involving how individuals 
-              experience behaviours, organisational systems, and cultural pressures. These factors are often beyond the reach of any single
-              psychological assessment tool. Even with clinical expertise, psychological harm assessments can be subjective, open to interpretation, and sometimes disputed,
-              potentially causing additional distress. No model or method can capture the full scope and nuance of psychological harm in the modern workplace.
+              Workplace harm is inherently unpredictable and impossible to eradicate. Incidents arise from a complex web of
+              human behaviours, organisational systems, cultural pressures, and ever-evolving legal standards. These factors
+              are often beyond the reach of any single assessment tool or professional’s control. Even with top clinical
+              expertise, assessments of psychological harm are frequently ambiguous, open to interpretation, and sometimes
+              disputed. No model or method can capture the full scope and nuance of harm in the modern workplace.
+            </p>
+
+            {/* NEW: financial consequences text */}
+            <p style={{ marginTop: 12, marginBottom: 0 }}>
+              <strong>The financial consequences are significant:</strong>
+            </p>
+            <p style={{ marginTop: 8 }}>
+              The latest Queensland workers' compensation scheme statistics show psychological and psychiatric claims
+              accounted for $230.9 million in statutory payments in 2023–24, with an average cost of over $63,000 per
+              claim—more than twice that of other injuries.
+            </p>
+            <p style={{ marginTop: 8 }}>
+              Comcare’s scheme licensee data for 2024–25 reports the average workers’ compensation claim for primary
+              psychological injury at $31,611 per claim, notably higher than the all-injury average of $20,368. Some
+              psychological claims involving violence or assault exceed $40,000 per claim.
             </p>
           </div>
         </div>
@@ -142,7 +158,7 @@ export default function Page() {
               demonstrably protect your reputation, reduce liability, and help you set the benchmark for safety and compliance.
             </p>
             <p style={{ marginTop: 12, marginBottom: 0 }}>
-              Don’t wait for harm. Act now—lead the way in safer, more resilient workplaces.
+              Don’t let psychological harm to escalate. Stop liability to increase. Act now—lead the way in safer, more resilient workplaces.
             </p>
           </div>
         </div>
