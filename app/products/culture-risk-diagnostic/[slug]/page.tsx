@@ -4,17 +4,8 @@ import BuyButton from "../BuyButton";
 import { SUBPRODUCTS } from "../subproducts";
 import { SUBSUB_BY_PARENT } from "../subsubproducts";
 
-// All valid slugs (those with modules are: copsoq, sheq, culture-pulse-surveys)
-type Slug =
-  | "copsoq"
-  | "sheq"
-  | "culture-pulse-surveys"
-  | "ocas"
-  | "wfbs"
-  | "code-of-conduct"
-  | "code-of-ethics"
-  | "qualitative-interventions"
-  | "culture-risk-indicators";
+// Derive Slug from your data source to avoid drift
+type Slug = (typeof SUBPRODUCTS)[number]["slug"];
 
 type Props = { params: { slug: Slug } };
 
@@ -66,7 +57,7 @@ const PRICE_ID_BY_SLUG: Partial<Record<Slug, string>> = {
 export default function SubproductPage({ params }: Props) {
   const sp = SUBPRODUCTS.find((s) => s.slug === params.slug);
 
-  // Modules only exist for these three; others return [] so we don't crash
+  // Modules only exist for some parents; others return [] so we don't crash
   const modules =
     (SUBSUB_BY_PARENT as Partial<
       Record<Slug, Array<{ slug: string; title: string; short: string }>>
