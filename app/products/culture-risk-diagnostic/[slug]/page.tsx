@@ -75,9 +75,28 @@ export default function SubproductPage({ params }: Props) {
   const wrap: CSSProperties = { maxWidth: 1000, margin: "28px auto", padding: "0 16px", lineHeight: 1.65 };
   const card: CSSProperties = { background: "#111", border: "1px solid #222", borderRadius: 12, padding: 16, marginTop: 24 };
   const grid: CSSProperties = { display: "grid", gridTemplateColumns: "repeat(auto-fill, minmax(260px, 1fr))", gap: 12 };
-  const tile: CSSProperties = { background: "#f1c40f", color: "#000", border: "1px solid #f1c40f", borderRadius: 12, padding: 14, textDecoration: "none", display: "block", fontWeight: 700 };
+
+  // Link/tile styles with mobile tap affordance
+  const tile: CSSProperties = {
+    background: "#f1c40f",
+    color: "#000",
+    border: "1px solid #f1c40f",
+    borderRadius: 12,
+    padding: 14,
+    textDecoration: "none",
+    display: "block",
+    fontWeight: 700,
+    WebkitTapHighlightColor: "rgba(241, 196, 15, 0.35)",
+  };
   const title: CSSProperties = { margin: 0, fontSize: 16, lineHeight: 1.35 };
   const short: CSSProperties = { margin: "6px 0 10px 0", fontSize: 13 };
+  const tapCueTile: CSSProperties = { marginTop: 8, fontWeight: 700, color: "#000" };
+  const backLinkStyle: CSSProperties = {
+    color: "#f1c40f",
+    textDecoration: "none",
+    fontWeight: 700,
+    WebkitTapHighlightColor: "rgba(241, 196, 15, 0.35)",
+  };
 
   if (!sp) {
     return (
@@ -85,7 +104,7 @@ export default function SubproductPage({ params }: Props) {
         <h1>Not found</h1>
         <p>This subproduct does not exist.</p>
         <p>
-          <Link href="/products/culture-risk-diagnostic" style={{ color: "#f1c40f", fontWeight: 700 }}>
+          <Link href="/products/culture-risk-diagnostic" style={backLinkStyle}>
             ← Back to Culture Risk Diagnostic
           </Link>
         </p>
@@ -100,7 +119,7 @@ export default function SubproductPage({ params }: Props) {
   return (
     <main style={wrap}>
       <p style={{ margin: "0 0 8px 0" }}>
-        <Link href="/products/culture-risk-diagnostic" style={{ color: "#f1c40f", textDecoration: "none", fontWeight: 700 }}>
+        <Link href="/products/culture-risk-diagnostic" style={backLinkStyle}>
           ← Culture Risk Diagnostic™
         </Link>
       </p>
@@ -165,10 +184,15 @@ export default function SubproductPage({ params }: Props) {
 
               return (
                 <div key={m.slug} style={{ display: "flex", flexDirection: "column", gap: 8 }}>
-                  <Link href={`/products/culture-risk-diagnostic/${params.slug}/${m.slug}`} style={tile}>
+                  <Link
+                    href={`/products/culture-risk-diagnostic/${params.slug}/${m.slug}`}
+                    style={tile}
+                    aria-label={`View module: ${m.title}`}
+                  >
                     <p style={title}>{m.title}</p>
                     <p style={short}>{m.short}</p>
                     <p style={{ margin: 0, fontWeight: 700 }}>{perModuleLabel}</p>
+                    <div style={tapCueTile}>Tap to view →</div>
                   </Link>
                   {/* If you later add Stripe price IDs per module, wire them in the module page file */}
                   <BuyButton priceId={undefined} name={m.title} price={perModuleFallback}>
