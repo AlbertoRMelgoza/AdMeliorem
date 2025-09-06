@@ -1,30 +1,32 @@
+import type { CSSProperties } from "react";
+
 export default function Page() {
   // Typography & layout
-  const wrap: React.CSSProperties = {
+  const wrap: CSSProperties = {
     maxWidth: 1000,
     margin: "28px auto",
     padding: "0 16px",
     lineHeight: 1.65,
   };
-  const h1: React.CSSProperties = {
+  const h1: CSSProperties = {
     margin: "0 0 8px",
     fontSize: "clamp(28px, 3.2vw, 44px)",
     letterSpacing: "-0.02em",
   };
-  const h2: React.CSSProperties = {
+  const h2: CSSProperties = {
     marginTop: 32,
     fontSize: "clamp(20px, 2.2vw, 28px)",
   };
 
   // Cards, CTAs, long-copy wrapper
-  const card: React.CSSProperties = {
+  const card: CSSProperties = {
     background: "#111",
     border: "1px solid #222",
     borderRadius: 12,
     padding: "clamp(14px, 3vw, 20px)",
   };
-  const prose: React.CSSProperties = { maxWidth: 720 };
-  const cta: React.CSSProperties = {
+  const prose: CSSProperties = { maxWidth: 720 };
+  const cta: CSSProperties = {
     display: "inline-block",
     backgroundColor: "#f1c40f",
     color: "#000",
@@ -35,13 +37,13 @@ export default function Page() {
   };
 
   // Grids
-  const heroGrid: React.CSSProperties = {
+  const heroGrid: CSSProperties = {
     display: "grid",
     gap: 24,
     alignItems: "center",
     gridTemplateColumns: "repeat(auto-fit, minmax(280px, 1fr))",
   };
-  const twoColCards: React.CSSProperties = {
+  const twoColCards: CSSProperties = {
     display: "grid",
     gap: 16,
     gridTemplateColumns: "repeat(auto-fit, minmax(280px, 1fr))",
@@ -64,7 +66,7 @@ export default function Page() {
       {/* Hero: image + primary CTA */}
       <section style={heroGrid}>
         <div style={{ ...card, padding: 24 }}>
-          <h2 style={{ marginTop: 0, ...h2, fontSize: "clamp(22px, 2.4vw, 30px)" }}>
+          <h2 style={{ ...h2, marginTop: 0, fontSize: "clamp(22px, 2.4vw, 30px)" }}>
             Compliance isn’t enough — proactive control is essential.
           </h2>
           <p style={{ marginTop: 0 }}>
@@ -79,7 +81,7 @@ export default function Page() {
         </div>
 
         <div>
-          {/* File must exist at /public/Images/hero-here-to-help.jpg */}
+          {/* /public/Images/hero-here-to-help.jpg must exist */}
           <img
             src="/Images/hero-here-to-help.jpg"
             alt="Professional support to prevent psychosocial harm"
@@ -93,7 +95,7 @@ export default function Page() {
       {/* Smart Solution / Thought Leadership — EXACT COPY */}
       <section style={{ marginTop: 32, display: "grid", gap: 16 }}>
         <div style={card}>
-          <h2 style={{ marginTop: 0, ...h2 }}>Can you guarantee zero harm in your organisation?</h2>
+          <h2 style={{ ...h2, marginTop: 0 }}>Can you guarantee zero harm in your organisation?</h2>
           <div style={prose}>
             <p style={{ marginTop: 8, marginBottom: 0 }}>
               My August White Paper Edition proves you can’t—no executive, no policy, and not even the most experienced
@@ -127,7 +129,7 @@ export default function Page() {
 
         <div style={card}>
           <h3 style={{ marginTop: 0 }}>This is where I make the difference.</h3>
-          <div style={prose}}>
+          <div style={prose}>
             <p style={{ marginTop: 8 }}>
               While compliance is mandatory, our service delivers rapid, regulator-ready solutions: robust, proactive
               prevention, psychosocial risk management, and clear, defensible documentation. We cut through complexity,
@@ -183,7 +185,7 @@ export default function Page() {
             </div>
           </a>
 
-          {/* SHSARC™ & RCABH™ — combined card with two links (no nested anchors) */}
+          {/* SHSARC™ & RCABH™ — combined card with two links */}
           <div style={card}>
             <h4 style={{ margin: "0 0 6px" }}>SHSARC™ &amp; RCABH™</h4>
             <div style={prose}>
@@ -208,7 +210,7 @@ export default function Page() {
       {/* Final CTA — EXACT STATEMENT */}
       <section style={{ marginTop: 32 }}>
         <div style={{ ...card, background: "#151515" }}>
-          <h2 style={{ marginTop: 0, ...h2 }}>Ready to prove you’re the leader in workplace safety?</h2>
+          <h2 style={{ ...h2, marginTop: 0 }}>Ready to prove you’re the leader in workplace safety?</h2>
           <div style={prose}>
             <p style={{ marginTop: 8 }}>
               Don’t let complexity or psychologist shortages leave your organisation exposed. Let’s future-proof your
