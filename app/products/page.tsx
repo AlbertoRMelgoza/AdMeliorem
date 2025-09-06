@@ -25,8 +25,14 @@ export default function ProductsIndex() {
   };
   const title: CSSProperties = { margin: "0 0 8px", fontSize: 18, color: "#f1c40f" };
   const blurb: CSSProperties = { fontSize: 14, color: "#bdbdbd" };
-  const linkStyle: CSSProperties = { textDecoration: "none", color: "inherit" };
+  // Mobile-friendly link affordance (keeps your previous styles, adds tap ink)
+  const linkStyle: CSSProperties = {
+    textDecoration: "none",
+    color: "inherit",
+    WebkitTapHighlightColor: "rgba(241, 196, 15, 0.35)",
+  };
   const priceText: CSSProperties = { fontWeight: 700, marginTop: 10 };
+  const tapCue: CSSProperties = { marginTop: 8, fontWeight: 700, color: "#f1c40f" };
 
   return (
     <main style={wrap}>
@@ -46,11 +52,12 @@ export default function ProductsIndex() {
       <div style={grid}>
         {/* SHSARC / RCABH */}
         <article style={card}>
-          <Link href="/products/shsarc-rcabh" style={linkStyle}>
+          <Link href="/products/shsarc-rcabh" style={linkStyle} aria-label="View SHSARC & RCABH — Risk Control Programs">
             <h3 style={title}>SHSARC™ &amp; RCABH™ — Risk Control Programs</h3>
             <p style={blurb}>
               Two flagship risk control programs through talent management that produce regulator-ready Prevention Plans.
             </p>
+            <div style={tapCue}>Tap to view →</div>
           </Link>
           <div style={priceText}>A$ 750.00 — per person (max 20 per workshop)</div>
           <div style={{ marginTop: 10 }}>
@@ -62,11 +69,16 @@ export default function ProductsIndex() {
 
         {/* Procedural Justice Framework */}
         <article style={card}>
-          <Link href="/products/procedural-justice-framework" style={linkStyle}>
+          <Link
+            href="/products/procedural-justice-framework"
+            style={linkStyle}
+            aria-label="View Procedural Justice Framework"
+          >
             <h3 style={title}>Procedural Justice Framework™</h3>
             <p style={blurb}>
               An operational risk control that embeds procedural fairness in incident handling—reducing psychosocial risk and liability without adding another system.
             </p>
+            <div style={tapCue}>Tap to view →</div>
           </Link>
           <div style={priceText}>A$ 4,000.00 — per use</div>
           <div style={{ marginTop: 10 }}>
@@ -78,11 +90,16 @@ export default function ProductsIndex() {
 
         {/* Culture Risk Diagnostic */}
         <article style={card}>
-          <Link href="/products/culture-risk-diagnostic" style={linkStyle}>
+          <Link
+            href="/products/culture-risk-diagnostic"
+            style={linkStyle}
+            aria-label="View Culture Risk Diagnostic"
+          >
             <h3 style={title}>Culture Risk Diagnostic™</h3>
             <p style={blurb}>
               Forensic culture assessment with leading indicators, risk scores and due-diligence evidence.
             </p>
+            <div style={tapCue}>Tap to view →</div>
           </Link>
           <div style={priceText}>A$ 15,000.00 — annual subscription</div>
           <div style={{ marginTop: 10 }}>
@@ -94,11 +111,12 @@ export default function ProductsIndex() {
 
         {/* Mediation */}
         <article style={card}>
-          <Link href="/products/mediation" style={linkStyle}>
+          <Link href="/products/mediation" style={linkStyle} aria-label="View Mediation Services">
             <h3 style={title}>Mediation Services</h3>
             <p style={blurb}>
               Neutral, confidential facilitation to resolve disputes and protect working relationships.
             </p>
+            <div style={tapCue}>Tap to view →</div>
           </Link>
           <div style={priceText}>A$ 3,000.00 — per session</div>
           <div style={{ marginTop: 10 }}>
@@ -110,11 +128,12 @@ export default function ProductsIndex() {
 
         {/* Negotiation */}
         <article style={card}>
-          <Link href="/products/negotiation" style={linkStyle}>
+          <Link href="/products/negotiation" style={linkStyle} aria-label="View Negotiation Services">
             <h3 style={title}>Negotiation Services</h3>
             <p style={blurb}>
               Structured preparation, leverage mapping, rehearsal, and deal support.
             </p>
+            <div style={tapCue}>Tap to view →</div>
           </Link>
           <div style={priceText}>A$ 3,000.00 — per session</div>
           <div style={{ marginTop: 10 }}>
