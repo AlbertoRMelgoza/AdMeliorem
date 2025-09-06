@@ -116,7 +116,7 @@ export default function Page() {
           <div style={prose}>
             <p style={{ marginTop: 8 }}>
               Workplace psychological harm is unpredictable and impossible to eradicate. Incidents result from a complex web involving how individuals 
-              experience behaviours, organisational systems, cultural pressures, and evolving legal standards. These factors are often beyond the reach of any single
+              experience behaviours, organisational systems, and cultural pressures. These factors are often beyond the reach of any single
               psychological assessment tool. Even with clinical expertise, psychological harm assessments can be subjective, open to interpretation, and sometimes disputed,
               potentially causing additional distress. No model or method can capture the full scope and nuance of psychological harm in the modern workplace.
             </p>
