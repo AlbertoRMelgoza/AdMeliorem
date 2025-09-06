@@ -95,17 +95,19 @@ export default function Page() {
       {/* Smart Solution / Thought Leadership — EXACT COPY */}
       <section style={{ marginTop: 32, display: "grid", gap: 16 }}>
         <div style={card}>
-          <h2 style={{ ...h2, marginTop: 0 }}>Can you guarantee zero harm in your organisation?</h2>
+          <h2 style={{ ...h2, marginTop: 0 }}>Can you guarantee zero pscyhological harm in your organisation?</h2>
           <div style={prose}>
             <p style={{ marginTop: 8, marginBottom: 0 }}>
-              My August White Paper Edition proves you can’t—no executive, no policy, and not even the most experienced
-              psychologist or clinical process can completely eliminate individual harm or definitively measure and resolve every claim.
+              No. As detailed in my August White Paper Edition, analysis of 47 significant Australian cases predicts that psychological and psychosocial harm claims occur across all industries,
+              demonstrating that it is impossible to fully eliminate psychological harm—regardless of sector. In addition, my white paper confirms that claims arising from psychosocial hazards
+              —such as bullying, harassment (including sexual harassment), aggression, procedural justice failures, toxic culture, and sexual assault— 
+              consistently lead to substantial financial liability, with real impact on reputation and social license to operate.
             </p>
           </div>
         </div>
 
         <div style={card}>
-          <h3 style={{ marginTop: 0 }}>Why not?</h3>
+          <h3 style={{ marginTop: 0 }}>More realitites of psychological harm!</h3>
           <div style={prose}>
             <p style={{ marginTop: 8 }}>
               Workplace harm is inherently unpredictable and impossible to eradicate. Incidents arise from a complex web of
