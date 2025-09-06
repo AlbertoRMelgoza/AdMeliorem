@@ -101,7 +101,7 @@ export default function Page() {
               No. As detailed in my August White Paper Edition, analysis of 47 significant Australian cases predicts that psychological and psychosocial harm claims occur across all industries,
               demonstrating that it is impossible to fully eliminate psychological harm—regardless of sector. In addition, my white paper confirms that claims arising from psychosocial hazards
               —such as bullying, harassment (including sexual harassment), aggression, procedural justice failures, toxic culture, and sexual assault— 
-              consistently lead to substantial financial liability, with real impact on reputation and social license to operate.
+              consistently lead to substantial financial liability, with real impact on reputation and social licence to operate.
             </p>
             <p style={{ marginTop: 12 }}>
               <a href="/contact" style={cta} aria-label="Contact me to request the August White Paper">
