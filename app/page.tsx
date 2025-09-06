@@ -185,26 +185,19 @@ export default function Page() {
             </div>
           </a>
 
-          {/* SHSARC™ & RCABH™ — combined card with two links */}
-          <div style={card}>
-            <h4 style={{ margin: "0 0 6px" }}>SHSARC™ &amp; RCABH™</h4>
-            <div style={prose}>
-              <p style={{ margin: 0 }}>
-                Target sexual harassment, assault, aggression, bullying, and harassment with comprehensive, documented,
-                prevention-focused programs. You gain regulator-ready, step-by-step controls and frameworks—your defensible
-                proof that you’ve acted on risk before it escalates into harm or legal action.
+          {/* SHSARC™ & RCABH™ — single clickable card (no extra links) */}
+          <a href="/products/shsarc-rcabh" style={{ color: "inherit", textDecoration: "none" }}>
+            <div style={card}>
+               <h4 style={{ margin: "0 0 6px" }}>SHSARC™ &amp; RCABH™</h4>
+               <div style={prose}>
+                 <p style={{ margin: 0 }}>
+                 Target sexual harassment, assault, aggression, bullying, and harassment with comprehensive, documented,
+                 prevention-focused programs. You gain regulator-ready, step-by-step controls and frameworks—your defensible
+                 proof that you’ve acted on risk before it escalates into harm or legal action.
               </p>
-              <p style={{ marginTop: 12, marginBottom: 0 }}>
-                <a href="/products/shsarc" style={{ color: "#f1c40f", fontWeight: 700, textDecoration: "none", marginRight: 16 }}>
-                  Explore SHSARC →
-                </a>
-                <a href="/products/rcabh" style={{ color: "#f1c40f", fontWeight: 700, textDecoration: "none" }}>
-                  Explore RCABH →
-                </a>
-              </p>
-            </div>
           </div>
         </div>
+      </div>
       </section>
 
       {/* Final CTA — EXACT STATEMENT */}
