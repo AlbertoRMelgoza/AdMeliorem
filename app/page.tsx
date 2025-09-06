@@ -112,7 +112,7 @@ export default function Page() {
         </div>
 
         <div style={card}>
-          <h3 style={{ marginTop: 0 }}>More realitites of psychological harm.</h3>
+          <h3 style={{ marginTop: 0 }}>More realities of psychological harm.</h3>
           <div style={prose}>
             <p style={{ marginTop: 8 }}>
               Workplace harm is inherently unpredictable and impossible to eradicate. Incidents arise from a complex web of
