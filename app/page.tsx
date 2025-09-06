@@ -69,9 +69,112 @@ export default function Page() {
         </div>
       </section>
 
+      {/* Smart Solution section */}
+      <section style={{ marginTop: 32, display: "grid", gap: 16 }}>
+        {/* Hook */}
+        <div style={card}>
+          <h2 style={{ marginTop: 0 }}>The Smart Solution for Safer Workplaces</h2>
+          <p style={{ margin: 0 }}>
+            <strong>Can you guarantee zero individual harm in your organisation?</strong><br />
+            No leader can—my August White Paper Edition proves that individual claims and incidents can never be entirely
+            eliminated, and even the best psychologists cannot always clearly assess harm.
+          </p>
+          <p style={{ marginTop: 12 }}>
+            <a
+              href="/contact"
+              style={{
+                display: "inline-block",
+                backgroundColor: "#f1c40f",
+                color: "#000",
+                padding: "10px 18px",
+                borderRadius: 6,
+                fontWeight: 600,
+                textDecoration: "none",
+              }}
+            >
+              Contact me to request the White Paper →
+            </a>
+          </p>
+        </div>
+
+        {/* Truth + Stakes */}
+        <div style={card}>
+          <p style={{ marginTop: 0 }}>
+            <strong>But your business CAN guarantee one thing:</strong><br />
+            That you have done everything possible to prevent harm, control risks, and demonstrate proactive compliance
+            to regulators, staff, and the public—even when incidents occur.
+          </p>
+          <p style={{ marginBottom: 0 }}>That’s where I come in.</p>
+        </div>
+
+        {/* When harm strikes */}
+        <div style={card}>
+          <h3 style={{ marginTop: 0 }}>When harm strikes, complexity explodes:</h3>
+          <ul style={{ margin: "8px 0 0 18px" }}>
+            <li>
+              Psychological assessments are slow and scarce (Australia faces a shortage of registered psychologists for
+              harm assessment).
+            </li>
+            <li>
+              Clinical answers are rarely clear—even experts can’t always define the full impact.
+            </li>
+            <li>Every delay increases your liability and reputational risk.</li>
+          </ul>
+        </div>
+
+        {/* Advantage + Proof */}
+        <div style={card}>
+          <h3 style={{ marginTop: 0 }}>Here’s your advantage:</h3>
+          <p style={{ marginTop: 0 }}>
+            We deliver immediate, regulator-ready psychosocial risk assessments and prevention solutions—no waitlists, no
+            ambiguity, just decisive, validated action.
+          </p>
+          <ul style={{ margin: "8px 0 0 18px" }}>
+            <li>
+              <strong>Instant credibility:</strong> Show regulators and the public concrete proof of your diligence,
+              safety leadership, and compliance—right now.
+            </li>
+            <li>
+              <strong>Stay out of crisis mode:</strong> We identify and control psychosocial risks before incidents
+              spiral, making compliance your strategic asset.
+            </li>
+            <li>
+              <strong>Make complexity manageable:</strong> Our practical, proven frameworks turn red tape into clear
+              action and executive peace of mind.
+            </li>
+            <li>
+              <strong>Prove your leadership:</strong> While others stall, you lead. Our assessments and solutions are
+              your documented evidence of care and responsibility—protecting your people and your organisation every step
+              of the way.
+            </li>
+          </ul>
+          <p style={{ marginTop: 12, marginBottom: 0 }}>
+            Don’t wait for harm—or for slow answers. Minimise complexity, reinforce trust, and stay ahead. That’s the
+            real smart solution.
+          </p>
+          <p style={{ marginTop: 12 }}>
+            <a
+              href="/contact"
+              style={{
+                display: "inline-block",
+                backgroundColor: "#f1c40f",
+                color: "#000",
+                padding: "10px 18px",
+                borderRadius: 6,
+                fontWeight: 600,
+                textDecoration: "none",
+              }}
+              aria-label="Contact to get immediate, regulator-ready psychosocial risk assessments"
+            >
+              Talk to us →
+            </a>
+          </p>
+        </div>
+      </section>
+
       {/* Products & Services */}
       <section>
-        <h2 style={h2}>My Products </h2>
+        <h2 style={h2}>My Products</h2>
 
         <h3 style={{ marginTop: 16 }}>Flagship Products (™)</h3>
         <div style={{ display: "grid", gridTemplateColumns: "repeat(2, 1fr)", gap: 16 }}>
@@ -116,4 +219,3 @@ export default function Page() {
     </main>
   );
 }
-
