@@ -165,8 +165,8 @@ export default function Page() {
           <h3 style={{ marginTop: 0 }}>This is where I make the difference.</h3>
           <div style={prose}>
             <p style={{ marginTop: 8 }}>
-              While compliance is mandatory, our service delivers rapid, regulator-ready solutions: robust, proactive
-              prevention, psychosocial risk management, and clear, defensible documentation. We cut through complexity,
+              While compliance is mandatory, my service delivers rapid, regulator-ready solutions: robust, proactive
+              prevention, psychosocial risk management, and clear, defensible documentation. I cut through complexity,
               demonstrably protect your reputation, reduce liability, and help you set the benchmark for safety and compliance.
             </p>
             <p style={{ marginTop: 12, marginBottom: 0 }}>
