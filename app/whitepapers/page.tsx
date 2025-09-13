@@ -14,6 +14,7 @@ const PAPERS: Paper[] = [
     blurb:
       "Explores wether higher rates and costs of psychological workplace injury claims directly reduce productivity and 
       financial performance for Australia’s largest self-insured employers ",
+    slug: "predicting-lower productivity-from-Comcare-self-licensees-psychological-claims",
   },
   {
     title:
