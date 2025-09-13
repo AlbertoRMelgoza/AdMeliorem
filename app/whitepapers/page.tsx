@@ -10,6 +10,12 @@ type Paper = { title: string; blurb: string; slug: string };
 
 const PAPERS: Paper[] = [
   {
+    title: "Do Pscyhological Claim Costs Undermine Productivity for Australian Self-Insured Licensees",
+    blurb:
+      "Explores wether higher rates and costs of psychological workplace injury claims directly reduce productivity and 
+      financial performance for Australia’s largest self-insured employers ",
+  },
+  {
     title:
       "Can Financial Liability/Impact Be Predicted by Psychosocial Hazards Claims?",
     blurb:
@@ -36,13 +42,7 @@ const PAPERS: Paper[] = [
       "Clarifies definitions, thresholds, and evidentiary standards to prevent escalation and misclassification.",
     slug: "sh-and-sa-what-they-are-and-are-not",
   },
-  {
-    title: "Power imbalances at work, the role of gender domination",
-    blurb:
-      "Examines structural and situational power dynamics and how to design fair, defensible processes.",
-    slug: "power-imbalances-gender-domination",
-  },
-];
+ ];
 
 export default function WhitepapersPage() {
   // layout + brand
