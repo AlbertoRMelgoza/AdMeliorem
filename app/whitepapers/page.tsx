@@ -9,12 +9,14 @@ export const metadata = {
 type Paper = { title: string; blurb: string; slug: string };
 
 const PAPERS: Paper[] = [
+  const PAPERS: Paper[] = [
   {
-    title: "Do Pscyhological Claim Costs Undermine Productivity for Australian Self-Insured Licensees",
+    title:
+      "Do Psychological Claim Costs Undermine Productivity for Australian Self-Insured Licensees",
     blurb:
-      "Explores wether higher rates and costs of psychological workplace injury claims directly reduce productivity and 
-      financial performance for Australia’s largest self-insured employers ",
-    slug: "predicting-lower productivity-from-Comcare-self-licensees-psychological-claims",
+      "Explores whether higher rates and costs of psychological workplace injury claims directly reduce productivity and financial performance for Australia’s largest self-insured employers.",
+    slug:
+      "predicting-lower-productivity-from-comcare-self-licensees-psychological-claims",
   },
   {
     title:
