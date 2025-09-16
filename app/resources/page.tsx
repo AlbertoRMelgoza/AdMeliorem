@@ -5,6 +5,19 @@ export const metadata = {
   title: "Resource Library — Ad Meliorem",
   description:
     "FAQs on ISO standards and psychosocial risk, announcements, and official Codes of Practice.",
+  openGraph: {
+    title: "Resource Library — Ad Meliorem",
+    description:
+      "FAQs on ISO standards and psychosocial risk, announcements, and official Codes of Practice.",
+    url: "https://albertormelgoza.com/resources",
+    siteName: "Ad Meliorem",
+  },
+  twitter: {
+    card: "summary_large_image",
+    title: "Resource Library — Ad Meliorem",
+    description:
+      "FAQs on ISO standards and psychosocial risk, announcements, and official Codes of Practice.",
+  },
 };
 
 export default function Page() {
@@ -22,6 +35,8 @@ export default function Page() {
     fontSize: 12,
   };
   const grid: CSSProperties = { display: "grid", gap: 8, gridTemplateColumns: "repeat(auto-fit, minmax(260px, 1fr))", marginTop: 8 };
+  const detailsStyle: CSSProperties = { border: "1px solid #222", borderRadius: 10, padding: 12, marginTop: 8, background: "#0f0f0f" };
+  const summaryStyle: CSSProperties = { fontWeight: 600, cursor: "pointer" };
 
   const faq = [
     {
@@ -42,14 +57,14 @@ export default function Page() {
     },
     {
       q: "What changed recently?",
-      a: "There’s sharpened guidance on managing sexual and gender-based harassment, a continued focus on psychosocial hazard management, and active enforcement of the AHRC Positive Duty."
+      a: "Sharpened guidance on preventing sexual & gender-based harassment, continued focus on psychosocial hazard management, and active enforcement of the AHRC Positive Duty."
     }
   ];
 
   const announcements = [
     {
-      title: "Sexual & Gender-based Harassment — National guidance",
-      blurb: "Fresh practical guidance for PCBUs to prevent and respond to SGBH. Useful for policy, training, and incident response design.",
+      title: "Sexual & Gender-based Harassment — national guidance",
+      blurb: "Practical resources for PCBUs to prevent and respond to SGBH. Useful for policy, training, and incident response design.",
       href: "https://www.safeworkaustralia.gov.au/safety-topic/hazards/sexual-and-gender-based-harassment/resources"
     },
     {
@@ -76,10 +91,10 @@ export default function Page() {
   ];
 
   const codeLinks = [
-    // Keep your original state picks; add national model guidance
-    { name: "Queensland Code of Practice (Psychosocial hazards at work)", href: "https://www.worksafe.qld.gov.au/__data/assets/pdf_file/0025/104857/managing-the-risk-of-psychosocial-hazards-at-work-code-of-practice.pdf" },
-    { name: "NSW Code of Practice (Managing psychosocial hazards)", href: "https://www.safework.nsw.gov.au/__data/assets/pdf_file/0004/983353/Code-of-Practice_Managing-psychosocial-hazards.pdf" },
-    { name: "WA Code of Practice (Psychosocial hazards in the workplace)", href: "https://www.worksafe.wa.gov.au/sites/default/files/atoms/files/221154_cp_psychosocialhazards.pdf" },
+    // Your original state picks + model guidance (all align to your services)
+    { name: "Queensland Code of Practice — Psychosocial hazards at work", href: "https://www.worksafe.qld.gov.au/__data/assets/pdf_file/0025/104857/managing-the-risk-of-psychosocial-hazards-at-work-code-of-practice.pdf" },
+    { name: "NSW Code of Practice — Managing psychosocial hazards", href: "https://www.safework.nsw.gov.au/__data/assets/pdf_file/0004/983353/Code-of-Practice_Managing-psychosocial-hazards.pdf" },
+    { name: "WA Code of Practice — Psychosocial hazards in the workplace", href: "https://www.worksafe.wa.gov.au/sites/default/files/atoms/files/221154_cp_psychosocialhazards.pdf" },
     { name: "Safe Work Australia — Model Code (Psychosocial)", href: "https://www.safeworkaustralia.gov.au/doc/model-code-practice-managing-psychosocial-hazards-work" },
     { name: "Safe Work Australia — Sexual & Gender-based Harassment guidance", href: "https://www.safeworkaustralia.gov.au/safety-topic/hazards/sexual-and-gender-based-harassment/resources" }
   ];
@@ -87,13 +102,24 @@ export default function Page() {
   return (
     <main style={wrap}>
       {/* Header */}
-      <section style={section}>
+      <section style={section} id="top">
         <h1 style={{ margin: 0, fontSize: 24 }}>Resource Library</h1>
         <p style={{ marginTop: 8, opacity: 0.85 }}>
           FAQs on ISO standards and psychosocial risk, recent announcements, and official Codes of Practice.
         </p>
+        <p style={{ marginTop: 6, fontSize: 12, opacity: 0.7 }}>
+          Last updated: 16 Sep 2025
+        </p>
 
-        {/* Service-aligned quick chips */}
+        {/* In-page nav */}
+        <nav style={{ marginTop: 6, fontSize: 14 }}>
+          <a href="#whats-new" style={linkStyle}>What’s new</a>{" · "}
+          <a href="#faqs" style={linkStyle}>FAQs</a>{" · "}
+          <a href="#policies" style={linkStyle}>Sample policies</a>{" · "}
+          <a href="#codes" style={linkStyle}>Codes & guidance</a>
+        </nav>
+
+        {/* Service-aligned chips */}
         <div style={chipRow}>
           <span style={chip}>Sexual harassment controls</span>
           <span style={chip}>Aggression & bullying controls</span>
@@ -105,8 +131,8 @@ export default function Page() {
         </div>
       </section>
 
-      {/* Announcements (kept generic, service-aligned) */}
-      <section style={section}>
+      {/* Announcements */}
+      <section style={section} id="whats-new">
         <h2 style={{ margin: 0, fontSize: 20 }}>What’s new (service-relevant)</h2>
         <div style={grid}>
           {announcements.map((a, i) => (
@@ -114,41 +140,45 @@ export default function Page() {
               <p style={{ margin: 0, fontWeight: 700 }}>{a.title}</p>
               <p style={{ marginTop: 6, opacity: 0.9 }}>{a.blurb}</p>
               <p style={{ marginTop: 6 }}>
-                <a href={a.href} target="_blank" rel="noopener noreferrer" style={linkStyle}>Read more →</a>
+                <a
+                  href={a.href}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  aria-label={`Read more: ${a.title}`}
+                  style={linkStyle}
+                >
+                  Read more →
+                </a>
               </p>
             </div>
           ))}
         </div>
       </section>
 
-      {/* FAQs */}
-      <section style={section}>
+      {/* FAQs (collapsible) */}
+      <section style={section} id="faqs">
         <h2 style={{ margin: 0, fontSize: 20 }}>FAQs (ISOs & psychosocial risk)</h2>
-        <ul style={{ padding: 0, listStyle: "none", marginTop: 8 }}>
+        <div style={{ marginTop: 8 }}>
           {faq.map((f, i) => (
-            <li key={i} style={{ border: "1px solid #222", borderRadius: 10, padding: 12, marginTop: 8, background: "#0f0f0f" }}>
-              <p style={{ margin: 0, fontWeight: 600 }}>{f.q}</p>
-              <p style={{ marginTop: 6, opacity: 0.85 }}>{f.a}</p>
-            </li>
+            <details key={i} style={detailsStyle}>
+              <summary style={summaryStyle}>{f.q}</summary>
+              <p style={{ marginTop: 8, opacity: 0.85 }}>{f.a}</p>
+            </details>
           ))}
-        </ul>
+        </div>
         <p style={{ marginTop: 8, fontSize: 14 }}>
           Key standards:&nbsp;
-          <a href="https://www.iso.org/standard/64283.html" target="_blank" rel="noopener noreferrer" style={linkStyle}>ISO 45003</a>,{" "}
-          <a href="https://www.iso.org/standard/65694.html" target="_blank" rel="noopener noreferrer" style={linkStyle}>ISO 31000</a>,{" "}
-          <a href="https://www.iso.org/standard/63787.html" target="_blank" rel="noopener noreferrer" style={linkStyle}>ISO 45001</a>.
+          <a href="https://www.iso.org/standard/64283.html" target="_blank" rel="noopener noreferrer" aria-label="ISO 45003" style={linkStyle}>ISO 45003</a>,{" "}
+          <a href="https://www.iso.org/standard/65694.html" target="_blank" rel="noopener noreferrer" aria-label="ISO 31000" style={linkStyle}>ISO 31000</a>,{" "}
+          <a href="https://www.iso.org/standard/63787.html" target="_blank" rel="noopener noreferrer" aria-label="ISO 45001" style={linkStyle}>ISO 45001</a>.
         </p>
       </section>
 
       {/* Sample policies */}
-      <section style={section}>
+      <section style={section} id="policies">
         <h2 style={{ margin: 0, fontSize: 20 }}>Sample policies & standards</h2>
         <div style={grid}>
-          {[
-            ...[{ title: "Psychosocial Risk Management Policy", blurb: "Editable templates available for clients (no public download)." }],
-            ...[{ title: "Workplace Culture & Conduct Standard/Code", blurb: "Defines expected behaviours, leadership duties, and measures." }],
-            ...[{ title: "Code of Ethics", blurb: "Ethical principles beyond compliance to guide behaviour and decision-making." }],
-          ].map((p, i) => (
+          {policies.map((p, i) => (
             <div key={i} style={{ border: "1px solid #222", borderRadius: 10, padding: 12, background: "#0f0f0f" }}>
               <p style={{ margin: 0, fontWeight: 600 }}>{p.title}</p>
               <p style={{ marginTop: 6, opacity: 0.85 }}>{p.blurb}</p>
@@ -162,15 +192,26 @@ export default function Page() {
       </section>
 
       {/* Codes & official guidance */}
-      <section style={section}>
+      <section style={section} id="codes">
         <h2 style={{ margin: 0, fontSize: 20 }}>Codes of Practice & official guidance</h2>
         <ul style={{ padding: 0, listStyle: "none", marginTop: 8 }}>
           {codeLinks.map((c, i) => (
             <li key={i} style={{ border: "1px solid #222", borderRadius: 10, padding: 12, marginTop: 8, background: "#0f0f0f" }}>
-              <a href={c.href} target="_blank" rel="noopener noreferrer" style={linkStyle}>{c.name}</a>
+              <a
+                href={c.href}
+                target="_blank"
+                rel="noopener noreferrer"
+                aria-label={`Open: ${c.name}`}
+                style={linkStyle}
+              >
+                {c.name}
+              </a>
             </li>
           ))}
         </ul>
+        <p style={{ marginTop: 8 }}>
+          <a href="#top" style={linkStyle} aria-label="Back to top">Back to top ↑</a>
+        </p>
       </section>
     </main>
   );
