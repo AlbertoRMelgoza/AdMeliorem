@@ -6,7 +6,8 @@
     "source": "9News",
     "hazard": "Bullying",
     "note": "Claims data points to sharp increases in bullying/harassment claims in Australia.",
-    "paywalled": false
+    "paywalled": false,
+    "force": true
   },
   {
     "title": "CFMEU WA official accused of intimidation, bullying",
@@ -52,7 +53,8 @@
     "source": "AFR",
     "hazard": "Sexual harassment",
     "note": "Leadership consequence following harassment complaint.",
-    "paywalled": true
+    "paywalled": true,
+    "force": true
   },
   {
     "title": "‘Card up my sleeve’: think tank withheld CCTV from alleged sexual harassment victim",
@@ -78,7 +80,7 @@
     "pubDate": "",
     "source": "People Matters",
     "hazard": "Sexual harassment",
-    "note": "Interesting comparative law signal; not Australia-specific.",
+    "note": "Comparative law signal; not Australia-specific.",
     "paywalled": false
   },
 
@@ -115,7 +117,7 @@
     "pubDate": "",
     "source": "HR Leader",
     "hazard": "Toxic culture",
-    "note": "Culture-fraud linkage: risk advisory lens.",
+    "note": "Culture–fraud linkage: risk advisory angle.",
     "paywalled": false
   },
   {
@@ -156,7 +158,6 @@
     "note": "Fair Work ruling touching both bullying and harassment grounds.",
     "paywalled": false
   },
-
   {
     "title": "HR executive dismissed after faking evidence in harassment investigation",
     "link": "https://www.hcamag.com/au/specialisation/employment-law/hr-executive-dismissed-after-faking-evidence-in-harassment-investigation/547755",
@@ -164,6 +165,7 @@
     "source": "HRD Australia",
     "hazard": "Procedural justice",
     "note": "Investigation integrity: dismissal for falsifying evidence.",
-    "paywalled": false
+    "paywalled": false,
+    "force": true
   }
 ]
