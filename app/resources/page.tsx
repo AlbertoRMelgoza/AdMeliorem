@@ -61,27 +61,31 @@ export default function Page() {
     }
   ];
 
+  // Updated links (AHRC + QLD)
   const announcements = [
     {
       title: "Sexual & Gender-based Harassment — national guidance",
-      blurb: "Practical resources for PCBUs to prevent and respond to SGBH. Useful for policy, training, and incident response design.",
-      href: "https://www.safeworkaustralia.gov.au/safety-topic/hazards/sexual-and-gender-based-harassment/resources"
+      blurb:
+        "Practical resources for PCBUs to prevent and respond to SGBH. Useful for policy, training, and incident response design.",
+      href: "https://www.safeworkaustralia.gov.au/safety-topic/hazards/sexual-and-gender-based-harassment/resources",
     },
     {
-      title: "AHRC Positive Duty — enforcement in effect",
-      blurb: "The Commission can investigate and enforce the Positive Duty to prevent workplace sex discrimination and harassment.",
-      href: "https://humanrights.gov.au/our-work/women/positive-duty"
+      title: "AHRC Positive Duty — compliance & enforcement",
+      blurb:
+        "The Commission can investigate and enforce the Positive Duty. Overview of enforcement and what ‘reasonable & proportionate’ looks like.",
+      href: "https://humanrights.gov.au/our-work/sex-discrimination/positive-duty-sex-discrimination-act/compliance-enforcement",
     },
     {
       title: "Model Code — Managing Psychosocial Hazards",
       blurb: "Baseline expectations for identifying, controlling, and reviewing psychosocial risks.",
-      href: "https://www.safeworkaustralia.gov.au/doc/model-code-practice-managing-psychosocial-hazards-work"
+      href: "https://www.safeworkaustralia.gov.au/doc/model-code-practice-managing-psychosocial-hazards-work",
     },
     {
-      title: "Queensland — Sexual harassment requirements",
-      blurb: "Queensland’s framework emphasises proactive risk management for sexual and gender-based harassment.",
-      href: "https://www.worksafe.qld.gov.au/"
-    }
+      title: "Queensland — Sexual harassment regulations",
+      blurb:
+        "Express obligations and prevention planning for sexual and gender-based harassment risks.",
+      href: "https://www.worksafe.qld.gov.au/safety-and-prevention/mental-health/Psychosocial-hazards/sexual-harassment-and-sex-or-gender-based-harassment",
+    },
   ];
 
   const policies = [
@@ -91,7 +95,6 @@ export default function Page() {
   ];
 
   const codeLinks = [
-    // Your original state picks + model guidance (all align to your services)
     { name: "Queensland Code of Practice — Psychosocial hazards at work", href: "https://www.worksafe.qld.gov.au/__data/assets/pdf_file/0025/104857/managing-the-risk-of-psychosocial-hazards-at-work-code-of-practice.pdf" },
     { name: "NSW Code of Practice — Managing psychosocial hazards", href: "https://www.safework.nsw.gov.au/__data/assets/pdf_file/0004/983353/Code-of-Practice_Managing-psychosocial-hazards.pdf" },
     { name: "WA Code of Practice — Psychosocial hazards in the workplace", href: "https://www.worksafe.wa.gov.au/sites/default/files/atoms/files/221154_cp_psychosocialhazards.pdf" },
