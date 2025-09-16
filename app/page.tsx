@@ -108,7 +108,7 @@ export default function Page() {
             decisions, complaints, and investigations stand up to scrutiny.
           </p>
           <p style={{ marginTop: 8, fontWeight: 700 }}>
-            ack ≤24h • triage ≤48h • findings ≤21d
+            Acknowledge ≤24h • Triage ≤48h • Findings ≤21d
           </p>
           <p style={{ marginTop: 12 }}>
             <a href="tel:+61490247772" style={ctaButton} aria-label="Call now to book a gap-check">
