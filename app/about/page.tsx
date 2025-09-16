@@ -19,14 +19,16 @@ export default function AboutPage() {
   };
   const grid: CSSProperties = {
     display: "grid",
-    gridTemplateColumns: "repeat(auto-fit, minmax(240px, 1fr))",
-    gap: 24,
+    gridTemplateColumns: "min(28vw, 260px) 1fr",
+    columnGap: 16,
+    rowGap: 24,
     alignItems: "start",
   };
   const leftCol: CSSProperties = { minWidth: 240 };
   const photoBox: CSSProperties = {
-    width: 240,
-    height: 240,
+    width: "100%",
+    maxWidth: 260,
+    aspectRatio: "1 / 1",
     borderRadius: 12,
     overflow: "hidden",
     background: "#111",
@@ -130,7 +132,7 @@ export default function AboutPage() {
 
           {/* Aha proof (de‑risked claims) */}
           <section style={card}>
-            <h2 style={{ marginTop: 0 }}>Aha proof</h2>
+            <h2 style={{ marginTop: 0 }}>Selected outcomes</h2>
 
             <p style={{ marginBottom: 6 }}>
               <strong>PEMEX:</strong> Avoided industrial‑action threats by combining negotiation expertise, culture‑risk
