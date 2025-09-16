@@ -1,42 +1,169 @@
 [
   {
-    "title": "ANU under pressure as investigator examines leadership and governance",
-    "link": "https://www.afr.com/work-and-careers/workplace/anu-under-pressure-as-investigator-examines-leadership-and-governance-20250829-p5mquv",
-    "source": "AFR",
-    "hazard": "Toxic culture",
-    "force": true,
-    "note": "How leadership and governance impact culture."
+    "title": "Workplace violence, bullying and harassment claims surge, Allianz says",
+    "link": "https://www.9news.com.au/national/workplace-violence-bullying-harassment-allianz-claims-surge/bc4a1d2b-78db-4ea9-a697-9b53ddd00ecc",
+    "pubDate": "",
+    "source": "9News",
+    "hazard": "Bullying",
+    "note": "Claims data points to sharp increases in bullying/harassment claims in Australia.",
+    "paywalled": false
   },
   {
-    "title": "Melbourne Cup booze-up ends in sexual harassment suit at Record Point",
-    "link": "https://www.afr.com/markets/equity-markets/melbourne-cup-booze-up-ends-in-sexual-harassment-suit-at-record-point-20250814-p5mn1h",
+    "title": "CFMEU WA official accused of intimidation, bullying",
+    "link": "https://www.afr.com/work-and-careers/workplace/cfmeu-wa-official-accused-of-intimidation-bullying-20250815-p5mn7v",
+    "pubDate": "2025-08-15",
+    "source": "AFR",
+    "hazard": "Bullying",
+    "note": "Union intimidation/bullying allegation in WA.",
+    "paywalled": true
+  },
+  {
+    "title": "Women face bullying, harassment for blowing the whistle",
+    "link": "https://www.lismorecitynews.com.au/story/9048659/women-face-bullying-harassment-for-blowing-the-whistle/",
+    "pubDate": "",
+    "source": "Lismore City News",
+    "hazard": "Bullying",
+    "note": "Whistleblowing followed by bullying/harassment; regional press example.",
+    "paywalled": false
+  },
+
+  {
+    "title": "Over 60 years women say they have been targeted with abuse by predatory instructors while learning to drive",
+    "link": "https://www.abc.net.au/news/2025-09-03/predators-paradise-learner-drivers-targeted-behind-the-wheel/105648076",
+    "pubDate": "2025-09-02",
+    "source": "ABC News",
+    "hazard": "Sexual harassment",
+    "note": "ABC investigation into harassment/assault by driving instructors.",
+    "paywalled": false
+  },
+  {
+    "title": "‘For Too Long, Women Have Been Shouldering the Responsibility’: Sexual Harassment Remains Rife in Melbourne’s Live Music Scene",
+    "link": "https://au.rollingstone.com/music/music-features/female-musos-against-sexual-harassment-melbourne-82621/",
+    "pubDate": "2025-08-28",
+    "source": "Rolling Stone AU",
+    "hazard": "Sexual harassment",
+    "note": "Scene-wide look at harassment in Melbourne’s live music sector.",
+    "paywalled": false
+  },
+  {
+    "title": "Switzer resigns from CIS after harassment complaint",
+    "link": "https://www.afr.com/politics/switzer-resigns-from-cis-after-harassment-complaint-20250902-p5mrwb",
+    "pubDate": "2025-09-02",
     "source": "AFR",
     "hazard": "Sexual harassment",
-    "force": true,
-    "note": "Sexual harassment is costly, I help you preventing it."
+    "note": "Leadership consequence following harassment complaint.",
+    "paywalled": true
   },
   {
-    "title": "KPMG, Deloitte and PwC exit 35 professionals over misconduct",
-    "link": "https://www.afr.com/companies/professional-services/kpmg-deloitte-pwc-exit-35-professionals-over-misconduct-20250812-p5mmax",
-    "source": "AFR",
-    "hazard": "Toxic Culture",
-    "force": true,
-    "note": "Glad to see toxic culture tackled."
+    "title": "‘Card up my sleeve’: think tank withheld CCTV from alleged sexual harassment victim",
+    "link": "https://www.theage.com.au/politics/nsw/card-up-my-sleeve-think-tank-withheld-cctv-from-alleged-sexual-harassment-victim-20250820-p5moc0.html",
+    "pubDate": "2025-08-20",
+    "source": "The Age",
+    "hazard": "Sexual harassment",
+    "note": "Allegation of evidence withholding in a harassment matter.",
+    "paywalled": true
   },
   {
-    "title": "Workplace watchdog accused of bullying culture",
-    "link": "https://www.abc.net.au/news/2012-10-25/workplace-watchdog-accused-of-bullying,-intimidation/4334274",
-    "source": "ABC",
+    "title": "Sexual harassment training to be introduced for hospo workers",
+    "link": "https://www.indailysa.com.au/news/in-depth/2025/08/28/pub-grubs-new-plan-to-tackle-predatory-behaviour-in-sas-hopso-scene",
+    "pubDate": "2025-08-28",
+    "source": "InDaily",
+    "hazard": "Sexual harassment",
+    "note": "Policy response: training to counter predatory behaviour in SA hospitality.",
+    "paywalled": false
+  },
+  {
+    "title": "Giving the middle finger at work not sexual harassment, UK court rules",
+    "link": "https://sea.peoplemattersglobal.com/news/watercooler/giving-the-middle-finger-at-work-not-sexual-harassment-uk-court-rules-46459",
+    "pubDate": "",
+    "source": "People Matters",
+    "hazard": "Sexual harassment",
+    "note": "Interesting comparative law signal; not Australia-specific.",
+    "paywalled": false
+  },
+
+  {
+    "title": "Roy Shapira on Holding Corporations Accountable For Flawed Corporate Culture",
+    "link": "https://www.corporatecrimereporter.com/news/200/roy-shapira-on-holding-corporations-accountable-for-flawed-corporate-culture/",
+    "pubDate": "",
+    "source": "Corporate Crime Reporter",
+    "hazard": "Toxic culture",
+    "note": "Scholar view: how to hold firms to account for culture.",
+    "paywalled": false
+  },
+  {
+    "title": "Qantas $90m fine – why the judge’s ruling is a ‘wake-up call’ for Aussie corporate culture",
+    "link": "https://www.2gb.com/qantas-90m-fine-why-the-judges-ruling-is-a-wake-up-call-for-aussie-corporate-culture/",
+    "pubDate": "",
+    "source": "2GB",
+    "hazard": "Toxic culture",
+    "note": "Reputational and cultural implications of a major penalty.",
+    "paywalled": false
+  },
+  {
+    "title": "Just three years after overhauling its top team, Sony Australia faces fresh accusations of a toxic workplace culture",
+    "link": "https://completemusicupdate.com/just-three-years-after-overhauling-its-top-team-sony-australia-faces-fresh-accusations-of-a-toxic-workplace-culture/",
+    "pubDate": "",
+    "source": "Complete Music Update",
+    "hazard": "Toxic culture",
+    "note": "Renewed allegations despite leadership change.",
+    "paywalled": false
+  },
+  {
+    "title": "Toxic workplace culture a hidden fraud risk, RSM warns",
+    "link": "https://www.hrleader.com.au/people/27231-toxic-workplace-culture-a-hidden-fraud-risk-rsm-warns",
+    "pubDate": "",
+    "source": "HR Leader",
+    "hazard": "Toxic culture",
+    "note": "Culture-fraud linkage: risk advisory lens.",
+    "paywalled": false
+  },
+  {
+    "title": "Coldplay Concert Controversy Illustrates How Conflicts of Interest Can Become Corporate Kiss of Death",
+    "link": "https://www.corporatecomplianceinsights.com/coldplay-concert-controversy-illustrates-conflicts/",
+    "pubDate": "",
+    "source": "Corporate Compliance Insights",
+    "hazard": "Toxic culture",
+    "note": "Governance/conflicts lessons for culture risk.",
+    "paywalled": false
+  },
+
+  {
+    "title": "Smokey Robinson’s Sexual Assault Accusers Can Proceed Anonymously, Judge Rules",
+    "link": "https://au.rollingstone.com/music/music-news/smokey-robinson-sexual-assault-accusers-pseudonyms-trial-83405/",
+    "pubDate": "2025-09-12",
+    "source": "Rolling Stone AU",
+    "hazard": "Sexual assault",
+    "note": "Court allows anonymity; high-profile case context.",
+    "paywalled": false
+  },
+  {
+    "title": "Emily Atack reveals she was sexually assaulted at work throughout her TV career",
+    "link": "https://www.itv.com/news/2025-09-02/emily-atack-reveals-she-was-sexually-assaulted-at-work-throughout-her-tv-career",
+    "pubDate": "2025-09-02",
+    "source": "ITV News",
+    "hazard": "Sexual assault",
+    "note": "Personal testimony; workplace assault across a career.",
+    "paywalled": false
+  },
+
+  {
+    "title": "Firing of misogynistic HR business partner justified, Fair Work finds",
+    "link": "https://www.hrleader.com.au/law/27202-firing-of-misogynistic-hr-business-partner-justified-fair-work-finds-2",
+    "pubDate": "",
+    "source": "HR Leader",
     "hazard": "Bullying",
-    "force": true,
-    "note": "A concern that watchdog is engaging in wrongful behaviour."
+    "note": "Fair Work ruling touching both bullying and harassment grounds.",
+    "paywalled": false
   },
- {
-    "title": "Risk culture lacking at Mercer $80b super fund",
-    "link": "https://www.afr.com/companies/financial-services/risk-culture-lacking-at-mercer-s-80b-super-fund-20250827-p5mq59",
-    "source": "AFR",
-    "hazard": "Toxic Culture",
-    "force": true,
-    "note": "Important for APRA to enforce compliance for risk culture, it is not enforced at the moment."
+
+  {
+    "title": "HR executive dismissed after faking evidence in harassment investigation",
+    "link": "https://www.hcamag.com/au/specialisation/employment-law/hr-executive-dismissed-after-faking-evidence-in-harassment-investigation/547755",
+    "pubDate": "",
+    "source": "HRD Australia",
+    "hazard": "Procedural justice",
+    "note": "Investigation integrity: dismissal for falsifying evidence.",
+    "paywalled": false
   }
 ]
