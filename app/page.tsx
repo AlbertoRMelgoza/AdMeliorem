@@ -1,7 +1,7 @@
 import type { CSSProperties } from "react";
 
 export default function Page() {
-  // Typography & layout
+  // Layout & typography
   const wrap: CSSProperties = {
     maxWidth: 1000,
     margin: "28px auto",
@@ -26,7 +26,7 @@ export default function Page() {
     padding: "clamp(14px, 3vw, 20px)",
   };
   const prose: CSSProperties = { maxWidth: 720 };
-  const cta: CSSProperties = {
+  const ctaButton: CSSProperties = {
     display: "inline-block",
     backgroundColor: "#f1c40f",
     color: "#000",
@@ -35,12 +35,22 @@ export default function Page() {
     fontWeight: 700,
     textDecoration: "none",
   };
+  const ghostButton: CSSProperties = {
+    display: "inline-block",
+    color: "#f1c40f",
+    padding: "10px 16px",
+    borderRadius: 6,
+    fontWeight: 700,
+    textDecoration: "none",
+    border: "1px solid #333",
+    marginLeft: 12,
+  };
 
   // Mobile-friendly link affordance
   const tapLink: CSSProperties = {
     color: "inherit",
     textDecoration: "none",
-    WebkitTapHighlightColor: "rgba(241, 196, 15, 0.35)", // iOS tap ink
+    WebkitTapHighlightColor: "rgba(241, 196, 15, 0.35)",
   };
   const tapCue: CSSProperties = {
     marginTop: 12,
@@ -63,40 +73,61 @@ export default function Page() {
 
   return (
     <main style={wrap}>
-      {/* Headline + supporting statement */}
+      {/* Phone-first CTA strip */}
+      <section aria-label="Call to action" style={{ marginBottom: 16 }}>
+        <div style={{ ...card, display: "flex", alignItems: "center", justifyContent: "space-between" }}>
+          <p style={{ margin: 0, fontWeight: 700 }}>
+            Call to book a 20‑min gap‑check
+          </p>
+          <p style={{ margin: 0 }}>
+            <a href="tel:+61490247772" style={ctaButton} aria-label="Call Alberto on 0490 247 772">
+              Call 0490 247 772
+            </a>
+          </p>
+        </div>
+      </section>
+
+      {/* Hero */}
       <section style={{ marginBottom: 16 }}>
-        <h1 style={h1}>
-          Specialist in preventing sexual harassment, aggression, bullying, and procedural justice failures
-        </h1>
+        <h1 style={h1}>Regulator‑ready controls for psychosocial risk — fast, fair, defensible.</h1>
         <p style={{ margin: 0 }}>
-          Sexual harassment, aggression, bullying, and procedural justice are now regulated under WHS Codes of Practice
-          in NSW and Qld. Compliance is mandatory, but a proactive approach is essential. I also address toxic culture
-          and sexual assault — hazards not yet listed in the Codes but proven to drive risk, harm, and liability.
+          Sexual harassment, aggression, bullying, and procedural‑justice failures are regulated hazards in NSW and QLD.
+          You can’t guarantee <em>zero</em> psychological harm — but you can control a pathway that resolves issues
+          <strong> fairly, consistently, and fast</strong>.
         </p>
       </section>
 
-      {/* Hero: image + primary CTA */}
+      {/* Hero: image + primary actions */}
       <section style={heroGrid}>
         <div style={{ ...card, padding: 24 }}>
           <h2 style={{ ...h2, marginTop: 0, fontSize: "clamp(22px, 2.4vw, 30px)" }}>
-            Compliance isn’t enough — proactive control is essential.
+            What you can control: a fair, fast, defensible pathway
           </h2>
           <p style={{ marginTop: 0 }}>
-            I help organisations prevent sexual harassment, aggression, bullying, and procedural justice failures before
-            they cause harm.
+            Procedural Justice Framework™ installs clear time standards, independence checks, and an audit trail so your
+            decisions, complaints, and investigations stand up to scrutiny.
+          </p>
+          <p style={{ marginTop: 8, fontWeight: 700 }}>
+            ack ≤24h • triage ≤48h • findings ≤21d
           </p>
           <p style={{ marginTop: 12 }}>
-            <a href="/contact" style={cta} aria-label="Contact me for proactive psychosocial risk control">
-              Contact me →
+            <a href="tel:+61490247772" style={ctaButton} aria-label="Call now to book a gap-check">
+              Call 0490 247 772
+            </a>
+            <a
+              href="/products/procedural-justice-framework"
+              style={ghostButton}
+              aria-label="See Procedural Justice Framework product details"
+            >
+              See Procedural Justice Framework →
             </a>
           </p>
         </div>
 
         <div>
-          {/* /public/Images/hero-here-to-help.jpg must exist */}
           <img
             src="/Images/hero-here-to-help.jpg"
-            alt="Professional support to prevent psychosocial harm"
+            alt="Advisor speaking with an HR leader about a fair, fast, defensible complaint pathway"
             width={900}
             height={600}
             style={{ width: "100%", height: "auto", borderRadius: 12, display: "block" }}
@@ -104,79 +135,63 @@ export default function Page() {
         </div>
       </section>
 
-      {/* Smart Solution / Thought Leadership — your copy */}
+      {/* Myth → Reality (white paper teaser) */}
       <section style={{ marginTop: 32, display: "grid", gap: 16 }}>
         <div style={card}>
-          <h2 style={{ ...h2, marginTop: 0 }}>Can you guarantee zero psychological harm in your organisation?</h2>
+          <h2 style={{ ...h2, marginTop: 0 }}>Myth vs Reality</h2>
           <div style={prose}>
             <p style={{ marginTop: 8, marginBottom: 0 }}>
-              No. As detailed in my August White Paper Edition, analysis of 47 significant Australian cases predicts that psychological and psychosocial harm claims occur across all industries,
-              demonstrating that it is impossible to fully eliminate psychological harm—regardless of sector. In addition, my white paper confirms that claims arising from psychosocial hazards
-              —such as bullying, harassment (including sexual harassment), aggression, procedural justice failures, toxic culture, and sexual assault— 
-              consistently lead to substantial financial liability, with real impact on reputation and social license to operate.
+              <strong>Myth:</strong> “We can achieve zero psychological harm.”
+              <br />
+              <strong>Reality:</strong> Human systems aren’t risk‑free. What regulators and boards expect is <strong>prevention</strong> plus a
+              <strong> fair, consistent, fast</strong> pathway with evidence.
             </p>
+            <ul style={{ marginTop: 12 }}>
+              <li>Prevention indicators (culture risk, hotspots)</li>
+              <li>Skill uptake for leaders & supervisors</li>
+              <li>Procedural Justice Framework™ with clear time standards and a complete audit trail</li>
+            </ul>
             <p style={{ marginTop: 12 }}>
-              <a href="/contact" style={cta} aria-label="Contact me to request the August White Paper">
-                Contact me to request the White Paper →
+              <a href="/whitepapers/september-2025" style={ghostButton} aria-label="View September white paper">
+                See the September White Paper →
               </a>
             </p>
           </div>
         </div>
 
+        {/* Evidence & stakes (kept general to avoid absolute claims) */}
         <div style={card}>
-          <h3 style={{ marginTop: 0 }}>More realities of psychological harm.</h3>
+          <h2 style={{ ...h2, marginTop: 0 }}>Why this matters</h2>
           <div style={prose}>
             <p style={{ marginTop: 8 }}>
-              Workplace psychological harm is unpredictable and impossible to eradicate. Incidents arise from a complex web
-              involving the experience of individual behaviours, organisational systems, and cultural pressures. These factors are often beyond the reach 
-              of any single psychological assessment tool because of individual experience is so complex and unique. Even with clinical expertise, psychological harm assessments can be subjective, 
-              open to interpretation, and sometimes disputed, potentially causing additional distress. No model or method can capture the
-              full scope and nuance of psychological harm in the modern workplace. The business impact is significant, with psychological 
-              injury claims among the most costly for employers.
-            </p>
-
-            <p style={{ marginTop: 12, marginBottom: 0 }}>
-              <strong>The financial consequences are significant:</strong>
-            </p>
-            <p style={{ marginTop: 8 }}>
-              The latest Queensland workers' compensation scheme statistics show psychological and psychiatric claims
-              accounted for $230.9 million in statutory payments in 2023–24, with an average cost of over $63,000 per
-              claim—more than twice that of other injuries.
-            </p>
-            <p style={{ marginTop: 8 }}>
-              Comcare’s scheme licensee data for 2024–25 reports the average workers’ compensation claim for primary
-              psychological injury at $31,611 per claim, notably higher than the all-injury average of $20,368. Some
-              psychological claims involving violence or assault exceed $40,000 per claim.
+              Psychological injury claims carry outsized cost and time‑loss compared with other injuries. Shortening
+              duration and improving perceived fairness reduces escalation risk, total cost, and productivity drag.
             </p>
           </div>
         </div>
 
         <div style={card}>
-          <h3 style={{ marginTop: 0 }}>What do regulators and courts expect?</h3>
+          <h2 style={{ ...h2, marginTop: 0 }}>What regulators and courts expect</h2>
           <div style={prose}>
             <p style={{ marginTop: 8 }}>
-              They don’t expect perfection—but they do require hard evidence that your business has taken all practicable
-              steps to systematically prevent and control risks, not just react after people are harmed.
+              Not perfection — <em>evidence</em> that you’ve taken practicable steps to prevent and control risks:
+              documented controls, fair‑process standards, competent investigations, and a defensible audit trail.
             </p>
           </div>
         </div>
 
         <div style={card}>
-          <h3 style={{ marginTop: 0 }}>This is where I make the difference.</h3>
+          <h2 style={{ ...h2, marginTop: 0 }}>How I help</h2>
           <div style={prose}>
             <p style={{ marginTop: 8 }}>
-              While compliance is mandatory, my products deliver rapid, regulator-ready solutions: robust, proactive
-              prevention, psychosocial risk management, and clear, defensible documentation. I cut through complexity,
-              demonstrably protect your reputation, reduce liability, and help you set the benchmark for safety and compliance.
-            </p>
-            <p style={{ marginTop: 12, marginBottom: 0 }}>
-              Don’t wait for individual harm to escalate. Stop liability to increase. Act now—lead the way in safer, more resilient workplaces.
+              Rapid, regulator‑ready solutions: proactive prevention, psychosocial risk management, and a clear,
+              defensible process that stands up under scrutiny — without adding another system.
             </p>
           </div>
         </div>
       </section>
 
-      {/* Products & Services — UPDATED COPY with mobile tap cues */}
+      {/* Products */}
       <section>
         <h2 style={h2}>My Products</h2>
 
@@ -188,9 +203,9 @@ export default function Page() {
               <h4 style={{ margin: "0 0 6px" }}>Procedural Justice Framework™</h4>
               <div style={prose}>
                 <p style={{ margin: 0 }}>
-                  Delivers transparent, fair, and consistent processes for decision-making, complaints, and investigations.
-                  This toolkit guarantees your organisation is always regulator-ready, minimising legal exposure by
-                  demonstrably meeting new WHS psychosocial hazard codes around procedural fairness and organisational justice.
+                  An <strong>operational control</strong> for decision‑making, complaints, and investigations. Helps ensure your
+                  pathway is fair, consistent, and regulator‑ready — with time standards, independence checks, and an
+                  auditable trail. No new system required.
                 </p>
                 <div style={tapCue}>Tap to view →</div>
               </div>
@@ -203,24 +218,22 @@ export default function Page() {
               <h4 style={{ margin: "0 0 6px" }}>Culture Risk Diagnostic™</h4>
               <div style={prose}>
                 <p style={{ margin: 0 }}>
-                  Uses validated, real-time tools (COPSOQ, SEQ, IAT, OCAS, WFBS) to pinpoint culture and psychosocial risk
-                  hotspots—ensuring you have complete visibility and never operate blind to emerging risk. This evidence-based
-                  approach proves you are identifying and managing hazards before they become liabilities.
+                  Validated tools (e.g., COPSOQ, SHEQ) to pinpoint psychosocial‑risk hotspots and track leading indicators.
+                  Start light and add depth where needed.
                 </p>
                 <div style={tapCue}>Tap to view →</div>
               </div>
             </div>
           </a>
 
-          {/* SHSARC™ & RCABH™ — single clickable card */}
+          {/* SHSARC™ & RCABH™ */}
           <a href="/products/shsarc-rcabh" style={tapLink} aria-label="View SHSARC and RCABH">
             <div style={card}>
               <h4 style={{ margin: "0 0 6px" }}>SHSARC™ &amp; RCABH™</h4>
               <div style={prose}>
                 <p style={{ margin: 0 }}>
-                  Target sexual harassment, assault, aggression, bullying, and harassment with comprehensive, documented,
-                  prevention-focused programs. You gain regulator-ready, step-by-step controls and frameworks—your defensible
-                  proof that you’ve acted on risk before it escalates into harm or legal action.
+                  Comprehensive, prevention‑focused programs for sexual harassment, assault, aggression, bullying, and
+                  harassment — documented controls and step‑by‑step frameworks you can evidence.
                 </p>
                 <div style={tapCue}>Tap to view →</div>
               </div>
@@ -229,18 +242,17 @@ export default function Page() {
         </div>
       </section>
 
-      {/* Final CTA — your copy */}
+      {/* Final CTA */}
       <section style={{ marginTop: 32 }}>
         <div style={{ ...card, background: "#151515" }}>
-          <h2 style={{ ...h2, marginTop: 0 }}>Ready to prove you’re the leader in workplace safety?</h2>
+          <h2 style={{ ...h2, marginTop: 0 }}>Ready to lead with fair, fast, defensible practice?</h2>
           <div style={prose}>
             <p style={{ marginTop: 8 }}>
-              Don’t let complexity or psychologist shortages leave your organisation exposed. Let’s future-proof your
-              compliance, reputation, and employee wellbeing—get protected today.
+              Don’t wait for escalation. Book a short call to map your current pathway to regulator‑ready standards.
             </p>
             <p style={{ marginTop: 12 }}>
-              <a href="/contact" style={cta} aria-label="Contact me to get protected today">
-                Contact me →
+              <a href="tel:+61490247772" style={ctaButton} aria-label="Call Alberto to book a 20 minute gap-check">
+                Call 0490 247 772
               </a>
             </p>
           </div>
