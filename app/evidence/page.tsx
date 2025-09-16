@@ -1,54 +1,56 @@
 import Image from "next/image";
+import Link from "next/link";
 import type { CSSProperties } from "react";
 
 export const metadata = {
   title: "Evidence of Impact — Ad Meliorem",
-  description:
-    "Real-world outcomes preventing harm, embedding fairness, and transforming cultures.",
+  description: "Real-world outcomes preventing harm, embedding fairness, and transforming cultures.",
 };
 
 export default function EvidencePage() {
   const wrap: CSSProperties = { maxWidth: 1100, margin: "28px auto", padding: "0 16px", lineHeight: 1.65 };
-  const section: CSSProperties = { background: "#111", border: "1px solid #222", borderRadius: 12, padding: 16, marginTop: 24 };
-  const grid: CSSProperties = {
-    display: "grid",
-    gridTemplateColumns: "repeat(auto-fit, minmax(280px, 1fr))",
-    gap: 16,
-    marginTop: 12,
-  };
-  const card: CSSProperties = {
-    background: "#0e0e0e",
-    border: "1px solid #222",
-    borderRadius: 12,
-    padding: 16,
-  };
-  const quoteMark: CSSProperties = {
-    fontSize: 28,
-    lineHeight: 1,
-    marginRight: 8,
-    opacity: 0.6,
-    userSelect: "none",
-  };
+  const section: CSSProperties = { background: "#111", border: "1px solid #222", borderRadius: 12, padding: 16, marginTop: 16 };
+  const grid: CSSProperties = { display: "grid", gridTemplateColumns: "repeat(auto-fit, minmax(280px, 1fr))", gap: 16, marginTop: 12 };
+  const card: CSSProperties = { background: "#0e0e0e", border: "1px solid #222", borderRadius: 12, padding: 16 };
+  const quoteMark: CSSProperties = { fontSize: 28, lineHeight: 1, marginRight: 8, opacity: 0.6, userSelect: "none" };
   const source: CSSProperties = { marginTop: 10, color: "#bbb", fontStyle: "italic" };
+  const chipRow: CSSProperties = { display: "flex", flexWrap: "wrap", gap: 8, marginTop: 8 };
+  const chip: CSSProperties = { display: "inline-block", background: "#f1c40f", color: "#000", borderRadius: 9999, padding: "6px 10px", fontWeight: 800, fontSize: 12 };
+  const callBtn: CSSProperties = { display: "inline-block", background: "#f1c40f", color: "#000", padding: "10px 16px", borderRadius: 6, fontWeight: 700, textDecoration: "none" };
+  const ghostBtn: CSSProperties = { display: "inline-block", color: "#f1c40f", padding: "10px 14px", border: "1px solid #333", borderRadius: 6, fontWeight: 700, textDecoration: "none" };
 
   return (
     <main style={wrap}>
-      <h1 style={{ marginTop: 0 }}>Evidence of Impact</h1>
-      <p>
-        Selected outcomes from complex matters and organisational change work, showing prevention, fairness, and measurable
-        culture improvement.
-      </p>
+      {/* Phone-first CTA strip */}
+      <section style={{ ...section, display: "flex", alignItems: "center", justifyContent: "space-between", marginTop: 0 }}>
+        <p style={{ margin: 0, fontWeight: 800 }}>Call to request the full evidence pack</p>
+        <a href="tel:+61490247772" style={callBtn} aria-label="Call Alberto on 0490 247 772">Call 0490 247 772</a>
+      </section>
 
-      {/* Headline evidence blocks */}
+      <h1 style={{ marginTop: 16 }}>Evidence of Impact</h1>
+      <p>Selected outcomes from complex matters and organisational change work, showing prevention, fairness, and measurable culture improvement.</p>
+
+      {/* Outcomes at a glance (wow bar) */}
       <section style={section}>
-        <h2 style={{ marginTop: 0 }}>Preventing Harm in Complex Sexual Harassment Cases</h2>
+        <h2 style={{ marginTop: 0 }}>Outcomes at a glance</h2>
+        <div style={chipRow}>
+          <span style={chip}>Acknowledge ≤24h</span>
+          <span style={chip}>Triage ≤48h</span>
+          <span style={chip}>Findings ≤21d</span>
+          <span style={chip}>90+ risk‑culture indicators</span>
+          <span style={chip}>Regulator‑ready evidence packs</span>
+          <span style={chip}>14+ recommendations adopted (QDoE)</span>
+        </div>
+      </section>
+
+      {/* Headline evidence block */}
+      <section style={section}>
+        <h2 style={{ marginTop: 0 }}>Preventing harm in complex sexual‑harassment cases</h2>
         <div style={card}>
           <p style={{ display: "flex", alignItems: "flex-start", marginTop: 0 }}>
             <span style={quoteMark}>“</span>
             <span>
-              Alberto brought clarity and fairness to a deeply complex sexual harassment case that management had struggled
-              with for years. His calm, skilled interviewing uncovered the truth, restored trust, and gave the organisation
-              defensible confidence in its processes.
+              Alberto brought clarity and fairness to a deeply complex sexual‑harassment case that management had struggled with for years. His calm, skilled interviewing uncovered the truth, restored trust, and gave the organisation defensible confidence in its processes.
             </span>
           </p>
           <div style={source}>— Australian Broadcasting Corporation</div>
@@ -60,43 +62,33 @@ export default function EvidencePage() {
         <h2 style={{ marginTop: 0 }}>A D M E L I O R E M — Evidence</h2>
         <div style={grid}>
           <article style={card} aria-labelledby="evidence-abh">
-            <h3 id="evidence-abh" style={{ margin: "0 0 8px 0" }}>
-              Driving Authentic Behavioural Change to Stop ABH
-            </h3>
+            <h3 id="evidence-abh" style={{ margin: "0 0 8px 0" }}>Driving authentic behavioural change to stop ABH</h3>
             <p style={{ display: "flex", alignItems: "flex-start", marginTop: 0 }}>
               <span style={quoteMark}>“</span>
               <span>
-                Alberto’s guidance helped crystallize key issues and gave me clearer insight into how my behaviour affects
-                others, as well as my own internal frame of reference.
+                Alberto’s guidance helped crystallise key issues and gave me clearer insight into how my behaviour affects others, as well as my own internal frame of reference.
               </span>
             </p>
             <div style={source}>— University of Queensland, School of Dentistry</div>
           </article>
 
           <article style={card} aria-labelledby="evidence-procjust">
-            <h3 id="evidence-procjust" style={{ margin: "0 0 8px 0" }}>
-              Embedding Fairness in Every Process to Prevent Liability
-            </h3>
+            <h3 id="evidence-procjust" style={{ margin: "0 0 8px 0" }}>Embedding fairness in every process to prevent liability</h3>
             <p style={{ display: "flex", alignItems: "flex-start", marginTop: 0 }}>
               <span style={quoteMark}>“</span>
               <span>
-                Alberto’s work helped us understand procedural justice in detail — from remediation to building fair
-                processes for every stakeholder involved.
+                Alberto’s work helped us understand procedural justice in detail — from remediation to building fair processes for every stakeholder involved.
               </span>
             </p>
             <div style={source}>— Hunter Water</div>
           </article>
 
           <article style={card} aria-labelledby="evidence-psychsafe">
-            <h3 id="evidence-psychsafe" style={{ margin: "0 0 8px 0" }}>
-              Transforming Toxic Workplaces into Psychosocially Safe Environments
-            </h3>
+            <h3 id="evidence-psychsafe" style={{ margin: "0 0 8px 0" }}>Transforming toxic workplaces into psychosocially safe environments</h3>
             <p style={{ display: "flex", alignItems: "flex-start", marginTop: 0 }}>
               <span style={quoteMark}>“</span>
               <span>
-                In a workplace long plagued by toxic conflict, Alberto helped uncover hidden issues, rebuild trust, and create
-                the foundation for a safer, healthier culture. His empathy, insight, and ability to challenge assumptions
-                transformed a divided workplace into a functioning team.
+                In a workplace long plagued by toxic conflict, Alberto helped uncover hidden issues, rebuild trust, and create the foundation for a safer, healthier culture. His empathy, insight, and ability to challenge assumptions transformed a divided workplace into a functioning team.
               </span>
             </p>
             <div style={source}>— Australian Broadcasting Corporation, Far North Queensland</div>
@@ -104,43 +96,77 @@ export default function EvidencePage() {
         </div>
       </section>
 
-  {/* AdMeliorem\public\Images\feedback.jpg */}
-      <div style={{ display: "flex", justifyContent: "center", margin: "24px 0" }}>
-        <Image
-          src="/Images/feedback.jpg"  // ← place your image at public/images/evidence.jpg
-          alt="Preventing harm and embedding fairness"
-          width={900}
-          height={500}
-          style={{ borderRadius: 12, width: "100%", height: "auto", maxWidth: 900 }}
-          sizes="(max-width: 960px) 100vw, 900px"
-        />
-      </div>
-      
-      {/* Optional CTA */}
+      {/* Proof stack (downloads) */}
       <section style={section}>
-        <h2 style={{ marginTop: 0 }}>Discuss your situation</h2>
-        <p>
-          Whether you’re facing a live dispute, regulator scrutiny, or a culture turning point, I will design a defensible,
-          fair pathway that prevents harm and protects value.
-        </p>
-        <p style={{ marginTop: 12 }}>
-          <a
-            href="/contact"
-            style={{
-              background: "#f1c40f",
-              color: "#000",
-              padding: "10px 18px",
-              borderRadius: 6,
-              fontWeight: 600,
-              textDecoration: "none",
-              display: "inline-block",
-            }}
-          >
-            Book a confidential discussion →
-          </a>
-        </p>
+        <h2 style={{ marginTop: 0 }}>Proof stack (downloads)</h2>
+        <div style={grid}>
+          <article style={card}>
+            <h3 style={{ marginTop: 0 }}>Executive Brief</h3>
+            <p>Short overview of approach, products, and regulator‑ready positioning.</p>
+            <p style={{ marginTop: 8 }}>
+              <a href="/docs/Executive-Brief.pdf" target="_blank" rel="noopener noreferrer" style={{ color: "#f1c40f", fontWeight: 700, textDecoration: "none" }}>Open PDF →</a>
+            </p>
+          </article>
+          <article style={card}>
+            <h3 style={{ marginTop: 0 }}>Product Catalogue</h3>
+            <p>Flagship products, pricing anchors, and deliverables in one document.</p>
+            <p style={{ marginTop: 8 }}>
+              <a href="/docs/Ad-Meliorem-Product-Catalogue.pdf" target="_blank" rel="noopener noreferrer" style={{ color: "#f1c40f", fontWeight: 700, textDecoration: "none" }}>Open PDF →</a>
+            </p>
+          </article>
+          <article style={card}>
+            <h3 style={{ marginTop: 0 }}>White Paper — September 2025</h3>
+            <p>Findings across significant Australian cases: why zero psychological harm cannot be guaranteed.</p>
+            <p style={{ marginTop: 8 }}>
+              <a href="/docs/September-2025-WhitePaper.pdf" target="_blank" rel="noopener noreferrer" style={{ color: "#f1c40f", fontWeight: 700, textDecoration: "none" }}>Open PDF →</a>
+            </p>
+          </article>
+        </div>
       </section>
+
+      {/* Small, de‑emphasised image */}
+      <div style={{ display: "flex", justifyContent: "center", margin: "12px 0" }}>
+        <div style={{ borderRadius: 12, overflow: "hidden", maxWidth: 420, width: "100%", filter: "grayscale(100%)", opacity: 0.9 }}>
+          <Image
+            src="/Images/feedback.jpg"
+            alt=""
+            width={440}
+            height={240}
+            sizes="(max-width: 420px) 100vw, 420px"
+            style={{ display: "block", width: "100%", height: "auto" }}
+          />
+        </div>
+      </div>
+
+      {/* Standards alignment */}
+      <section style={section}>
+        <h2 style={{ marginTop: 0 }}>Standards & expectations</h2>
+        <ul>
+          <li><strong>WHS psychosocial Codes of Practice</strong> — operational controls and documentation aligned to regulator expectations</li>
+          <li><strong>ILO C190</strong> & <strong>UN Guiding Principles on Business & Human Rights (UNGPs)</strong> — fair‑treatment and remedy principles reflected in process design</li>
+          <li><strong>Fair‑process (SLA):</strong> <span style={{ fontWeight: 800 }}>Acknowledge ≤24h • Triage ≤48h • Findings ≤21d</span></li>
+        </ul>
+      </section>
+
+      {/* Procurement help */}
+      <section style={section}>
+        <h2 style={{ marginTop: 0 }}>Procurement‑ready</h2>
+        <ul>
+          <li>Clear pricing anchors across products (see Products page)</li>
+          <li>Invoice / PO path supported; standard Terms & Conditions</li>
+          <li>Operational controls integrate with existing systems — no new platform</li>
+        </ul>
+        <div style={{ display: "flex", gap: 8, flexWrap: "wrap" }}>
+          <a href="tel:+61490247772" style={callBtn} aria-label="Call to request the full evidence pack">Call 0490 247 772</a>
+          <Link href="/contact" style={ghostBtn} aria-label="Request the evidence pack via email">Request evidence pack via email</Link>
+        </div>
+      </section>
+
+      {/* Compliance note */}
+      <p style={{ fontSize: 12, opacity: 0.7, marginTop: 12 }}>
+        No provider can guarantee zero psychological harm. These materials evidence regulator‑ready controls designed to
+        reduce risk, shorten duration, and improve defensibility.
+      </p>
     </main>
   );
 }
-
