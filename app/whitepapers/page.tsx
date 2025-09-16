@@ -19,8 +19,7 @@ const PAPERS: Paper[] = [
       "predicting-lower-productivity-from-comcare-self-licensees-psychological-claims",
   },
   {
-    title:
-      "Can Financial Liability Be Predicted by Psychosocial Hazard Claims?",
+    title: "Can Financial Liability Be Predicted by Psychosocial Hazard Claims?",
     blurb:
       "Lead indicators in claims data and how they correlate with downstream financial exposure.",
     slug: "predicting-liability-from-psychosocial-claims",
@@ -57,7 +56,7 @@ export default function WhitepapersPage() {
   const accent = "#f1c40f";
   const subtext = "#bdbdbd";
 
-  // tighter hero; keep image small so copy/CTAs dominate
+  // tighter hero; image small so copy/CTAs lead
   const hero: CSSProperties = {
     display: "grid",
     gridTemplateColumns: "1fr 360px",
@@ -80,13 +79,9 @@ export default function WhitepapersPage() {
     overflow: "hidden",
     background: "#0e0e0e",
   };
-  const heroImg: CSSProperties = {
-    width: "100%",
-    height: "auto",
-    display: "block",
-  };
+  const heroImg: CSSProperties = { width: "100%", height: "auto", display: "block" };
 
-  // short skim chips for boards/buyers
+  // skim chips (keep jargon-free)
   const chipRow: CSSProperties = { display: "flex", flexWrap: "wrap", gap: 8, marginTop: 10 };
   const chip: CSSProperties = {
     display: "inline-block",
@@ -98,6 +93,7 @@ export default function WhitepapersPage() {
     fontWeight: 700,
     fontSize: 12,
   };
+  const link: CSSProperties = { color: accent, textDecoration: "none", fontWeight: 700 };
 
   const grid: CSSProperties = {
     display: "grid",
@@ -147,7 +143,7 @@ export default function WhitepapersPage() {
   const phoneHref = "tel:+61490247772";
   const contactHref = "/contact";
 
-  // Pre-fill subject/body when user taps “Request” on a specific paper
+  // Pre-filled email for a specific paper
   const mailtoFor = (paperTitle: string) =>
     `mailto:am@albertormelgoza.com?subject=${encodeURIComponent(
       `Whitepaper request: ${paperTitle}`
@@ -162,7 +158,7 @@ export default function WhitepapersPage() {
           <h1 style={{ marginTop: 0 }}>Whitepapers</h1>
           <span style={badge}>For scheme licensees & large PCBUs</span>
           <p style={{ marginTop: 10, opacity: 0.9 }}>
-            Evidence-based briefings that turn complex case law and regulator expectations into **actionable controls**.
+            Evidence-based briefings that turn complex case law and regulator expectations into <strong>actionable controls</strong>.
             These papers are not publicly downloadable — request a copy and we’ll verify details before sending.
           </p>
 
@@ -171,8 +167,19 @@ export default function WhitepapersPage() {
             <span style={chip}>Board-grade visuals</span>
             <span style={chip}>Fair-process timelines</span>
             <span style={chip}>Independence checks</span>
-            <span style={chip}>Links to PJF & CRD</span>
           </div>
+
+          {/* Reader-friendly related solutions (replaces confusing acronym chip) */}
+          <p style={{ marginTop: 8, fontSize: 12, opacity: 0.85 }}>
+            Related solutions:&nbsp;
+            <a href="/products/procedural-justice-framework" style={link}>
+              Procedural Justice Framework™
+            </a>
+            &nbsp;•&nbsp;
+            <a href="/products/culture-risk-diagnostic" style={link}>
+              Culture Risk Diagnostic™
+            </a>
+          </p>
 
           <div style={{ marginTop: 14, display: "flex", gap: 8, flexWrap: "wrap" }}>
             <a href={phoneHref} style={btnPrimary} aria-label="Call Alberto to request a whitepaper">
@@ -205,6 +212,19 @@ export default function WhitepapersPage() {
             <h3 style={title}>{p.title}</h3>
             <p style={blurb}>{p.blurb}</p>
 
+            {/* Reader-friendly nudge to your core offers */}
+            <p style={{ marginTop: 8, fontSize: 12, opacity: 0.85 }}>
+              What to do next: install the{" "}
+              <a href="/products/procedural-justice-framework" style={link}>
+                Procedural Justice Framework™
+              </a>{" "}
+              or run a{" "}
+              <a href="/products/culture-risk-diagnostic" style={link}>
+                Culture Risk Diagnostic™
+              </a>
+              .
+            </p>
+
             <div style={{ display: "flex", gap: 8, marginTop: 10, flexWrap: "wrap" }}>
               <a
                 href={contactHref + `?paper=${encodeURIComponent(p.title)}`}
@@ -213,11 +233,7 @@ export default function WhitepapersPage() {
               >
                 Request via contact form
               </a>
-              <a
-                href={phoneHref}
-                style={btnGhost}
-                aria-label={`Call to request whitepaper: ${p.title}`}
-              >
+              <a href={phoneHref} style={btnGhost} aria-label={`Call to request whitepaper: ${p.title}`}>
                 Call 0490 247 772
               </a>
               <a
@@ -235,7 +251,7 @@ export default function WhitepapersPage() {
       <section style={cta}>
         <h2 style={{ marginTop: 0 }}>Want a copy?</h2>
         <p style={{ color: subtext }}>
-          We’ll send the relevant whitepaper **after a quick verification**. Choose call or form:
+          We’ll send the relevant whitepaper <strong>after a quick verification</strong>. Choose call or form:
         </p>
         <div style={{ display: "flex", gap: 8, justifyContent: "center", flexWrap: "wrap" }}>
           <a href={phoneHref} style={btnPrimary} aria-label="Call to request whitepaper">
