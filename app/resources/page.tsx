@@ -16,7 +16,7 @@ export default function Page() {
     },
     {
       q: "Is toxic culture an identified hazard or risk under the NSW or QLD codes?",
-      a: "No toxic culture is not identified hazard or risk under the codes, yet toxic culture causes financial liability and individual harm."
+      a: "Toxic culture is not identified hazard or risk under the codes, yet toxic culture causes financial liability and individual harm."
     }
   ];
 
