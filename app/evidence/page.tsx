@@ -30,7 +30,7 @@ export default function EvidencePage() {
       <h1 style={{ marginTop: 16 }}>Evidence of Impact</h1>
       <p>Selected outcomes from complex matters and organisational change work, showing prevention, fairness, and measurable culture improvement.</p>
 
-      {/* ✅ Marketing WOW */}
+      {/* Marketing WOW */}
       <section style={section}>
         <h2 style={{ marginTop: 0 }}>Proven outcomes at a glance</h2>
         <div style={chipRow}>
@@ -45,15 +45,16 @@ export default function EvidencePage() {
         </p>
       </section>
 
-      {/* ✅ Process standards (proof) */}
+      {/* Fair-process standards (auditable) */}
       <section style={section}>
-        <h2 style={{ marginTop: 0 }}>Standards you can show</h2>
+        <h2 style={{ marginTop: 0 }}>Fair-process standards (auditable)</h2>
+        <p style={{ margin: "6px 0 0 0", opacity: 0.9 }}>What a regulator expects to see in your evidence pack.</p>
         <div style={chipRow}>
           <span style={chip}>Receipt confirmed ≤24h</span>
           <span style={chip}>Pathway decided ≤48h</span>
           <span style={chip}>Findings / progress ≤21d</span>
-          <span style={chip}>Audit-ready evidence pack</span>
           <span style={chip}>Independence checks logged</span>
+          <span style={chip}>Audit-ready evidence pack</span>
         </div>
         <p style={{ fontSize: 12, opacity: 0.7, marginTop: 6 }}>
           Targets are calendar days; complex matters receive a documented progress update.
@@ -116,29 +117,29 @@ export default function EvidencePage() {
         </div>
       </section>
 
-      {/* Proof stack (request, no direct downloads) */}
+      {/* Evidence documents (on request) */}
       <section style={section}>
-        <h2 style={{ marginTop: 0 }}>Proof stack (request)</h2>
+        <h2 style={{ marginTop: 0 }}>Evidence documents (on request)</h2>
         <div style={grid}>
           <article style={card}>
             <h3 style={{ marginTop: 0 }}>Executive Brief</h3>
             <p>Short overview of approach, products, and regulator-ready positioning.</p>
             <p style={{ marginTop: 8 }}>
-              <Link href="/contact" style={ghostBtn} aria-label="Contact to request the Executive Brief">Contact me to request →</Link>
+              <Link href="/contact" style={ghostBtn} aria-label="Request a copy of the Executive Brief">Request a copy →</Link>
             </p>
           </article>
           <article style={card}>
             <h3 style={{ marginTop: 0 }}>Product Catalogue</h3>
             <p>Flagship products, pricing anchors, and deliverables in one document.</p>
             <p style={{ marginTop: 8 }}>
-              <Link href="/contact" style={ghostBtn} aria-label="Contact to request the Product Catalogue">Contact me to request →</Link>
+              <Link href="/contact" style={ghostBtn} aria-label="Request a copy of the Product Catalogue">Request a copy →</Link>
             </p>
           </article>
           <article style={card}>
             <h3 style={{ marginTop: 0 }}>White Paper — September 2025</h3>
             <p>Findings across significant Australian cases: why zero psychological harm cannot be guaranteed.</p>
             <p style={{ marginTop: 8 }}>
-              <Link href="/contact" style={ghostBtn} aria-label="Contact to request the White Paper">Contact me to request →</Link>
+              <Link href="/contact" style={ghostBtn} aria-label="Request a copy of the September 2025 White Paper">Request a copy →</Link>
             </p>
           </article>
         </div>
@@ -184,7 +185,8 @@ export default function EvidencePage() {
 
       {/* Compliance note */}
       <p style={{ fontSize: 12, opacity: 0.7, marginTop: 12 }}>
-        No provider can guarantee zero psychological harm. These materials evidence regulator-ready controls designed to reduce risk, shorten duration, and improve defensibility.
+        No provider can guarantee zero psychological harm. These materials evidence regulator-ready controls designed to
+        reduce risk, shorten duration, and improve defensibility.
       </p>
     </main>
   );
