@@ -65,7 +65,27 @@ export default function SubproductPage({ params }: Props) {
 
   const wrap: CSSProperties = { maxWidth: 1000, margin: "28px auto", padding: "0 16px", lineHeight: 1.65 };
   const card: CSSProperties = { background: "#111", border: "1px solid #222", borderRadius: 12, padding: 16, marginTop: 24 };
-  const grid: CSSProperties = { display: "grid", gridTemplateColumns: "repeat(auto-fill, minmax(260px, 1fr))", gap: 12 };
+  const grid: CSSProperties = { display: "grid", gridTemplateColumns: "repeat(auto-fill, minmax(260px, 1fr))", gap: 16 };
+
+  // CTA styles
+  const callBtn: CSSProperties = {
+    display: "inline-block",
+    background: "#f1c40f",
+    color: "#000",
+    padding: "10px 16px",
+    borderRadius: 6,
+    fontWeight: 700,
+    textDecoration: "none",
+  };
+  const ghostBtn: CSSProperties = {
+    display: "inline-block",
+    color: "#f1c40f",
+    padding: "10px 14px",
+    border: "1px solid #333",
+    borderRadius: 6,
+    fontWeight: 700,
+    textDecoration: "none",
+  };
 
   // Link/tile styles with mobile tap affordance
   const tile: CSSProperties = {
@@ -109,7 +129,15 @@ export default function SubproductPage({ params }: Props) {
 
   return (
     <main style={wrap}>
-      <p style={{ margin: "0 0 8px 0" }}>
+      {/* Phone-first CTA strip */}
+      <section style={{ ...card, display: "flex", alignItems: "center", justifyContent: "space-between", marginTop: 0 }}>
+        <p style={{ margin: 0, fontWeight: 800 }}>Call to book a 20‑min scoping call</p>
+        <a href="tel:+61490247772" style={callBtn} aria-label="Call Alberto on 0490 247 772">
+          Call 0490 247 772
+        </a>
+      </section>
+
+      <p style={{ margin: "8px 0" }}>
         <Link href="/products/culture-risk-diagnostic" style={backLinkStyle}>
           ← Culture Risk Diagnostic™
         </Link>
@@ -136,16 +164,16 @@ export default function SubproductPage({ params }: Props) {
       </div>
 
       <section style={card} id="data-safety">
-        <h2 style={{ marginTop: 0 }}>Data safety &amp; privacy</h2>
+        <h2 style={{ marginTop: 0 }}>Data safety & privacy</h2>
         <p>
-          We partner with <strong>Alchemer</strong> to run secure collection for Culture Risk Diagnostic engagements.
-          Alchemer provides enterprise-grade controls:
+          We partner with <strong>Alchemer</strong> to run secure collection for Culture Risk Diagnostic engagements. Alchemer provides
+          enterprise‑grade controls:
         </p>
         <ul>
-          <li>AES-256 encryption at rest and TLS in transit; encrypted backups.</li>
-          <li>Hosted on AWS with VPC isolation, WAF, and fault-tolerant design.</li>
-          <li>Independent certifications: SOC 2 Type II and ISO 27001.</li>
-          <li>Committed 99.9% service uptime for surveys and app access.</li>
+          <li>AES‑256 encryption at rest and TLS in transit; encrypted backups</li>
+          <li>Hosted on AWS with VPC isolation, WAF, and fault‑tolerant design</li>
+          <li>Independent certifications: SOC 2 Type II and ISO 27001</li>
+          <li>Committed 99.9% service uptime for surveys and app access</li>
         </ul>
         <p style={{ marginTop: 10 }}>
           <a
@@ -157,9 +185,7 @@ export default function SubproductPage({ params }: Props) {
             View Alchemer Security White Paper →
           </a>
         </p>
-        <p style={{ opacity: 0.9, marginTop: 10 }}>
-          We also enforce strict anonymity and minimum subgroup sizes for reporting.
-        </p>
+        <p style={{ opacity: 0.9, marginTop: 10 }}>We also enforce strict anonymity and minimum subgroup sizes for reporting.</p>
       </section>
 
       {/* If this subproduct has modules, show them with prices + Buy Now for each module */}
@@ -196,28 +222,42 @@ export default function SubproductPage({ params }: Props) {
         </section>
       ) : (
         // Otherwise, sell the subproduct itself here
-        <section style={{ ...card, display: "flex", alignItems: "center", justifyContent: "space-between", gap: 12 }}>
+        <section style={{ ...card, display: "grid", gap: 12, gridTemplateColumns: "1fr auto" }}>
           <div>
             <h2 style={{ margin: "0 0 6px 0" }}>Purchase</h2>
             <div style={{ fontWeight: 700 }}>{subPriceLabel}</div>
-            <div style={{ fontSize: 13, opacity: 0.8, marginTop: 4 }}>Instant checkout with Terms &amp; Conditions.</div>
+            <div style={{ fontSize: 13, opacity: 0.8, marginTop: 4 }}>Instant checkout with Terms & Conditions.</div>
           </div>
-          <BuyButton priceId={subPriceId} name={sp.title} price={subFallback}>
-            Buy Now
-          </BuyButton>
+          <div style={{ display: "flex", gap: 8, alignItems: "center" }}>
+            <a href="tel:+61490247772" style={callBtn} aria-label="Call to scope this subproduct">
+              Call 0490 247 772
+            </a>
+            <BuyButton priceId={subPriceId} name={sp.title} price={subFallback}>
+              Buy Now
+            </BuyButton>
+            <Link href="/contact" style={ghostBtn} aria-label="Request invoice or purchase order">
+              Request invoice / PO
+            </Link>
+          </div>
         </section>
       )}
 
       {/* Why it matters */}
       <section style={card}>
         <h2 style={{ marginTop: 0 }}>Why it matters</h2>
-        <p>{sp.description}</p>
-        {sp.includedInPackages && (
+        <p>{(sp as any).description}</p>
+        {(sp as any).includedInPackages && (
           <p style={{ opacity: 0.9 }}>
-            <strong>Included in:</strong> {sp.includedInPackages.join(" • ")}
+            <strong>Included in:</strong> {(sp as any).includedInPackages.join(" • ")}
           </p>
         )}
       </section>
+
+      {/* Compliance note */}
+      <p style={{ fontSize: 12, opacity: 0.7, marginTop: 16 }}>
+        No provider can guarantee zero psychological harm. These diagnostics provide prevention indicators and governance
+        evidence to reduce risk and improve defensibility.
+      </p>
     </main>
   );
 }
