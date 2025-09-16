@@ -30,7 +30,7 @@ export default function EvidencePage() {
       <h1 style={{ marginTop: 16 }}>Evidence of Impact</h1>
       <p>Selected outcomes from complex matters and organisational change work, showing prevention, fairness, and measurable culture improvement.</p>
 
-      {/* Marketing WOW */}
+      {/* ✅ Marketing WOW only */}
       <section style={section}>
         <h2 style={{ marginTop: 0 }}>Proven outcomes at a glance</h2>
         <div style={chipRow}>
@@ -38,38 +38,33 @@ export default function EvidencePage() {
           <span style={chip}>Zero stoppages during change (PEMEX)</span>
           <span style={chip}>IPO transformation supported (Aramco)</span>
           <span style={chip}>Indicators embedded in board reports</span>
-          <span style={chip}>Regulator-ready evidence packs</span>
+          <span style={chip}>Regulator‑ready evidence packs</span>
         </div>
         <p style={{ fontSize: 12, opacity: 0.7, marginTop: 6 }}>
-          Results reflect multi-factor programs; statements describe my contribution within broader initiatives.
+          Results reflect multi‑factor programs; statements describe my contribution within broader initiatives.
         </p>
       </section>
 
-      {/* Fair-process standards (auditable) */}
+      {/* ✅ What clients receive (tangible deliverables, no SLA jargon) */}
       <section style={section}>
-        <h2 style={{ marginTop: 0 }}>Fair-process standards (auditable)</h2>
-        <p style={{ margin: "6px 0 0 0", opacity: 0.9 }}>What a regulator expects to see in your evidence pack.</p>
-        <div style={chipRow}>
-          <span style={chip}>Receipt confirmed ≤24h</span>
-          <span style={chip}>Pathway decided ≤48h</span>
-          <span style={chip}>Findings / progress ≤21d</span>
-          <span style={chip}>Independence checks logged</span>
-          <span style={chip}>Audit-ready evidence pack</span>
-        </div>
-        <p style={{ fontSize: 12, opacity: 0.7, marginTop: 6 }}>
-          Targets are calendar days; complex matters receive a documented progress update.
-        </p>
+        <h2 style={{ marginTop: 0 }}>What you receive</h2>
+        <ul style={{ marginTop: 8 }}>
+          <li><strong>Evidence Pack</strong> — clear timeline summary, key decisions, and artefacts in one place.</li>
+          <li><strong>Independence record</strong> — who assessed, who investigated, and why the choice was appropriate.</li>
+          <li><strong>Findings letter template</strong> — plain‑English outcome format ready to personalise.</li>
+          <li><strong>Close‑out memo</strong> — actions taken, lessons learned, and next steps for leaders.</li>
+          <li><strong>Board snapshot</strong> — 1‑page summary for governance and external scrutiny.</li>
+        </ul>
       </section>
 
       {/* Headline evidence block */}
       <section style={section}>
-        <h2 style={{ marginTop: 0 }}>Preventing harm in complex sexual-harassment cases</h2>
+        <h2 style={{ marginTop: 0 }}>Preventing harm in complex sexual‑harassment cases</h2>
         <div style={card}>
           <p style={{ display: "flex", alignItems: "flex-start", marginTop: 0 }}>
             <span style={quoteMark}>“</span>
             <span>
-              Alberto brought clarity and fairness to a deeply complex sexual-harassment case that management had struggled with for years.
-              His calm, skilled interviewing uncovered the truth, restored trust, and gave the organisation defensible confidence in its processes.
+              Alberto brought clarity and fairness to a deeply complex sexual‑harassment case that management had struggled with for years. His calm, skilled interviewing uncovered the truth, restored trust, and gave the organisation defensible confidence in its processes.
             </span>
           </p>
           <div style={source}>— Australian Broadcasting Corporation</div>
@@ -85,8 +80,7 @@ export default function EvidencePage() {
             <p style={{ display: "flex", alignItems: "flex-start", marginTop: 0 }}>
               <span style={quoteMark}>“</span>
               <span>
-                Alberto’s guidance helped crystallise key issues and gave me clearer insight into how my behaviour affects others,
-                as well as my own internal frame of reference.
+                Alberto’s guidance helped crystallise key issues and gave me clearer insight into how my behaviour affects others, as well as my own internal frame of reference.
               </span>
             </p>
             <div style={source}>— University of Queensland, School of Dentistry</div>
@@ -108,8 +102,7 @@ export default function EvidencePage() {
             <p style={{ display: "flex", alignItems: "flex-start", marginTop: 0 }}>
               <span style={quoteMark}>“</span>
               <span>
-                In a workplace long plagued by toxic conflict, Alberto helped uncover hidden issues, rebuild trust, and create the foundation for a safer, healthier culture.
-                His empathy, insight, and ability to challenge assumptions transformed a divided workplace into a functioning team.
+                In a workplace long plagued by toxic conflict, Alberto helped uncover hidden issues, rebuild trust, and create the foundation for a safer, healthier culture. His empathy, insight, and ability to challenge assumptions transformed a divided workplace into a functioning team.
               </span>
             </p>
             <div style={source}>— Australian Broadcasting Corporation, Far North Queensland</div>
@@ -123,7 +116,7 @@ export default function EvidencePage() {
         <div style={grid}>
           <article style={card}>
             <h3 style={{ marginTop: 0 }}>Executive Brief</h3>
-            <p>Short overview of approach, products, and regulator-ready positioning.</p>
+            <p>Short overview of approach, products, and regulator‑ready positioning.</p>
             <p style={{ marginTop: 8 }}>
               <Link href="/contact" style={ghostBtn} aria-label="Request a copy of the Executive Brief">Request a copy →</Link>
             </p>
@@ -145,7 +138,7 @@ export default function EvidencePage() {
         </div>
       </section>
 
-      {/* Small, de-emphasised image */}
+      {/* Small, de‑emphasised image */}
       <div style={{ display: "flex", justifyContent: "center", margin: "12px 0" }}>
         <div style={{ borderRadius: 12, overflow: "hidden", maxWidth: 420, width: "100%", filter: "grayscale(100%)", opacity: 0.9 }}>
           <Image
@@ -159,19 +152,9 @@ export default function EvidencePage() {
         </div>
       </div>
 
-      {/* Standards alignment */}
-      <section style={section}>
-        <h2 style={{ marginTop: 0 }}>Standards & expectations</h2>
-        <ul>
-          <li><strong>WHS psychosocial Codes of Practice</strong> — operational controls and documentation aligned to regulator expectations</li>
-          <li><strong>ILO C190</strong> & <strong>UN Guiding Principles on Business & Human Rights (UNGPs)</strong> — fair-treatment and remedy principles reflected in process design</li>
-          <li><strong>Fair-process (SLA):</strong> <span style={{ fontWeight: 800 }}>Acknowledge ≤24h • Triage ≤48h • Findings ≤21d</span></li>
-        </ul>
-      </section>
-
       {/* Procurement help */}
       <section style={section}>
-        <h2 style={{ marginTop: 0 }}>Procurement-ready</h2>
+        <h2 style={{ marginTop: 0 }}>Procurement‑ready</h2>
         <ul>
           <li>Clear pricing anchors across products (see Products page)</li>
           <li>Invoice / PO path supported; standard Terms & Conditions</li>
@@ -185,8 +168,7 @@ export default function EvidencePage() {
 
       {/* Compliance note */}
       <p style={{ fontSize: 12, opacity: 0.7, marginTop: 12 }}>
-        No provider can guarantee zero psychological harm. These materials evidence regulator-ready controls designed to
-        reduce risk, shorten duration, and improve defensibility.
+        No provider can guarantee zero psychological harm. These materials evidence practical controls designed to reduce risk, shorten duration, and improve defensibility.
       </p>
     </main>
   );
