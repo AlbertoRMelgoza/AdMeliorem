@@ -10,13 +10,31 @@
     "force": true
   },
   {
+    "title": "Donald Trump takes aim at ABC journalist as he suggests he'll meet Albanese 'very soon'",
+    "link": "https://www.abc.net.au/news/2025-09-17/donald-trump-john-lyons-exchange-before-anthony-albanese-meeting/105781624",
+    "pubDate": "2025-09-17",
+    "source": "ABC News",
+    "hazard": "Aggression (work-related)",
+    "note": "Hostile, intimidatory exchange directed at a working journalist. Single-incident aggression is a psychosocial hazard while working; repeated conduct can meet the legal test for workplace bullying.",
+    "paywalled": false,
+    "force": true,
+    "cta": [
+      { "href": "/products/shsarc-rcabh", "label": "Next step — SHSARC & RCABH →" },
+      { "href": "/products/culture-risk-diagnostic", "label": "Next step — Culture Risk Diagnostic →" }
+    ]
+  },
+  {
     "title": "CFMEU WA official accused of intimidation, bullying",
     "link": "https://www.afr.com/work-and-careers/workplace/cfmeu-wa-official-accused-of-intimidation-bullying-20250815-p5mn7v",
     "pubDate": "2025-08-15",
     "source": "AFR",
     "hazard": "Bullying",
     "note": "Union intimidation/bullying allegation in WA.",
-    "paywalled": true
+    "paywalled": true,
+    "cta": [
+      { "href": "/products/shsarc-rcabh", "label": "Next step — SHSARC & RCABH →" },
+      { "href": "/products/culture-risk-diagnostic", "label": "Next step — Culture Risk Diagnostic →" }
+    ]
   },
   {
     "title": "Women face bullying, harassment for blowing the whistle",
@@ -27,16 +45,7 @@
     "note": "Whistleblowing followed by bullying/harassment; regional press example.",
     "paywalled": false
   },
-  {
-    "title": "Hostile exchange with a journalist while working — example of work-related aggression",
-    "link": "https://www.abc.net.au/news/2025-09-17/donald-trump-john-lyons-exchange-before-anthony-albanese-meeting/105781624",
-    "pubDate": "2025-09-17",
-    "source": "ABC News",
-    "hazard": "Aggression (work-related)",
-    "note": "Hostile, intimidatory exchange directed at a working journalist. Single-incident aggression is a psychosocial hazard while working.",
-    "paywalled": false,
-    "force": true
-  },
+
   {
     "title": "Over 60 years women say they have been targeted with abuse by predatory instructors while learning to drive",
     "link": "https://www.abc.net.au/news/2025-09-03/predators-paradise-learner-drivers-targeted-behind-the-wheel/105648076",
@@ -92,6 +101,7 @@
     "note": "Comparative law signal; not Australia-specific.",
     "paywalled": false
   },
+
   {
     "title": "Roy Shapira on Holding Corporations Accountable For Flawed Corporate Culture",
     "link": "https://www.corporatecrimereporter.com/news/200/roy-shapira-on-holding-corporations-accountable-for-flawed-corporate-culture/",
@@ -137,6 +147,7 @@
     "note": "Governance/conflicts lessons for culture risk.",
     "paywalled": false
   },
+
   {
     "title": "Smokey Robinson’s Sexual Assault Accusers Can Proceed Anonymously, Judge Rules",
     "link": "https://au.rollingstone.com/music/music-news/smokey-robinson-sexual-assault-accusers-pseudonyms-trial-83405/",
@@ -155,6 +166,7 @@
     "note": "Personal testimony; workplace assault across a career.",
     "paywalled": false
   },
+
   {
     "title": "Firing of misogynistic HR business partner justified, Fair Work finds",
     "link": "https://www.hrleader.com.au/law/27202-firing-of-misogynistic-hr-business-partner-justified-fair-work-finds-2",
