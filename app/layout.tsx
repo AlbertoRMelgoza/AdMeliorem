@@ -37,6 +37,40 @@ const brand = {
 export default function RootLayout({ children }: { children: React.ReactNode }) {
   return (
     <html lang="en">
+      {/* 👉 JSON-LD: Organization / ProfessionalService */}
+      <head>
+        <Script
+          id="org-schema"
+          type="application/ld+json"
+          strategy="afterInteractive"
+          dangerouslySetInnerHTML={{
+            __html: JSON.stringify({
+              "@context": "https://schema.org",
+              "@type": ["Organization", "ProfessionalService"],
+              "name": "Ad Meliorem",
+              "url": "https://www.albertormelgoza.com",
+              "logo":
+                "https://www.albertormelgoza.com/Images/logo-ad-meliorem%20-%20Copy.jpg",
+              "founder": { "@type": "Person", "name": "Alberto R. Melgoza, PhD" },
+              "email": "mailto:am@albertormelgoza.com",
+              "identifier": {
+                "@type": "PropertyValue",
+                "propertyID": "ABN",
+                "value": "93 710 507 818",
+              },
+              "areaServed": ["AU-NSW", "AU-QLD", "AU"],
+              "contactPoint": {
+                "@type": "ContactPoint",
+                "contactType": "sales",
+                "email": "am@albertormelgoza.com",
+                "areaServed": "AU",
+                "availableLanguage": ["en"],
+              },
+            }),
+          }}
+        />
+      </head>
+
       <body
         style={{
           margin: 0,
@@ -95,26 +129,64 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
             </span>
           </a>
 
-         {/* Navigation */}
-<nav
-  style={{
-    marginLeft: "auto",
-    display: "flex",
-    gap: 16,
-    flexWrap: "wrap",
-  }}
->
-  <a href="/" style={{ color: brand.accent, textDecoration: "none" }}>Home</a>
-  <a href="/about" style={{ color: brand.text, textDecoration: "none" }}>About</a>
-  <a href="/products" style={{ color: brand.text, textDecoration: "none" }}>Products</a>
-  <a href="/evidence" style={{ color: brand.text, textDecoration: "none" }}>Evidence</a>
-  <a href="/principles" style={{ color: brand.text, textDecoration: "none" }}>Principles</a>
-  <a href="/resources" style={{ color: brand.text, textDecoration: "none" }}>Resources</a>
-  <a href="/whitepapers" style={{ color: brand.text, textDecoration: "none" }}>Whitepapers</a>
-  <a href="/MediaRoom" style={{ color: brand.text, textDecoration: "none" }}>MediaRoom</a>
-  <a href="/contact" style={{ color: brand.text, textDecoration: "none" }}>Contact</a>
-</nav>
-
+          {/* Navigation */}
+          <nav
+            style={{
+              marginLeft: "auto",
+              display: "flex",
+              gap: 16,
+              flexWrap: "wrap",
+            }}
+          >
+            <a href="/" style={{ color: brand.accent, textDecoration: "none" }}>
+              Home
+            </a>
+            <a href="/about" style={{ color: brand.text, textDecoration: "none" }}>
+              About
+            </a>
+            <a
+              href="/products"
+              style={{ color: brand.text, textDecoration: "none" }}
+            >
+              Products
+            </a>
+            <a
+              href="/evidence"
+              style={{ color: brand.text, textDecoration: "none" }}
+            >
+              Evidence
+            </a>
+            <a
+              href="/principles"
+              style={{ color: brand.text, textDecoration: "none" }}
+            >
+              Principles
+            </a>
+            <a
+              href="/resources"
+              style={{ color: brand.text, textDecoration: "none" }}
+            >
+              Resources
+            </a>
+            <a
+              href="/whitepapers"
+              style={{ color: brand.text, textDecoration: "none" }}
+            >
+              Whitepapers
+            </a>
+            <a
+              href="/MediaRoom"
+              style={{ color: brand.text, textDecoration: "none" }}
+            >
+              MediaRoom
+            </a>
+            <a
+              href="/contact"
+              style={{ color: brand.text, textDecoration: "none" }}
+            >
+              Contact
+            </a>
+          </nav>
         </header>
 
         {/* Page content */}
@@ -139,7 +211,7 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
         <Analytics />
         <SpeedInsights />
 
-        {/* Google tag (gtag.js) — kept exactly as requested */}
+        {/* Google tag (gtag.js) */}
         <Script
           src="https://www.googletagmanager.com/gtag/js?id=G-XC0JMD1CHD"
           strategy="afterInteractive"
