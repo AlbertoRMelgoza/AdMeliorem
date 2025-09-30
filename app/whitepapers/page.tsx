@@ -12,6 +12,13 @@ type Paper = { title: string; blurb: string; slug: string };
 const PAPERS: Paper[] = [
   {
     title:
+      "Do stronger consultation practices and procedural fairness with care relate to higher revenue per employee and fewer hours lost for Comcare self-licensees?",
+    blurb:
+      "Consultation, and Procedural Fairness with Care when applied adequately can improve revenue per employee.",
+    slug: "predicting revenue per employee through consultation and fair processes with care",
+  },
+  {
+    title:
       "Do Psychological Claim Costs Undermine Productivity for Australian Self-Insured Licensees",
     blurb:
       "Do higher rates and costs of psychological workplace injury claims reduce productivity and financial performance for large self-insured employers?",
@@ -37,14 +44,7 @@ const PAPERS: Paper[] = [
       "Legal, operational, and reputational loss channels when culture risks go unmanaged.",
     slug: "how-culture-risks-cost-business",
   },
-  {
-    title:
-      "Sexual Harassment & Sexual Assault — What They Are and What They Are Not",
-    blurb:
-      "Definitions, thresholds, and evidentiary standards to prevent escalation and misclassification.",
-    slug: "sh-and-sa-what-they-are-and-are-not",
-  },
-];
+  ];
 
 export default function WhitepapersPage() {
   const wrap: CSSProperties = {
