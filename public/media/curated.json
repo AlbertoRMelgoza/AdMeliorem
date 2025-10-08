@@ -1,23 +1,49 @@
 [
   {
+    "title": "Deloitte to partially refund Australian government for report with apparent AI-generated errors",
+    "link": "https://apnews.com/article/ab54858680ffc4ae6555b31c8fb987f3",
+    "pubDate": "2025-10-08",
+    "source": "AP News",
+    "hazard": "Procedural justice",
+    "note": "DEWR report contained fabricated/misattributed citations; corrected version disclosed Azure OpenAI use. Psychosocial link: breakdown in organisational justice undermines trust and decision integrity.",
+    "paywalled": false
+  },
+  {
+    "title": "Targeted Compliance Framework Assurance Review – Final Report (corrected)",
+    "link": "https://www.dewr.gov.au/assuring-integrity-targeted-compliance-framework/resources/targeted-compliance-framework-assurance-review-final-report",
+    "pubDate": "2025-10-03",
+    "source": "Department of Employment and Workplace Relations (DEWR)",
+    "hazard": "Procedural justice",
+    "note": "Official page notes the report was updated on 26 Sep 2025 to fix references/footnotes; page modified 3 Oct 2025.",
+    "paywalled": false
+  },
+  {
+    "title": "Deloitte will refund Australian government for AI-hallucination-filled report",
+    "link": "https://arstechnica.com/ai/2025/10/deloitte-will-refund-australian-government-for-ai-hallucination-filled-report/",
+    "pubDate": "2025-10-06",
+    "source": "Ars Technica",
+    "hazard": "Procedural justice",
+    "note": "Round-up of the errors, partial refund, and the corrected DEWR report.",
+    "paywalled": false
+  },
+
+  {
     "title": "Workplace violence, bullying and harassment claims surge, Allianz says",
     "link": "https://www.9news.com.au/national/workplace-violence-bullying-harassment-allianz-claims-surge/bc4a1d2b-78db-4ea9-a697-9b53ddd00ecc",
     "pubDate": "",
     "source": "9News",
     "hazard": "Bullying",
     "note": "Claims data points to sharp increases in bullying/harassment claims in Australia.",
-    "paywalled": false,
-    "force": true
+    "paywalled": false
   },
   {
-    "title": "Aggression aim at ABC journalist in the USA",
+    "title": "Donald Trump takes aim at ABC journalist ahead of Albanese meeting",
     "link": "https://www.abc.net.au/news/2025-09-17/donald-trump-john-lyons-exchange-before-anthony-albanese-meeting/105781624",
     "pubDate": "2025-09-17",
     "source": "ABC News",
     "hazard": "Aggression (work-related)",
     "note": "Hostile, intimidatory exchange directed at a working journalist. Single-incident aggression is a psychosocial hazard while working.",
     "paywalled": false,
-    "force": true,
     "cta": [
       { "href": "/products/shsarc-rcabh", "label": "Next step — SHSARC & RCABH →" },
       { "href": "/products/culture-risk-diagnostic", "label": "Next step — Culture Risk Diagnostic →" }
@@ -36,16 +62,6 @@
       { "href": "/products/culture-risk-diagnostic", "label": "Next step — Culture Risk Diagnostic →" }
     ]
   },
-  {
-    "title": "Women face bullying, harassment for blowing the whistle",
-    "link": "https://www.lismorecitynews.com.au/story/9048659/women-face-bullying-harassment-for-blowing-the-whistle/",
-    "pubDate": "",
-    "source": "Lismore City News",
-    "hazard": "Bullying",
-    "note": "Whistleblowing followed by bullying/harassment; regional press example.",
-    "paywalled": false
-  },
-
   {
     "title": "Over 60 years women say they have been targeted with abuse by predatory instructors while learning to drive",
     "link": "https://www.abc.net.au/news/2025-09-03/predators-paradise-learner-drivers-targeted-behind-the-wheel/105648076",
@@ -71,8 +87,7 @@
     "source": "AFR",
     "hazard": "Sexual harassment",
     "note": "Leadership consequence following harassment complaint.",
-    "paywalled": true,
-    "force": true
+    "paywalled": true
   },
   {
     "title": "‘Card up my sleeve’: think tank withheld CCTV from alleged sexual harassment victim",
@@ -93,62 +108,6 @@
     "paywalled": false
   },
   {
-    "title": "Giving the middle finger at work not sexual harassment, UK court rules",
-    "link": "https://sea.peoplemattersglobal.com/news/watercooler/giving-the-middle-finger-at-work-not-sexual-harassment-uk-court-rules-46459",
-    "pubDate": "",
-    "source": "People Matters",
-    "hazard": "Sexual harassment",
-    "note": "Comparative law signal; not Australia-specific.",
-    "paywalled": false
-  },
-
-  {
-    "title": "Roy Shapira on Holding Corporations Accountable For Flawed Corporate Culture",
-    "link": "https://www.corporatecrimereporter.com/news/200/roy-shapira-on-holding-corporations-accountable-for-flawed-corporate-culture/",
-    "pubDate": "",
-    "source": "Corporate Crime Reporter",
-    "hazard": "Toxic culture",
-    "note": "Scholar view: how to hold firms to account for culture.",
-    "paywalled": false
-  },
-  {
-    "title": "Qantas $90m fine – why the judge’s ruling is a ‘wake-up call’ for Aussie corporate culture",
-    "link": "https://www.2gb.com/qantas-90m-fine-why-the-judges-ruling-is-a-wake-up-call-for-aussie-corporate-culture/",
-    "pubDate": "",
-    "source": "2GB",
-    "hazard": "Toxic culture",
-    "note": "Reputational and cultural implications of a major penalty.",
-    "paywalled": false
-  },
-  {
-    "title": "Just three years after overhauling its top team, Sony Australia faces fresh accusations of a toxic workplace culture",
-    "link": "https://completemusicupdate.com/just-three-years-after-overhauling-its-top-team-sony-australia-faces-fresh-accusations-of-a-toxic-workplace-culture/",
-    "pubDate": "",
-    "source": "Complete Music Update",
-    "hazard": "Toxic culture",
-    "note": "Renewed allegations despite leadership change.",
-    "paywalled": false
-  },
-  {
-    "title": "Toxic workplace culture a hidden fraud risk, RSM warns",
-    "link": "https://www.hrleader.com.au/people/27231-toxic-workplace-culture-a-hidden-fraud-risk-rsm-warns",
-    "pubDate": "",
-    "source": "HR Leader",
-    "hazard": "Toxic culture",
-    "note": "Culture–fraud linkage: risk advisory angle.",
-    "paywalled": false
-  },
-  {
-    "title": "Coldplay Concert Controversy Illustrates How Conflicts of Interest Can Become Corporate Kiss of Death",
-    "link": "https://www.corporatecomplianceinsights.com/coldplay-concert-controversy-illustrates-conflicts/",
-    "pubDate": "",
-    "source": "Corporate Compliance Insights",
-    "hazard": "Toxic culture",
-    "note": "Governance/conflicts lessons for culture risk.",
-    "paywalled": false
-  },
-
-  {
     "title": "Smokey Robinson’s Sexual Assault Accusers Can Proceed Anonymously, Judge Rules",
     "link": "https://au.rollingstone.com/music/music-news/smokey-robinson-sexual-assault-accusers-pseudonyms-trial-83405/",
     "pubDate": "2025-09-12",
@@ -165,25 +124,5 @@
     "hazard": "Sexual assault",
     "note": "Personal testimony; workplace assault across a career.",
     "paywalled": false
-  },
-
-  {
-    "title": "Firing of misogynistic HR business partner justified, Fair Work finds",
-    "link": "https://www.hrleader.com.au/law/27202-firing-of-misogynistic-hr-business-partner-justified-fair-work-finds-2",
-    "pubDate": "",
-    "source": "HR Leader",
-    "hazard": "Bullying",
-    "note": "Fair Work ruling touching both bullying and harassment grounds.",
-    "paywalled": false
-  },
-  {
-    "title": "HR executive dismissed after faking evidence in harassment investigation",
-    "link": "https://www.hcamag.com/au/specialisation/employment-law/hr-executive-dismissed-after-faking-evidence-in-harassment-investigation/547755",
-    "pubDate": "",
-    "source": "HRD Australia",
-    "hazard": "Procedural justice",
-    "note": "Investigation integrity: dismissal for falsifying evidence.",
-    "paywalled": false,
-    "force": true
   }
 ]
