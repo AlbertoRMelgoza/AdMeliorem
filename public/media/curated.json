@@ -124,5 +124,51 @@
     "hazard": "Sexual assault",
     "note": "Personal testimony; workplace assault across a career.",
     "paywalled": false
+  },
+
+  {
+    "title": "Victoria makes Psychological Health Regulations 2025 (commence 1 Dec)",
+    "link": "https://www.premier.vic.gov.au/protecting-mental-health-workers-victoria",
+    "pubDate": "2025-10-01",
+    "source": "VIC Government",
+    "hazard": "Regulatory (psychosocial risk)",
+    "note": "New OHS regs clarify employer duties to identify and control psychosocial hazards; commencement 1 Dec 2025.",
+    "paywalled": false
+  },
+  {
+    "title": "Public hearings begin for Queensland CFMEU ‘culture of violence’ inquiry",
+    "link": "https://www.abc.net.au/news/2025-10-01/qld-cfmeu-inquiry-public-hearings-begin/105833780",
+    "pubDate": "2025-10-01",
+    "source": "ABC News",
+    "hazard": "Bullying / intimidation (industry culture)",
+    "note": "Inquiry examines alleged threats, coercion and intimidation in construction; governance and culture under scrutiny.",
+    "paywalled": false
+  },
+  {
+    "title": "JLL names interim ANZ CEO amid leadership change",
+    "link": "https://www.jll.com/en-au/newsroom/jll-announces-interim-ceo-for-australia",
+    "pubDate": "2025-10-01",
+    "source": "JLL Newsroom",
+    "hazard": "Culture risk",
+    "note": "Leadership transition with ongoing culture/governance lens; external review coverage in trade press.",
+    "paywalled": false
+  },
+  {
+    "title": "ANU chancellor Julie Bishop denies bullying allegations, stays on",
+    "link": "https://www.abc.net.au/news/2025-09-18/anu-julie-bishop-categorically-denies-allegations-of-bullying/105791110",
+    "pubDate": "2025-09-18",
+    "source": "ABC News",
+    "hazard": "Bullying (governance risk)",
+    "note": "Universities context: organisational justice, complaint handling, and trust in leadership.",
+    "paywalled": false
+  },
+  {
+    "title": "Cancer Council Queensland faces ‘toxic workplace’ claims amid staff exits",
+    "link": "https://www.couriermail.com.au/news/queensland/employees-shock-accusations-of-toxic-work-nightmare-at-cancer-council/news-story/33cb6759bff43e7e1da5fb5313ff0ceb",
+    "pubDate": "2025-10-04",
+    "source": "Courier-Mail",
+    "hazard": "Toxic culture",
+    "note": "Reports of resignations and program changes; leadership disputes claims; board support noted.",
+    "paywalled": true
   }
 ]
