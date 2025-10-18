@@ -1,5 +1,18 @@
 [
   {
+    "title": "JLL apologises for cultural and leadership failures after sexual harassment probe",
+    "link": "https://anz.peoplemattersglobal.com/news/organisational-culture/jll-apologises-for-cultural-and-leadership-failures-after-sexual-harassment-probe-46805",
+    "pubDate": "2025-10-13",
+    "source": "People Matters",
+    "hazard": "Sexual harassment / Culture risk",
+    "note": "JLL publicly apologised and admitted to cultural and leadership failings following an external investigation into its handling of sexual harassment allegations within its Australian business. An independent review by Clyde & Co found serious issues including inappropriate behaviours, poor executive decision-making, and non-compliance with established policies and protocols. JLL has committed to significant reforms.",
+    "paywalled": false,
+    "cta": [
+      { "href": "/products/culture-risk-diagnostic", "label": "Next step — Culture Risk Diagnostic™ →" },
+      { "href": "/products/procedural-justice-framework", "label": "Next step — Procedural Justice Framework™ →" }
+    ]
+  },
+  {
     "title": "‘Reputational damage’: Sacked JLL agents hit back with federal lawsuit",
     "link": "https://www.realestatebusiness.com.au/industry/30787-reputational-damage-sacked-jll-agents-hit-back-with-federal-lawsuit",
     "pubDate": "2025-10-16",
@@ -9,6 +22,19 @@
     "paywalled": false,
     "cta": [
       { "href": "/products/procedural-justice-framework", "label": "Next step — Procedural Justice Framework™ →" }
+    ]
+  },
+  {
+    "title": "One in three Australians sexually harassed at work: study",
+    "link": "https://www.news.com.au/finance/work/at-work/horror-as-one-in-three-australians-sexually-harassed-at-work-study/news-story/e35df5c121fd08ee36757f4a671c0384",
+    "pubDate": "2025-10-18",
+    "source": "news.com.au",
+    "hazard": "Sexual harassment",
+    "note": "A report by Burke Mangan Lawyers finds that one in three Australians (41% of women, 26% of men, 67% of non-binary) have experienced sexual harassment at work. Only one in five incidents are reported; particular risk in male-dominated, younger-staffed industries. Systemic under-reporting and weak consequences highlight culture and control issues.",
+    "paywalled": true,
+    "cta": [
+      { "href": "/products/shsarc-rcabh", "label": "Next step — SHSARC & RCABH →" },
+      { "href": "/products/culture-risk-diagnostic", "label": "Next step — Culture Risk Diagnostic™ →" }
     ]
   },
   {
@@ -39,28 +65,6 @@
     "paywalled": false
   },
   {
-    "title": "Workplace violence, bullying and harassment claims surge, Allianz says",
-    "link": "https://www.9news.com.au/national/workplace-violence-bullying-harassment-allianz-claims-surge/bc4a1d2b-78db-4ea9-a697-9b53ddd00ecc",
-    "pubDate": "",
-    "source": "9News",
-    "hazard": "Bullying",
-    "note": "Claims data points to sharp increases in bullying/harassment claims in Australia.",
-    "paywalled": false
-  },
-  {
-    "title": "Donald Trump takes aim at ABC journalist ahead of Albanese meeting",
-    "link": "https://www.abc.net.au/news/2025-09-17/donald-trump-john-lyons-exchange-before-anthony-albanese-meeting/105781624",
-    "pubDate": "2025-09-17",
-    "source": "ABC News",
-    "hazard": "Aggression (work-related)",
-    "note": "Hostile, intimidatory exchange directed at a working journalist. Single-incident aggression is a psychosocial hazard while working.",
-    "paywalled": false,
-    "cta": [
-      { "href": "/products/shsarc-rcabh", "label": "Next step — SHSARC & RCABH →" },
-      { "href": "/products/culture-risk-diagnostic", "label": "Next step — Culture Risk Diagnostic →" }
-    ]
-  },
-  {
     "title": "CFMEU WA official accused of intimidation, bullying",
     "link": "https://www.afr.com/work-and-careers/workplace/cfmeu-wa-official-accused-of-intimidation-bullying-20250815-p5mn7v",
     "pubDate": "2025-08-15",
@@ -84,38 +88,11 @@
   },
   {
     "title": "‘For Too Long, Women Have Been Shouldering the Responsibility’: Sexual Harassment Remains Rife in Melbourne’s Live Music Scene",
-    "link": "https://au.rollingstone.com/music/music-features/female-musos-against-sexual-harassment-melbourne-82621/",
+    "link": "https://au.rollingstone.com/music/music-features/female-musos-against-sex-harassment-melbourne-82621/",
     "pubDate": "2025-08-28",
     "source": "Rolling Stone AU",
     "hazard": "Sexual harassment",
     "note": "Scene-wide look at harassment in Melbourne’s live music sector.",
-    "paywalled": false
-  },
-  {
-    "title": "Switzer resigns from CIS after harassment complaint",
-    "link": "https://www.afr.com/politics/switzer-resigns-from-cis-after-harassment-complaint-20250902-p5mrwb",
-    "pubDate": "2025-09-02",
-    "source": "AFR",
-    "hazard": "Sexual harassment",
-    "note": "Leadership consequence following harassment complaint.",
-    "paywalled": true
-  },
-  {
-    "title": "‘Card up my sleeve’: think tank withheld CCTV from alleged sexual harassment victim",
-    "link": "https://www.theage.com.au/politics/nsw/card-up-my-sleeve-think-tank-withheld-cctv-from-alleged-sexual-harassment-victim-20250820-p5moc0.html",
-    "pubDate": "2025-08-20",
-    "source": "The Age",
-    "hazard": "Sexual harassment",
-    "note": "Allegation of evidence withholding in a harassment matter.",
-    "paywalled": true
-  },
-  {
-    "title": "Sexual harassment training to be introduced for hospo workers",
-    "link": "https://www.indailysa.com.au/news/in-depth/2025/08/28/pub-grubs-new-plan-to-tackle-predatory-behaviour-in-sas-hopso-scene",
-    "pubDate": "2025-08-28",
-    "source": "InDaily",
-    "hazard": "Sexual harassment",
-    "note": "Policy response: training to counter predatory behaviour in SA hospitality.",
     "paywalled": false
   },
   {
@@ -171,14 +148,5 @@
     "hazard": "Bullying (governance risk)",
     "note": "Universities context: organisational justice, complaint handling, and trust in leadership.",
     "paywalled": false
-  },
-  {
-    "title": "Cancer Council Queensland faces ‘toxic workplace’ claims amid staff exits",
-    "link": "https://www.couriermail.com.au/news/queensland/employees-shock-accusations-of-toxic-work-nightmare-at-cancer-council/news-story/33cb6759bff43e7e1da5fb5313ff0ceb",
-    "pubDate": "2025-10-04",
-    "source": "Courier-Mail",
-    "hazard": "Toxic culture",
-    "note": "Reports of resignations and program changes; leadership disputes claims; board support noted.",
-    "paywalled": true
   }
 ]
