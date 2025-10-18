@@ -1,5 +1,18 @@
 [
   {
+    "title": "RACP leadership dispute lands in court amid bullying allegations",
+    "link": "https://michaelwest.com.au/racp-royal-college-power-struggle-spills-into-court/",
+    "pubDate": "2025-10-14",
+    "source": "Michael West Media",
+    "hazard": "Bullying (governance risk) / Culture risk",
+    "note": "Royal Australasian College of Physicians (RACP) faces a Fair Work stop-bullying claim filed by president-elect Dr Sharmila Chandran against current president Professor Jennifer Martin. Allegations include exclusion, intimidation, and governance failings. The dispute highlights psychosocial and cultural risks within professional associations.",
+    "paywalled": false,
+    "cta": [
+      { "href": "/products/culture-risk-diagnostic", "label": "Next step — Culture Risk Diagnostic™ →" },
+      { "href": "/products/procedural-justice-framework", "label": "Next step — Procedural Justice Framework™ →" }
+    ]
+  },
+  {
     "title": "JLL apologises for cultural and leadership failures after sexual harassment probe",
     "link": "https://anz.peoplemattersglobal.com/news/organisational-culture/jll-apologises-for-cultural-and-leadership-failures-after-sexual-harassment-probe-46805",
     "pubDate": "2025-10-13",
@@ -88,7 +101,7 @@
   },
   {
     "title": "‘For Too Long, Women Have Been Shouldering the Responsibility’: Sexual Harassment Remains Rife in Melbourne’s Live Music Scene",
-    "link": "https://au.rollingstone.com/music/music-features/female-musos-against-sex-harassment-melbourne-82621/",
+    "link": "https://au.rollingstone.com/music/music-features/female-musos-against-sexual-harassment-melbourne-82621/",
     "pubDate": "2025-08-28",
     "source": "Rolling Stone AU",
     "hazard": "Sexual harassment",
